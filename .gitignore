@@ -20,7 +20,8 @@ __pycache__/
 .ipynb_checkpoints/
 *.egg-info/
 
-# ---- LaTeX (artefatos de compilação)
+# ---- LaTeX (artefatos de compilação; o PDF gerado vai para monografia/build/)
+monografia/build/
 monografia/**/*.aux
 monografia/**/*.bbl
 monografia/**/*.blg
