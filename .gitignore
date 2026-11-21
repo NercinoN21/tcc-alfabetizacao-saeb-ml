@@ -22,6 +22,7 @@ __pycache__/
 
 # ---- LaTeX (artefatos de compilação; o PDF gerado vai para monografia/build/)
 monografia/build/
+monografia/_compilar_xetex.tex
 monografia/**/*.aux
 monografia/**/*.bbl
 monografia/**/*.blg

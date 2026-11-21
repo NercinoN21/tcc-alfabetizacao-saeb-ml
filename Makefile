@@ -25,8 +25,12 @@ checksums:       ## confere data/raw contra data/raw/SHA256SUMS
 dados-snapshot:  ## restaura data/raw a partir do snapshot congelado (mesmos dados do TCC; não depende do Inep)
 	cd data/snapshot && shasum -a 256 -c SHA256SUMS && tar -xJf saeb2023_2ef_snapshot.tar.xz -C ../raw && cd ../raw && shasum -a 256 -c SHA256SUMS
 
+# O Tectonic usa o motor XeTeX; a monografia é configurada para pdfTeX (fontenc T1). O arquivo intermediário
+# (fora do git) faz o "º" digitado usar \textordmasculine. Limitação: no PDF do XeTeX a busca por palavras com
+# ligadura (fi, fl) pode falhar. Nada da monografia é alterado. O PDF oficial de depósito sai do pdfTeX (Overleaf).
 pdf:             ## compila a monografia com Tectonic (leve; brew install tectonic) → monografia/build/projeto.pdf
-	cd monografia && tectonic -X compile projeto.tex --outdir build
+	cd monografia && printf '%s\n' '\catcode`\º=\active' '\defº{\textordmasculine}' '\input{projeto}' > _compilar_xetex.tex
+	cd monografia && tectonic -X compile _compilar_xetex.tex --outdir build && mv build/_compilar_xetex.pdf build/projeto.pdf
 	@echo "PDF: monografia/build/projeto.pdf"
 
 -include Makefile.local
