@@ -57,6 +57,14 @@ class Saida:
         fig.savefig(self.pasta / "figuras" / f"{nome}.png", dpi=200, bbox_inches="tight")
 
 
+def _relativo(v) -> str:
+    """Caminhos gravados relativos à raiz do repositório (o run_info não expõe a máquina de quem executou)."""
+    try:
+        return str(Path(v).resolve().relative_to(RAIZ)) if isinstance(v, Path) else str(v)
+    except ValueError:
+        return str(v)
+
+
 def _git_commit() -> str:
     try:
         r = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=RAIZ, capture_output=True, text=True)
@@ -78,7 +86,7 @@ def executar(cfg: Config, ate: str = "robustez") -> Path:
     carimbo = dt.datetime.now().strftime("%Y%m%d_%H%M")
     out = Saida(cfg.saida_dir / f"{carimbo}_{cfg.modo}_s{cfg.seed}")
     info = {"inicio": dt.datetime.now().isoformat(timespec="seconds"), "modo": cfg.modo, "semente": cfg.seed,
-            "citavel_no_texto": not cfg.rapido, "git": _git_commit(), "config": {k: str(v) for k, v in cfg.__dict__.items()}}
+            "citavel_no_texto": not cfg.rapido, "git": _git_commit(), "config": {k: _relativo(v) for k, v in cfg.__dict__.items()}}
 
     # ---------------------------------------------------------------- 1. base
     origem = etl.baixar_saeb(cfg.data_dir)
