@@ -104,6 +104,9 @@ def sensibilidades(pop, base_todas, base_interna, base_turma, meta, alvo, trilha
         add("n mínimo", f"n ≥ {n}", p, sel(p))
     pi = base_interna[base_interna.N_ALUNOS >= cfg.n_min_alunos]
     add("Junção", "interna (professor E diretor)", pi, sel(pi))
+    com_percepcao = selecionar_variaveis(pop, meta, com_cor=False, limite_ausencia=cfg.limite_ausencia,
+                                         excluir_percepcao=False)[0]
+    add("Percepção do desfecho", "COM os itens PROF_TX_Q080 e DIR_TX_Q030", pop, com_percepcao)
     add("Pesos", "treino sem peso amostral · avaliação ponderada", pop, ms, w_aval=w)
     add("Pesos", "treino COM peso amostral · avaliação ponderada", pop, ms, w=w, w_aval=w)
     add("Pesos", "treino com peso truncado no p99 · avaliação ponderada", pop, ms,

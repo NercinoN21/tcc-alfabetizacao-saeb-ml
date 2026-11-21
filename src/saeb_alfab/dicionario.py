@@ -191,6 +191,8 @@ def montar_meta(dic_prof: pd.DataFrame, dic_dir: pd.DataFrame) -> pd.DataFrame:
         ("ESC_PC_FORMACAO_DOCENTE_INICIAL", "Formação docente (escola)", "numerico",
          "% de docentes com formação adequada (anos iniciais)"),
         ("CTX_N_TURMAS", "Contexto de agregação", "numerico", "Nº de turmas de 2º ano com questionário de professor"),
+        ("PROF_SEM_QUESTIONARIO", "Não resposta ao questionário", "binario", "Escola sem questionário de professor do 2º ano"),
+        ("DIR_SEM_QUESTIONARIO", "Não resposta ao questionário", "binario", "Escola sem questionário de diretor"),
         ("PROF_COR_PCT_PRETA_PARDA", TEMA_RACA, "numerico", "% das turmas cujo professor se declara preto/pardo"),
         ("PROF_COR_PCT_BRANCA", TEMA_RACA, "numerico", "% das turmas cujo professor se declara branco"),
         ("PROF_COR_PCT_OUTRA_ND", TEMA_RACA, "numerico", "% das turmas cujo professor é amarelo/indígena ou não declara"),

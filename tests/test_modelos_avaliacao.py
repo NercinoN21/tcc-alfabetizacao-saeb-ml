@@ -82,3 +82,18 @@ def test_lime_regressao_usa_o_sinal_correto():
     x = np.array([1.5, 1.5, 0.0])
     pesos, _ = _lime_por_variavel(expl, x, f, 3, ["a", "b", "c"], 2000)
     assert pesos["a"] > 0 > pesos["b"]                 # com a chave 0 (espelho), os dois sinais inverteriam
+
+
+def test_itens_de_percepcao_do_desfecho_fora_por_padrao():
+    """D5: PROF_TX_Q080 e DIR_TX_Q030 saem da especificação principal; a sensibilidade os reinclui."""
+    from saeb_alfab.config import Config
+
+    assert Config().excluir_percepcao_desfecho is True
+    n = 50
+    df = pd.DataFrame({"PROF_TX_Q080": np.arange(n) % 4 + 1.0, "PROF_TX_Q081": np.arange(n) % 3 + 1.0})
+    meta = pd.DataFrame({"variavel": ["PROF_TX_Q080", "PROF_TX_Q081"], "tipo": "ordinal", "excluir_sempre": False,
+                         "sensivel": False, "percepcao_desfecho": [True, False], "tema": "t"})
+    principal, _ = selecionar_variaveis(df, meta, excluir_percepcao=True)
+    sensibilidade, _ = selecionar_variaveis(df, meta, excluir_percepcao=False)
+    assert principal.variavel.tolist() == ["PROF_TX_Q081"]
+    assert set(sensibilidade.variavel) == {"PROF_TX_Q080", "PROF_TX_Q081"}

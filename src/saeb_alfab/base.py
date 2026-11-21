@@ -106,6 +106,9 @@ def construir_base(aluno, escola, prof, dire, meta, juncao: str = "esquerda", n_
     base["TEM_PROF"], base["TEM_DIR"] = base.index.isin(prof_agg.index), base.index.isin(dir_cod.index)
     base["TEM_INSE"] = base["ESC_INSE"].notna()
     base["CTX_N_TURMAS"] = base["CTX_N_TURMAS"].fillna(0)
+    # Ausência informativa: indicadores de escola sem o questionário (a mediana imputada não a distingue)
+    base["PROF_SEM_QUESTIONARIO"] = (~base["TEM_PROF"]).astype(float)
+    base["DIR_SEM_QUESTIONARIO"] = (~base["TEM_DIR"]).astype(float)
     base = base[(base.TEM_PROF | base.TEM_DIR) & (base.N_ALUNOS >= n_min)]
     return base, a, prof_cod, dir_cod
 

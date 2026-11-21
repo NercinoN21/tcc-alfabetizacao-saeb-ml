@@ -46,3 +46,13 @@ def test_divergencia_do_corte_743_e_detectada(micro, dic_prof, dic_dir):
     meta = D.montar_meta(D.parse_dicionario(dic_prof), D.parse_dicionario(dic_dir))
     with pytest.raises(AssertionError):
         B.construir_base(aluno, escola, prof, dire, meta)
+
+
+def test_indicadores_de_ausencia_do_questionario(micro, dic_prof, dic_dir):
+    """Ausência informativa: escola sem questionário do diretor recebe DIR_SEM_QUESTIONARIO = 1."""
+    aluno, escola, prof, dire = micro
+    meta = D.montar_meta(D.parse_dicionario(dic_prof), D.parse_dicionario(dic_dir))
+    base, *_ = B.construir_base(aluno, escola, prof, dire[dire.ID_ESCOLA != 2], meta)
+    assert base.loc[2, "DIR_SEM_QUESTIONARIO"] == 1.0 and base.loc[1, "DIR_SEM_QUESTIONARIO"] == 0.0
+    assert (base.PROF_SEM_QUESTIONARIO == 0).all()
+    assert set(base.PROF_SEM_QUESTIONARIO.unique()) <= {0.0, 1.0}

@@ -41,9 +41,9 @@ class Config:
     # Regra de seleção do modelo final (Seção 3.7): o ensemble só é escolhido se for
     # melhor que o linear com IC95% excluindo zero E com ganho relativo >= margem.
     margem_equivalencia: float = 0.02
-    # Itens que medem a percepção do respondente sobre o próprio desfecho (risco de
-    # causalidade reversa). Por padrão entram, marcados no meta (`percepcao_desfecho`).
-    excluir_percepcao_desfecho: bool = False
+    # Itens que medem a percepção do respondente sobre o próprio desfecho (PROF_TX_Q080, DIR_TX_Q030;
+    # risco de causalidade reversa): fora da especificação principal; a sensibilidade os reinclui.
+    excluir_percepcao_desfecho: bool = True
     data_dir: Path = field(default_factory=lambda: Path(os.environ.get("SAEB_DATA_DIR", RAIZ / "data" / "raw")))
     saida_dir: Path = field(default_factory=lambda: RAIZ / "reports" / "execucoes")
 
