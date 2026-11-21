@@ -1,0 +1,1642 @@
+\chapter{Introdução}
+
+A educação é uma preocupação central de qualquer país, e a razão é
+econômica antes mesmo de ser social: a literatura de capital humano
+documenta, de forma consistente ao longo de décadas, que cada ano adicional
+de escolaridade está associado a um retorno privado médio de 9\% ao ano em
+rendimentos futuros no mundo (e de 11\% na América Latina), com o
+maior retorno social concentrado justamente na etapa primária da
+escolarização \cite{psacharopoulos2018returns}. Mais do que o tempo de
+permanência na escola, contudo, o que se associa ao desenvolvimento
+econômico das nações são as habilidades cognitivas efetivamente adquiridas
+pelos estudantes, medidas por avaliações padronizadas
+\cite{hanushek2008role}. Escolarizar sem ensinar, adverte o Banco Mundial,
+é uma promessa não cumprida: há uma distância persistente entre
+\emph{schooling} e \emph{learning}, e é nessa distância que se decide se o
+investimento educacional de um país se converte ou não em bem-estar para as
+pessoas \cite{worldbank2018wdr}.
+
+Essa preocupação é mais aguda nos países em desenvolvimento. Estimativas
+conjuntas do Banco Mundial e da UNESCO indicam que, após a pandemia de
+Covid-19, cerca de 70\% das crianças de dez anos dos países de renda baixa
+e média encontravam-se em situação de \emph{pobreza de aprendizagem},
+definida como a incapacidade de ler e compreender um texto simples; na
+América Latina, a proporção estimada chegou a 80\%, ante cerca de metade
+antes da pandemia \cite{worldbank2022learningpoverty}. O Brasil ilustra com
+precisão a natureza do problema: sua pobreza de aprendizagem é estimada em
+47\%, decomposta em 45,6 pontos percentuais de déficit de
+\emph{aprendizagem} e apenas 2,4 de déficit de \emph{acesso} à escola
+\cite{worldbank2024brazilbrief}. O desafio brasileiro, portanto, não é mais
+matricular, é ensinar. Em contextos de escassez de recursos, próximos da
+realidade de parte da rede pública, a evidência internacional mostra que
+insumos escolares básicos e a governança da escola voltam a ter associação
+relevante com o aprendizado, desde que efetivamente utilizados em sala de
+aula \cite{glewwe2011school}. Isso torna a pergunta sobre \emph{quais}
+características da escola acompanham melhores resultados uma pergunta de
+alocação de recursos, não apenas de pesquisa acadêmica.
+
+É nesse cenário de escassez de recursos e de decisões sobre onde investir
+que se insere o sistema educacional brasileiro, cujo funcionamento convém
+situar para um leitor não familiarizado com ele. A Constituição Federal, após a Emenda
+Constitucional n\textordmasculine{}~59/2009, torna a educação básica
+obrigatória e gratuita dos 4 aos 17 anos de idade. Ela se organiza em três
+etapas: a \emph{educação infantil} (creche, para crianças de 0 a 3 anos, e
+pré-escola, dos 4 aos 5), o \emph{ensino fundamental}, com duração de nove
+anos e ingresso aos 6 anos de idade (Lei n\textordmasculine{}~11.274/2006),
+e o \emph{ensino médio}, dos 15 aos 17. Das 47,1 milhões de matrículas da
+educação básica registradas pelo Censo Escolar de 2024, 79,8\% estão na
+rede pública; nos anos iniciais do ensino fundamental (onde se situa o
+2º ano), a rede pública responde por 80,4\% das matrículas, das quais a
+maior parte em redes municipais \cite{inep2025censo}. Compreender o que se
+associa ao aprendizado na escola pública é, portanto, compreender o caso
+majoritário da educação brasileira. As trajetórias que desembocam no
+fundamental, porém, são desiguais desde antes dele: a pré-escola aproxima-se
+da universalização (93,4\% das crianças de 4 e 5 anos), mas a creche
+alcança apenas cerca de 40\% das crianças de 0 a 3 (com acesso fortemente
+estratificado por renda), de modo que as crianças chegam ao processo de
+alfabetização com pontos de partida muito distintos
+\cite{ibge2025pnadeducacao}.
+
+É nesse contexto que a alfabetização até o final do 2º ano do Ensino
+Fundamental, quando a criança tem por volta de 7 a 8 anos, tornou-se uma
+das metas mais consensuais da política educacional brasileira, formalizada
+no Plano Nacional de Educação e reafirmada por programas federais como o
+Compromisso Nacional Criança Alfabetizada, que estabelece a meta de 80\% de
+crianças alfabetizadas ao final do 2º ano até 2030. A distância até essa
+meta é considerável: na avaliação amostral do Saeb 2023, 49,3\% dos alunos
+do 2º ano da rede pública alcançaram o ponto de corte oficial de
+alfabetização \cite{inep2025resultadossaeb}. O argumento por trás dessa
+priorização é bem estabelecido na literatura de economia da educação:
+dificuldades de leitura e escrita não superadas nos primeiros anos
+escolares tendem a se acumular ao longo da trajetória educacional,
+associando-se a maiores taxas de repetência e evasão e a pior desempenho em
+etapas posteriores \cite{hanushek2008role}. Garantir a alfabetização na
+idade certa é, além disso, a intervenção com melhor razão custo-benefício
+disponível ao gestor público: a evidência sobre programas de primeira
+infância indica retornos sociais da ordem de 13\% ao ano por criança,
+superiores aos de intervenções remediais tardias
+\cite{garcia2020quantifying}. Compreender quais fatores estão associados à
+alfabetização nessa fase inicial é, portanto, uma pergunta tanto acadêmica
+quanto diretamente relevante para a formulação de políticas públicas.
+
+O Sistema de Avaliação da Educação Básica (Saeb), conduzido pelo Instituto
+Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep), é o
+instrumento nacional que permite formular essa pergunta com dados. O Saeb
+passou a avaliar sistematicamente o 2º ano do Ensino Fundamental a partir
+da edição de 2019, produzindo tanto uma medida de proficiência em Língua
+Portuguesa (estimada por Teoria de Resposta ao Item) quanto um indicador
+binário de alfabetização, definido por um corte nessa proficiência
+\cite{klein2003tri}. Paralelamente à prova aplicada ao aluno, o Saeb coleta
+questionários contextuais extensos respondidos pelo professor da turma e
+pelo diretor da escola, além de um indicador agregado de nível
+socioeconômico da escola, cobrindo temas como formação docente, práticas
+pedagógicas, infraestrutura, gestão escolar e clima de segurança. Essa
+combinação de desfechos educacionais mensurados em larga escala com
+centenas de covariáveis de contexto escolar torna o Saeb uma base
+particularmente adequada à aplicação de técnicas de aprendizado de máquina
+supervisionado.
+
+Há, contudo, uma lacuna específica a explorar. A literatura brasileira
+sobre fatores associados ao desempenho escolar apoia-se predominantemente
+em modelos de regressão multinível e de regressão quantílica
+\cite{franco2007qualidade, alves2007efeito, almeida2014determinantes}, e as
+aplicações de modelos interpretáveis de aprendizado de máquina aos
+microdados do Saeb concentram-se em etapas mais avançadas da escolarização
+\cite{tertulino2025multilevel}. A aplicação desse instrumental ao 2º ano do
+Ensino Fundamental permanece limitada: trata-se de uma etapa reintroduzida
+na avaliação em larga escala apenas recentemente e que, por não contar com
+questionário respondido pelo próprio aluno, impõe um desenho analítico
+distinto do adotado nas etapas mais estudadas. É essa lacuna que o presente
+projeto pretende endereçar.
+
+Para tanto, será construída uma base analítica única a partir da integração
+de quatro fontes de microdados do Saeb 2023 (aluno, escola, professor e
+diretor), agregada no nível da \emph{escola} (unidade de análise deste
+trabalho, pelas razões metodológicas detalhadas na
+Seção~\ref{sec:unidade-escola}), sobre a qual serão comparados
+algoritmos de aprendizado supervisionado em duas trilhas complementares de
+regressão: a da \emph{proporção de alunos alfabetizados} de cada escola e a
+da \emph{proficiência média em Língua Portuguesa} de cada escola. O
+trabalho buscará identificar e hierarquizar quais características da turma,
+do professor, da escola e da gestão escolar apresentam maior capacidade
+preditiva sobre esses dois desfechos, recorrendo a técnicas de
+explicabilidade para tornar interpretáveis os modelos estimados.
+
+\section{Problema de pesquisa}
+\label{sec:problema-pesquisa}
+
+Este trabalho parte da seguinte pergunta central: \emph{quais
+características da turma, do professor, da escola e da gestão escolar
+apresentam maior capacidade preditiva em relação à proporção de alunos
+alfabetizados e à proficiência média em Língua Portuguesa das escolas
+públicas com 2º ano do Ensino Fundamental, segundo os microdados do Saeb
+2023?}
+
+A formulação da pergunta reflete uma característica estrutural da base: o
+Saeb 2023 não aplica questionário contextual ao aluno do 2º ano, de modo
+que não há covariáveis individuais disponíveis além dos próprios desfechos
+e dos identificadores de vínculo (Seção~\ref{sec:unidade-escola}). Toda a
+informação preditiva disponível é de nível turma, escola ou gestão escolar,
+e é precisamente por isso que a escola, e não o aluno, é adotada como
+unidade de análise: os desfechos individuais são agregados por escola, e a
+pergunta é enunciada no nível em que tanto os preditores quanto as decisões
+de gestão educacional efetivamente operam.
+
+\subsection{Hipóteses de pesquisa}
+\label{sec:hipoteses}
+
+Essa pergunta se desdobra em quatro sub-perguntas mais específicas, cada uma
+ancorada em um grupo temático distinto do questionário contextual do Saeb e
+detalhada, variável a variável, na Seção~\ref{sec:variaveis} da
+Metodologia. A Tabela~\ref{tab:hipoteses} resume as sub-perguntas e as
+hipóteses de pesquisa correspondentes. Todas são enunciadas em termos
+associativos e preditivos, no nível da escola: o desenho deste trabalho
+permite verificar quais variáveis contribuem para prever os desfechos
+agregados e como se ordenam em importância, não estabelecer relações
+causais entre elas (Seção~\ref{sec:registros-inferenciais}).
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Sub-perguntas de pesquisa e hipóteses testáveis}
+    \begin{tabular}{L{0.5cm}L{3.6cm}L{5.3cm}L{2.6cm}}
+        \toprule
+        \textbf{\#} & \textbf{Sub-pergunta} & \textbf{Hipótese} & \textbf{Grupo temático} \\
+        \midrule
+        H1 & Características do corpo docente apresentam contribuição
+        preditiva para a proporção de alfabetizados da escola? & Variáveis
+        de formação continuada em alfabetização/letramento, experiência
+        docente e práticas pedagógicas figuram entre as de maior
+        importância preditiva. & Professor: formação, experiência e
+        prática \\
+        H2 & Características da escola e da gestão escolar apresentam
+        contribuição preditiva para a proficiência média? & Variáveis de
+        clima e segurança escolar e de gestão e liderança pedagógica do
+        diretor estão associadas à proficiência média da escola. & Escola:
+        clima, segurança e gestão \\
+        H3 & O INSE permanece entre os preditores mais importantes na
+        presença das demais variáveis? & Mesmo na presença das variáveis de
+        professor e diretor, o INSE figura entre as variáveis de maior
+        importância em todos os modelos. & Nível socioeconômico \\
+        H4 & O contexto geográfico carrega informação própria? & Variáveis
+        de região, unidade da federação e localização apresentam
+        contribuição preditiva não redutível à do INSE. & Contexto
+        geográfico \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor.}
+    \end{flushleft}
+    \label{tab:hipoteses}
+\end{table}
+
+As quatro hipóteses estão ancoradas em grupos temáticos distintos do
+questionário contextual do Saeb, cada um deles examinado pelo mesmo
+instrumento de importância agregada por grupo (Seção~\ref{sec:xai}). H1
+reúne formação continuada em alfabetização/letramento, experiência docente
+e práticas pedagógicas em sala de aula sob um único grupo temático de
+professor, testando se esse conjunto figura entre os preditores mais
+importantes da proporção de alfabetizados da escola. H2 reúne clima e
+segurança escolar com gestão e liderança pedagógica do diretor sob um grupo
+temático de escola, testando sua associação com a proficiência média. Ficou
+fora do conjunto de hipóteses testáveis a efetividade de ações de combate à
+repetência e ao abandono escolar: os itens correspondentes do questionário
+do Saeb registram apenas a \emph{existência declarada} dessas ações, não
+seu resultado, de modo que sua efetividade não é verificável com a
+informação disponível na base.
+
+A Hipótese~3 merece destaque metodológico particular: a literatura de
+sociologia da educação brasileira estabelece, com razoável consenso, que o
+nível socioeconômico da escola é um dos preditores mais robustos de
+desempenho escolar (Seção~\ref{sec:evidencias-brasileiras}). O que este
+trabalho se propõe a verificar é se as variáveis de contexto de professor e
+diretor apresentam contribuição preditiva \emph{além} da que o INSE já
+captura sozinho, ou se seu papel é, na prática, redundante com ele,
+pergunta endereçada diretamente pela comparação de modelos e pela
+interpretabilidade SHAP agregada por grupo temático (Capítulo~3). A
+Hipótese~4 testa, na mesma lógica, se variáveis de região, unidade da
+federação e localização carregam informação preditiva não redutível à do
+INSE, ancorando-se nos achados de efeito-município da literatura brasileira
+(Seção~\ref{sec:evidencias-brasileiras}).
+
+Uma limitação deve ser declarada já nesta introdução, por qualificar
+diretamente a Hipótese~1: o questionário do professor do 2º ano não
+pergunta sobre \emph{método} de alfabetização (fônico, silábico, global),
+apenas sobre práticas pedagógicas genéricas
+(Seção~\ref{sec:alfabetizacao-2ef}). H1 capta, portanto, proxies de
+qualidade pedagógica geral, não escolhas de método de alfabetização
+especificamente, o que deverá ser retomado na discussão dos resultados em
+TCC II.
+
+\section{Objetivos}
+\label{sec:objetivos}
+
+\subsection{Objetivo geral}
+
+Identificar e hierarquizar características da turma, do professor, da escola
+e da gestão escolar associadas à proporção de alunos alfabetizados e à
+proficiência média em Língua Portuguesa das escolas públicas com 2º ano do
+Ensino Fundamental no Brasil, utilizando os microdados do Saeb 2023 e
+modelos interpretáveis de aprendizado de máquina.
+
+\subsection{Objetivos específicos}
+\label{sec:objetivos-especificos}
+
+\begin{enumerate}
+    \item Construir uma base analítica única, com a escola como unidade de
+    análise, a partir da integração de quatro fontes de microdados do Saeb
+    2023 (aluno, escola, professor e diretor), com critérios de agregação e
+    de seleção de variáveis documentados e reprodutíveis, livres de
+    vazamento de informação e de dados pessoais sensíveis;
+    \item Estimar e comparar, em duas trilhas de regressão complementares
+    (proporção de alunos alfabetizados e proficiência média em Língua
+    Portuguesa, ambas no nível da escola), modelos lineares regularizados
+    de referência e \textit{ensembles} de árvores de decisão, avaliados por
+    um protocolo experimental único com partição e validação cruzada no
+    nível da escola (Seção~\ref{sec:protocolo}) e contrastados com
+    \textit{baselines} simples, como a média e a mediana dos desfechos;
+    \item Aplicar SHAP como método prioritário de explicabilidade ao modelo
+    selecionado de cada trilha, hierarquizando a importância dos grupos
+    temáticos de variáveis, com o LIME tratado como checagem complementar e
+    opcional em casos individuais selecionados;
+    \item Avaliar a robustez das conclusões frente a duas decisões
+    metodológicas: a restrição da análise à rede pública (por meio de
+    execuções alternativas que variem um fator de cada vez, a população
+    analisada e o conjunto de preditores disponível, de modo a isolar a
+    origem das diferenças observadas) e a escolha da escola como unidade de
+    agregação (por meio de uma execução de sensibilidade que repete a
+    trilha da proporção de alfabetizados com a turma como unidade,
+    Seção~\ref{sec:robustez});
+    \item Desenvolver, como produto aplicado do trabalho, o protótipo de um
+    artefato de dados (um \emph{dashboard} interativo) que traduza os
+    modelos e suas explicações em um instrumento de consulta para gestores
+    educacionais e potenciais financiadores de política pública.
+\end{enumerate}
+
+\section{Justificativa}
+\label{sec:justificativa}
+
+A contribuição pretendida por este trabalho é quádrupla. Em primeiro lugar,
+do ponto de vista metodológico, ele propõe aplicar ao Saeb uma combinação
+que o levantamento bibliográfico realizado no Capítulo~2 não identificou em
+trabalhos anteriores sobre o 2º ano: uma comparação sistemática entre
+modelos lineares de referência e \textit{ensembles} de árvore, sobre
+\emph{duas} trilhas de regressão no nível da escola (proporção de
+alfabetizados e proficiência média) construídas a partir de um mesmo
+conjunto de preditores, o que permitirá verificar se as variáveis mais
+relevantes para prever a proporção de alunos alfabetizados coincidem com as
+mais relevantes para prever o nível médio de proficiência. Essa proposta
+dialoga com a tradição de regressão quantílica aplicada a microdados
+educacionais brasileiros, da qual \citeonline{almeida2014determinantes} é
+referência direta (Seção~\ref{sec:quantilica-ml}), e com o precedente mais
+recente de aprendizado de máquina multinível aplicado ao Saeb
+\cite{tertulino2025multilevel}, mas distingue-se deles pela unidade de análise
+agregada, pelas duas trilhas de modelagem e por agregar a
+interpretabilidade SHAP por grupo temático de variáveis, não apenas por
+coluna isolada.
+
+Em segundo lugar, do ponto de vista do rigor de dados, o trabalho documenta
+de forma exaustiva, para as 591 colunas reais das quatro bases de dados, a
+decisão de inclusão ou exclusão de cada variável candidata e sua
+justificativa, incluindo uma discussão explícita sobre vazamento de
+informação (a variável alvo de alfabetização é definida por um corte na
+própria proficiência contínua) e sobre a exclusão deliberada dos dados de
+cor/raça e de deficiência de professores e diretores do conjunto de
+preditores; a justificativa completa dessa exclusão, tratada como decisão
+de escopo e de ética de aplicação, e não como vedação legal automática dos
+dados já públicos e anonimizados, é desenvolvida na Seção~\ref{sec:etica}.
+
+Em terceiro lugar, do ponto de vista de política pública, hierarquizar os
+grupos temáticos de contexto escolar por sua contribuição preditiva à
+alfabetização (e verificar se essa contribuição se sustenta na presença do
+nível socioeconômico) fornece subsídio à \emph{formulação de hipóteses} a
+serem investigadas em estudos futuros com desenho de pesquisa mais robusto.
+Cabe registrar explicitamente o limite desse uso:
+importância preditiva em um modelo não se converte diretamente em
+recomendação de política pública, uma vez que a ordenação de variáveis
+reflete o poder de previsão sobre os dados observados, não o efeito
+esperado de intervir sobre elas.
+
+Em quarto lugar, do ponto de vista da Ciência de Dados para Negócios, o
+trabalho percorre integralmente o ciclo que caracteriza a área aplicada a
+um problema de decisão pública. Parte da integração de quatro bases
+heterogêneas, com granularidades e chaves distintas, em uma base analítica
+única no nível da escola. Organiza essa integração em um \textbf{pipeline
+reprodutível}, em que os critérios de inclusão, exclusão, agregação e
+codificação de cada variável residem em um módulo de configuração que
+funciona como fonte única de verdade, de modo que documentação e código não
+divergem. Submete os modelos a uma \textbf{comparação preditiva} sob
+protocolo experimental único e traduz os modelos resultantes em
+explicações auditáveis por meio de técnicas de explicabilidade. O produto
+final previsto para o TCC II é o protótipo de um \textbf{dashboard
+interativo} (um artefato de dados nos moldes do que se apresentaria a um
+comitê de investimento ou a um secretário de educação) que disponibilize
+essas evidências em formato explorável, permitindo filtrar por unidade da
+federação e região (variáveis de contexto geográfico previstas entre os
+preditores, Hipótese~4), consultar a ordenação dos grupos temáticos,
+localizar escolas cuja proporção de alfabetizados destoa do que seu contexto
+socioeconômico preveria e inspecionar a decomposição da predição em casos
+concretos. A lógica de negócio subjacente é a de um instrumento de
+\emph{triagem e priorização}: com recursos escassos, o gestor que precisa
+decidir onde concentrar formação docente, apoio pedagógico ou investimento
+em infraestrutura ganha um mapa ordenado por evidência, cuja lógica é
+inspecionável por quem o utiliza, não um número isolado.
+
+\section{Estrutura do trabalho}
+
+Além desta introdução, este Projeto está organizado em mais dois capítulos.
+O Capítulo~2 apresenta a fundamentação teórica, cobrindo a avaliação do
+Saeb e a Teoria de Resposta ao Item, a literatura brasileira sobre fatores
+associados ao desempenho escolar, a tradição de regressão quantílica e o
+aprendizado de máquina aplicado à educação, as técnicas de explicabilidade
+adotadas e os fundamentos da análise com desfechos agregados no nível da
+escola. O Capítulo~3 detalha a metodologia: as fontes de dados, a unidade
+de análise e a delimitação da amostra, os critérios de agregação, seleção e
+engenharia de variáveis, o modelo empírico e o protocolo experimental da
+comparação de algoritmos, a abordagem de explicabilidade e o cronograma de
+execução.
+
+Por se tratar de Projeto apresentado na disciplina Projetos em Ciência de
+Dados I (TCC I), os capítulos de Resultados e de Considerações Finais não
+integram esta versão: a análise descritiva da base, o desempenho comparado
+dos modelos, a interpretação por SHAP do modelo selecionado de cada trilha
+e a checagem de robustez serão desenvolvidos e discutidos na versão final
+do trabalho, na disciplina Projetos em Ciência de Dados II (TCC II),
+conforme o cronograma da Seção~\ref{sec:cronograma}.
+
+
+\chapter{Fundamentação Teórica}
+
+A investigação dos fatores associados ao desempenho escolar articula, ao
+longo do último meio século, duas tradições de pesquisa que só recentemente
+passaram a dialogar de forma sistemática. A primeira, de raiz sociológica e
+econométrica, herda o desenho da função de produção educacional e da
+pesquisa sobre efeito-escola, e busca isolar, por meio de modelos
+estatísticos com pressupostos distribucionais explícitos, a contribuição
+relativa de fatores familiares, escolares, docentes e de gestão sobre a
+proficiência dos estudantes. A segunda, de origem mais recente e vinculada
+à mineração de dados educacionais (\textit{Educational Data Mining}) e ao
+aprendizado de máquina, privilegia a capacidade preditiva e a flexibilidade
+funcional de algoritmos não paramétricos, historicamente ao custo de menor
+transparência interpretativa (lacuna apenas parcialmente superada com o
+amadurecimento recente das técnicas de explicabilidade). Este capítulo
+revisa criticamente as duas tradições e as articula ao objeto específico
+desta pesquisa: os fatores associados à alfabetização e à proficiência em
+Língua Portuguesa no 2º ano do Ensino Fundamental da rede pública
+brasileira, analisados no nível da escola a partir dos microdados do Saeb
+2023.
+
+\section{Avaliação em larga escala e a mensuração do desempenho no Saeb}
+
+O Sistema de Avaliação da Educação Básica (Saeb), conduzido pelo Instituto
+Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep), é a
+principal fonte nacional de dados sobre desempenho escolar associados a
+características contextuais de alunos, professores, diretores e escolas. A
+proficiência dos estudantes não é uma nota bruta de acertos: ela é estimada
+por meio da Teoria de Resposta ao Item (TRI), que modela a probabilidade de
+acerto de cada item em função de um traço latente de habilidade, permitindo
+comparabilidade da escala entre edições e etapas de ensino
+\cite{klein2003tri}. Essa escolha metodológica tem uma consequência direta
+para o desenho empírico deste trabalho, detalhada na
+Seção~\ref{sec:variaveis} da Metodologia: como a proficiência contínua e o
+indicador binário de alfabetização são subprodutos do mesmo processo de
+estimação por TRI, as demais colunas derivadas da prova do aluno (erro
+padrão, respostas a itens individuais) não podem ser tratadas como
+preditores independentes, sob pena de vazamento de informação.
+
+Feita essa ressalva metodológica, cabe situar a edição do Saeb em que este
+trabalho se apoia. A partir de 2023, o Saeb voltou a avaliar sistematicamente o
+2º ano do Ensino Fundamental, produzindo, além da proficiência em Língua
+Portuguesa, um indicador oficial de alfabetização definido por um corte de
+743 pontos na escala de proficiência, diretamente vinculado ao
+monitoramento do Compromisso Nacional Criança Alfabetizada. O desenho
+amostral que sustenta essa edição, incluindo pesos amostrais e estratos, é
+documentado pelo próprio Inep em notas técnicas específicas sobre a base
+amostral e sobre a construção do Indicador de Nível Socioeconômico (INSE)
+\cite{inep2024amostra, inep2024inse}, este último utilizado neste trabalho
+como proxy do contexto socioeconômico da escola (variável
+\texttt{NIVEL\_SOCIO\_ECONOMICO}). \citeonline{costa2023reflexoes}
+investigam, por meio de entrevistas com professores, como a reintrodução da
+avaliação em larga escala do 2º ano foi recebida na prática pedagógica,
+concluindo que ainda é cedo para afirmações consistentes sobre a
+intensidade dessa influência, o que serve de indício de que o próprio
+objeto de avaliação, o 2º ano do Ensino Fundamental, permanece pouco
+explorado empiricamente na literatura nacional em comparação com etapas
+mais tradicionalmente estudadas, como o 5\textordmasculine{} e o
+9\textordmasculine{} anos.
+
+\section{Fatores associados ao desempenho escolar: fundamentos teóricos da função de produção educacional}
+\label{sec:fundamentos-teoricos}
+
+O estudo empírico dos determinantes do desempenho escolar tem como marco
+fundador o relatório coordenado por \citeonline{coleman1966equality},
+encomendado pelo governo dos Estados Unidos para avaliar desigualdades
+entre escolas públicas americanas. Ao analisar dados de mais de 600 mil
+estudantes, o estudo chegou a uma conclusão que reorientou globalmente a
+agenda de pesquisa em sociologia da educação: diferenças em infraestrutura,
+financiamento e currículo escolar têm impacto surpreendentemente pequeno
+sobre o desempenho acadêmico, quando comparadas ao contexto socioeconômico
+e familiar do próprio aluno e à composição social do corpo discente. Esse
+achado inaugura a tensão que atravessa toda a literatura subsequente sobre
+fatores associados ao desempenho, e que orienta diretamente a formulação da
+Hipótese~3 deste trabalho (Seção~\ref{sec:hipoteses}): o quanto o
+desempenho escolar se associa à origem dos alunos em comparação com o que a
+escola, o professor e o diretor conseguem agregar independentemente dela.
+
+\citeonline{hanushek1970production} formaliza essa discussão por meio da
+função de produção educacional, um modelo analítico que trata a escola como
+um sistema em que insumos (recursos financeiros, infraestrutura,
+características familiares e docentes) são transformados em resultados de
+aprendizagem. Uma das descobertas mais contra-intuitivas do autor é que
+métricas tradicionais de qualificação docente (anos de experiência,
+titulação) apresentam pouca correlação consistente com ganhos reais de
+proficiência, ainda que a eficácia real do professor varie substancialmente
+entre profissionais. Essa distinção entre credenciais observáveis e
+eficácia efetiva é retomada, décadas depois, por
+\citeonline{hanushek2008role}, que demonstram que o verdadeiro motor do
+desenvolvimento econômico de uma nação não é o tempo de escolarização da
+população, mas suas habilidades cognitivas reais, medidas por avaliações
+padronizadas como o próprio Saeb. Já \citeonline{glewwe2011school}, em
+revisão sistemática da literatura sobre países em desenvolvimento, matizam
+esse quadro: em contextos de escassez (mais próximos da realidade de
+parte da rede pública brasileira), recursos físicos e de governança
+básicos (carteiras, livros didáticos, presença efetiva do professor) voltam
+a ter impacto estatístico considerável, desde que a estrutura de incentivos
+da escola garanta seu uso efetivo em sala de aula.
+
+Tomados em conjunto, esses três trabalhos fornecem o andaime conceitual
+(insumos familiares, insumos docentes, insumos escolares) que orienta a
+seleção das variáveis candidatas deste TCC (Seção~\ref{sec:variaveis}) e,
+mais adiante, a interpretação por grupos temáticos dos valores de SHAP.
+
+\section{Evidências brasileiras: efeito-escola, efeito-município e o papel residual do contexto escolar}
+\label{sec:evidencias-brasileiras}
+
+A aplicação da função de produção educacional ao contexto brasileiro tem em
+\citeonline{barros2001determinantes} uma referência seminal: utilizando
+microdados do Saeb, os autores mostram que características familiares
+(renda e escolaridade dos pais) determinam a maior parte do desempenho
+educacional no país, mas que, diferentemente do observado em países ricos,
+a infraestrutura escolar e a qualidade docente ainda retêm uma margem de
+impacto significativa para reduzir desigualdades (resultado consistente
+com o quadro de escassez relativa descrito por
+\citeonline{glewwe2011school}). \citeonline{albernaz2002qualidade}
+aprofundam essa margem por meio de modelos estatísticos multinível,
+comprovando quantitativamente o efeito de composição socioeconômica da
+escola (efeito de pares) e destacando a formação docente como um dos poucos
+insumos escolares que efetivamente promovem equidade, e não apenas
+desempenho médio.
+
+O conceito de efeito-escola é sistematizado metodologicamente por
+\citeonline{alves2007efeito}, que discutem como isolar a contribuição
+própria da escola da composição socioeconômica de seus alunos, sendo uma
+discussão central para este trabalho, cuja Hipótese~3
+(Seção~\ref{sec:hipoteses}) testa exatamente se as variáveis de professor e
+diretor explicam desempenho além do que o nível socioeconômico da escola já
+captura sozinho. Utilizando dados do próprio Saeb,
+\citeonline{franco2007qualidade} testam empiricamente quais fatores
+intraescolares (gestão, clima, prática docente) se associam a
+desempenho em Matemática controlando por contexto socioeconômico,
+constituindo o precedente brasileiro metodologicamente mais próximo deste
+TCC, ainda que por meio de regressão multinível clássica em vez de
+aprendizado de máquina. Por fim, \citeonline{soares2013efeitos} estendem a
+discussão ao nível da gestão municipal, demonstrando que a capacidade de
+gestão das prefeituras se associa a diferenças de aprendizado mesmo entre
+escolas com alunado de perfil socioeconômico semelhante, evidenciando que o
+contexto geográfico e administrativo pode carregar informação própria, não
+redutível ao nível socioeconômico da escola. É desse achado da literatura
+que deriva diretamente a Hipótese~4 deste trabalho
+(Seção~\ref{sec:hipoteses}). Cabe uma ressalva quanto ao alcance dessa
+transposição: nos microdados do Saeb 2023 utilizados aqui, o identificador
+de município é um código anonimizado, sem correspondência divulgada com os
+códigos oficiais do IBGE (Seção~\ref{sec:fonte-dados}), de modo que este
+trabalho pode empregar o município como variável de agrupamento (na
+validação cruzada agrupada, Seção~\ref{sec:protocolo}), mas não como
+identificador para incorporar covariáveis municipais externas ou para
+nomear municípios específicos, como fazem \citeonline{soares2013efeitos}.
+
+Em conjunto, a literatura brasileira converge para um resultado de duas
+camadas: o contexto socioeconômico e familiar é o preditor mais robusto de
+desempenho, mas subsiste uma margem residual, ainda que menor, associada a
+professores, diretores e à gestão escolar e municipal. É precisamente essa
+margem residual que a comparação de modelos e a interpretabilidade SHAP
+deste trabalho se propõem a dimensionar e hierarquizar tema a tema.
+
+\section{Da regressão quantílica ao aprendizado de máquina: métodos quantitativos aplicados a microdados educacionais brasileiros}
+\label{sec:quantilica-ml}
+
+Um segundo eixo metodológico relevante para este trabalho é o
+reconhecimento de que os fatores associados ao desempenho escolar podem não
+atuar de forma homogênea ao longo de toda a distribuição de proficiência.
+\citeonline{koenker2005quantile} sistematiza a Regressão Quantílica como
+alternativa à Regressão por Mínimos Quadrados Ordinários (MQO): em vez de
+estimar o efeito de covariáveis sobre a média condicional da variável
+dependente, a técnica permite avaliar esse efeito em diferentes quantis da
+distribuição, revelando heterogeneidades que uma análise centrada na média
+esconde. Aplicada a dados educacionais, \citeonline{tian2006quantile}
+demonstra que variáveis de contexto familiar afetam de forma assimétrica o
+desempenho em Matemática, com impacto mais acentuado sobre alunos já
+situados nos quantis inferiores da distribuição.
+
+É nessa tradição que se insere a pesquisa de
+\citeonline{almeida2014determinantes}, referência direta para este TCC.
+Utilizando os microdados da Prova Brasil 2011 e a
+Regressão Quantílica, o autor identifica os determinantes dos piores e dos
+melhores resultados educacionais de alunos da rede pública no
+5\textordmasculine{} e no 9\textordmasculine{} anos do Ensino Fundamental,
+trazendo como contribuições originais o uso de variáveis que captam a
+existência de programas de reforço escolar e a ausência de hábito de
+leitura (do próprio aluno e de seus colegas de escola) e a demonstração
+de que esses fatores afetam de modo distinto os alunos de baixo e de alto
+desempenho. O achado central do estudo (que programas de reforço escolar
+não se mostram determinantes, ao passo que a falta de hábito de leitura
+reduz consistentemente o desempenho) ilustra exatamente o tipo de
+heterogeneidade que uma análise de média (MQO) não captaria.
+
+Este trabalho compartilha com \citeonline{almeida2014determinantes} o
+compromisso de ir além da média condicional e de deixar que os dados
+revelem quais fatores se associam ao desempenho e para quem, mas persegue
+esse objetivo por uma via metodológica distinta e complementar. Em vez de
+estender o paradigma da regressão quantílica a novos quantis ou a uma nova
+etapa de ensino, este TCC recorre a uma comparação entre modelos lineares
+regularizados de referência e três \textit{ensembles} de árvore de decisão
+(Random Forest \cite{breiman2001random}, XGBoost e LightGBM, ambas
+implementações otimizadas do algoritmo de \textit{gradient boosting}
+\cite{friedman2001greedy}), capazes de capturar não linearidades e
+interações entre as variáveis candidatas sem exigir a especificação prévia
+de uma forma funcional. \citeonline{breiman2001two}, em seu influente
+ensaio sobre as ``duas culturas'' da modelagem estatística, argumenta que a
+modelagem algorítmica (da qual os \textit{ensembles} de árvore são exemplo)
+e a modelagem estatística clássica respondem a perguntas diferentes e
+complementares. Essa distinção justifica, neste trabalho, tratar os modelos
+lineares regularizados não como modelos descartáveis, mas como
+\emph{modelos lineares de referência} da comparação
+(Seção~\ref{sec:estrategia-empirica}), sem que disso decorra
+caracterizá-los como inferenciais ou causais: estimados sobre dados
+observacionais e sem desenho de identificação, seus coeficientes descrevem
+associações condicionais, não efeitos.
+
+Cabe distinguir, porém, o que as técnicas de explicabilidade pós-hoc
+(Seção~\ref{sec:xai-revisao}) recuperam e o que não recuperam da leitura
+quantílica. Regressão quantílica e SHAP respondem a perguntas distintas: a
+primeira estima como a associação entre covariáveis e desfecho varia ao
+longo de quantis da distribuição condicional. O segundo decompõe a predição
+de um modelo já estimado em contribuições aditivas por variável, sem
+qualquer pretensão de estimar parâmetros populacionais. O exame separado de
+escolas com proporções de alfabetização muito baixas e muito altas,
+previsto para o TCC II, é, portanto, análogo à análise de quantis extremos
+de \citeonline{almeida2014determinantes} e \citeonline{tian2006quantile}
+apenas no plano do interesse substantivo (entender o que distingue os
+extremos da distribuição), não no plano inferencial.
+
+Este trabalho também se insere na literatura internacional de
+\textit{Educational Data Mining}, revisada por \citeonline{romero2010edm},
+que situa problemas como o deste TCC (modelagem supervisionada sobre
+microdados educacionais) dentro de uma taxonomia mais ampla de tarefas de
+mineração de dados aplicadas à educação. No plano internacional,
+\citeonline{masci2018student} constituem precedente revisado por pares
+diretamente pertinente ao desenho aqui adotado: aplicando árvores de
+regressão e \textit{boosting} a dados do PISA de nove países, os autores
+modelam o desempenho tanto de alunos quanto de \emph{escolas}, e mostram
+que os fatores associados ao desempenho escolar agregado diferem entre
+sistemas educacionais (evidência de que a análise no nível da escola é
+uma via legítima e informativa para esse tipo de pergunta). O precedente
+brasileiro mais direto e recente, no entanto, é o de
+\citeonline{tertulino2025multilevel}, que
+integra as mesmas quatro fontes de dados utilizadas aqui (aluno, professor,
+escola e diretor) em uma comparação de algoritmos de \textit{ensemble} para
+classificar a proficiência de alunos do 9\textordmasculine{} ano e do
+Ensino Médio, obtendo um modelo de Random Forest vencedor com 90,2\% de
+acurácia e AUC de 96,7\%, e concluindo, via SHAP, que o nível
+socioeconômico médio da escola é o preditor dominante --- evidência,
+segundo os autores, de que ``o desempenho acadêmico é um fenômeno sistêmico
+profundamente ligado ao ecossistema da escola''. Esse precedente não cobre,
+contudo, o 2º ano do Ensino Fundamental, etapa em que, ao contrário do
+9\textordmasculine{} ano e do Ensino Médio, não existe questionário do
+aluno: uma ausência estrutural, não uma lacuna de atenção acadêmica, que
+impõe a este trabalho um desenho analítico necessariamente distinto
+(detalhado na Seção~\ref{sec:unidade-escola}) e que constitui, ao lado da
+unidade de análise agregada, da dupla trilha de modelagem sobre o mesmo
+conjunto de preditores e da agregação de SHAP por grupo temático, o
+diferencial pretendido por este TCC frente ao precedente mais próximo da
+literatura.
+
+\section{Explicabilidade em aprendizado de máquina: abrindo a caixa-preta}
+\label{sec:xai-revisao}
+
+A adoção de \textit{ensembles} de árvore de decisão como os empregados
+neste trabalho reabre, na prática, a discussão iniciada por
+\citeonline{coleman1966equality} e retomada por toda a literatura sobre
+fatores associados ao desempenho: não basta prever o desempenho escolar com
+acurácia, é preciso saber por quê. \citeonline{lundberg2017shap} respondem
+a essa exigência unificando métodos anteriores de importância de variáveis
+sob a teoria dos valores de Shapley, oriunda da teoria dos jogos
+cooperativos, dando origem ao SHAP (\textit{SHapley Additive
+exPlanations}), método que atribui a cada variável uma contribuição aditiva
+e consistente para a predição de cada observação individual, permitindo
+tanto explicações locais (por escola, no desenho deste trabalho) quanto
+agregações globais (por variável ou por grupo temático de variáveis).
+\citeonline{ribeiro2016lime} propõem, de forma independente, o LIME
+(\textit{Local Interpretable Model-agnostic Explanations}), que aproxima o
+comportamento do modelo por um modelo linear interpretável na vizinhança de
+uma predição específica, método utilizado neste trabalho como checagem
+cruzada das explicações locais do SHAP em casos individuais selecionados
+(Seção~\ref{sec:xai}).
+
+A escolha de empregar simultaneamente dois métodos de explicabilidade, em
+vez de aceitar um único como verdade, apoia-se na taxonomia proposta por
+\citeonline{doshivelez2017rigorous} para avaliar rigorosamente o que
+significa uma explicação ser ``boa'' (os autores argumentam que
+divergências entre métodos distintos aplicados ao mesmo caso são, elas
+próprias, evidência relevante sobre a estabilidade da explicação, não um
+problema a ser escondido). \citeonline{molnar2025interpretable} consolida
+esses métodos em um panorama didático que serve de apoio complementar aos
+artigos originais.
+
+Essa literatura não é, contudo, isenta de crítica, e este trabalho a
+incorpora em vez de ignorá-la. \citeonline{rudin2019stop} argumenta que
+explicações pós-hoc de modelos caixa-preta podem ser infiéis ao
+comportamento real do modelo e que, em decisões de alto risco, modelos
+intrinsecamente interpretáveis deveriam ser preferidos. O desenho deste
+trabalho responde a essa objeção por duas vias: mantém modelos lineares
+regularizados intrinsecamente interpretáveis como referência da comparação
+(de modo que, se o ganho preditivo dos \textit{ensembles} for pequeno, o
+modelo interpretável será o selecionado, Seção~\ref{sec:testes-significancia})
+e restringe o uso do SHAP à explicação do \emph{modelo}, sem convertê-lo
+em afirmação sobre o fenômeno. Uma advertência metodológica atravessa toda
+essa literatura e é adotada explicitamente neste trabalho: os valores de
+SHAP e LIME descrevem o que o modelo aprendeu a partir dos dados de
+treinamento, não uma relação causal entre as variáveis e o desfecho, razão
+pela qual os resultados serão redigidos em termos de associação, nunca de
+causalidade.
+
+\section{Previsão, associação, explicação do modelo e inferência causal}
+\label{sec:registros-inferenciais}
+
+A articulação entre as duas tradições revisadas acima exige distinguir com
+precisão quatro registros que a literatura aplicada frequentemente sobrepõe
+e que este trabalho mantém separados de forma deliberada.
+
+\textbf{Previsão} diz respeito à capacidade de antecipar o valor do
+desfecho para observações não utilizadas na estimação. É o critério pelo
+qual os modelos serão comparados entre si (Seção~\ref{sec:protocolo}) e é
+avaliada exclusivamente por desempenho fora da amostra de treino. Um modelo
+pode prever bem apoiando-se em variáveis sem qualquer papel causal no
+fenômeno, bastando que sejam informativas sobre ele.
+
+\textbf{Associação} refere-se à relação estatística entre uma variável e o
+desfecho, condicional às demais variáveis incluídas. É o registro em que se
+enunciam as hipóteses deste trabalho (Seção~\ref{sec:hipoteses}) e o teto do
+que os dados disponíveis permitem afirmar. Associações são sensíveis ao
+conjunto de covariáveis incluído e não se sustentam necessariamente sob
+intervenção.
+
+\textbf{Explicação do modelo} é o que SHAP e LIME fornecem: uma decomposição
+de como um modelo \emph{já estimado} chegou a determinada predição. O objeto
+explicado é o modelo, não o fenômeno educacional. Duas consequências
+decorrem daí: as importâncias de SHAP dependem do modelo escolhido e podem
+variar entre algoritmos igualmente acurados; e uma variável pode receber
+alta importância por atuar como \textit{proxy} de outra, ausente ou mal
+medida na base.
+
+\textbf{Inferência causal} exige um desenho de identificação
+(aleatorização, variável instrumental, descontinuidade, diferenças em
+diferenças) que este trabalho não possui, por operar sobre um corte
+transversal observacional de uma única edição do Saeb. Nenhuma afirmação
+causal será, portanto, formulada, e a ordenação de variáveis produzida pela
+análise deve ser lida como insumo para a formulação de hipóteses causais a
+serem testadas em estudos com desenho apropriado, não como estimativa do
+efeito de intervir sobre essas variáveis.
+
+\section{Análise no nível da escola: desfechos agregados, proporções e o alcance ecológico das conclusões}
+\label{sec:nivel-escola-teoria}
+
+A adoção da escola como unidade de análise insere este trabalho em uma
+literatura metodológica própria, com dois fundamentos e uma advertência.
+
+O primeiro fundamento é econométrico: desfechos expressos como proporções
+(caso da proporção de alunos alfabetizados de cada escola) são
+variáveis limitadas ao intervalo $[0,1]$, para as quais a literatura
+recomenda especificações que respeitem esse suporte.
+\citeonline{papke1996fractional} propõem o modelo de resposta fracionária
+(\textit{fractional logit}), que modela a esperança condicional da
+proporção por meio de uma função de ligação logística sem exigir
+transformações ad hoc dos valores extremos 0 e 1;
+\citeonline{ferrari2004beta} desenvolvem alternativa paramétrica pela
+regressão beta. Neste trabalho, essas especificações informam o papel do
+modelo linear de referência da trilha de proporção
+(Seção~\ref{sec:estrategia-empirica}), enquanto os \textit{ensembles} de
+árvore, por não imporem forma funcional, acomodam naturalmente o desfecho
+fracionário, com a checagem de que as predições respeitem o intervalo
+unitário.
+
+O segundo fundamento é de desenho: quando todos os preditores disponíveis
+são medidos no nível do grupo, replicá-los para cada indivíduo do grupo não
+acrescenta informação: apenas repete a mesma linha muitas vezes,
+fenômeno conhecido como pseudo-replicação, que inflaciona artificialmente o
+tamanho aparente da amostra e o desempenho aparente dos modelos. Agregar o
+desfecho ao nível em que os preditores variam torna a estrutura de
+informação dos dados explícita, em vez de escondê-la sob dezenas de
+milhares de linhas redundantes.
+
+A advertência é clássica: \citeonline{robinson1950ecological} demonstrou
+que correlações calculadas sobre agregados (as chamadas correlações
+ecológicas) podem diferir substancialmente (em magnitude e até em sinal)
+das correlações no nível individual, erro de transposição conhecido
+como \emph{falácia ecológica}. A consequência para este trabalho é uma
+regra de redação: todas as associações estimadas serão enunciadas e
+interpretadas no nível da escola (``escolas com maior X apresentam, em
+média, maior proporção de alfabetizados''), nunca transpostas ao nível do
+aluno individual.
+
+\section{Alfabetização no 2º ano do Ensino Fundamental: especificidades do objeto}
+\label{sec:alfabetizacao-2ef}
+
+A alfabetização, tal como tratada neste trabalho, não é um constructo
+simples. \citeonline{soares2017alfabetizacao} a define como um processo
+complexo, composto por três facetas (linguística, interativa e
+sociocultural), e reconstrói o embate histórico entre métodos de
+alfabetização analíticos e sintéticos (fônico, silábico, global) que ainda
+hoje organiza o debate público e de política educacional no Brasil. Essa
+discussão expõe uma limitação estrutural deste TCC que deve ser declarada
+com transparência: o questionário do professor do 2º ano
+do Ensino Fundamental no Saeb 2023 não pergunta sobre o método de
+alfabetização adotado em sala de aula, apenas sobre práticas pedagógicas
+de natureza mais genérica. Consequentemente, as variáveis de prática
+docente utilizadas neste trabalho (Seção~\ref{sec:variaveis}) funcionam
+como \textit{proxies} de qualidade pedagógica geral, não como uma medida da
+escolha de método de alfabetização especificamente, o que qualifica de
+forma importante a interpretação da Hipótese~1 (Seção~\ref{sec:hipoteses}).
+Some-se a isso a constatação de \citeonline{costa2023reflexoes} de que a
+própria avaliação em larga escala do 2º ano ainda é
+recente na prática das escolas, reforçando que este é um objeto de
+pesquisa pouco consolidado, tanto do ponto de vista da política educacional
+quanto da literatura acadêmica nacional.
+
+\section{Síntese e posicionamento da pesquisa}
+
+A fundamentação desenvolvida neste capítulo permite situar com precisão a
+contribuição pretendida por este TCC. Da função de produção educacional
+(Seção~\ref{sec:fundamentos-teoricos}) e das evidências brasileiras de
+efeito-escola e efeito-município (Seção~\ref{sec:evidencias-brasileiras}),
+herda-se a expectativa teórica de que o contexto socioeconômico domina, mas
+não esgota, a associação com o desempenho escolar, deixando uma margem
+empírica em aberto para professores, diretores e gestão municipal, que a
+comparação de modelos e a interpretabilidade SHAP deste trabalho se propõem
+a dimensionar. Da tradição de regressão quantílica
+(Seção~\ref{sec:quantilica-ml}), herda-se o compromisso de investigar
+heterogeneidade além da média condicional, perseguido aqui por uma via
+complementar (a comparação entre modelos lineares de referência e
+\textit{ensembles} de árvore, interpretada por SHAP,
+Seção~\ref{sec:xai-revisao}), em vez de uma extensão direta do
+instrumental quantílico. Da literatura de desfechos agregados
+(Seção~\ref{sec:nivel-escola-teoria}), herda-se a especificação adequada a
+proporções e o limite ecológico das conclusões. Do precedente mais próximo
+em aprendizado de máquina multinível aplicado ao Saeb
+\cite{tertulino2025multilevel}, herda-se o desenho de integração de quatro
+fontes de dados, mas identifica-se uma lacuna estrutural específica (a
+ausência de questionário do aluno no 2º ano do Ensino Fundamental,
+Seção~\ref{sec:alfabetizacao-2ef}) que esta pesquisa endereça com um
+desenho necessariamente distinto, detalhado a seguir no capítulo de
+Metodologia.
+
+\chapter{Metodologia}
+
+Este capítulo descreve, de forma detalhada e replicável, os procedimentos
+empíricos previstos para responder à pergunta de pesquisa enunciada na
+Introdução. A Seção~\ref{sec:fonte-dados} apresenta as fontes de microdados
+e os critérios de integração. A Seção~\ref{sec:unidade-escola} justifica a
+adoção da escola como unidade de análise, descreve a agregação dos
+desfechos e dos preditores e discute as implicações dessa decisão. A
+Seção~\ref{sec:pesos} trata dos pesos amostrais, e a
+Seção~\ref{sec:vies-inse} do viés de seleção associado à disponibilidade do
+INSE. A Seção~\ref{sec:variaveis} detalha os critérios de seleção,
+codificação e exclusão de variáveis, incluindo o tratamento do vazamento de
+informação e as considerações éticas (Seção~\ref{sec:etica}). A
+Seção~\ref{sec:estrategia-empirica} formaliza a estratégia empírica de
+comparação de modelos nas duas trilhas de regressão e o protocolo
+experimental (Seção~\ref{sec:protocolo}). A
+Seção~\ref{sec:testes-significancia} descreve os testes de significância
+estatística pareados entre os modelos de melhor desempenho. A
+Seção~\ref{sec:xai} detalha o protocolo de explicabilidade (XAI), a
+Seção~\ref{sec:robustez} descreve a checagem de robustez frente à restrição
+da análise à rede pública, e a Seção~\ref{sec:cronograma} apresenta o
+cronograma de execução.
+
+\section{Fonte de dados e integração das bases}
+\label{sec:fonte-dados}
+
+\subsection{O Saeb 2023 e o 2º ano do Ensino Fundamental}
+
+O Saeb 2023 disponibiliza, para o 2º ano do Ensino
+Fundamental, seis arquivos de microdados: \texttt{TS\_ALUNO\_2EF},
+\texttt{TS\_ESCOLA}, \texttt{TS\_PROFESSOR}, \texttt{TS\_DIRETOR},
+\texttt{TS\_SECRETARIO\_\allowbreak MUNICIPAL} e \texttt{TS\_ITEM}.
+Deste conjunto, os dois últimos foram excluídos do escopo:
+\texttt{TS\_\allowbreak SECRETARIO\_MUNICIPAL} tem granularidade municipal,
+incompatível com o nível de análise deste trabalho (o identificador de
+município do Saeb é, além disso, um código anonimizado, sem correspondência
+divulgada com os códigos oficiais do IBGE, o que impede vincular a base a
+fontes externas de dados municipais e restringe seu uso, neste trabalho, ao
+papel de variável de agrupamento na validação cruzada,
+Seção~\ref{sec:protocolo}). Já \texttt{TS\_ITEM} refere-se à análise
+psicométrica de funcionamento diferencial de item (TRI/DIF), uma pergunta
+de pesquisa distinta da investigação de fatores contextuais associados ao
+desempenho aqui proposta.
+As quatro bases restantes (aluno, escola, professor e diretor) serão
+integradas em uma única base analítica, descrita a seguir.
+
+\subsection{Chaves, filtros e registros sem correspondência}
+
+\textbf{Chaves e filtros de integração.} A junção das quatro fontes segue
+chaves e filtros distintos, resumidos na Tabela~\ref{tab:fontes-dados}. O
+questionário do professor é unido pela chave \texttt{ID\_TURMA},
+restrito a \texttt{ID\_SERIE == 2} e \texttt{SQ\_QUESTIONARIO == 5}, código
+que o dicionário de dados do Inep identifica como o bloco \emph{Professor
+Único, 2º e 5º ano}. O primeiro filtro seleciona os registros referentes ao
+2º ano. O segundo seleciona, entre os múltiplos blocos de
+questionário que a base do professor concatena em um mesmo arquivo, aquele
+efetivamente aplicado ao docente regente da turma avaliada (sem ele, um
+mesmo professor apareceria replicado em mais de um registro por turma, com
+conjuntos distintos de itens respondidos). A relação um-para-um entre
+professor e turma resultante desses filtros \emph{será verificada
+empiricamente} na etapa de preparação dos dados, por contagem de registros
+por \texttt{ID\_TURMA}, e o resultado dessa verificação será reportado na
+versão final do trabalho.
+
+O questionário do diretor é unido pela chave \texttt{ID\_ESCOLA}, também
+restrito a \texttt{ID\_SERIE == 2}, em relação um-para-um com a escola e com
+cobertura integral do universo de escolas com 2º ano. Já
+\texttt{TS\_ESCOLA}, única fonte do Indicador de Nível Socioeconômico
+(INSE), cobre exclusivamente a rede pública e cerca de 60\% das escolas do
+universo (assimetria de cobertura cujas implicações são discutidas na
+Seção~\ref{sec:vies-inse}).
+
+\textbf{Registros sem correspondência.} A integração parte da base de
+alunos, por meio de junção à esquerda. Um aluno cuja turma não possua
+questionário de professor correspondente, ou cuja escola não possua
+questionário de diretor, permanece na base com as variáveis daquele bloco
+ausentes, sendo tratado pelo procedimento de imputação descrito na
+Seção~\ref{sec:protocolo}. Escolas que percam a totalidade dos blocos de
+preditores são excluídas, por não restar informação explicativa. O número
+de registros perdidos em cada etapa de junção e agregação será apurado e
+reportado conforme a estrutura da Tabela~\ref{tab:cobertura}, apresentada a
+seguir como \textbf{modelo do formato de apresentação}, ainda sem os
+valores observados: as colunas serão preenchidas com a contagem efetiva de
+alunos, turmas e escolas em cada etapa na versão final do trabalho, em TCC
+II.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Fontes de microdados do Saeb 2023 utilizadas e critérios de integração}
+    \begin{tabular}{L{2.6cm}L{1.7cm}L{2.1cm}L{3.1cm}L{3.4cm}}
+        \toprule
+        \textbf{Fonte} & \textbf{Unidade de observação} & \textbf{Chave de junção} & \textbf{Cobertura} & \textbf{Papel na base analítica} \\
+        \midrule
+        TS\_ALUNO\_2EF & Aluno & --- & Universo do 2º ano & Desfechos (agregados por escola) e identificadores de vínculo \\
+        TS\_PROFESSOR & Turma & ID\_TURMA & Universo (público+privado) & Preditores de perfil e prática docente (agregados por escola) \\
+        TS\_DIRETOR & Escola & ID\_ESCOLA & 100\% das escolas & Preditores de gestão escolar \\
+        TS\_ESCOLA & Escola & ID\_ESCOLA & Rede pública (60\% das escolas) & Única fonte do INSE \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor, com base no dicionário de
+    dados do Saeb 2023 (Inep).}
+    \end{flushleft}
+    \label{tab:fontes-dados}
+\end{table}
+
+Cabe registrar que \texttt{TS\_ALUNO\_2EF} não contribui com covariáveis de
+contexto do aluno: no 2º ano não há questionário
+respondido pelo estudante, de modo que essa base fornece apenas os
+desfechos, os identificadores de vínculo com turma e escola e as variáveis
+de estrato e localização.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Estrutura de apuração da cobertura e das perdas por etapa de integração}
+    \begin{tabular}{L{6.0cm}C{2.2cm}C{2.2cm}C{2.2cm}}
+        \toprule
+        \textbf{Etapa} & \textbf{Alunos} & \textbf{Turmas} & \textbf{Escolas} \\
+        \midrule
+        Registros iniciais (TS\_ALUNO\_2EF)            & & & \\
+        Após consistência com o Censo Escolar          & & & \\
+        Após preenchimento adequado do questionário    & & & \\
+        Após proficiência em LP calculável (TRI)       & & & \\
+        Após junção com TS\_PROFESSOR                  & & & \\
+        Após junção com TS\_DIRETOR                    & & & \\
+        Após restrição à rede pública (escopo principal) & & & \\
+        Após junção com TS\_ESCOLA (disponibilidade do INSE) & & & \\
+        Após agregação por escola e filtro de nº mínimo de alunos & & & \\
+        \midrule
+        \textbf{Base analítica final (linhas = escolas)} & & & \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor. Modelo de apresentação, a
+    ser preenchido com os valores observados na versão final do trabalho.}
+    \end{flushleft}
+    \label{tab:cobertura}
+\end{table}
+
+\subsection{Filtros de elegibilidade e delimitação do escopo}
+
+A coorte analítica principal é delimitada por três filtros sucessivos no
+nível do aluno, aplicados \emph{antes} da agregação: consistência com o
+Censo Escolar, preenchimento adequado do questionário e proficiência em
+Língua Portuguesa calculável pela TRI. Como \texttt{TS\_ESCOLA} é a única
+fonte do INSE e cobre apenas a rede pública, o escopo principal deste
+trabalho é adicionalmente restrito a \texttt{IN\_PUBLICA == 1}. Para
+avaliar se essa restrição altera as conclusões, execuções alternativas
+descritas na Seção~\ref{sec:robustez} repetem a trilha da proporção de
+alfabetizados sobre o universo de escolas públicas e privadas, sem a
+variável de INSE.
+
+\section{Unidade de análise: da observação-aluno à observação-escola}
+\label{sec:unidade-escola}
+
+A decisão metodológica mais consequente deste projeto é a adoção da
+\textbf{escola como unidade de análise}: cada linha da base analítica
+corresponde a uma escola pública com 2º ano avaliado no Saeb 2023, os
+desfechos são agregados dos alunos para a escola e os preditores são
+consolidados no mesmo nível. Esta seção expõe, nesta ordem, as razões da
+decisão, o procedimento de agregação e as implicações (inclusive os
+custos) que dela decorrem, de modo que a banca possa avaliar não apenas
+\emph{o que} será feito, mas \emph{por que} e \emph{com que consequências}.
+
+\subsection{Por que a escola, e não o aluno}
+\label{sec:limitacao-estrutural}
+
+No 2º ano do Ensino Fundamental não há questionário contextual respondido
+pelo aluno: as variáveis preditoras candidatas originam-se inteiramente de
+questionários de turma (professor) e de escola (diretor, escola,
+geografia). Na prática, alunos de uma mesma turma compartilham exatamente o
+mesmo vetor de variáveis preditoras. Uma \textbf{análise exploratória
+preliminar} da base integrada, conduzida durante a elaboração deste Projeto
+e sujeita a revisão na execução definitiva, dimensiona essa característica:
+na coorte de escolas públicas examinada, cerca de 13.800 alunos
+distribuíam-se por aproximadamente 690 turmas em torno de 500 escolas, com
+correlação intraclasse (ICC) da proficiência próxima de 0,20, o que
+situa o tamanho amostral \emph{efetivo} na ordem de poucos milhares de
+observações-equivalentes, muito abaixo do número de linhas-aluno.
+
+Manter o aluno como unidade de observação, nesse cenário, significa repetir
+a mesma linha de preditores dezenas de vezes, variando apenas o desfecho:
+uma estrutura de \emph{pseudo-replicação} que inflaciona o tamanho
+aparente da amostra sem acrescentar informação explicativa
+(Seção~\ref{sec:nivel-escola-teoria}). O mesmo ICC impõe, ainda, um
+\textbf{teto estrutural} à modelagem no nível individual: se apenas cerca
+de 20\% da variância da proficiência reside \emph{entre} grupos, nenhum
+modelo alimentado exclusivamente por preditores de grupo pode explicar mais
+do que essa fração da variância individual, por melhor que seja o
+algoritmo. A agregação reconhece esse limite e reformula o alvo para o
+nível em que a variância explicável de fato reside. Além do argumento
+estatístico, há um argumento de decisão: a escola é a menor unidade sobre a
+qual a gestão educacional efetivamente atua (alocação de professores,
+formação, infraestrutura), de modo que desfechos e explicações no nível da
+escola são diretamente acionáveis pelo usuário final previsto para o
+dashboard (Seção~\ref{sec:justificativa}).
+
+\subsection{Agregação dos desfechos e dos preditores}
+\label{sec:agregacao}
+
+\textbf{Desfechos.} Os dois desfechos individuais são agregados por escola:
+o indicador binário de alfabetização torna-se a \textbf{proporção de alunos
+alfabetizados} da escola,
+\begin{equation}
+    Y_e^{\text{alf}} = \frac{1}{n_e} \sum_{i \in e} \mathbf{1}\left[\text{PROFICIENCIA\_LP\_SAEB}_i \geq 743\right],
+    \label{eq:prop-alfabetizado}
+\end{equation}
+em que $n_e$ é o número de alunos avaliados da escola $e$. A proficiência
+contínua torna-se, por sua vez, a \textbf{proficiência média} da escola,
+$Y_e^{\text{prof}} = \frac{1}{n_e} \sum_{i \in e}
+\text{PROFICIENCIA\_LP\_SAEB}_i$. O número de alunos avaliados $n_e$ será
+retido como variável auxiliar: escolas com $n_e$ muito pequeno produzem
+proporções instáveis, e um filtro de número mínimo de alunos por escola
+(com corte definido na análise descritiva e reportado na
+Tabela~\ref{tab:cobertura}) será avaliado, com a sensibilidade das
+conclusões a esse corte verificada.
+
+\textbf{Preditores.} As variáveis de diretor, de escola e de geografia já
+são de nível escola e não requerem transformação. As variáveis do
+questionário do professor são de nível turma. Quando uma escola possuir
+mais de uma turma de 2º ano avaliada, serão consolidadas por escola:
+variáveis numéricas e ordinais pela média, variáveis binárias pela
+proporção de turmas com resposta afirmativa e variáveis nominais pela moda,
+com o número de turmas da escola retido como variável de contexto. Essa
+consolidação não é inócua: na coorte preliminar, cerca de um terço das
+escolas possuía mais de uma turma avaliada, de modo que a agregação por
+escola funde vetores docentes distintos. Por isso, além da retenção do
+número de turmas, a Seção~\ref{sec:robustez} prevê uma execução de
+sensibilidade com a \emph{turma} como unidade de agregação, que preserva o
+bloco docente intacto. Os critérios de agregação de cada variável serão
+registrados no mesmo módulo de configuração que documenta sua inclusão
+(Seção~\ref{sec:variaveis}).
+
+\subsection{Implicações da agregação}
+\label{sec:implicacoes-agregacao}
+
+Três implicações devem ser declaradas desde já, porque alteram a leitura de
+todos os resultados previstos.
+
+\textbf{Queda do tamanho amostral e das métricas.} A base analítica passa
+de dezenas de milhares de linhas-aluno para algumas centenas de
+linhas-escola (na coorte preliminar, em torno de 500). Isso impõe uma
+consequência direta à engenharia de variáveis: com 332 preditoras
+candidatas para poucas centenas de observações, a razão
+preditores/observações torna a poda prévia de variáveis (executada dentro
+das dobras de validação, Seção~\ref{sec:protocolo}) uma etapa necessária, e
+não opcional, sob pena de sobreajuste mesmo com regularização. Além disso,
+é esperado que as métricas de desempenho reportadas sejam
+\emph{substancialmente inferiores} às que um protocolo com partição
+aleatória por aluno produziria, e isso não é uma deficiência do desenho,
+mas sua correção: parte relevante do desempenho aparente sob partição por
+aluno decorre de o modelo reencontrar no teste vetores de preditores que já
+viu no treino. As métricas obtidas no nível da escola descrevem a
+capacidade real de generalização para escolas novas, que é a pergunta
+relevante para o uso previsto do instrumento.
+
+\textbf{Perda da leitura individual.} Ao agregar, o trabalho abdica de
+qualquer afirmação sobre alunos individuais: não haverá predição de risco
+individual de não alfabetização, e as associações estimadas valem para
+escolas, não para crianças (falácia ecológica,
+Seção~\ref{sec:nivel-escola-teoria}). O que se ganha em contrapartida é um
+desfecho contínuo mais informativo que o binário individual (a proporção
+carrega intensidade, não apenas estado) e diretamente alinhado às metas
+públicas, que são formuladas exatamente nesses termos: a proporção de
+crianças alfabetizadas é o indicador oficial do Compromisso Nacional
+Criança Alfabetizada.
+
+\textbf{Simplificação do protocolo de validação.} Com uma linha por escola,
+a partição treino/teste e a validação cruzada operam diretamente sobre
+escolas, eliminando por construção o vazamento entre colegas de turma que o
+desenho anterior precisava neutralizar com validação agrupada. Permanece
+uma dependência residual possível entre escolas de um mesmo município ou
+rede (gestão municipal comum, Seção~\ref{sec:evidencias-brasileiras}), que
+será tratada como checagem: a estabilidade das conclusões será examinada
+sob validação cruzada agrupada por município, reportada como análise de
+sensibilidade.
+
+\section{Pesos amostrais e alcance das conclusões}
+\label{sec:pesos}
+
+O Saeb 2023 é uma avaliação amostral no 2º ano do Ensino
+Fundamental, e seu desenho prevê pesos amostrais e estratos documentados
+pelo Inep \cite{inep2024amostra}. Os modelos deste trabalho serão estimados
+\emph{sem ponderação pelos pesos amostrais}, por duas razões: os
+estimadores de aprendizado supervisionado empregados não incorporam
+naturalmente o desenho amostral complexo, e a variável \texttt{ESTRATO},
+que codifica parte desse desenho, é excluída do conjunto de preditores pelas
+razões expostas na Seção~\ref{sec:variaveis}.
+
+Essa escolha tem uma consequência que deve ser declarada com clareza, e que
+a análise exploratória preliminar impede de tratar como inócua: os pesos
+amostrais do Saeb 2023 exibem forte variabilidade (coeficiente de variação
+superior a 2 na coorte examinada), de modo que a amostra não ponderada pode
+divergir de forma relevante do universo. Os resultados descrevem, portanto,
+os padrões preditivos observados \emph{no conjunto de escolas analisado}, e
+não constituem estimativas populacionais representativas do conjunto de
+escolas ou de estudantes do 2º ano do Brasil. Nenhuma generalização automática para o país será formulada a
+partir deles. Uma alternativa a ser considerada em TCC II, caso o
+cronograma permita, é a reestimação ponderada dos modelos lineares de
+referência como checagem da sensibilidade das conclusões ao desenho
+amostral. Questão distinta é a ponderação das \emph{escolas} pelo seu
+número de alunos avaliados na estimação e na avaliação: o cenário principal
+tratará cada escola como uma observação de igual peso (coerente com a
+unidade de decisão), e uma execução ponderada por $n_e$ será reportada como
+análise de sensibilidade.
+
+\section{Viés de seleção associado à disponibilidade do INSE}
+\label{sec:vies-inse}
+
+A restrição do escopo principal às escolas com INSE disponível não é
+aleatória: ela seleciona a rede pública e, dentro dela, aproximadamente 60\%
+das escolas. Se as escolas com INSE disponível diferirem sistematicamente
+das demais em características associadas ao desfecho (porte, localização,
+dependência administrativa, região), as associações estimadas sobre a
+subamostra não se transferem diretamente ao universo.
+
+Para dimensionar esse risco, será realizada uma \textbf{comparação
+descritiva entre as escolas incluídas e as excluídas} em razão da
+disponibilidade do INSE, contrastando a distribuição dos desfechos
+agregados e das principais variáveis de professor, diretor e localização
+entre os dois grupos. O resultado dessa comparação será apresentado na
+análise descritiva do TCC II e servirá para qualificar o alcance das
+conclusões, sendo complementado pelas execuções de robustez da
+Seção~\ref{sec:robustez}, que prescindem do INSE e operam sobre o universo
+completo.
+
+\section{Variáveis}
+\label{sec:variaveis}
+
+\subsection{Variáveis-alvo e o problema do vazamento de informação}
+
+Este trabalho define duas variáveis-alvo complementares no nível da escola,
+ambas construídas a partir da proficiência contínua em Língua Portuguesa
+(\texttt{PROFICIENCIA\_LP\_SAEB}), estimada pela TRI \cite{klein2003tri}: a
+\textbf{proporção de alunos alfabetizados} da escola
+(Equação~\ref{eq:prop-alfabetizado}), em que o indicador individual de
+alfabetização é definido pelo Inep como
+$\mathbf{1}[\text{PROFICIENCIA\_LP\_SAEB}_i \geq 743]$, e a
+\textbf{proficiência média} da escola. Como ambas derivam do mesmo processo
+de estimação por TRI, todo o bloco de colunas da tabela do aluno derivado
+desse processo (a própria proficiência, quando não compõe o alvo da
+trilha em questão, o erro-padrão de estimação e as respostas a itens
+individuais da prova) constitui vazamento de informação e foi excluído
+do conjunto de preditores em ambas as trilhas. Pela mesma razão, os dois
+alvos não podem figurar um como preditor do outro: são transformações
+distintas da mesma variável de origem.
+
+\subsection{Seleção, codificação e engenharia das variáveis preditoras}
+
+As quatro bases integradas somam 591 colunas reais. Cada uma foi avaliada
+individualmente quanto à sua inclusão como preditor, com a decisão e a
+justificativa registradas em um módulo de configuração que funciona como
+fonte única de verdade para todo o pipeline (\texttt{feature\_config.py}),
+evitando divergência entre o código de modelagem e a documentação da base.
+Além do vazamento descrito acima, foram excluídas: colunas de texto aberto;
+colunas com mais de 30\% de ausência na amostra filtrada; e a variável
+\texttt{ESTRATO}, um metadado do desenho amostral \cite{inep2024amostra}
+que se comportava, em testes preliminares, como quase-identificador de
+escola e dominava desproporcionalmente a importância agregada de SHAP, sem
+corresponder a um fator de contexto substantivo. O processo resultou em 332
+variáveis preditoras candidatas, cada uma codificada de acordo com o tipo
+de resposta inferido a partir do dicionário de dados do Inep como binária,
+ordinal (tipo Likert), numérica ou nominal, classificadas em um de dezenas
+de grupos temáticos (por exemplo, ``práticas pedagógicas em sala de aula''
+ou ``clima escolar''), utilizados na Seção~\ref{sec:xai} para agregar a
+importância de SHAP por tema, e não apenas por coluna isolada. Com a adoção
+da escola como unidade de análise, o mesmo módulo de configuração passa a
+registrar, para cada variável de nível turma, a regra de agregação por
+escola descrita na Seção~\ref{sec:agregacao}.
+
+\subsection{Considerações éticas e delimitação de escopo}
+\label{sec:etica}
+
+\textbf{Natureza dos dados utilizados.} Os microdados do Saeb 2023 são
+\emph{públicos}, disponibilizados pelo Inep em portal de dados abertos, e
+distribuídos já \emph{anonimizados}: não contêm nome, documento ou qualquer
+identificador direto de aluno, professor ou diretor, e os identificadores de
+turma e escola são códigos sem correspondência divulgada com pessoas
+naturais. Seu uso neste trabalho tem \emph{finalidade exclusivamente
+acadêmica}, em conformidade com os termos de disponibilização da base.
+
+\textbf{Exclusão das variáveis de cor/raça e de deficiência.} As perguntas
+de cor/raça e de indicador de deficiência, Transtorno do Espectro Autista ou
+altas habilidades do professor e do diretor foram deliberadamente excluídas
+do conjunto de preditores. Convém ser preciso quanto ao fundamento dessa
+decisão: embora se trate de dado pessoal sensível nos termos do
+art.~5\textordmasculine{}, inciso~II, da Lei Geral de Proteção de Dados
+(Lei n\textordmasculine{} 13.709/2018), essa qualificação \emph{não implica,
+por si só}, vedação ao uso em pesquisa com microdados públicos e
+anonimizados: a própria LGPD prevê hipótese de tratamento para realização
+de estudos por órgão de pesquisa (art.~7\textordmasculine{}, IV, e
+art.~11, II, ``c''). Pesquisas sobre desigualdade educacional legitimamente
+utilizam variáveis de raça, e fazê-lo pode ser condição para tornar
+desigualdades visíveis.
+
+A exclusão adotada aqui é, portanto, uma \textbf{decisão de escopo e de
+ética de aplicação}, não uma imposição legal. Ela se apoia em dois
+argumentos. O primeiro é de escopo: a pergunta de pesquisa
+(Seção~\ref{sec:problema-pesquisa}) versa sobre características
+\emph{modificáveis por política educacional} (formação, prática
+pedagógica, gestão, clima escolar), e atributos adscritos de professores e
+diretores não pertencem a essa classe. O segundo é de \textbf{risco de viés
+algorítmico}: incluir a cor/raça do docente como preditor de desempenho da
+escola produziria um modelo capaz de associar atributo racial a resultado
+educacional sem qualquer mecanismo explicativo, cuja ordenação de
+importâncias poderia ser lida (ou reutilizada em um dashboard) como
+evidência de diferença de qualidade atribuível a raça, quando refletiria a
+distribuição desigual de docentes entre escolas de contextos distintos. Como
+os modelos aqui estimados não permitem separar esses dois mecanismos
+(Seção~\ref{sec:registros-inferenciais}), a exclusão é a decisão prudente.
+
+Registre-se, por transparência, o custo dessa escolha: ao não incluir tais
+variáveis, o trabalho abdica de examinar dimensões de desigualdade que
+poderiam ser relevantes, e suas conclusões não devem ser lidas como
+evidência de ausência de tais desigualdades.
+
+\section{Estratégia empírica: comparação de modelos em duas trilhas}
+\label{sec:estrategia-empirica}
+
+A estratégia empírica deste trabalho consiste em uma comparação entre
+algoritmos de aprendizado supervisionado, estimados em duas trilhas de
+regressão complementares no nível da escola (a da proporção de alunos
+alfabetizados e a da proficiência média em Língua Portuguesa), ambas
+sobre exatamente o mesmo conjunto de preditores, cada uma excluindo apenas
+a variável-alvo não utilizada pela outra trilha. Em cada trilha concorrem
+um \emph{modelo linear regularizado de referência} e três
+\textit{ensembles} de árvore, todos contrastados com um \textit{baseline}
+trivial que estabelece o piso de desempenho abaixo do qual nenhum modelo
+pode ser considerado útil. A Tabela~\ref{tab:trilhas} resume a estratégia.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Trilhas de modelagem, alvos, modelos e métricas de avaliação}
+    \begin{tabular}{L{2.2cm}L{2.2cm}L{3.0cm}L{1.6cm}L{3.2cm}}
+        \toprule
+        \textbf{Trilha} & \textbf{Alvo (nível escola)} & \textbf{Modelos} & \textbf{Métrica principal} & \textbf{Métricas complementares} \\
+        \midrule
+        Proporção de alfabetizados & Proporção de alunos alfabetizados
+        $\in [0,1]$ & \textit{Baseline}: média/mediana. Referência linear:
+        Elastic Net e \textit{fractional logit}. \textit{Ensembles}: Random
+        Forest, XGBoost, LightGBM & MAE & RMSE, R\textsuperscript{2},
+        análise de resíduos, aderência das predições ao intervalo $[0,1]$ \\
+        Proficiência média & Proficiência média em LP (contínua) &
+        \textit{Baseline}: média/mediana. Referência linear: Regressão
+        Linear com Elastic Net. \textit{Ensembles}: Random Forest, XGBoost,
+        LightGBM & MAE & RMSE, R\textsuperscript{2}, sMAPE, análise de
+        resíduos \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor.}
+    \end{flushleft}
+    \label{tab:trilhas}
+\end{table}
+
+A métrica principal das duas trilhas é definida \emph{previamente} à
+estimação, de modo a evitar que a escolha do critério de comparação seja
+influenciada pelos resultados observados. Adota-se o MAE (\emph{Mean
+Absolute Error}, ou Erro Médio Absoluto, a média das distâncias absolutas
+entre valor previsto e valor observado) em ambas: na
+trilha de proporção, ele é lido diretamente em pontos percentuais de
+alfabetização, a unidade em que as metas públicas são formuladas. Na trilha
+de proficiência média, é expresso na própria escala do Saeb e é menos
+sensível a observações extremas que o RMSE. As demais métricas são
+reportadas como complementares, para caracterizar o comportamento dos
+modelos, não para arbitrar a comparação. Na trilha de proporção, o MAE será
+reportado em duas versões (não ponderada, cada escola com o mesmo peso,
+coerente com a unidade de decisão, e ponderada pelo número de alunos
+avaliados $n_e$), uma vez que escolas pequenas produzem proporções
+mecanicamente mais voláteis e as duas leituras respondem a perguntas de
+gestão distintas.
+
+\subsection{Justificativa da ausência de modelos autorregressivos}
+
+O padrão de referência da disciplina para trabalhos aplicados costuma
+contrapor modelos autorregressivos (ARIMAX/SARIMAX) a \textit{ensembles} de
+árvore em séries temporais. O Saeb 2023, no entanto, é um corte transversal
+de uma única edição, sem painel de anos nem variação temporal por escola a
+modelar. Reproduzir ARIMAX aqui seria metodologicamente incorreto, por
+ausência de estrutura temporal a decompor. O equivalente clássico
+apropriado a dados de corte transversal, adotado como \emph{modelo linear
+de referência} nas duas trilhas, é a regressão linear regularizada por
+Elastic Net (complementada, na trilha de proporção, pelo
+\textit{fractional logit} de \citeonline{papke1996fractional}, especificação
+canônica para desfechos fracionários), cumprindo, na terminologia de
+\citeonline{breiman2001two}, o papel da ``cultura'' de modelagem estatística
+clássica em contraste com a ``cultura'' algorítmica dos três
+\textit{ensembles} de árvore. Reitere-se que essa designação é comparativa,
+não inferencial: os coeficientes desses modelos são interpretáveis como
+associações condicionais e servem de referência de desempenho e de leitura,
+sem que deles se extraiam efeitos causais
+(Seção~\ref{sec:registros-inferenciais}).
+
+\subsection{Trilha da proporção de alfabetizados}
+
+Na primeira trilha, o alvo é a proporção $Y_e^{\text{alf}} \in [0,1]$
+definida na Equação~\ref{eq:prop-alfabetizado}. O modelo de referência
+fracionário especifica a esperança condicional por meio de uma função de
+ligação logística \cite{papke1996fractional}:
+
+\begin{equation}
+    \mathrm{E}\left[Y_e^{\text{alf}} \mid X_e\right] = \frac{1}{1 + e^{-(\beta_0 + \boldsymbol{\beta}^\top X_e)}},
+    \label{eq:fraclogit}
+\end{equation}
+
+em que $X_e$ é o vetor de preditores da escola $e$. Essa especificação
+garante, por construção, predições no intervalo unitário e acomoda sem
+transformação ad hoc as escolas com proporções exatamente iguais a 0 ou 1
+(presentes na base), situação em que a alternativa paramétrica da
+regressão beta \cite{ferrari2004beta} tem verossimilhança indefinida, razão
+pela qual esta é citada como alternativa, mas não adotada. A estimação
+seguirá a quase-verossimilhança binomial com ligação logística proposta por
+\citeonline{papke1996fractional}, com o número de alunos avaliados $n_e$
+como peso de precisão e erros-padrão robustos. Como referência linear
+adicional e diretamente comparável à da segunda trilha, estima-se também a
+regressão linear regularizada por Elastic Net sobre o mesmo alvo, com a
+aderência de suas predições ao intervalo $[0,1]$ reportada como métrica
+complementar. Os três \textit{ensembles} de árvore
+(Random Forest \cite{breiman2001random}, XGBoost e LightGBM,
+implementações do \textit{gradient boosting},
+\citeonline{friedman2001greedy}) produzem, de forma geral, uma predição
+aditiva sobre um conjunto de $M$ árvores de regressão $f_m$:
+
+\begin{equation}
+    \hat{y}_e = \sum_{m=1}^{M} f_m(X_e), \qquad f_m \in \mathcal{F},
+    \label{eq:ensemble}
+\end{equation}
+
+em que $\mathcal{F}$ é o espaço de árvores de regressão. A diferença
+essencial entre os três algoritmos está no procedimento de ajuste de cada
+$f_m$: amostragem aleatória independente com agregação por média
+(\textit{bagging}) no Random Forest, versus ajuste sequencial que corrige o
+erro residual das árvores anteriores (\textit{boosting}) no XGBoost e no
+LightGBM. Um detalhe de implementação relevante para o alvo fracionário
+será documentado no código: as funções-objetivo empregadas devem aceitar
+rótulos contínuos em $[0,1]$ (\texttt{reg:logistic} no XGBoost e
+\texttt{cross\_entropy} no LightGBM), e não os objetivos de classificação
+binária, que exigem rótulos em $\{0,1\}$ e falhariam silenciosamente com
+proporções.
+
+\subsection{Trilha da proficiência média}
+
+Na segunda trilha, o alvo passa a ser a proficiência média da escola, e o
+modelo de referência é a Regressão Linear regularizada por Elastic Net, que
+minimiza
+
+\begin{equation}
+    \min_{\boldsymbol{\beta}} \; \frac{1}{2n} \sum_{e=1}^{n} \left(y_e - \boldsymbol{\beta}^\top X_e\right)^2 + \lambda \left[\alpha \lVert \boldsymbol{\beta} \rVert_1 + \frac{1-\alpha}{2} \lVert \boldsymbol{\beta} \rVert_2^2\right],
+    \label{eq:elasticnet}
+\end{equation}
+
+em que $\lambda$ controla a intensidade geral da penalização e $\alpha \in
+[0,1]$ pondera entre a penalidade L1 (Lasso) e L2 (Ridge). Os mesmos três
+\textit{ensembles} de árvore da primeira trilha são reestimados para este
+alvo, seguindo a mesma forma geral da Equação~\ref{eq:ensemble}.
+
+\subsection{Protocolo experimental}
+\label{sec:protocolo}
+
+Com a escola como unidade de análise, cada linha da base carrega seu
+próprio vetor de preditores, e o vazamento entre colegas de turma que
+comprometeria uma partição por aluno (Seção~\ref{sec:limitacao-estrutural})
+é eliminado por construção. O protocolo abaixo, comum às duas trilhas e a
+todos os modelos estimados, preserva ainda assim a disciplina experimental
+de separar estritamente decisão de avaliação:
+
+\begin{enumerate}
+    \item \textbf{Separação treino/teste final por escola}: a partição é
+    feita sobre as linhas-escola, na proporção aproximada de 80/20, com
+    semente aleatória fixa documentada no código e estratificação pela
+    distribuição do desfecho e pela região, preservando a mesma partição
+    nas duas trilhas para permitir comparação direta de importância de
+    variáveis entre elas;
+    \item \textbf{Busca de hiperparâmetros restrita ao treino}: toda a busca
+    é realizada exclusivamente sobre o conjunto de treino. O conjunto de
+    teste final não participa de nenhuma decisão de modelagem: nem de
+    seleção de hiperparâmetro, nem de escolha de modelo;
+    \item \textbf{Validação cruzada}: a busca emprega validação cruzada de
+    5 dobras sobre as escolas do conjunto de treino. Como checagem de
+    sensibilidade à dependência residual entre escolas de um mesmo
+    município (Seção~\ref{sec:implicacoes-agregacao}), a estabilidade dos
+    resultados será examinada também sob validação cruzada agrupada por
+    município (\texttt{GroupKFold});
+    \item \textbf{Pré-processamento dentro de cada dobra}: imputação
+    (mediana para variáveis numéricas e ordinais, categoria ``não
+    informado'' para nominais), codificação de variáveis nominais
+    (\textit{one-hot} para os modelos lineares de referência e para o Random
+    Forest; tipo categórico nativo no LightGBM) e qualquer seleção de
+    variáveis são ajustadas \emph{dentro} de cada dobra, a partir apenas dos
+    dados de treinamento daquela dobra, e então aplicadas à dobra de
+    validação. Nenhuma estatística derivada do conjunto completo precede a
+    partição. XGBoost e LightGBM toleram valores ausentes nativamente;
+    \item \textbf{Avaliação única no teste final}: concluída a seleção, o
+    modelo escolhido de cada trilha é avaliado \emph{uma única vez} sobre o
+    conjunto de teste. O valor assim obtido é a estimativa de desempenho
+    reportada. Reavaliações sucessivas no teste após ajustes seriam,
+    na prática, uma forma indireta de ajustar o modelo a ele;
+    \item \textbf{Explicabilidade sobre o modelo selecionado}: o SHAP é
+    aplicado ao modelo selecionado de cada trilha e às escolas do
+    conjunto de teste, conforme a Seção~\ref{sec:xai}.
+\end{enumerate}
+
+Além do desempenho absoluto, cada modelo é comparado ao \textit{baseline}
+trivial de sua trilha (média ou mediana do desfecho no treino), de modo que
+o ganho informacional atribuível à modelagem seja explicitado, e não apenas
+o valor da métrica. Na trilha de proporção, será adicionalmente verificada
+a aderência das predições ao intervalo $[0,1]$, automática no
+\textit{fractional logit} mas não garantida nos demais modelos, cujas
+predições fora do intervalo serão truncadas e reportadas.
+
+\section{Testes de significância estatística entre os modelos}
+\label{sec:testes-significancia}
+
+Para evitar que diferenças pequenas e possivelmente aleatórias entre
+métricas sejam interpretadas como superioridade real de um algoritmo sobre
+outro, os dois modelos de melhor desempenho de cada trilha são comparados
+por um teste de significância pareado.
+
+Uma cautela metodológica governa esse procedimento. Selecionar os dois
+modelos e testar a diferença entre eles \emph{no mesmo conjunto} torna o
+teste otimista: a própria seleção já explorou a variação amostral daquele
+conjunto, de modo que o valor-$p$ resultante não tem a interpretação
+frequentista usual. Por isso, a seleção dos dois melhores modelos de cada
+trilha é feita \textbf{pelo desempenho na validação cruzada}, e o teste
+pareado é aplicado depois, sobre o conjunto de teste final, que não
+participou da seleção. O resultado do teste é reportado como evidência
+descritiva sobre a magnitude da diferença, e não como critério isolado de
+decisão: quando dois modelos apresentam desempenho estatisticamente
+indistinguível, a preferência recai sobre o mais simples e interpretável,
+tipicamente o modelo linear de referência.
+
+Como as duas trilhas são de regressão, o teste adotado em ambas é o teste
+não paramétrico de \textbf{Wilcoxon para amostras pareadas}, aplicado sobre
+os erros absolutos de predição dos dois modelos nas mesmas escolas do
+conjunto de teste. O pareamento por escola respeita a estrutura da base
+(cada escola é uma observação independente na partição) e dispensa a
+agregação de erros por grupo que o desenho anterior, no nível do aluno,
+exigiria.
+
+\section{Explicabilidade dos modelos (XAI)}
+\label{sec:xai}
+
+A explicabilidade concentra-se no \textbf{modelo selecionado de cada
+trilha}, e não na interpretação detalhada de todos os modelos estimados.
+A razão é substantiva: importâncias produzidas por modelos que não serão
+adotados não informam sobre o fenômeno nem sobre o instrumento final, e
+multiplicar explicações de modelos concorrentes convida à seleção
+\textit{a posteriori} da narrativa mais conveniente. As importâncias dos
+demais modelos são examinadas apenas de forma agregada, como checagem de
+estabilidade (descrita ao fim desta seção).
+
+O método prioritário é o SHAP, que segue a abordagem unificada de
+\citeonline{lundberg2017shap}: para cada escola $e$, a predição do
+modelo é decomposta em uma soma de contribuições aditivas e individualmente
+atribuíveis a cada variável,
+
+\begin{equation}
+    f(X_e) = \phi_0 + \sum_{j=1}^{p} \phi_{e,j},
+    \label{eq:shap}
+\end{equation}
+
+em que $\phi_0$ é o valor esperado da predição sobre o conjunto de treino e
+$\phi_{e,j}$ é o valor de SHAP da $j$-ésima variável para a escola $e$.
+Os valores são calculados sobre as \textbf{escolas do conjunto de
+teste}, de modo que as explicações se refiram ao comportamento do modelo em
+dados que não participaram de sua estimação. O explicador
+\texttt{TreeExplainer} é utilizado quando o modelo selecionado for um
+\textit{ensemble} de árvore, por computar valores de SHAP exatos em tempo
+polinomial explorando a estrutura interna das árvores, conforme o algoritmo
+TreeSHAP de \citeonline{lundberg2020tree}; o \texttt{LinearExplainer} é
+utilizado caso o modelo selecionado seja o linear de referência.
+
+A partir dos valores de SHAP do modelo selecionado, este trabalho produzirá
+três níveis de análise: (i) a importância agregada por variável, sumarizada
+em gráficos de resumo (\textit{summary plots}); (ii) a importância agregada
+por grupo temático, obtida somando o valor absoluto médio de SHAP de todas
+as variáveis pertencentes ao mesmo tema (Seção~\ref{sec:variaveis}), mais
+informativa à discussão de política pública do que uma lista de centenas de
+variáveis isoladas, por permitir perguntas do tipo ``o grupo `clima escolar'
+pesa mais que o grupo `formação do professor'?''; e (iii) gráficos de
+dependência (\textit{dependence plots}) para as variáveis de maior
+importância agregada, revelando não linearidades na relação entre o valor da
+variável e seu impacto na predição.
+
+\textbf{Reagrupamento de categorias.} A codificação \textit{one-hot} de uma
+variável nominal a fragmenta em várias colunas binárias, cada uma recebendo
+seu próprio valor de SHAP. Reportar essas colunas isoladamente subestima
+sistematicamente a importância da variável original e a torna incomparável
+com variáveis numéricas, que permanecem em uma única coluna. Por isso, na
+apresentação das importâncias, as colunas geradas por \textit{one-hot} de
+uma mesma variável serão \textbf{reagrupadas}, somando-se as contribuições
+absolutas de suas categorias antes de qualquer ordenação ou agregação
+temática.
+
+\textbf{Estabilidade do ranking.} A ordenação de variáveis por importância é
+ela própria uma estimativa sujeita a variação amostral. Para evitar
+interpretar como achado uma flutuação de estimação, a estabilidade do
+\textit{ranking} será verificada \textbf{entre as dobras da validação
+cruzada e entre sementes aleatórias distintas}, reportando-se a variação de
+posição das variáveis e dos grupos temáticos de maior importância. Apenas
+ordenações estáveis entre repetições serão objeto de interpretação
+substantiva.
+
+\textbf{LIME como checagem complementar e opcional.} Havendo tempo hábil no
+cronograma, duas ou três escolas de exemplo (uma predição acurada, um erro
+grande do modelo e um caso limítrofe, com proporção de alfabetizados
+próxima à mediana da rede) terão sua decomposição SHAP local (gráfico
+\textit{waterfall}) comparada qualitativamente à explicação produzida pelo
+LIME \cite{ribeiro2016lime} para o mesmo caso, seguindo a recomendação de
+\citeonline{doshivelez2017rigorous} de que divergências entre métodos de
+explicação são, elas próprias, um resultado a ser discutido, não uma
+inconsistência a ser ocultada. Trata-se de análise complementar: sua
+eventual supressão não compromete os objetivos do trabalho, que se apoiam no
+SHAP.
+
+Em todas as análises, respeita-se a advertência metodológica de que os
+valores de SHAP e LIME descrevem o que o modelo aprendeu a partir dos dados
+de treinamento, não uma relação causal
+(Seção~\ref{sec:registros-inferenciais}), razão pela qual a redação dos
+resultados em TCC II utilizará ``associado a'', nunca ``causa'', e
+sempre no nível da escola, nunca transposta ao aluno individual
+(Seção~\ref{sec:nivel-escola-teoria}).
+
+\section{Checagem de robustez}
+\label{sec:robustez}
+
+Como a variável de nível socioeconômico (INSE) está disponível apenas para
+a rede pública, o escopo principal deste trabalho é restrito a essa rede
+(decisão metodológica necessária, mas que poderia, em princípio, alterar as
+conclusões sobre a importância relativa dos grupos temáticos).
+
+A dificuldade de avaliar essa possibilidade é que a restrição altera
+\emph{dois} fatores ao mesmo tempo: a \textbf{população analisada} (escolas
+da rede pública apenas \textit{versus} universo público e privado) e o
+\textbf{conjunto de preditores disponível} (com \textit{versus} sem o INSE e
+as demais variáveis de \texttt{TS\_ESCOLA}). Uma comparação direta entre o
+escopo principal e uma execução no universo sem INSE confundiria os dois
+efeitos: qualquer diferença observada poderia ser atribuída tanto à mudança
+de população quanto à retirada de um preditor reconhecidamente forte, sem
+que se possa isolar a origem.
+
+Por isso, a checagem de robustez adota um desenho que varia \textbf{um fator
+de cada vez}, comparando três execuções da trilha da proporção de
+alfabetizados sob o mesmo protocolo da Seção~\ref{sec:protocolo}:
+
+\begin{enumerate}
+    \item \textbf{Execução de referência}. População: escolas da rede
+    pública; preditores: conjunto completo, incluindo o INSE. É o escopo
+    principal do trabalho;
+    \item \textbf{Variação do conjunto de preditores}. População: rede
+    pública (a mesma da referência); preditores: excluindo o INSE e as
+    demais variáveis derivadas de \texttt{TS\_ESCOLA}. Comparada à
+    referência, isola o quanto o INSE contribui, mantida constante a
+    população;
+    \item \textbf{Variação da população}. População: universo de escolas
+    públicas e privadas; preditores: o mesmo conjunto reduzido da execução
+    anterior. Comparada à execução 2, isola o efeito da ampliação da
+    população, mantido constante o conjunto de preditores.
+\end{enumerate}
+
+A essas três execuções soma-se uma \textbf{execução de sensibilidade à
+unidade de agregação}: a trilha da proporção será repetida com a
+\emph{turma} como unidade, sob o mesmo protocolo. A razão foi exposta na
+Seção~\ref{sec:agregacao}: os preditores docentes variam por turma, e parte
+das escolas possui mais de uma turma avaliada, de modo que a agregação por
+escola funde vetores docentes distintos. A convergência das conclusões
+entre as duas unidades converterá a escolha da escola (justificada pelo
+alinhamento com a unidade de decisão gerencial) de escolha contestável em
+escolha validada; uma divergência será, ela própria, reportada e discutida.
+
+A leitura conjunta das três execuções principais permite atribuir
+separadamente as diferenças observadas à retirada do INSE
+(1~\textit{vs.}~2) e à mudança de população (2~\textit{vs.}~3). A análise privilegiará a estabilidade do
+\emph{ordenamento} dos grupos temáticos entre execuções, mais informativa
+que a variação do valor absoluto da métrica, que responde também a
+alterações na distribuição do desfecho e no tamanho amostral entre as
+populações comparadas.
+
+\section{Cronograma de execução}
+\label{sec:cronograma}
+
+A execução das etapas restantes está prevista para o período letivo 2026.2,
+cujo calendário acadêmico foi fixado pela Resolução CONSEPE
+n\textordmasculine{} 44/2025. O período tem início em \textbf{28 de agosto
+de 2026} e término em \textbf{16 de dezembro de 2026}, com o Encontro
+Unificado do Campus~I entre 23 e 27 de novembro. O depósito da versão final
+está previsto para \textbf{4 de dezembro de 2026}, de modo a assegurar prazo
+de leitura à banca examinadora, e a defesa deverá ocorrer até \textbf{16 de
+dezembro de 2026}. A Tabela~\ref{tab:cronograma} distribui as atividades ao
+longo dos cinco meses do período.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Cronograma de execução do TCC II (período letivo 2026.2)}
+    \begin{tabular}{L{5.6cm}C{1.5cm}C{1.5cm}C{1.5cm}C{1.5cm}C{1.5cm}}
+        \toprule
+        \textbf{Atividade} & \textbf{Ago/26} & \textbf{Set/26} & \textbf{Out/26} & \textbf{Nov/26} & \textbf{Dez/26} \\
+        \midrule
+        Revisão e consolidação do projeto            & X &   &   &   &   \\
+        Extração e integração dos microdados         & X & X &   &   &   \\
+        Agregação por escola e construção da base analítica &   & X &   &   &   \\
+        Qualidade, cobertura e análise descritiva    &   & X &   &   &   \\
+        Engenharia e seleção de variáveis            &   & X & X &   &   \\
+        Implementação do protocolo de validação      &   & X & X &   &   \\
+        Estimação e comparação dos modelos           &   &   & X &   &   \\
+        Explicabilidade e robustez                   &   &   & X & X &   \\
+        Protótipo do artefato de dados (dashboard)   &   &   & X & X &   \\
+        Redação dos resultados e discussão           &   &   &   & X &   \\
+        Revisão integral com o orientador            &   &   &   & X & X \\
+        Depósito e apresentação do TCC               &   &   &   &   & X \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor.}
+    \end{flushleft}
+    \label{tab:cronograma}
+\end{table}
+
+Três observações sobre o cronograma. Primeira, a agregação por escola e a
+implementação do protocolo de validação aparecem como atividades autônomas,
+e não como detalhes da estimação, por exigirem a reconstrução da base
+analítica e da partição e a reexecução completa das estimativas obtidas até
+aqui sob o desenho anterior. Segunda, o desenvolvimento do protótipo do
+artefato de dados (o \emph{dashboard} interativo destinado a gestores
+educacionais e potenciais financiadores, Seção~\ref{sec:justificativa})
+inicia-se tão logo os primeiros modelos estejam estimados, de modo que o
+instrumento evolua junto com os resultados, e não após eles. Terceira, o
+mês de agosto compreende apenas os últimos dias do calendário letivo (o
+período inicia-se em 28 de agosto), de modo que as atividades ali alocadas
+correspondem à retomada e ao planejamento, com carga concentrada a partir de
+setembro.

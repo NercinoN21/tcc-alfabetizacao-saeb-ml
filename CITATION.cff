@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "Se você usar este código ou estes resultados, cite o trabalho como abaixo."
+type: software
+title: "Preditores da alfabetização e da proficiência em Língua Portuguesa: uma comparação de algoritmos aplicada ao 2º ano do Ensino Fundamental público"
+version: 0.2.0
+license: MIT
+# Texto da monografia: CC-BY-4.0 (ver LICENSE-MONOGRAFIA.md)
+authors:
+  - given-names: "Nercino José"
+    family-names: "De Barros Neto"
+    affiliation: "Universidade Federal da Paraíba (UFPB)"
+keywords:
+  - Saeb 2023
+  - alfabetização
+  - aprendizado de máquina
+  - SHAP
+  - LIME
+  - educação básica
+preferred-citation:
+  type: thesis
+  thesis-type: "Trabalho de Conclusão de Curso (Bacharelado em Ciência de Dados para Negócios)"
+  title: "Preditores da alfabetização e da proficiência em Língua Portuguesa: uma comparação de algoritmos aplicada ao 2º ano do Ensino Fundamental público"
+  authors:
+    - given-names: "Nercino José"
+      family-names: "De Barros Neto"
+  institution:
+    name: "Universidade Federal da Paraíba"
+    city: "João Pessoa"
+    country: BR
+  year: 2026

@@ -1,0 +1,42 @@
+# ---- Dados: NUNCA versionar microdados (baixar com `make dados`; ver data/README.md)
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/SHA256SUMS
+data/processed/*
+!data/processed/.gitkeep
+*.zip
+*.part
+
+# ---- Saídas de execução (versionamos só a execução final congelada em reports/final/)
+reports/execucoes/
+models/
+*.joblib
+
+# ---- Python / ambiente
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# ---- LaTeX (artefatos de compilação)
+monografia/**/*.aux
+monografia/**/*.bbl
+monografia/**/*.blg
+monografia/**/*.fdb_latexmk
+monografia/**/*.fls
+monografia/**/*.log
+monografia/**/*.out
+monografia/**/*.toc
+monografia/**/*.lof
+monografia/**/*.lot
+monografia/**/*.idx
+monografia/**/*.ilg
+monografia/**/*.ind
+monografia/**/*.synctex.gz
+
+# ---- Sistema / editor
+.DS_Store
+.~lock.*
+*.swp
