@@ -1,0 +1,28 @@
+name: testes
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Ambiente (Python 3.12, versões fixadas em uv.lock)
+        run: |
+          uv python install 3.12
+          uv sync --frozen
+
+      - name: Restaurar os microdados do snapshot (confere os checksums)
+        run: make dados-snapshot
+
+      - name: Testes (inclui os que leem os microdados reais)
+        run: uv run pytest -q
