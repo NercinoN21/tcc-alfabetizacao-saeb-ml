@@ -1,0 +1,3 @@
+alvo do teste,n,R² (CV),MAE modelo,MAE chute (média),AUC
+% turmas com professor preto/pardo,515,0.14310178731997758,0.3393521587355163,0.40670374210575927,
+diretor preto/pardo (vs branco),553,,,,0.722961895070104

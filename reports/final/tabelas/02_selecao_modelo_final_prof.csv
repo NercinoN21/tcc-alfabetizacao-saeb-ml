@@ -1,0 +1,18 @@
+,Proficiência média
+melhor_ensemble,Random Forest
+selecionado,Linear (Elastic Net)
+cv_MAE_linear,17.72021691225537
+cv_MAE_ensemble,16.91656276699896
+media,0.802692361050087
+ep,0.44182252489490514
+ic_inf,-0.10918451257536954
+ic_sup,1.7145692346755435
+p_corrigido,0.08176180578102638
+n_dobras,25
+ganho_relativo,0.045297062293002906
+margem,0.02
+ensemble_selecionado,False
+teste_dif_MAE_(b−a),1.0198042894479764
+teste_IC95_inf,-0.38084168032658905
+teste_IC95_sup,2.4004026602935706
+teste_p_Wilcoxon,0.16839898459062774

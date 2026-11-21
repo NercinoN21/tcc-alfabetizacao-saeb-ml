@@ -1,0 +1,18 @@
+,Proporção de alfabetizados
+melhor_ensemble,XGBoost
+selecionado,Linear (Elastic Net)
+cv_MAE_linear,0.1690940583492829
+cv_MAE_ensemble,0.16359454210910299
+media,0.0055002486529497525
+ep,0.0030472646392364125
+ic_inf,-0.0007889964528702189
+ic_sup,0.011789493758769724
+p_corrigido,0.0836407243656561
+n_dobras,25
+ganho_relativo,0.03252861875481022
+margem,0.02
+ensemble_selecionado,False
+teste_dif_MAE_(b−a),0.0035405042284456486
+teste_IC95_inf,-0.008894777572659876
+teste_IC95_sup,0.014595242105351791
+teste_p_Wilcoxon,0.33659075937838545

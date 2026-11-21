@@ -1,0 +1,26 @@
+,participação,tema,descricao,percepcao_desfecho
+ESC_INSE,0.12760917112638842,Nível socioeconômico (INSE),INSE da escola (1 = Nível I … 8 = Nível VIII),False
+DIR_TX_Q141__FORA_ESCALA,0.06269756522813942,Merenda escolar,Quantas refeições são oferecidas nesta escola em relação ao tempo de permanência dos(as) estudantes? Para estudantes que permanecem mais que 4 e menos que 7 horas na escola:,False
+DIR_TX_Q115,0.050716714321756964,Gestão democrática e colegiados,Existe Associação de Pais e Mestres – APM (ou caixa escolar) nesta escola?,False
+DIR_TX_Q218,0.03228043012265395,Formação continuada percebida (equipe),Educação especial.,False
+DIR_TX_Q117,0.030849134389438763,Gestão democrática e colegiados,Há grêmio estudantil na sua escola?,False
+DIR_TX_Q099,0.03035504621125054,Segurança — episódios de violência,"Sobre os episódios listados abaixo, indique a frequência com que ocorreram neste ano, nesta escola: Discriminação (racial, gênero, orientação sexual, econômica/social, deficiência).",False
+DIR_TX_Q044__FORA_ESCALA,0.026833416555492682,Infraestrutura — Educação Infantil,"Avalie, abaixo, as condições dos EQUIPAMENTOS da sua escola: Tanque de areia.",False
+DIR_TX_Q170,0.024480247273864865,Composição de turmas e alocação de professores,Capacidade física da sala de aula.,False
+DIR_TX_Q144,0.024231288944753182,Merenda escolar,"Em relação à merenda escolar, como você avalia os seguintes aspectos: Os alimentos são de boa qualidade.",False
+PROF_TX_Q023,0.023837218227664658,Formação continuada (curta duração),Curso com carga horária total com mais de 180 e menos 360 horas,False
+PROF_TX_Q137,0.02351959157701952,Clima escolar — segurança e violência,Roubo ou furto.,False
+PROF_TX_Q021,0.023467391810475545,Formação continuada (curta duração),Atividades formativas com menos de 20 horas,False
+DIR_TX_Q004,0.023268187312008155,Caracterização da escola (etapas oferecidas),Anos Finais do Ensino Fundamental.,False
+DIR_TX_Q191,0.022988905024522815,Ações contra repetência e abandono,"Neste ano, a escola realizou as seguintes ações para redução do ABANDONO ESCOLAR? Caso tenham sido realizadas, indique a eficácia das seguintes ações: Entrar em contato com os familiares/responsáveis do(a) estudante.",False
+DIR_TX_Q014,0.022866890766527356,Formação e carreira do diretor,Qual é o MAIS ALTO nível de escolaridade que você concluiu?,False
+PROF_TX_Q128,0.022502812260446804,Clima escolar — relação com estudantes,São assíduos(as).,False
+PROF_TX_Q092,0.01940927452108587,Práticas pedagógicas em sala de aula,Buscar estratégias para melhorar a aprendizagem dos(as) estudantes com menor desempenho.,False
+PROF_TX_Q009,0.01842332667609842,Hábitos culturais e lazer do professor,"Acesso blogs, Youtube, redes sociais (Twitter, Instagram, Facebook etc.).",False
+GEO_ID_AREA,0.01756456983010252,Contexto geográfico,Capital ou interior,False
+DIR_TX_Q121,0.016710675982992005,Parcerias externas,A escola desenvolve REGULARMENTE trabalhos em conjunto com: Serviços de saúde (postos de saúde).,False
+DIR_TX_Q067,0.015183757115722478,Recursos financeiros e de pessoal,As famílias contribuíram com o trabalho pedagógico.,False
+PROF_TX_Q077,0.014716634474506999,"Crenças pedagógicas (repetência, avaliações externas)","A quantidade de avaliações externas (municipais, estaduais ou federais) é excessiva.",False
+DIR_TX_Q043__FORA_ESCALA,0.014656424378337326,Infraestrutura — Educação Infantil,"Avalie, abaixo, as condições dos EQUIPAMENTOS da sua escola: Horta.",False
+DIR_TX_Q079,0.014032515175822626,Interrupções do calendário,Falta de energia.,False
+DIR_TX_Q001,0.013838078625322367,Caracterização da escola (etapas oferecidas),Educação Infantil  -  Creche  (0 a 3 anos).,False

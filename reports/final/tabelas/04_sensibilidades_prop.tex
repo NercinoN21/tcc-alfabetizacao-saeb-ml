@@ -1,0 +1,26 @@
+\begin{tabular}{llrrrrrrrrr}
+\toprule
+ &  & linhas & variáveis & MAE & MAE baseline & ganho sobre baseline (\%) & R² & MAE ponderado & MAE baseline ponderado & ganho ponderado (\%) \\
+eixo & variante &  &  &  &  &  &  &  &  &  \\
+\midrule
+\multirow[t]{2}{*}{CV} & 5-dobras por escola (referência) & 604 & 363 & 0.164 & 0.190 & 13.446 & 0.202 & NaN & NaN & NaN \\
+ & GroupKFold por município & 604 & 363 & 0.164 & 0.190 & 13.518 & 0.217 & NaN & NaN & NaN \\
+\cline{1-11}
+Unidade & turma (CV agrupada por escola) & 721 & 364 & 0.175 & 0.197 & 11.211 & 0.152 & NaN & NaN & NaN \\
+\cline{1-11}
+\multirow[t]{5}{*}{n mínimo} & n ≥ 1 & 616 & 363 & 0.167 & 0.192 & 12.906 & 0.186 & NaN & NaN & NaN \\
+ & n ≥ 5 & 615 & 363 & 0.166 & 0.191 & 13.462 & 0.198 & NaN & NaN & NaN \\
+ & n ≥ 10 & 604 & 363 & 0.164 & 0.190 & 13.445 & 0.202 & NaN & NaN & NaN \\
+ & n ≥ 15 & 523 & 363 & 0.157 & 0.184 & 14.705 & 0.218 & NaN & NaN & NaN \\
+ & n ≥ 20 & 410 & 364 & 0.146 & 0.173 & 15.774 & 0.250 & NaN & NaN & NaN \\
+\cline{1-11}
+Junção & interna (professor E diretor) & 491 & 367 & 0.167 & 0.187 & 10.941 & 0.161 & NaN & NaN & NaN \\
+\cline{1-11}
+Percepção do desfecho & COM os itens PROF\_TX\_Q080 e DIR\_TX\_Q030 & 604 & 365 & 0.164 & 0.190 & 13.512 & 0.203 & NaN & NaN & NaN \\
+\cline{1-11}
+\multirow[t]{3}{*}{Pesos} & treino sem peso amostral · avaliação ponderada & 604 & 363 & 0.164 & 0.190 & 13.446 & 0.202 & 0.167 & 0.197 & 15.348 \\
+ & treino COM peso amostral · avaliação ponderada & 604 & 363 & 0.195 & 0.190 & -2.572 & -0.108 & 0.188 & 0.197 & 4.586 \\
+ & treino com peso truncado no p99 · avaliação ponderada & 604 & 363 & 0.187 & 0.190 & 1.614 & -0.022 & 0.178 & 0.197 & 9.606 \\
+\cline{1-11}
+\bottomrule
+\end{tabular}

@@ -1,0 +1,13 @@
+\begin{tabular}{lrrrrrrrrrrr}
+\toprule
+ & cv\_MAE & MAE & RMSE & R2 & sMAPE\_\% & MAE\_pond\_n & MAE\_IC95\_inf & MAE\_IC95\_sup & pct\_fora\_de\_0\_1 & segundos & ganho\_vs\_baseline\_media\_\% \\
+modelo &  &  &  &  &  &  &  &  &  &  &  \\
+\midrule
+Baseline: média & NaN & 18.856 & 23.178 & -0.008 & 2.569 & 17.514 & NaN & NaN & NaN & NaN & 0.000 \\
+Baseline: mediana & NaN & 18.899 & 23.295 & -0.018 & 2.575 & 17.624 & NaN & NaN & NaN & NaN & -0.232 \\
+Linear (Elastic Net) & 17.886 & 16.993 & 20.357 & 0.223 & 2.318 & 15.916 & 14.953 & 18.949 & NaN & 6.300 & 9.880 \\
+Random Forest & 17.007 & 15.904 & 19.794 & 0.265 & 2.166 & 14.940 & 13.888 & 18.025 & NaN & 41.300 & 15.655 \\
+XGBoost & 17.065 & 16.197 & 20.147 & 0.238 & 2.207 & 15.102 & 14.132 & 18.399 & NaN & 17.400 & 14.098 \\
+LightGBM & 17.037 & 16.102 & 19.923 & 0.255 & 2.195 & 15.048 & 14.106 & 18.276 & NaN & 13.200 & 14.602 \\
+\bottomrule
+\end{tabular}

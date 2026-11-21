@@ -1,0 +1,12 @@
+etapa,alunos,turmas,escolas
+1. Registros iniciais (TS_ALUNO_2EF),37104,1612,1181
+2. Consistência com o Censo Escolar,36989,1611,1181
+3. Prova de LP preenchida,28532,1504,1107
+4. Proficiência em LP calculável (TRI),28516,1504,1107
+5. Rede pública,20939,1069,764
+6. Com INSE (TS_ESCOLA),19361,985,704
+   6a. turma com questionário de professor,14613,730,527
+   6b. escola com questionário de diretor,16466,825,587
+7. Escola com ≥ 1 bloco de preditores,17269,867,616
+8. n ≥ 10 alunos → BASE FINAL (linhas = escolas),17183,854,604
+Coorte interna (professor E diretor),13810,688,498

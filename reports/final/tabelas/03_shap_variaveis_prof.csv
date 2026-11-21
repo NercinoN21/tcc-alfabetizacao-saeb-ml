@@ -1,0 +1,26 @@
+,participação,tema,descricao,percepcao_desfecho
+ESC_INSE,0.05908910392082959,Nível socioeconômico (INSE),INSE da escola (1 = Nível I … 8 = Nível VIII),False
+DIR_TX_Q141__FORA_ESCALA,0.03289500354137104,Merenda escolar,Quantas refeições são oferecidas nesta escola em relação ao tempo de permanência dos(as) estudantes? Para estudantes que permanecem mais que 4 e menos que 7 horas na escola:,False
+DIR_TX_Q204,0.025708558346276122,Projetos temáticos,"Nesta escola, há projetos com as seguintes temáticas: Sexualidade.",False
+DIR_TX_Q218,0.025031460153112868,Formação continuada percebida (equipe),Educação especial.,False
+PROF_TX_Q123,0.02150580340833848,Liderança do diretor e colaboração (visão do professor),"Colaboração da família para superar problemas relacionados aos estudantes (ausências, acompanhamento das atividades escolares etc.).",False
+DIR_TX_Q017,0.01827419445133668,Formação e carreira do diretor,Há quantos anos você é diretor(a) desta escola?,False
+DIR_TX_Q117,0.01819130122744756,Gestão democrática e colegiados,Há grêmio estudantil na sua escola?,False
+PROF_TX_Q023,0.018117620683839337,Formação continuada (curta duração),Curso com carga horária total com mais de 180 e menos 360 horas,False
+DIR_TX_Q191,0.01733284833684639,Ações contra repetência e abandono,"Neste ano, a escola realizou as seguintes ações para redução do ABANDONO ESCOLAR? Caso tenham sido realizadas, indique a eficácia das seguintes ações: Entrar em contato com os familiares/responsáveis do(a) estudante.",False
+DIR_TX_Q004,0.017073604020878687,Caracterização da escola (etapas oferecidas),Anos Finais do Ensino Fundamental.,False
+DIR_TX_Q067,0.016915552620518377,Recursos financeiros e de pessoal,As famílias contribuíram com o trabalho pedagógico.,False
+DIR_TX_Q142__FORA_ESCALA,0.01631713821831379,Merenda escolar,Quantas refeições são oferecidas nesta escola em relação ao tempo de permanência dos(as) estudantes? Para estudantes que permanecem 7 horas ou mais na escola:,False
+DIR_TX_Q001,0.01609993340975634,Caracterização da escola (etapas oferecidas),Educação Infantil  -  Creche  (0 a 3 anos).,False
+DIR_TX_Q115,0.01589720849341929,Gestão democrática e colegiados,Existe Associação de Pais e Mestres – APM (ou caixa escolar) nesta escola?,False
+DIR_TX_Q014,0.015152838901756288,Formação e carreira do diretor,Qual é o MAIS ALTO nível de escolaridade que você concluiu?,False
+PROF_SEM_QUESTIONARIO,0.015002234023574272,Não resposta ao questionário,Escola sem questionário de professor do 2º ano,False
+DIR_TX_Q065,0.014661749579433905,Recursos financeiros e de pessoal,A comunidade apoiou a gestão da escola.,False
+PROF_TX_Q128,0.01464216130855264,Clima escolar — relação com estudantes,São assíduos(as).,False
+GEO_ID_AREA,0.01430783968644244,Contexto geográfico,Capital ou interior,False
+PROF_TX_Q074__FORA_ESCALA,0.01403941473469348,Infraestrutura da sala de aula (percepção),Internet.,False
+DIR_TX_Q148,0.013749209741697212,Merenda escolar,"Em relação à merenda escolar, como você avalia os seguintes aspectos: O acesso ao local de alimentação é livre para estudantes com mobilidade reduzida.",False
+DIR_TX_Q064,0.013254189944675372,Recursos financeiros e de pessoal,Os(As) estudantes foram assíduos(as).,False
+PROF_TX_Q009,0.012536017843597423,Hábitos culturais e lazer do professor,"Acesso blogs, Youtube, redes sociais (Twitter, Instagram, Facebook etc.).",False
+PROF_TX_Q137,0.012535327842536057,Clima escolar — segurança e violência,Roubo ou furto.,False
+DIR_TX_Q222,0.011943445036090234,Formação continuada percebida (equipe),Alfabetização e letramento.,False

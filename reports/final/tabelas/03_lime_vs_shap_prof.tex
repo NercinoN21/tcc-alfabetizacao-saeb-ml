@@ -1,0 +1,13 @@
+\begin{tabular}{lrrrrrrrrll}
+\toprule
+ & escola & observado & previsto & fidelidade\_LIME\_R2\_media & estabilidade\_LIME\_jaccard\_topk & concordancia\_jaccard\_topk & spearman\_LIME\_SHAP & concordancia\_de\_sinal & top3\_SHAP & top3\_LIME \\
+caso &  &  &  &  &  &  &  &  &  &  \\
+\midrule
+típica (menor |resíduo|) & 61426494 & 725.480 & 725.239 & 0.602 & 0.788 & 0.053 & 0.142 & 1.000 & PROF\_TX\_Q074\_\_FORA\_ESCALA, PROF\_TX\_Q028, PROF\_TX\_Q123 & DIR\_TX\_Q119, DIR\_TX\_Q157\_\_FORA\_ESCALA, DIR\_TX\_Q038\_\_FORA\_ESCALA \\
+acima do esperado (maior resíduo +) & 61459092 & 787.570 & 737.864 & 0.464 & 0.736 & 0.176 & 0.602 & 1.000 & ESC\_INSE, DIR\_TX\_Q017, PROF\_TX\_Q023 & DIR\_TX\_Q119, DIR\_TX\_Q157\_\_FORA\_ESCALA, DIR\_TX\_Q038\_\_FORA\_ESCALA \\
+abaixo do esperado (maior resíduo −) & 61463592 & 697.885 & 736.451 & 0.586 & 0.791 & 0.053 & 0.598 & 1.000 & ESC\_INSE, PROF\_TX\_Q123, PROF\_TX\_Q128 & DIR\_TX\_Q119, DIR\_TX\_Q157\_\_FORA\_ESCALA, DIR\_TX\_Q038\_\_FORA\_ESCALA \\
+limítrofe (desfecho ≈ mediana) & 61430737 & 731.647 & 731.987 & 0.574 & 0.786 & 0.053 & 0.527 & 1.000 & ESC\_INSE, DIR\_TX\_Q141\_\_FORA\_ESCALA, DIR\_TX\_Q044\_\_FORA\_ESCALA & DIR\_TX\_Q119, DIR\_TX\_Q157\_\_FORA\_ESCALA, DIR\_TX\_Q038\_\_FORA\_ESCALA \\
+extremo inferior (menor desfecho) & 61454905 & 686.341 & 711.567 & 0.579 & 0.764 & 0.176 & 0.501 & 1.000 & DIR\_TX\_Q038\_\_FORA\_ESCALA, ESC\_INSE, DIR\_TX\_Q218 & DIR\_TX\_Q119, DIR\_TX\_Q157\_\_FORA\_ESCALA, DIR\_TX\_Q038\_\_FORA\_ESCALA \\
+extremo superior (maior desfecho) & 61412762 & 785.252 & 753.413 & 0.586 & 0.775 & 0.111 & 0.588 & 1.000 & DIR\_TX\_Q001, PROF\_TX\_Q123, DIR\_TX\_Q141\_\_FORA\_ESCALA & DIR\_TX\_Q119, DIR\_TX\_Q157\_\_FORA\_ESCALA, DIR\_TX\_Q038\_\_FORA\_ESCALA \\
+\bottomrule
+\end{tabular}
