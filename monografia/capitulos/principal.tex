@@ -1251,7 +1251,13 @@ a variável-alvo não utilizada pela outra trilha. Em cada trilha concorrem
 um \emph{modelo linear regularizado de referência} e três
 \textit{ensembles} de árvore, todos contrastados com um \textit{baseline}
 trivial que estabelece o piso de desempenho abaixo do qual nenhum modelo
-pode ser considerado útil. A Tabela~\ref{tab:trilhas} resume a estratégia.
+pode ser considerado útil. O modelo linear de referência é a regressão
+regularizada por Elastic Net (complementada, na trilha de proporção, pelo
+\textit{fractional logit} de \citeonline{papke1996fractional}, especificação
+canônica para desfechos fracionários) e representa, na terminologia de
+\citeonline{breiman2001two}, a ``cultura'' da modelagem estatística clássica
+diante da ``cultura'' algorítmica dos \textit{ensembles} de árvore.
+A Tabela~\ref{tab:trilhas} resume a estratégia.
 
 \begin{table}[H]
     \centering
@@ -1296,27 +1302,6 @@ coerente com a unidade de decisão, e ponderada pelo número de alunos
 avaliados $n_e$), uma vez que escolas pequenas produzem proporções
 mecanicamente mais voláteis e as duas leituras respondem a perguntas de
 gestão distintas.
-
-\subsection{Justificativa da ausência de modelos autorregressivos}
-
-O padrão de referência da disciplina para trabalhos aplicados costuma
-contrapor modelos autorregressivos (ARIMAX/SARIMAX) a \textit{ensembles} de
-árvore em séries temporais. O Saeb 2023, no entanto, é um corte transversal
-de uma única edição, sem painel de anos nem variação temporal por escola a
-modelar. Reproduzir ARIMAX aqui seria metodologicamente incorreto, por
-ausência de estrutura temporal a decompor. O equivalente clássico
-apropriado a dados de corte transversal, adotado como \emph{modelo linear
-de referência} nas duas trilhas, é a regressão linear regularizada por
-Elastic Net (complementada, na trilha de proporção, pelo
-\textit{fractional logit} de \citeonline{papke1996fractional}, especificação
-canônica para desfechos fracionários), cumprindo, na terminologia de
-\citeonline{breiman2001two}, o papel da ``cultura'' de modelagem estatística
-clássica em contraste com a ``cultura'' algorítmica dos três
-\textit{ensembles} de árvore. Reitere-se que essa designação é comparativa,
-não inferencial: os coeficientes desses modelos são interpretáveis como
-associações condicionais e servem de referência de desempenho e de leitura,
-sem que deles se extraiam efeitos causais
-(Seção~\ref{sec:registros-inferenciais}).
 
 \subsection{Trilha da proporção de alfabetizados}
 
