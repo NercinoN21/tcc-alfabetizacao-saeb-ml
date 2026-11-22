@@ -1508,6 +1508,32 @@ que expressa o erro em termos relativos à escala do desfecho. Na trilha de
 proporção, o sMAPE não é utilizado porque se torna instável quando a
 proporção observada é igual ou próxima de zero.
 
+\textbf{Perda de quantil.} A previsão também é avaliada fora da média, nos
+quantis $\tau = 0{,}10$, $0{,}25$, $0{,}50$, $0{,}75$ e $0{,}90$ da
+distribuição condicional de cada desfecho. Para cada $\tau$, calcula-se no
+conjunto de teste a perda média de quantil (\textit{mean pinball loss})
+\begin{equation}
+    L_\tau = \frac{1}{n}\sum_{e} \rho_\tau\left(y_e - \hat{q}_{\tau,e}\right),
+    \qquad \rho_\tau(u) = u\,\bigl(\tau - \mathrm{I}(u < 0)\bigr),
+    \label{eq:pinball}
+\end{equation}
+em que $\hat{q}_{\tau,e}$ é o quantil previsto para a escola $e$ e
+$\mathrm{I}(\cdot)$ é a função indicadora. A função $\rho_\tau$ pesa por
+$\tau$ os erros acima do quantil e por $1-\tau$ os erros abaixo dele, e é a
+mesma que a regressão quantílica minimiza \cite{koenker2005quantile}.
+Concorrem, em cada $\tau$, a regressão quantílica linear com penalidade L1 e
+as versões do XGBoost e do LightGBM com perda de quantil, contra um
+\textit{baseline} igual ao quantil empírico do treino. O Random Forest fica
+fora dessa comparação porque a implementação utilizada não estima quantis.
+Cada modelo é calibrado só no treino, separadamente para cada $\tau$, com a
+mesma validação cruzada da comparação principal e com a própria perda de
+quantil como critério. Na trilha de proporção, todos os modelos usam o peso
+de precisão $n_e$. As diferenças em relação ao \textit{baseline} são
+reportadas com intervalo de confiança \textit{bootstrap} pareado de 95\%
+sobre as escolas de teste. Como cada quantil é ajustado à parte, reporta-se
+também a fração de escolas cujos quantis previstos saem fora de ordem. A
+análise é complementar e não entra na regra de seleção do modelo final.
+
 \section{Explicabilidade dos modelos (XAI)}
 \label{sec:xai}
 
