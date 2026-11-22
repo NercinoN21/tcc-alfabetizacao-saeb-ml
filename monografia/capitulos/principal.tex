@@ -604,12 +604,17 @@ quantílica. Regressão quantílica e SHAP respondem a perguntas distintas: a
 primeira estima como a associação entre covariáveis e desfecho varia ao
 longo de quantis da distribuição condicional. O segundo decompõe a predição
 de um modelo já estimado em contribuições aditivas por variável, sem
-qualquer pretensão de estimar parâmetros populacionais. O exame separado de
-escolas com proporções de alfabetização muito baixas e muito altas,
-previsto para o TCC II, é, portanto, análogo à análise de quantis extremos
-de \citeonline{almeida2014determinantes} e \citeonline{tian2006quantile}
-apenas no plano do interesse substantivo (entender o que distingue os
-extremos da distribuição), não no plano inferencial.
+qualquer pretensão de estimar parâmetros populacionais. 
+
+Para manter a leitura por quantis, os modelos são avaliados também pela
+perda de quantil (\textit{pinball loss}) em cinco pontos da distribuição
+condicional dos desfechos (Seção~\ref{sec:testes-significancia}). Essa é a
+função que a regressão quantílica minimiza \cite{koenker2005quantile}, e a
+avaliação usa todas as escolas, sem recortar a amostra nos extremos. A
+comparação permanece no plano preditivo: mede-se quão bem cada modelo prevê
+o quantil $\tau$ do desfecho de cada escola, sem estimar a associação de
+cada variável em cada quantil, como fazem \citeonline{almeida2014determinantes}
+e \citeonline{tian2006quantile}.
 
 Este trabalho também se insere na literatura internacional de
 \textit{Educational Data Mining}, revisada por \citeonline{romero2010edm},
