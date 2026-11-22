@@ -17,7 +17,8 @@ investimento educacional de um país se converte ou não em bem-estar para as
 pessoas \cite{worldbank2018wdr}.
 
 Essa preocupação é mais aguda nos países em desenvolvimento. Estimativas
-conjuntas do Banco Mundial e da UNESCO indicam que, após a pandemia de
+conjuntas do Banco Mundial e da Organização das Nações Unidas para a
+Educação, a Ciência e a Cultura (UNESCO) indicam que, após a pandemia de
 Covid-19, cerca de 70\% das crianças de dez anos dos países de renda baixa
 e média encontravam-se em situação de \emph{pobreza de aprendizagem},
 definida como a incapacidade de ler e compreender um texto simples; na
@@ -63,7 +64,8 @@ das metas mais consensuais da política educacional brasileira, formalizada
 no Plano Nacional de Educação e reafirmada por programas federais como o
 Compromisso Nacional Criança Alfabetizada, que estabelece a meta de 80\% de
 crianças alfabetizadas ao final do 2º ano até 2030. A distância até essa
-meta é considerável: na avaliação amostral do Saeb 2023, 49,3\% dos alunos
+meta é considerável: na avaliação amostral do Sistema de Avaliação da
+Educação Básica (Saeb) de 2023, 49,3\% dos alunos
 do 2º ano da rede pública alcançaram o ponto de corte oficial de
 alfabetização \cite{inep2025resultadossaeb}. O argumento por trás dessa
 priorização é bem estabelecido na literatura de economia da educação:
@@ -79,19 +81,19 @@ superiores aos de intervenções remediais tardias
 alfabetização nessa fase inicial é, portanto, uma pergunta tanto acadêmica
 quanto diretamente relevante para a formulação de políticas públicas.
 
-O Sistema de Avaliação da Educação Básica (Saeb), conduzido pelo Instituto
+O Saeb, conduzido pelo Instituto
 Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep), é o
 instrumento nacional que permite formular essa pergunta com dados. O Saeb
 passou a avaliar sistematicamente o 2º ano do Ensino Fundamental a partir
 da edição de 2019, produzindo tanto uma medida de proficiência em Língua
-Portuguesa, estimada por Teoria de Resposta ao Item \cite{klein2003tri},
+Portuguesa (LP), estimada por Teoria de Resposta ao Item (TRI) \cite{klein2003tri},
 quanto, a partir da edição de 2023, um indicador binário de alfabetização,
 definido pelo Inep por um corte de 743 pontos nessa proficiência
 \cite{inep2023alfabetiza}. Paralelamente à prova aplicada ao aluno, o Saeb coleta
 questionários contextuais extensos respondidos pelo professor da turma e
-pelo diretor da escola, além de um indicador agregado de nível
-socioeconômico da escola, cobrindo temas como formação docente, práticas
-pedagógicas, infraestrutura, gestão escolar e clima de segurança. Essa
+pelo diretor da escola, cobrindo temas como formação docente, práticas
+pedagógicas, infraestrutura, gestão escolar e clima de segurança, e o Inep
+divulga o Indicador de Nível Socioeconômico (INSE) das escolas. Essa
 combinação de desfechos educacionais mensurados em larga escala com
 centenas de covariáveis de contexto escolar torna o Saeb uma base
 particularmente adequada à aplicação de técnicas de aprendizado de máquina
@@ -201,8 +203,9 @@ desempenho escolar (Seção~\ref{sec:evidencias-brasileiras}). O que este
 trabalho se propõe a verificar é se as variáveis de contexto de professor e
 diretor apresentam contribuição preditiva \emph{além} da que o INSE já
 captura sozinho, ou se seu papel é, na prática, redundante com ele,
-pergunta endereçada diretamente pela comparação de modelos e pela
-interpretabilidade SHAP agregada por grupo temático (Capítulo~3). A
+pergunta endereçada diretamente pela comparação de modelos e pelos valores
+SHAP (\textit{SHapley Additive exPlanations},
+Seção~\ref{sec:xai-revisao}) agregados por grupo temático (Capítulo~3). A
 Hipótese~4 testa, na mesma lógica, se variáveis de região, unidade da
 federação e localização carregam informação preditiva não redutível à do
 INSE, ancorando-se nos achados de efeito-município da literatura brasileira
@@ -215,7 +218,7 @@ apenas sobre práticas pedagógicas genéricas
 (Seção~\ref{sec:alfabetizacao-2ef}). H1 capta, portanto, proxies de
 qualidade pedagógica geral, não escolhas de método de alfabetização
 especificamente, o que deverá ser retomado na discussão dos resultados em
-TCC II.
+Trabalho de Conclusão de Curso II (TCC II).
 
 \section{Objetivos}
 \label{sec:objetivos}
@@ -246,7 +249,8 @@ modelos interpretáveis de aprendizado de máquina.
     \textit{baselines} simples, como a média e a mediana dos desfechos;
     \item Aplicar SHAP como método prioritário de explicabilidade ao modelo
     selecionado de cada trilha, hierarquizando a importância dos grupos
-    temáticos de variáveis, com o LIME tratado como checagem complementar e
+    temáticos de variáveis, com o LIME (\textit{Local Interpretable
+Model-agnostic Explanations}) tratado como checagem complementar e
     opcional em casos individuais selecionados;
     \item Avaliar a robustez das conclusões frente a duas decisões
     metodológicas: a restrição da análise à rede pública (por meio de
@@ -504,7 +508,8 @@ que deriva diretamente a Hipótese~4 deste trabalho
 (Seção~\ref{sec:hipoteses}). Cabe uma ressalva quanto ao alcance dessa
 transposição: nos microdados do Saeb 2023 utilizados aqui, o identificador
 de município é um código anonimizado, sem correspondência divulgada com os
-códigos oficiais do IBGE (Seção~\ref{sec:fonte-dados}), de modo que este
+códigos oficiais do Instituto Brasileiro de Geografia e Estatística (IBGE)
+(Seção~\ref{sec:fonte-dados}), de modo que este
 trabalho pode empregar o município como variável de agrupamento (na
 validação cruzada agrupada, Seção~\ref{sec:protocolo}), mas não como
 identificador para incorporar covariáveis municipais externas ou para
@@ -591,7 +596,8 @@ microdados educacionais) dentro de uma taxonomia mais ampla de tarefas de
 mineração de dados aplicadas à educação. No plano internacional,
 \citeonline{masci2018student} constituem precedente revisado por pares
 diretamente pertinente ao desenho aqui adotado: aplicando árvores de
-regressão e \textit{boosting} a dados do PISA de nove países, os autores
+regressão e \textit{boosting} a dados do Programa Internacional de
+Avaliação de Estudantes (PISA) de nove países, os autores
 modelam o desempenho tanto de alunos quanto de \emph{escolas}, e mostram
 que os fatores associados ao desempenho escolar agregado diferem entre
 sistemas educacionais (evidência de que a análise no nível da escola é
@@ -602,7 +608,8 @@ integra as mesmas quatro fontes de dados utilizadas aqui (aluno, professor,
 escola e diretor) em uma comparação de algoritmos de \textit{ensemble} para
 classificar a proficiência de alunos do 9\textordmasculine{} ano e do
 Ensino Médio, obtendo um modelo de Random Forest vencedor com 90,2\% de
-acurácia e AUC de 96,7\%, e concluindo, via SHAP, que o nível
+acurácia e área sob a curva ROC (AUC, do inglês \textit{Area Under the
+Curve}) de 96,7\%, e concluindo, via SHAP, que o nível
 socioeconômico médio da escola é o preditor dominante. Para os autores,
 ``o desempenho acadêmico é um fenômeno sistêmico profundamente ligado ao
 ecossistema da escola'' \cite[tradução nossa]{tertulino2025multilevel}.\footnote{A fonte consultada não é paginada.}
@@ -814,7 +821,8 @@ comparação de modelos nas duas trilhas de regressão e o protocolo
 experimental (Seção~\ref{sec:protocolo}). A
 Seção~\ref{sec:testes-significancia} descreve a regra de seleção do modelo
 final e os testes de significância pareados. A
-Seção~\ref{sec:xai} detalha o protocolo de explicabilidade (XAI), a
+Seção~\ref{sec:xai} detalha o protocolo de explicabilidade (XAI, do inglês
+\textit{eXplainable Artificial Intelligence}), a
 Seção~\ref{sec:robustez} descreve a checagem de robustez frente à restrição
 da análise à rede pública, e a Seção~\ref{sec:cronograma} apresenta o
 cronograma de execução.
@@ -836,7 +844,8 @@ divulgada com os códigos oficiais do IBGE, o que impede vincular a base a
 fontes externas de dados municipais e restringe seu uso, neste trabalho, ao
 papel de variável de agrupamento na validação cruzada,
 Seção~\ref{sec:protocolo}). Já \texttt{TS\_ITEM} refere-se à análise
-psicométrica de funcionamento diferencial de item (TRI/DIF), uma pergunta
+psicométrica, via TRI, de funcionamento diferencial de item (DIF, do inglês
+\textit{Differential Item Functioning}), uma pergunta
 de pesquisa distinta da investigação de fatores contextuais associados ao
 desempenho aqui proposta.
 As quatro bases restantes (aluno, escola, professor e diretor) serão
@@ -978,7 +987,8 @@ e sujeita a revisão na execução definitiva, dimensiona essa característica:
 na coorte de escolas públicas com questionários de professor e de diretor,
 13.810 alunos distribuem-se por 688 turmas em 498 escolas (na base analítica
 final, com junção à esquerda, são 17.183 alunos em 604 escolas), com
-correlação intraclasse (ICC) da proficiência próxima de 0,20, o que
+correlação intraclasse (ICC, do inglês \textit{intraclass correlation
+coefficient}) da proficiência próxima de 0,20, o que
 situa o tamanho amostral \emph{efetivo} na ordem de poucos milhares de
 observações-equivalentes, muito abaixo do número de linhas-aluno.
 
@@ -1210,7 +1220,7 @@ altas habilidades do professor e do diretor foram deliberadamente excluídas
 do conjunto de preditores. Convém ser preciso quanto ao fundamento dessa
 decisão: embora se trate de dado pessoal sensível nos termos do
 art.~5\textordmasculine{}, inciso~II, da Lei Geral de Proteção de Dados
-(Lei n\textordmasculine{} 13.709/2018), essa qualificação \emph{não implica,
+(LGPD, Lei n\textordmasculine{} 13.709/2018), essa qualificação \emph{não implica,
 por si só}, vedação ao uso em pesquisa com microdados públicos e
 anonimizados: a própria LGPD prevê hipótese de tratamento para realização
 de estudos por órgão de pesquisa (art.~7\textordmasculine{}, IV, e
@@ -1281,7 +1291,11 @@ A Tabela~\ref{tab:trilhas} resume a estratégia.
     \end{tabular}
     \vspace{0.1cm}
     \begin{flushleft}
-    {\footnotesize Fonte: elaborada pelo autor.}
+    {\footnotesize Fonte: elaborada pelo autor.\\
+    Nota: MAE (\textit{Mean Absolute Error}): erro médio absoluto. RMSE
+    (\textit{Root Mean Squared Error}): raiz do erro quadrático médio.
+    R\textsuperscript{2}: coeficiente de determinação. sMAPE (\textit{symmetric
+    Mean Absolute Percentage Error}): erro percentual absoluto médio simétrico.}
     \end{flushleft}
     \label{tab:trilhas}
 \end{table}
@@ -1635,8 +1649,9 @@ bloco não acrescenta poder preditivo.
 \label{sec:cronograma}
 
 A execução das etapas restantes está prevista para o período letivo 2026.2,
-cujo calendário acadêmico foi fixado pela Resolução CONSEPE
-n\textordmasculine{} 44/2025. O período tem início em \textbf{28 de agosto
+cujo calendário acadêmico foi fixado pela Resolução
+n\textordmasculine{} 44/2025 do Conselho Superior de Ensino, Pesquisa e
+Extensão (CONSEPE) da Universidade Federal da Paraíba. O período tem início em \textbf{28 de agosto
 de 2026} e término em \textbf{16 de dezembro de 2026}, com o Encontro
 Unificado do Campus~I entre 23 e 27 de novembro. O depósito da versão final
 está previsto para \textbf{4 de dezembro de 2026}, de modo a assegurar prazo
