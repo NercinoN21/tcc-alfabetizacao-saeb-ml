@@ -1,0 +1,4 @@
+,fração de escolas
+Linear (regressão quantílica L1),0.14049586776859505
+XGBoost (quantile),0.03305785123966942
+LightGBM (quantile),0.14049586776859505

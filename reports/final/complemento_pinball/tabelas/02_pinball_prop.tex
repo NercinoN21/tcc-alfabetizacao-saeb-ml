@@ -1,0 +1,13 @@
+\begin{tabular}{lrrrr}
+\toprule
+ & Baseline (quantil empírico) & Linear (regressão quantílica L1) & XGBoost (quantile) & LightGBM (quantile) \\
+\midrule
+0.100000 & 0.035 & 0.030 & 0.033 & 0.031 \\
+0.250000 & 0.068 & 0.059 & 0.059 & 0.063 \\
+0.500000 & 0.095 & 0.081 & 0.082 & 0.082 \\
+0.750000 & 0.079 & 0.068 & 0.072 & 0.074 \\
+0.900000 & 0.043 & 0.043 & 0.043 & 0.042 \\
+média dos quantis & 0.064 & 0.056 & 0.058 & 0.059 \\
+ganho vs baseline (\%) & 0.000 & 12.307 & 9.715 & 8.437 \\
+\bottomrule
+\end{tabular}
