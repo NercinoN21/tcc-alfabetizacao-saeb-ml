@@ -1166,20 +1166,25 @@ distintas da mesma variável de origem.
 As quatro bases integradas somam 591 colunas reais. Cada uma foi avaliada
 individualmente quanto à sua inclusão como preditor, com a decisão e a
 justificativa registradas em um módulo de configuração que funciona como
-fonte única de verdade para todo o pipeline (\texttt{feature\_config.py}),
+fonte única de verdade para todo o pipeline (\texttt{dicionario.py},
+exportado como tabela versionada a cada execução),
 evitando divergência entre o código de modelagem e a documentação da base.
 Além do vazamento descrito acima, foram excluídas: colunas de texto aberto;
 colunas com mais de 30\% de ausência na amostra filtrada; e a variável
 \texttt{ESTRATO}, um metadado do desenho amostral \cite{inep2024amostra}
 que se comportava, em testes preliminares, como quase-identificador de
 escola e dominava desproporcionalmente a importância agregada de SHAP, sem
-corresponder a um fator de contexto substantivo. O processo resultou em 332
-variáveis preditoras candidatas, cada uma codificada de acordo com o tipo
-de resposta inferido a partir do dicionário de dados do Inep como binária,
-ordinal (tipo Likert), numérica ou nominal, classificadas em um de dezenas
-de grupos temáticos (por exemplo, ``práticas pedagógicas em sala de aula''
-ou ``clima escolar''), utilizados na Seção~\ref{sec:xai} para agregar a
-importância de SHAP por tema, e não apenas por coluna isolada. Com a adoção
+corresponder a um fator de contexto substantivo. O processo resultou em 363
+variáveis preditoras candidatas, cada uma codificada como binária, ordinal
+(tipo Likert), numérica ou nominal a partir da coluna de tipo do dicionário
+do Inep e do texto das opções de resposta (nunca da posição da letra) e
+classificada em um de dezenas de grupos temáticos (por exemplo,
+``práticas pedagógicas em sala de aula'' ou ``clima escolar''). Esses grupos
+permitem agregar a importância de SHAP por tema, além da leitura por coluna
+isolada (Seção~\ref{sec:xai}). Nas escalas que incluem opções alheias à
+escala (``Não tem'', ``Não uso'', ``Não se aplica'', ``Não sei''), essas
+opções geram um indicador binário próprio, em vez de serem ordenadas
+artificialmente junto aos demais níveis. Com a adoção
 da escola como unidade de análise, o mesmo módulo de configuração passa a
 registrar, para cada variável de nível turma, a regra de agregação por
 escola descrita na Seção~\ref{sec:agregacao}.
