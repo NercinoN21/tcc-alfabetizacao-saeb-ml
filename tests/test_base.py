@@ -1,5 +1,6 @@
 """Integridade da base por escola (agregações e desfechos)."""
 import numpy as np
+import pandas as pd
 import pytest
 
 from saeb_alfab import base as B
@@ -56,3 +57,18 @@ def test_indicadores_de_ausencia_do_questionario(micro, dic_prof, dic_dir):
     assert base.loc[2, "DIR_SEM_QUESTIONARIO"] == 1.0 and base.loc[1, "DIR_SEM_QUESTIONARIO"] == 0.0
     assert (base.PROF_SEM_QUESTIONARIO == 0).all()
     assert set(base.PROF_SEM_QUESTIONARIO.unique()) <= {0.0, 1.0}
+
+
+def test_deff_kish_valores_conhecidos():
+    from saeb_alfab.robustez import deff_kish
+    assert deff_kish([2.0, 2.0, 2.0]) == pytest.approx(1.0)            # pesos iguais: sem perda
+    assert deff_kish([1, 1, 1, 3]) == pytest.approx(4 * 12 / 36)        # n·Σw²/(Σw)²
+
+
+def test_diagnostico_pesos_contrasta_medias():
+    from saeb_alfab.robustez import diagnostico_pesos
+    pop = pd.DataFrame({"PESO": [1.0, 1.0, 2.0], "PESO_ESCOLA": [1.0, np.nan, 2.0],
+                        "Y_PROP_ALFAB": [0.2, 0.4, 0.6], "Y_PROF_MEDIA": [700, 720, 760], "ESC_INSE": [3, 4, 5]})
+    resumo, medias = diagnostico_pesos(pop)
+    assert medias.loc["Y_PROP_ALFAB", "média ponderada"] == pytest.approx((0.2 + 0.4 + 1.2) / 4)
+    assert resumo.loc["pesos imputados (sem questionário do diretor, %)", "valor"] == pytest.approx(100 / 3)

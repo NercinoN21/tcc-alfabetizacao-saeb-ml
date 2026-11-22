@@ -4,6 +4,7 @@
     uv run python -m saeb_alfab.pipeline --modo completo    # execução final (vai para o texto)
     uv run python -m saeb_alfab.pipeline --ate modelagem    # para numa etapa: base | modelagem | explicabilidade | robustez
     uv run python -m saeb_alfab.pipeline --apenas pinball   # só a base + a perda de quantil (análise complementar)
+    uv run python -m saeb_alfab.pipeline --apenas pesos     # só a base + o diagnóstico dos pesos amostrais
 
 Cada execução grava em reports/execucoes/<data>_<modo>_s<semente>/ (tabelas .csv/.tex, figuras, run_info.json
 com checksums dos dados, versões e commit do git). Nada sobrescreve execuções anteriores.
@@ -32,8 +33,8 @@ from .avaliacao import (comparar_no_teste, competir, competir_quantilica, cv_rep
 from .config import RAIZ, Config
 from .explicabilidade import estabilidade, lime_vs_shap, shap_por_tema, shap_por_variavel
 from .modelos import LINEAR, MODELOS, X_de, particao, pipeline_de, selecionar_variaveis, usa_peso_n
-from .robustez import (ablacao, auditar_equidade, construir_base_turma, sensibilidades, teste_proxies,
-                       tres_execucoes)
+from .robustez import (ablacao, auditar_equidade, construir_base_turma, diagnostico_pesos, sensibilidades,
+                       teste_proxies, tres_execucoes)
 
 ETAPAS = ["base", "modelagem", "explicabilidade", "robustez"]
 TRILHAS = {"prop": ("Y_PROP_ALFAB", "Proporção de alfabetizados"), "prof": ("Y_PROF_MEDIA", "Proficiência média")}
@@ -115,7 +116,8 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
     info.update(origem_dados=origem, escolas_pop=len(pop), escolas_universo=len(universo), variaveis_A=len(ms_A),
                 variaveis_B=len(ms_B))
     print(f"[base] pop={len(pop)} escolas · universo={len(universo)} · variáveis A={len(ms_A)} B={len(ms_B)}")
-    if ate == "base":
+    _pesos(out, pop)
+    if ate == "base" or apenas == "pesos":
         return _fechar(out, info, t0)
 
     # ---------------------------------------------------------------- 2. modelagem (cenário A e B)
@@ -192,6 +194,12 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
     return _fechar(out, info, t0)
 
 
+def _pesos(out: Saida, pop) -> None:
+    resumo, medias = diagnostico_pesos(pop)
+    out.tabela(resumo, "01_pesos_diagnostico")
+    out.tabela(medias, "01_pesos_medias")
+
+
 def _pinball(out: Saida, pop, ms, alvo, tr, idx_tr, idx_te, cfg: Config) -> None:
     perdas, ic, diag, cruz = competir_quantilica(pop, ms, alvo, tr, idx_tr, idx_te, cfg)
     out.tabela(perdas, f"02_pinball_{tr}")
@@ -217,7 +225,7 @@ def main(argv=None):
     ap.add_argument("--modo", choices=["rapido", "completo"], default=None)
     ap.add_argument("--ate", choices=ETAPAS, default="robustez")
     ap.add_argument("--seed", type=int, default=None)
-    ap.add_argument("--apenas", choices=["pinball"], default=None)
+    ap.add_argument("--apenas", choices=["pinball", "pesos"], default=None)
     a = ap.parse_args(argv)
     cfg = Config()
     if a.modo:

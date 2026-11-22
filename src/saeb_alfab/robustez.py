@@ -114,6 +114,34 @@ def sensibilidades(pop, base_todas, base_interna, base_turma, meta, alvo, trilha
     return pd.DataFrame(linhas).set_index(["eixo", "variante"])
 
 
+def deff_kish(w) -> float:
+    """Efeito de desenho aproximado pela variação dos pesos: deff = n·Σw² / (Σw)² (1 = pesos iguais)."""
+    w = np.asarray(w, float)
+    return float(len(w) * np.sum(w ** 2) / np.sum(w) ** 2)
+
+
+def diagnostico_pesos(pop, variaveis=("Y_PROP_ALFAB", "Y_PROF_MEDIA", "ESC_INSE")) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Diagnóstico do peso amostral da escola (Seção 3.3): dispersão, deff de Kish, escolas efetivas e
+    contraste entre média ponderada e não ponderada (Solon; Haider; Wooldridge, 2015)."""
+    from scipy.stats import spearmanr
+    w = pop["PESO"].values
+    deff = deff_kish(w)
+    resumo = pd.Series({
+        "escolas": len(w), "pesos imputados (sem questionário do diretor, %)": 100 * float(pop["PESO_ESCOLA"].isna().mean()),
+        "coeficiente de variação do peso": float(np.std(w) / np.mean(w)), "deff de Kish": deff,
+        "escolas efetivas (n / deff)": len(w) / deff, "razão peso máximo / mínimo": float(w.max() / w.min()),
+        "razão p99 / p1": float(np.quantile(w, .99) / np.quantile(w, .01))}, name="valor").to_frame()
+    linhas = []
+    for v in variaveis:
+        x = pop[v].values.astype(float)
+        ok = ~np.isnan(x)
+        m, mp = float(x[ok].mean()), float(np.average(x[ok], weights=w[ok]))
+        linhas.append({"variável": v, "média sem peso": m, "média ponderada": mp,
+                       "diferença relativa (%)": 100 * (mp / m - 1),
+                       "Spearman peso × variável": float(spearmanr(w[ok], x[ok]).statistic)})
+    return resumo, pd.DataFrame(linhas).set_index("variável")
+
+
 def teste_proxies(pop, meta_sel, cfg) -> pd.DataFrame:
     """Dá para recuperar cor/raça a partir das variáveis do cenário A? (excluir ≠ remover a informação)"""
     from lightgbm import LGBMClassifier, LGBMRegressor
