@@ -7,21 +7,19 @@
 
 \documentclass[12pt, openright,oneside, a4paper, english, brazil]{abntex2}
 
-\usepackage[brazilian,hyperpageref]{backref}
-% Texto das páginas de citação na lista de referências (modelo do abnTeX2)
-\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
-\renewcommand{\backref}{}
-\renewcommand*{\backrefalt}[4]{%
-  \ifcase #1 Nenhuma citação no texto.%
-  \or Citado na página #2.%
-  \else Citado #1 vezes nas páginas #2.%
-  \fi}
-\usepackage[alf]{abntex2cite}
 \usepackage{lipsum}
 \usepackage{lmodern}
 \renewcommand{\sfdefault}{ppl}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage[autostyle]{csquotes}
+% Citações e referências: biblatex-abnt (ABNT NBR 10520:2023 e NBR 6023). Compilar com pdfLaTeX + biber.
+\usepackage[backend=biber, style=abnt, backref=true, extradate, sortcites=true]{biblatex}
+\DefineBibliographyStrings{brazilian}{backrefpage={Citado na página}, backrefpages={Citado nas páginas}}
+\DefineBibliographyStrings{brazil}{backrefpage={Citado na página}, backrefpages={Citado nas páginas}}
+\addbibresource{referencias.bib}
+% Compatibilidade: o texto usa \citeonline (abntex2cite); no biblatex-abnt o equivalente é \textcite
+\providecommand{\citeonline}{\textcite}
 \usepackage{ctable}
 \usepackage{multirow}
 \usepackage{array}

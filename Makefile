@@ -25,12 +25,14 @@ checksums:       ## confere data/raw contra data/raw/SHA256SUMS
 dados-snapshot:  ## restaura data/raw a partir do snapshot congelado (mesmos dados do TCC; não depende do Inep)
 	cd data/snapshot && shasum -a 256 -c SHA256SUMS && tar -xJf saeb2023_2ef_snapshot.tar.xz -C ../raw && cd ../raw && shasum -a 256 -c SHA256SUMS
 
-# O Tectonic usa o motor XeTeX; a monografia é configurada para pdfTeX (fontenc T1). O arquivo intermediário
-# (fora do git) faz o "º" digitado usar \textordmasculine. Limitação: no PDF do XeTeX a busca por palavras com
-# ligadura (fi, fl) pode falhar. Nada da monografia é alterado. O PDF oficial de depósito sai do pdfTeX (Overleaf).
-pdf:             ## compila a monografia com Tectonic (leve; brew install tectonic) → monografia/build/projeto.pdf
-	cd monografia && printf '%s\n' '\catcode`\º=\active' '\defº{\textordmasculine}' '\input{projeto}' > _compilar_xetex.tex
-	cd monografia && tectonic -X compile _compilar_xetex.tex --outdir build && mv build/_compilar_xetex.pdf build/projeto.pdf
+# As referências usam biblatex-abnt (ABNT NBR 10520:2023 e NBR 6023), que exige pdfLaTeX + biber de um TeX Live
+# atual, o mesmo motor do Overleaf. Sem TeX Live no sistema, basta o TinyTeX (https://yihui.org/tinytex/) com os
+# pacotes do template. TEXBIN aponta para os binários do TinyTeX quando ele existe; com TeX Live no PATH, fica vazio.
+TEXBIN ?= $(firstword $(wildcard $(HOME)/Library/TinyTeX/bin/*/) $(wildcard $(HOME)/.TinyTeX/bin/*/))
+COMPILAR = PATH="$(TEXBIN):$$PATH" pdflatex -interaction=nonstopmode -halt-on-error -output-directory=build projeto.tex > /dev/null
+
+pdf:             ## compila a monografia (pdfLaTeX + biber) → monografia/build/projeto.pdf
+	cd monografia && mkdir -p build && $(COMPILAR) && PATH="$(TEXBIN):$$PATH" biber --quiet build/projeto && $(COMPILAR) && $(COMPILAR) && $(COMPILAR)
 	@echo "PDF: monografia/build/projeto.pdf"
 
 -include Makefile.local
