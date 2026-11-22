@@ -1189,6 +1189,22 @@ da escola como unidade de análise, o mesmo módulo de configuração passa a
 registrar, para cada variável de nível turma, a regra de agregação por
 escola descrita na Seção~\ref{sec:agregacao}.
 
+Duas decisões complementam esse conjunto. Primeiro, foram retirados da
+especificação principal dois itens que medem a percepção do respondente
+sobre o próprio desfecho: a concordância do professor e do diretor com a
+afirmação de que a maioria dos estudantes apresenta problemas de
+aprendizagem (\texttt{PROF\_TX\_Q080} e \texttt{DIR\_TX\_Q030}). Como a
+resposta tende a refletir o desempenho já observado, esses itens carregam
+risco de causalidade reversa e transformariam a ordenação de importâncias
+em um termômetro do próprio alvo. Uma análise de sensibilidade os
+reintroduz para dimensionar seu efeito (Seção~\ref{sec:robustez}). Segundo, as escolas sem
+questionário apresentam desfechos médios um pouco menores que as demais,
+embora as diferenças não alcancem significância estatística ao nível de
+5\%. Como precaução, foram incluídos dois
+indicadores binários de escola sem questionário de professor e sem
+questionário de diretor, de modo que o modelo distinga a não resposta de
+uma resposta mediana, que é o valor atribuído pela imputação.
+
 \subsection{Considerações éticas e delimitação de escopo}
 \label{sec:etica}
 
