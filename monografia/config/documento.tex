@@ -7,7 +7,15 @@
 
 \documentclass[12pt, openright,oneside, a4paper, english, brazil]{abntex2}
 
-\usepackage[brazilian,hyperpageref]{}
+\usepackage[brazilian,hyperpageref]{backref}
+% Texto das páginas de citação na lista de referências (modelo do abnTeX2)
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+\renewcommand{\backref}{}
+\renewcommand*{\backrefalt}[4]{%
+  \ifcase #1 Nenhuma citação no texto.%
+  \or Citado na página #2.%
+  \else Citado #1 vezes nas páginas #2.%
+  \fi}
 \usepackage[alf]{abntex2cite}
 \usepackage{lipsum}
 \usepackage{lmodern}
@@ -34,6 +42,9 @@
 \usepackage{lastpage}
 
 \usepackage{array}
+\setlength{\emergencystretch}{3em} % folga para evitar linhas estourando a margem
+% Colunas alinhadas pelo TOPO (p), sem \hspace{0pt}: evita o desalinhamento das células
+\newcolumntype{P}[1]{>{\raggedright\let\newline\\\arraybackslash}p{#1}}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}

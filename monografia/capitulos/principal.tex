@@ -160,7 +160,7 @@ causais entre elas (Seção~\ref{sec:registros-inferenciais}).
     \centering
     \footnotesize
     \caption{Sub-perguntas de pesquisa e hipóteses testáveis}
-    \begin{tabular}{L{0.5cm}L{3.6cm}L{5.3cm}L{2.6cm}}
+    \begin{tabular}{P{0.5cm}P{3.6cm}P{5.3cm}P{2.6cm}}
         \toprule
         \textbf{\#} & \textbf{Sub-pergunta} & \textbf{Hipótese} & \textbf{Grupo temático} \\
         \midrule
@@ -169,16 +169,16 @@ causais entre elas (Seção~\ref{sec:registros-inferenciais}).
         de formação continuada em alfabetização/letramento, experiência
         docente e práticas pedagógicas figuram entre as de maior
         importância preditiva. & Professor: formação, experiência e
-        prática \\
+        prática \\ \addlinespace
         H2 & Características da escola e da gestão escolar apresentam
         contribuição preditiva para a proficiência média? & Variáveis de
         clima e segurança escolar e de gestão e liderança pedagógica do
         diretor estão associadas à proficiência média da escola. & Escola:
-        clima, segurança e gestão \\
+        clima, segurança e gestão \\ \addlinespace
         H3 & O INSE permanece entre os preditores mais importantes na
         presença das demais variáveis? & Mesmo na presença das variáveis de
         professor e diretor, o INSE figura entre as variáveis de maior
-        importância em todos os modelos. & Nível socioeconômico \\
+        importância em todos os modelos. & Nível socioeconômico \\ \addlinespace
         H4 & O contexto geográfico carrega informação própria? & Variáveis
         de região, unidade da federação e localização apresentam
         contribuição preditiva não redutível à do INSE. & Contexto
@@ -859,7 +859,7 @@ integradas em uma única base analítica, descrita a seguir.
 \textbf{Chaves e filtros de integração.} A junção das quatro fontes segue
 chaves e filtros distintos, resumidos na Tabela~\ref{tab:fontes-dados}. O
 questionário do professor é unido pela chave \texttt{ID\_TURMA},
-restrito a \texttt{ID\_SERIE == 2} e \texttt{SQ\_QUESTIONARIO == 5}, código
+restrito a \texttt{ID\_SERIE~==~2} e \texttt{SQ\_QUESTIONARIO~==~5}, código
 que o dicionário de dados do Inep identifica como o bloco \emph{Professor
 Único, 2º e 5º ano}. O primeiro filtro seleciona os registros referentes ao
 2º ano. O segundo seleciona, entre os múltiplos blocos de
@@ -873,7 +873,7 @@ por \texttt{ID\_TURMA}, e o resultado dessa verificação será reportado na
 versão final do trabalho.
 
 O questionário do diretor é unido pela chave \texttt{ID\_ESCOLA}, também
-restrito a \texttt{ID\_SERIE == 2}, em relação um-para-um com a escola,
+restrito a \texttt{ID\_SERIE~==~2}, em relação um-para-um com a escola,
 cobrindo 95,4\% das escolas da base analítica. Já \texttt{TS\_ESCOLA},
 única fonte do Indicador de Nível Socioeconômico (INSE), cobre
 exclusivamente a rede pública: das 1.107 escolas com alunos de proficiência
@@ -899,13 +899,13 @@ II.
     \centering
     \footnotesize
     \caption{Fontes de microdados do Saeb 2023 utilizadas e critérios de integração}
-    \begin{tabular}{L{2.6cm}L{1.7cm}L{2.1cm}L{3.1cm}L{3.4cm}}
+    \begin{tabular}{P{2.9cm}P{1.6cm}P{2.3cm}P{2.9cm}P{3.2cm}}
         \toprule
         \textbf{Fonte} & \textbf{Unidade de observação} & \textbf{Chave de junção} & \textbf{Cobertura} & \textbf{Papel na base analítica} \\
         \midrule
-        TS\_ALUNO\_2EF & Aluno & --- & Universo do 2º ano & Desfechos (agregados por escola) e identificadores de vínculo \\
-        TS\_PROFESSOR & Turma & ID\_TURMA & Universo (público+privado) & Preditores de perfil e prática docente (agregados por escola) \\
-        TS\_DIRETOR & Escola & ID\_ESCOLA & 95,4\% das escolas da base & Preditores de gestão escolar \\
+        TS\_ALUNO\_2EF & Aluno & --- & Universo do 2º ano & Desfechos (agregados por escola) e identificadores de vínculo \\ \addlinespace
+        TS\_PROFESSOR & Turma & ID\_TURMA & Universo (público+privado) & Preditores de perfil e prática docente (agregados por escola) \\ \addlinespace
+        TS\_DIRETOR & Escola & ID\_ESCOLA & 95,4\% das escolas da base & Preditores de gestão escolar \\ \addlinespace
         TS\_ESCOLA & Escola & ID\_ESCOLA & Só rede pública (92,1\% das escolas públicas) & Única fonte do INSE \\
         \bottomrule
     \end{tabular}
@@ -959,7 +959,7 @@ nível do aluno, aplicados \emph{antes} da agregação: consistência com o
 Censo Escolar, preenchimento adequado do questionário e proficiência em
 Língua Portuguesa calculável pela TRI. Como \texttt{TS\_ESCOLA} é a única
 fonte do INSE e cobre apenas a rede pública, o escopo principal deste
-trabalho é adicionalmente restrito a \texttt{IN\_PUBLICA == 1}. Para
+trabalho é adicionalmente restrito a \texttt{IN\_PUBLICA~==~1}. Para
 avaliar se essa restrição altera as conclusões, execuções alternativas
 descritas na Seção~\ref{sec:robustez} repetem a trilha da proporção de
 alfabetizados sobre o universo de escolas públicas e privadas, sem a
@@ -1269,7 +1269,7 @@ pode ser considerado útil. A Tabela~\ref{tab:trilhas} resume a estratégia.
     \centering
     \footnotesize
     \caption{Trilhas de modelagem, alvos, modelos e métricas de avaliação}
-    \begin{tabular}{L{2.2cm}L{2.2cm}L{3.0cm}L{1.6cm}L{3.2cm}}
+    \begin{tabular}{P{2.2cm}P{2.2cm}P{3.0cm}P{1.6cm}P{3.2cm}}
         \toprule
         \textbf{Trilha} & \textbf{Alvo (nível escola)} & \textbf{Modelos} & \textbf{Métrica principal} & \textbf{Métricas complementares} \\
         \midrule
@@ -1277,7 +1277,7 @@ pode ser considerado útil. A Tabela~\ref{tab:trilhas} resume a estratégia.
         $\in [0,1]$ & \textit{Baseline}: média/mediana. Referência linear:
         Elastic Net e \textit{fractional logit}. \textit{Ensembles}: Random
         Forest, XGBoost, LightGBM & MAE & RMSE, R\textsuperscript{2},
-        análise de resíduos, aderência das predições ao intervalo $[0,1]$ \\
+        análise de resíduos, aderência das predições ao intervalo $[0,1]$ \\ \addlinespace
         Proficiência média & Proficiência média em LP (contínua) &
         \textit{Baseline}: média/mediana. Referência linear: Regressão
         Linear com Elastic Net. \textit{Ensembles}: Random Forest, XGBoost,
