@@ -1055,12 +1055,11 @@ todos os resultados previstos.
 
 \textbf{Queda do tamanho amostral e das métricas.} A base analítica passa
 de dezenas de milhares de linhas-aluno para algumas centenas de
-linhas-escola (na coorte preliminar, em torno de 500). Isso impõe uma
-consequência direta à engenharia de variáveis: com 332 preditoras
-candidatas para poucas centenas de observações, a razão
-preditores/observações torna a poda prévia de variáveis (executada dentro
-das dobras de validação, Seção~\ref{sec:protocolo}) uma etapa necessária, e
-não opcional, sob pena de sobreajuste mesmo com regularização. Além disso,
+linhas-escola (604 na base final). Isso impõe uma consequência direta à
+modelagem: com 363 preditoras candidatas para algumas centenas de
+observações, a regularização dos modelos e a verificação explícita do valor
+incremental de cada bloco de variáveis (Seção~\ref{sec:robustez}) tornam-se
+etapas obrigatórias, sob pena de sobreajuste. Além disso,
 é esperado que as métricas de desempenho reportadas sejam
 \emph{substancialmente inferiores} às que um protocolo com partição
 aleatória por aluno produziria, e isso não é uma deficiência do desenho,
