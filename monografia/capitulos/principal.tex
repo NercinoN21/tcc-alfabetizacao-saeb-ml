@@ -824,8 +824,8 @@ informação e as considerações éticas (Seção~\ref{sec:etica}). A
 Seção~\ref{sec:estrategia-empirica} formaliza a estratégia empírica de
 comparação de modelos nas duas trilhas de regressão e o protocolo
 experimental (Seção~\ref{sec:protocolo}). A
-Seção~\ref{sec:testes-significancia} descreve os testes de significância
-estatística pareados entre os modelos de melhor desempenho. A
+Seção~\ref{sec:testes-significancia} descreve a regra de seleção do modelo
+final e os testes de significância pareados. A
 Seção~\ref{sec:xai} detalha o protocolo de explicabilidade (XAI), a
 Seção~\ref{sec:robustez} descreve a checagem de robustez frente à restrição
 da análise à rede pública, e a Seção~\ref{sec:cronograma} apresenta o
@@ -1431,34 +1431,51 @@ a aderência das predições ao intervalo $[0,1]$, automática no
 \textit{fractional logit} mas não garantida nos demais modelos, cujas
 predições fora do intervalo serão truncadas e reportadas.
 
-\section{Testes de significância estatística entre os modelos}
+\section{Seleção do modelo final e testes de significância}
 \label{sec:testes-significancia}
 
 Para evitar que diferenças pequenas e possivelmente aleatórias entre
-métricas sejam interpretadas como superioridade real de um algoritmo sobre
-outro, os dois modelos de melhor desempenho de cada trilha são comparados
-por um teste de significância pareado.
+métricas sejam interpretadas como superioridade real de um algoritmo, a
+escolha do modelo explicado em cada trilha segue uma regra definida antes
+da estimação e aplicada exclusivamente ao conjunto de treino. O melhor
+\textit{ensemble} (menor MAE de validação cruzada) é confrontado com o
+modelo linear de referência nas \emph{mesmas} dobras de uma validação
+cruzada de 5 dobras repetida cinco vezes. Para cada dobra $k$, calcula-se
+a diferença $d_k = \text{MAE}_{\text{linear},k} - \text{MAE}_{\text{ensemble},k}$,
+e o intervalo de confiança de 95\% da média de $d_k$ é obtido pelo teste $t$
+corrigido de \citeonline{nadeau2003inference}, que ajusta a variância
+estimada pela dependência entre dobras que compartilham observações de
+treino:
+\begin{equation}
+    \widehat{\mathrm{Var}}(\bar{d}) = \left(\frac{1}{J} + \frac{n_{\text{val}}}{n_{\text{trein}}}\right) s^2_d,
+    \label{eq:nadeau-bengio}
+\end{equation}
+em que $J$ é o número de dobras avaliadas e $s^2_d$ a variância amostral das
+diferenças. O \textit{ensemble} é selecionado somente se (i) o limite
+inferior do intervalo for positivo e (ii) o ganho relativo médio,
+$\bar{d}/\overline{\text{MAE}}_{\text{linear}}$, for de pelo menos 2\%,
+margem que representa a menor melhoria considerada relevante na prática.
+Caso contrário, seleciona-se o modelo linear, mais simples e
+intrinsecamente interpretável, em coerência com a objeção de
+\citeonline{rudin2019stop} discutida na Seção~\ref{sec:xai-revisao}.
 
-Uma cautela metodológica governa esse procedimento. Selecionar os dois
-modelos e testar a diferença entre eles \emph{no mesmo conjunto} torna o
-teste otimista: a própria seleção já explorou a variação amostral daquele
-conjunto, de modo que o valor-$p$ resultante não tem a interpretação
-frequentista usual. Por isso, a seleção dos dois melhores modelos de cada
-trilha é feita \textbf{pelo desempenho na validação cruzada}, e o teste
-pareado é aplicado depois, sobre o conjunto de teste final, que não
-participou da seleção. O resultado do teste é reportado como evidência
-descritiva sobre a magnitude da diferença, e não como critério isolado de
-decisão: quando dois modelos apresentam desempenho estatisticamente
-indistinguível, a preferência recai sobre o mais simples e interpretável,
-tipicamente o modelo linear de referência.
+O conjunto de teste não participa dessa decisão. Concluída a seleção, ele é
+utilizado uma única vez para reportar o desempenho do modelo escolhido, com
+intervalo de confiança \textit{bootstrap} de 95\% para o MAE, e, de forma
+descritiva, a diferença de erro entre o melhor \textit{ensemble} e o modelo
+linear nas mesmas escolas, acompanhada do teste não paramétrico de
+\textbf{Wilcoxon para amostras pareadas} sobre os erros absolutos. Com
+121 escolas de teste, esse teste tem poder limitado para detectar
+diferenças pequenas. Por isso, a ausência de significância não é tomada
+como evidência de equivalência entre os modelos, e a decisão segue a regra
+de seleção definida no treino.
 
-Como as duas trilhas são de regressão, o teste adotado em ambas é o teste
-não paramétrico de \textbf{Wilcoxon para amostras pareadas}, aplicado sobre
-os erros absolutos de predição dos dois modelos nas mesmas escolas do
-conjunto de teste. O pareamento por escola respeita a estrutura da base
-(cada escola é uma observação independente na partição) e dispensa a
-agregação de erros por grupo que o desenho anterior, no nível do aluno,
-exigiria.
+Na trilha de proficiência média, reporta-se ainda, como métrica
+complementar, o erro percentual absoluto médio simétrico,
+$\text{sMAPE} = \frac{100}{n}\sum_{e} \frac{2\,|y_e - \hat{y}_e|}{|y_e| + |\hat{y}_e|}$,
+que expressa o erro em termos relativos à escala do desfecho. Na trilha de
+proporção, o sMAPE não é utilizado porque se torna instável quando a
+proporção observada é igual ou próxima de zero.
 
 \section{Explicabilidade dos modelos (XAI)}
 \label{sec:xai}
