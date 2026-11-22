@@ -30,7 +30,7 @@ make completo
 | Prefixo | Conteúdo |
 |---|---|
 | `00_` | dicionário de variáveis: tipo, escala, mapa de codificação, tema |
-| `01_` | funil de cobertura, cobertura dos blocos e decisão sobre cada variável |
+| `01_` | funil de cobertura, cobertura dos blocos e decisão sobre cada variável. O diagnóstico dos pesos amostrais está em `complemento_pesos/` |
 | `02_` | comparação de modelos e seleção do modelo final. A perda de quantil (pinball) está em `complemento_pinball/` |
 | `03_` | explicabilidade: SHAP por variável e por tema, estabilidade e comparação LIME × SHAP |
 | `04_` | valor incremental dos blocos (ablação), robustez, sensibilidades, proxies e equidade |
