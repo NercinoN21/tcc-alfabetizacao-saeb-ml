@@ -97,3 +97,42 @@ def test_itens_de_percepcao_do_desfecho_fora_por_padrao():
     sensibilidade, _ = selecionar_variaveis(df, meta, excluir_percepcao=False)
     assert principal.variavel.tolist() == ["PROF_TX_Q081"]
     assert set(sensibilidade.variavel) == {"PROF_TX_Q080", "PROF_TX_Q081"}
+
+
+def test_perda_pinball_valores_conhecidos():
+    from saeb_alfab.avaliacao import perda_pinball
+    # u = y − q: acima do quantil pesa τ, abaixo pesa (1 − τ)
+    assert np.allclose(perda_pinball([10, 10], [8, 12], 0.9), [0.9 * 2, 0.1 * 2])
+    assert np.allclose(perda_pinball([1.0], [1.0], 0.1), [0.0])
+
+
+def test_ic_pinball_pareado_detecta_modelo_melhor():
+    from saeb_alfab.avaliacao import BASE_QUANTIL, ic_bootstrap_pinball
+    rng = np.random.default_rng(0)
+    y = rng.normal(size=300)
+    quantis = (0.1, 0.5, 0.9)
+    from scipy.stats import norm
+    preds = {BASE_QUANTIL: {t: np.full(300, 0.0) for t in quantis},
+             "bom": {t: np.full(300, norm.ppf(t)) for t in quantis}}
+    ic = ic_bootstrap_pinball(y, preds, quantis, n_boot=300, seed=1)
+    media = ic.loc[("bom", "média dos quantis")]
+    assert media["IC95_sup"] < 0 and media["ganho_vs_baseline_%"] > 0   # o quantil verdadeiro vence a constante 0
+    assert len(ic) == len(quantis) + 1
+
+
+def test_competir_quantilica_linear_nao_colapsa_com_sinal_forte(dados):
+    """Regressão do bug da grade de penalidades: com sinal forte, a regressão quantílica L1 precisa
+    manter coeficientes nas pontas (antes, a grade grossa podia levá-la ao só-intercepto)."""
+    from dataclasses import replace
+    from saeb_alfab.avaliacao import competir_quantilica
+    from saeb_alfab.config import Config
+    df, meta = dados
+    df = df.copy()
+    df["Y_PROF_MEDIA"] = 750 + 30 * df.B + np.random.default_rng(2).normal(0, 3, len(df))
+    ms = meta[meta.variavel.isin(["A", "B", "C"])]
+    cfg = replace(Config(), modo="rapido")
+    perdas, ic, diag, cruz = competir_quantilica(df, ms, "Y_PROF_MEDIA", "prof", df.index[:90], df.index[90:], cfg,
+                                                 quantis=(0.1, 0.9))
+    assert (diag["linear: coeficientes ≠ 0"] > 0).all()
+    assert perdas.loc["ganho vs baseline (%)", "Linear (regressão quantílica L1)"] > 50
+    assert set(cruz.index) == {"Linear (regressão quantílica L1)", "XGBoost (quantile)", "LightGBM (quantile)"}

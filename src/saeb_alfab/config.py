@@ -68,5 +68,9 @@ class Config:
         return 3 if self.rapido else 20
 
     @property
+    def n_iter_quantil(self) -> int:    # busca aleatória por τ das árvores com perda de quantil
+        return 3 if self.rapido else 15
+
+    @property
     def n_boot(self) -> int:
         return 200 if self.rapido else 2000

@@ -6,7 +6,8 @@ REGRA DE SELEÇÃO DO MODELO FINAL (Seção 3.7, agora implementada como escrita
   dobras sobrepostas: Var = s²_d · (1/J + n_val/n_trein).
   O ENSEMBLE é selecionado sse  IC_inf > 0  E  média(d)/MAE_linear ≥ margem_equivalencia.
   Caso contrário, seleciona-se o LINEAR (mais simples e intrinsecamente interpretável).
-O conjunto de teste é tocado uma única vez, para reportar o modelo selecionado (com IC bootstrap).
+O conjunto de teste é tocado uma única vez, para reportar o modelo selecionado (com IC bootstrap). A perda de
+quantil (pinball) é análise complementar: também reporta no teste, sem influir na seleção.
 """
 from __future__ import annotations
 
@@ -172,40 +173,94 @@ def comparar_no_teste(y, p_a, p_b, n_boot: int, seed: int) -> dict:
 
 
 # ------------------------------------------------------------------ perda de quantil (pinball) — pedido do avaliador (p. 17)
-def competir_quantilica(base, meta_sel, alvo, trilha, idx_tr, idx_te, params: dict, cfg: Config, quantis=QUANTIS):
-    """Mean pinball loss em vários τ — usa TODA a amostra (não reduz aos extremos). Baseline = quantil
-    empírico do treino. Árvores reaproveitam os hiperparâmetros vencedores da trilha."""
-    from lightgbm import LGBMRegressor
+PENALIDADES_QUANTIL = tuple(np.round(np.geomspace(0.005, 0.3, 12), 4))   # L1 da regressão quantílica (ver docstring)
+MODELOS_QUANTIL = ("Linear (regressão quantílica L1)", "XGBoost (quantile)", "LightGBM (quantile)")
+BASE_QUANTIL = "Baseline (quantil empírico)"
+
+
+def perda_pinball(y, q, tau: float) -> np.ndarray:
+    """Perda de quantil por observação: ρ_τ(u) = u·(τ − 1{u < 0}), u = y − q (Koenker, 2005)."""
+    u = np.asarray(y, float) - np.asarray(q, float)
+    return u * (tau - (u < 0))
+
+
+def ic_bootstrap_pinball(y, preds: dict, quantis, n_boot: int, seed: int) -> pd.DataFrame:
+    """Diferença de pinball média (modelo − baseline) por τ e na média dos τ, com IC bootstrap pareado:
+    as MESMAS escolas reamostradas valem para todos os τ e modelos. Negativo = modelo melhor."""
+    rng = np.random.default_rng(seed)
+    perdas = {m: np.column_stack([perda_pinball(y, preds[m][t], t) for t in quantis]) for m in preds}
+    base = perdas[BASE_QUANTIL]
+    amostras = [rng.integers(0, len(y), len(y)) for _ in range(n_boot)]
+    linhas = []
+    for m in (k for k in preds if k != BASE_QUANTIL):
+        d = perdas[m] - base                                      # escolas × τ
+        for j, rot in enumerate(list(quantis) + ["média dos quantis"]):
+            col = d.mean(axis=1) if rot == "média dos quantis" else d[:, j]
+            ref = base.mean(axis=1) if rot == "média dos quantis" else base[:, j]
+            bs = [col[i].mean() for i in amostras]
+            linhas.append({"modelo": m, "quantil τ": rot, "dif_pinball_(modelo−baseline)": float(col.mean()),
+                           "IC95_inf": float(np.percentile(bs, 2.5)), "IC95_sup": float(np.percentile(bs, 97.5)),
+                           "ganho_vs_baseline_%": float(-100 * col.mean() / ref.mean())})
+    return pd.DataFrame(linhas).set_index(["modelo", "quantil τ"])
+
+
+def _cruzamento(preds_modelo: dict, quantis) -> float:
+    """Fração de escolas cujas previsões de quantil não são monótonas em τ (modelos ajustados por τ)."""
+    P = np.column_stack([preds_modelo[t] for t in quantis])
+    return float(np.mean(np.any(np.diff(P, axis=1) < -1e-12, axis=1)))
+
+
+def competir_quantilica(base, meta_sel, alvo, trilha, idx_tr, idx_te, cfg: Config, quantis=QUANTIS):
+    """Mean pinball loss em vários τ sobre TODA a amostra (não reduz aos extremos), no lugar do exame
+    separado das escolas extremas. Para cada τ, cada modelo é calibrado só no TREINO, com a mesma CV
+    5-dobras por escola de `competir` e critério = pinball no próprio τ:
+      - regressão quantílica linear com L1: busca em PENALIDADES_QUANTIL. Com ~430 colunas e ~390 escolas
+        por dobra, penalidades pequenas sobreajustam; a grade cobre do regime esparso ao só-intercepto;
+      - XGBoost e LightGBM com perda de quantil: busca aleatória no MESMO espaço da trilha (cfg.n_iter_quantil).
+    Trilha de proporção: peso de precisão n no ajuste de todos os modelos (decisão T1); avaliação sem peso.
+    Baseline = quantil empírico do treino. O teste é usado uma vez por τ, para reportar (análise
+    complementar: não altera a regra de seleção do modelo final).
+    Devolve (perdas por τ, diferenças com IC bootstrap, diagnóstico por τ)."""
     from sklearn.linear_model import QuantileRegressor
-    from xgboost import XGBRegressor
+    from sklearn.metrics import make_scorer
+    from sklearn.model_selection import GridSearchCV
+    from sklearn.pipeline import Pipeline
 
     Xtr, Xte = X_de(base.loc[idx_tr], meta_sel), X_de(base.loc[idx_te], meta_sel)
     ytr, yte = base.loc[idx_tr, alvo].values, base.loc[idx_te, alvo].values
-    pre_l, pre_t = montar_preprocessador(meta_sel, True), montar_preprocessador(meta_sel, False)
-    Ztr, Zte = pre_l.fit_transform(Xtr), pre_l.transform(Xte)
-    Ztr2, Zte2 = pre_t.fit_transform(Xtr), pre_t.transform(Xte)
-    linhas = []
+    ajuste = {"model__sample_weight": base.loc[idx_tr, "N_ALUNOS"].values} if trilha == "prop" else {}
+    cortes = list(KFold(5, shuffle=True, random_state=cfg.seed).split(Xtr))
+    espacos = especificar(trilha, cfg.seed)
+    preds = {m: {} for m in (BASE_QUANTIL,) + MODELOS_QUANTIL}
+    diag = []
     for tau in quantis:
-        row = {"quantil τ": tau,
-               "Baseline (quantil empírico)": mean_pinball_loss(yte, np.full(len(yte), np.quantile(ytr, tau)), alpha=tau)}
-        melhor = None
-        for al in (0.002, 0.005, 0.02, 0.08):
-            e = []
-            for a_, b_ in KFold(3, shuffle=True, random_state=cfg.seed).split(Ztr):
-                q = QuantileRegressor(quantile=tau, alpha=al, solver="highs").fit(Ztr[a_], ytr[a_] - ytr[a_].mean())
-                e.append(mean_pinball_loss(ytr[b_], q.predict(Ztr[b_]) + ytr[a_].mean(), alpha=tau))
-            if melhor is None or np.mean(e) < melhor[0]:
-                melhor = (np.mean(e), al)
-        q = QuantileRegressor(quantile=tau, alpha=melhor[1], solver="highs").fit(Ztr, ytr - ytr.mean())
-        row["Linear (regressão quantílica L1)"] = mean_pinball_loss(yte, _clip(trilha, q.predict(Zte) + ytr.mean()), alpha=tau)
-        px = XGBRegressor(objective="reg:quantileerror", quantile_alpha=tau, tree_method="hist", n_jobs=1,
-                          random_state=cfg.seed, verbosity=0, **params["XGBoost"]).fit(Ztr2, ytr).predict(Zte2)
-        row["XGBoost (quantile)"] = mean_pinball_loss(yte, _clip(trilha, px), alpha=tau)
-        pl = LGBMRegressor(objective="quantile", alpha=tau, n_jobs=1, random_state=cfg.seed, verbose=-1,
-                           **params["LightGBM"]).fit(Ztr2, ytr).predict(Zte2)
-        row["LightGBM (quantile)"] = mean_pinball_loss(yte, _clip(trilha, pl), alpha=tau)
-        linhas.append(row)
-    df = pd.DataFrame(linhas).set_index("quantil τ")
-    m = df.mean().rename("média dos quantis")
-    g = (100 * (1 - m / m["Baseline (quantil empírico)"])).rename("ganho vs baseline (%)")
-    return pd.concat([df, pd.DataFrame([m, g])])
+        score = make_scorer(mean_pinball_loss, alpha=tau, greater_is_better=False)
+        preds[BASE_QUANTIL][tau] = np.full(len(yte), np.quantile(ytr, tau))
+        lin = GridSearchCV(Pipeline([("pre", montar_preprocessador(meta_sel, True)),
+                                     ("model", QuantileRegressor(quantile=tau, solver="highs"))]),
+                           {"model__alpha": list(PENALIDADES_QUANTIL)}, cv=cortes, scoring=score, n_jobs=-1)
+        lin.fit(Xtr, ytr, **ajuste)
+        preds[MODELOS_QUANTIL[0]][tau] = _clip(trilha, lin.predict(Xte))
+        coef = lin.best_estimator_.named_steps["model"].coef_
+        linha = {"quantil τ": tau, "linear: penalidade L1": lin.best_params_["model__alpha"],
+                 "linear: coeficientes ≠ 0": int(np.sum(np.abs(coef) > 1e-9)),
+                 "linear: penalidade no limite da grade": lin.best_params_["model__alpha"] in
+                 (PENALIDADES_QUANTIL[0], PENALIDADES_QUANTIL[-1])}
+        for nome, rot, obj in (("XGBoost", MODELOS_QUANTIL[1], {"model__objective": "reg:quantileerror",
+                                                                 "model__quantile_alpha": tau}),
+                               ("LightGBM", MODELOS_QUANTIL[2], {"model__objective": "quantile", "model__alpha": tau})):
+            pipe = pipeline_de(trilha, nome, meta_sel, cfg.seed).set_params(**obj)
+            busca = RandomizedSearchCV(pipe, espacos[nome][1], n_iter=cfg.n_iter_quantil, cv=cortes, scoring=score,
+                                       random_state=cfg.seed, n_jobs=-1, refit=True).fit(Xtr, ytr, **ajuste)
+            preds[rot][tau] = _clip(trilha, busca.predict(Xte))
+            linha[f"{nome}: pinball CV"] = -busca.best_score_
+        linha["linear: pinball CV"] = -lin.best_score_
+        diag.append(linha)
+    perdas = pd.DataFrame({m: {t: mean_pinball_loss(yte, preds[m][t], alpha=t) for t in quantis} for m in preds})
+    perdas.index.name = "quantil τ"
+    m = perdas.mean().rename("média dos quantis")
+    g = (100 * (1 - m / m[BASE_QUANTIL])).rename("ganho vs baseline (%)")
+    perdas = pd.concat([perdas, pd.DataFrame([m, g])])
+    d = pd.DataFrame(diag).set_index("quantil τ")
+    cruz = pd.Series({rot: _cruzamento(preds[rot], quantis) for rot in MODELOS_QUANTIL}, name="fração de escolas")
+    return perdas, ic_bootstrap_pinball(yte, preds, quantis, cfg.n_boot, cfg.seed), d, cruz.to_frame()

@@ -3,6 +3,7 @@
     uv run python -m saeb_alfab.pipeline --modo rapido      # valida o pipeline (números NÃO citáveis)
     uv run python -m saeb_alfab.pipeline --modo completo    # execução final (vai para o texto)
     uv run python -m saeb_alfab.pipeline --ate modelagem    # para numa etapa: base | modelagem | explicabilidade | robustez
+    uv run python -m saeb_alfab.pipeline --apenas pinball   # só a base + a perda de quantil (análise complementar)
 
 Cada execução grava em reports/execucoes/<data>_<modo>_s<semente>/ (tabelas .csv/.tex, figuras, run_info.json
 com checksums dos dados, versões e commit do git). Nada sobrescreve execuções anteriores.
@@ -74,7 +75,7 @@ def _git_commit() -> str:
         return "sem-git"
 
 
-def executar(cfg: Config, ate: str = "robustez") -> Path:
+def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> Path:
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -120,6 +121,12 @@ def executar(cfg: Config, ate: str = "robustez") -> Path:
     # ---------------------------------------------------------------- 2. modelagem (cenário A e B)
     idx_tr, idx_te = particao(pop, "Y_PROP_ALFAB", cfg.seed, cfg.teste)
     info.update(n_treino=len(idx_tr), n_teste=len(idx_te))
+    if apenas == "pinball":
+        info["apenas"] = "pinball"
+        for tr, (alvo, rot) in TRILHAS.items():
+            _pinball(out, pop, ms_A, alvo, tr, idx_tr, idx_te, cfg)
+            print(f"[pinball] {rot}: concluída")
+        return _fechar(out, info, t0)
     R = {}
     for tr, (alvo, rot) in TRILHAS.items():
         res, aj, pr = competir(pop, ms_A, alvo, tr, idx_tr, idx_te, cfg)
@@ -131,8 +138,7 @@ def executar(cfg: Config, ate: str = "robustez") -> Path:
         out.tabela(pd.Series(sel, name=rot).to_frame(), f"02_selecao_modelo_final_{tr}")
         resB, ajB, prB = competir(pop, ms_B, alvo, tr, idx_tr, idx_te, cfg)
         out.tabela(resB, f"02_competicao_{tr}_cenarioB")
-        par = {m: params_busca(aj[m]) for m in ("XGBoost", "LightGBM")}
-        out.tabela(competir_quantilica(pop, ms_A, alvo, tr, idx_tr, idx_te, par, cfg), f"02_pinball_{tr}")
+        _pinball(out, pop, ms_A, alvo, tr, idx_tr, idx_te, cfg)
         R[tr] = dict(res=res, aj=aj, pr=pr, sel=sel, resB=resB, ajB=ajB)
         print(f"[modelagem] {rot}: selecionado = {sel['selecionado']} (ensemble candidato: {sel['melhor_ensemble']}; "
               f"Δ={sel['media']:.4f}, IC=[{sel['ic_inf']:.4f}; {sel['ic_sup']:.4f}])")
@@ -186,6 +192,14 @@ def executar(cfg: Config, ate: str = "robustez") -> Path:
     return _fechar(out, info, t0)
 
 
+def _pinball(out: Saida, pop, ms, alvo, tr, idx_tr, idx_te, cfg: Config) -> None:
+    perdas, ic, diag, cruz = competir_quantilica(pop, ms, alvo, tr, idx_tr, idx_te, cfg)
+    out.tabela(perdas, f"02_pinball_{tr}")
+    out.tabela(ic, f"02_pinball_ic_{tr}")
+    out.tabela(diag, f"02_pinball_diagnostico_{tr}")
+    out.tabela(cruz, f"02_pinball_cruzamento_{tr}")
+
+
 def _fechar(out: Saida, info: dict, t0: float) -> Path:
     import lightgbm, shap, sklearn, xgboost  # noqa: E401
 
@@ -203,13 +217,14 @@ def main(argv=None):
     ap.add_argument("--modo", choices=["rapido", "completo"], default=None)
     ap.add_argument("--ate", choices=ETAPAS, default="robustez")
     ap.add_argument("--seed", type=int, default=None)
+    ap.add_argument("--apenas", choices=["pinball"], default=None)
     a = ap.parse_args(argv)
     cfg = Config()
     if a.modo:
         cfg = replace(cfg, modo=a.modo)
     if a.seed is not None:
         cfg = replace(cfg, seed=a.seed)
-    executar(cfg, a.ate)
+    executar(cfg, a.ate, a.apenas)
 
 
 if __name__ == "__main__":
