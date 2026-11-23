@@ -95,7 +95,7 @@ def params_busca(busca) -> dict:
 
 # ------------------------------------------------------------------ CV repetida (OOF, ablação, sensibilidades, seleção)
 def cv_repetida(base, meta_sel, alvo, trilha, nome, params, cfg: Config, grupos=None, w=None, w_aval=None,
-                repet: int | None = None) -> dict:
+                repet: int | None = None, indices_tema: bool = False) -> dict:
     """CV 5-dobras repetida com hiperparâmetros fixos (GroupKFold: 1 passada). `w` = pesos de treino
     (padrão: peso de precisão n, se o modelo o usa); `w_aval` = pesos só da avaliação.
     Devolve MAE médio, baseline, R², ganho, MAE por dobra (para comparações pareadas) e OOF médio."""
@@ -108,7 +108,7 @@ def cv_repetida(base, meta_sel, alvo, trilha, nome, params, cfg: Config, grupos=
         cortes = (KFold(5, shuffle=True, random_state=cfg.seed + r).split(X) if grupos is None
                   else GroupKFold(5).split(X, y, groups=np.asarray(grupos)))
         for a_, b_ in cortes:
-            pipe = pipeline_de(trilha, nome, meta_sel, cfg.seed + r, params, cfg.n_arvores_rf)
+            pipe = pipeline_de(trilha, nome, meta_sel, cfg.seed + r, params, cfg.n_arvores_rf, indices_tema)
             sw = w[a_] if w is not None else (base["N_ALUNOS"].values[a_] if peso_n else None)
             pipe.fit(X.iloc[a_], y[a_], **({} if sw is None else {"model__sample_weight": sw}))
             pred[r, b_] = _clip(trilha, pipe.predict(X.iloc[b_]))

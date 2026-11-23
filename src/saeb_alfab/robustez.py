@@ -38,16 +38,20 @@ def ablacao(pop, meta_sel, alvo, trilha, nome, params, cfg) -> pd.DataFrame:
         "M4 − professor": [x for x in tudo if x not in b["prof"]],
         "M4 − diretor": [x for x in tudo if x not in b["dir"]],
         "M4 − geografia": [x for x in tudo if x not in b["geo"]],
+        "M7: M1 + índices por tema": tudo,          # especificação extra declarada na D1 (antes da execução final)
     }
-    res = {k: cv_repetida(pop, meta_sel[meta_sel.variavel.isin(cols)], alvo, trilha, nome, params, cfg)
+    res = {k: cv_repetida(pop, meta_sel[meta_sel.variavel.isin(cols)], alvo, trilha, nome, params, cfg,
+                          indices_tema=k.startswith("M7"))
            for k, cols in specs.items()}
-    ref = res["M4: completo"]["mae_dobras"]
+    ref, ref1 = res["M4: completo"]["mae_dobras"], res["M1: INSE + geografia"]["mae_dobras"]
     linhas = {}
     for k, r in res.items():
         ic = ic_diferenca_pareada(r["mae_dobras"] - ref)            # > 0  => pior que o completo
+        ic1 = ic_diferenca_pareada(r["mae_dobras"] - ref1)          # < 0  => melhor que INSE + geografia
         linhas[k] = {"n variáveis": len(specs[k]), "MAE (CV)": r["MAE"], "MAE baseline": r["MAE_baseline"],
                      "ganho vs baseline (%)": r["ganho_%"], "R² (CV)": r["R2"],
-                     "Δ MAE vs M4": ic["media"], "IC95% inf": ic["ic_inf"], "IC95% sup": ic["ic_sup"]}
+                     "Δ MAE vs M4": ic["media"], "IC95% inf": ic["ic_inf"], "IC95% sup": ic["ic_sup"],
+                     "Δ MAE vs M1": ic1["media"], "IC95% inf vs M1": ic1["ic_inf"], "IC95% sup vs M1": ic1["ic_sup"]}
     return pd.DataFrame(linhas).T.infer_objects()
 
 

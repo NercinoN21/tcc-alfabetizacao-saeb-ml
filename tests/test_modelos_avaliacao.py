@@ -149,3 +149,33 @@ def test_ranking_temas_ponderado_reflete_os_pesos():
     assert tab.index[0] == "a"                                   # sem peso: a (15,1) > c (10)
     assert resumo.loc["1º tema com peso", "valor"] == "c"        # com peso, a escola pesada põe c na frente
     assert tab["participação com peso"].sum() == pytest.approx(1.0)
+
+
+def test_indices_por_tema_resume_cada_tema_em_um_componente():
+    from saeb_alfab.modelos import IndicesPorTema
+    rng = np.random.default_rng(3)
+    n = 200
+    lat = rng.normal(size=(n, 2))
+    X = pd.DataFrame({"num__ESC_INSE": rng.normal(size=n),
+                      "num__PROF_A": lat[:, 0] + .1 * rng.normal(size=n), "num__PROF_B": -lat[:, 0] + .1 * rng.normal(size=n),
+                      "num__DIR_C": lat[:, 1] + .1 * rng.normal(size=n), "num__DIR_D": lat[:, 1] + .1 * rng.normal(size=n)})
+    meta = pd.DataFrame({"variavel": ["ESC_INSE", "PROF_A", "PROF_B", "DIR_C", "DIR_D"],
+                         "tipo": "numerico", "tema": ["inse", "t1", "t1", "t2", "t2"]})
+    t = IndicesPorTema(meta).fit(X[:150])
+    Z = t.transform(X[150:])
+    assert Z.shape == (50, 3)                                     # INSE intacto + 1 índice por (bloco, tema)
+    assert np.allclose(Z[:, 0], X["num__ESC_INSE"].values[150:])
+    assert abs(np.corrcoef(Z[:, 1], lat[150:, 0])[0, 1]) > 0.95   # itens com sinais opostos não se anulam
+    assert abs(np.corrcoef(Z[:, 2], lat[150:, 1])[0, 1]) > 0.95
+
+
+def test_pipeline_com_indices_por_tema_treina_e_preve(dados):
+    from saeb_alfab.modelos import pipeline_de
+    df, meta = dados
+    ms = meta[meta.variavel.isin(["A", "B", "C"])].assign(tema=["t1", "t1", "t2"])
+    ms = ms.assign(variavel=["PROF_A", "PROF_B", "DIR_C"])
+    d2 = df.rename(columns={"A": "PROF_A", "B": "PROF_B", "C": "DIR_C"})
+    from saeb_alfab.modelos import X_de
+    pipe = pipeline_de("prof", "Linear (Elastic Net)", ms, 0, {"alpha": 0.01, "l1_ratio": 0.5}, indices_tema=True)
+    p = pipe.fit(X_de(d2, ms), d2.Y_PROP_ALFAB).predict(X_de(d2, ms))
+    assert len(p) == len(d2) and np.isfinite(p).all()

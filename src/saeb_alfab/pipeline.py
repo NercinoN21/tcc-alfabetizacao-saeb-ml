@@ -6,6 +6,7 @@
     uv run python -m saeb_alfab.pipeline --apenas pinball   # só a base + a perda de quantil (análise complementar)
     uv run python -m saeb_alfab.pipeline --apenas pesos     # só a base + o diagnóstico dos pesos amostrais
     uv run python -m saeb_alfab.pipeline --apenas ranking-pesos  # ranking de temas do SHAP sem × com peso amostral
+    uv run python -m saeb_alfab.pipeline --apenas ablacao   # valor incremental dos blocos, com os índices por tema
 
 Cada execução grava em reports/execucoes/<data>_<modo>_s<semente>/ (tabelas .csv/.tex, figuras, run_info.json
 com checksums dos dados, versões e commit do git). Nada sobrescreve execuções anteriores.
@@ -131,6 +132,15 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
             _pinball(out, pop, ms_A, alvo, tr, idx_tr, idx_te, cfg)
             print(f"[pinball] {rot}: concluída")
         return _fechar(out, info, t0)
+    if apenas == "ablacao":
+        info["apenas"] = "ablacao"
+        for tr, (alvo, rot) in TRILHAS.items():
+            res, aj, _ = competir(pop, ms_A, alvo, tr, idx_tr, idx_te, cfg)
+            sel = selecionar_modelo_final(pop, ms_A, alvo, tr, idx_tr, aj, res, cfg)
+            nome = sel["selecionado"]
+            out.tabela(ablacao(pop, ms_A, alvo, tr, nome, params_busca(aj[nome]), cfg), f"04_ablacao_{tr}")
+            print(f"[ablacao] {rot}: selecionado = {nome}")
+        return _fechar(out, info, t0)
     if apenas == "ranking-pesos":
         info["apenas"] = "ranking-pesos"
         for tr, (alvo, rot) in TRILHAS.items():
@@ -250,7 +260,7 @@ def main(argv=None):
     ap.add_argument("--modo", choices=["rapido", "completo"], default=None)
     ap.add_argument("--ate", choices=ETAPAS, default="robustez")
     ap.add_argument("--seed", type=int, default=None)
-    ap.add_argument("--apenas", choices=["pinball", "pesos", "ranking-pesos"], default=None)
+    ap.add_argument("--apenas", choices=["pinball", "pesos", "ranking-pesos", "ablacao"], default=None)
     a = ap.parse_args(argv)
     cfg = Config()
     if a.modo:

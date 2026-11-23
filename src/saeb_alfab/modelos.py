@@ -84,6 +84,58 @@ def variavel_original(nomes_saida, meta_sel: pd.DataFrame) -> list[str]:
     return out
 
 
+# ------------------------------------------------------------------ índices por tema (especificação extra da D1)
+def bloco_de(variavel: str) -> str | None:
+    """Bloco do questionário a que a variável pertence (None = fora dos questionários: INSE, geografia)."""
+    if variavel.startswith("PROF_") or variavel == "CTX_N_TURMAS":
+        return "professor"
+    if variavel.startswith("DIR_"):
+        return "diretor"
+    return None
+
+
+class IndicesPorTema(BaseEstimator):
+    """Troca as colunas dos questionários por um índice por (bloco, tema): o 1º componente principal das
+    colunas do tema, padronizadas, ajustado SÓ no treino. Colunas fora dos questionários passam inalteradas.
+    O sinal do componente é fixado pela maior carga (positiva), para o resultado ser determinístico."""
+
+    def __init__(self, meta_sel=None):
+        self.meta_sel = meta_sel
+
+    def fit(self, X, y=None):
+        nomes = list(X.columns)
+        orig = variavel_original(nomes, self.meta_sel)
+        tema = self.meta_sel.set_index("variavel")["tema"]
+        grupos, self.manter_ = {}, []
+        for j, v in enumerate(orig):
+            b = bloco_de(v)
+            if b is None:
+                self.manter_.append(j)
+            else:
+                grupos.setdefault((b, tema.get(v, "Sem tema")), []).append(j)
+        Z = np.asarray(X, float)
+        self.grupos_, self.comp_ = list(grupos), []
+        for g in self.grupos_:
+            cols = grupos[g]
+            A = Z[:, cols]
+            mu, sd = A.mean(axis=0), A.std(axis=0)
+            sd[sd == 0] = 1.0
+            C = (A - mu) / sd
+            _, _, vt = np.linalg.svd(C, full_matrices=False)
+            w = vt[0] * np.sign(vt[0][np.argmax(np.abs(vt[0]))])
+            sc = C @ w
+            self.comp_.append((cols, mu, sd, w, sc.mean(), sc.std() or 1.0))
+        self.nomes_saida_ = [nomes[j] for j in self.manter_] + [f"idx__{b}__{t}" for b, t in self.grupos_]
+        return self
+
+    def transform(self, X):
+        Z = np.asarray(X, float)
+        partes = [Z[:, self.manter_]]
+        for cols, mu, sd, w, m, s in self.comp_:
+            partes.append(((((Z[:, cols] - mu) / sd) @ w - m) / s)[:, None])
+        return np.hstack(partes)
+
+
 # ------------------------------------------------------------------ regressão fracionária logit
 class FractionalLogit(BaseEstimator, RegressorMixin):
     """Quase-verossimilhança binomial com ligação logística para y ∈ [0, 1] (Papke; Wooldridge, 1996),
@@ -152,10 +204,13 @@ def especificar(trilha: str, seed: int, n_arvores: int = 500) -> dict:
 
 
 def pipeline_de(trilha: str, nome: str, meta_sel: pd.DataFrame, seed: int, params: dict | None = None,
-                n_arvores: int = 500) -> Pipeline:
+                n_arvores: int = 500, indices_tema: bool = False) -> Pipeline:
     est, _, escalar, _ = especificar(trilha, seed, n_arvores)[nome]
     if params:
         est.set_params(**params)
+    if indices_tema:
+        pre = montar_preprocessador(meta_sel, escalar).set_output(transform="pandas")
+        return Pipeline([("pre", pre), ("idx", IndicesPorTema(meta_sel)), ("model", est)])
     return Pipeline([("pre", montar_preprocessador(meta_sel, escalar)), ("model", est)])
 
 
