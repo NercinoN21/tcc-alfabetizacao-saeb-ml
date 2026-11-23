@@ -678,12 +678,14 @@ cruzada das explicações locais do SHAP em casos individuais selecionados
 (Seção~\ref{sec:xai}).
 
 A escolha de empregar simultaneamente dois métodos de explicabilidade, em
-vez de aceitar um único como verdade, apoia-se na taxonomia proposta por
-\citeonline{doshivelez2017rigorous} para avaliar rigorosamente o que
-significa uma explicação ser ``boa'' (os autores argumentam que
-divergências entre métodos distintos aplicados ao mesmo caso são, elas
-próprias, evidência relevante sobre a estabilidade da explicação, não um
-problema a ser escondido). \citeonline{molnar2025interpretable} consolida
+vez de aceitar um único como verdade, responde à falta de consenso sobre o
+que é interpretabilidade e sobre como avaliá-la, apontada por
+\citeonline{doshivelez2017rigorous}. Os autores distinguem avaliações
+feitas na aplicação real, com pessoas em tarefas simplificadas e por
+critérios formais, sem participação humana. Este trabalho não realiza
+avaliação com usuários, e a comparação entre SHAP e LIME
+(Seção~\ref{sec:xai}) é feita sem participação humana, o que a situa no
+terceiro tipo. \citeonline{molnar2025interpretable} consolida
 esses métodos em um panorama didático que serve de apoio complementar aos
 artigos originais.
 
@@ -1693,10 +1695,8 @@ cronograma, duas ou três escolas de exemplo (uma predição acurada, um erro
 grande do modelo e um caso limítrofe, com proporção de alfabetizados
 próxima à mediana da rede) terão sua decomposição SHAP local (gráfico
 \textit{waterfall}) comparada qualitativamente à explicação produzida pelo
-LIME \cite{ribeiro2016lime} para o mesmo caso, seguindo a recomendação de
-\citeonline{doshivelez2017rigorous} de que divergências entre métodos de
-explicação são, elas próprias, um resultado a ser discutido, não uma
-inconsistência a ser ocultada. Trata-se de análise complementar: sua
+LIME \cite{ribeiro2016lime} para o mesmo caso, e as divergências entre os
+dois métodos são tratadas como resultado a discutir. Trata-se de análise complementar: sua
 eventual supressão não compromete os objetivos do trabalho, que se apoiam no
 SHAP.
 
