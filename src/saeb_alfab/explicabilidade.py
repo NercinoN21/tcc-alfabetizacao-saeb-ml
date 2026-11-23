@@ -56,6 +56,51 @@ def shap_por_variavel(pipe, base, meta_sel, idx, idx_fundo) -> pd.Series:
     return (imp / imp.sum()).sort_values(ascending=False)
 
 
+def shap_abs_por_escola(pipe, base, meta_sel, idx, idx_fundo) -> pd.DataFrame:
+    """|SHAP| por escola × variável original (módulo antes de somar as colunas one-hot, como em
+    `shap_por_variavel`)."""
+    pre, mdl = pipe.named_steps["pre"], pipe.named_steps["model"]
+    Z = pre.transform(X_de(base.loc[idx], meta_sel))
+    Zf = pre.transform(X_de(base.loc[idx_fundo], meta_sel))
+    sv = np.abs(np.asarray(_explicador(mdl, Zf).shap_values(Z)))
+    orig = variavel_original(pre.get_feature_names_out(), meta_sel)
+    return pd.DataFrame(sv, columns=orig, index=idx).T.groupby(level=0).sum().T
+
+
+def _participacao(T: np.ndarray, w=None) -> np.ndarray:
+    m = np.average(T, axis=0, weights=w)
+    return m / m.sum()
+
+
+def ranking_temas_ponderado(abs_escola: pd.DataFrame, meta_sel, pesos, n_boot: int, seed: int, k: int = 5):
+    """Ranking de temas pela participação no |SHAP| SEM peso × COM peso amostral (decisão D2; contraste
+    recomendado por Solon, Haider e Wooldridge, 2015). Bootstrap de escolas para o IC do Spearman entre os
+    dois rankings. Devolve (tabela por tema, resumo)."""
+    tema = meta_sel.set_index("variavel")["tema"]
+    T = abs_escola.T.groupby(abs_escola.columns.map(tema)).sum().T
+    temas, M, w = T.columns, T.values, np.asarray(pesos, float)
+    p0, p1 = _participacao(M), _participacao(M, w)
+    tab = pd.DataFrame({"participação sem peso": p0, "participação com peso": p1}, index=temas)
+    tab["posição sem peso"] = tab["participação sem peso"].rank(ascending=False)
+    tab["posição com peso"] = tab["participação com peso"].rank(ascending=False)
+    tab = tab.sort_values("posição sem peso")
+    rho = float(stats.spearmanr(p0, p1).statistic)
+    rng = np.random.default_rng(seed)
+    bs = []
+    for _ in range(n_boot):
+        i = rng.integers(0, len(M), len(M))
+        bs.append(stats.spearmanr(_participacao(M[i]), _participacao(M[i], w[i])).statistic)
+    top0 = set(tab.nsmallest(k, "posição sem peso").index)
+    top1 = set(tab.nsmallest(k, "posição com peso").index)
+    resumo = pd.Series({"escolas": len(M), "escolas efetivas (n / deff)": float(w.sum() ** 2 / np.sum(w ** 2)),
+                        "temas": len(temas), "Spearman sem × com peso": rho,
+                        "IC95_inf": float(np.percentile(bs, 2.5)), "IC95_sup": float(np.percentile(bs, 97.5)),
+                        f"temas em comum no top-{k}": len(top0 & top1),
+                        "1º tema sem peso": tab.index[0],
+                        "1º tema com peso": tab["participação com peso"].idxmax()}, name="valor").to_frame()
+    return tab, resumo
+
+
 def shap_por_tema(imp_var: pd.Series, meta_sel: pd.DataFrame) -> pd.DataFrame:
     tema = meta_sel.set_index("variavel")["tema"]
     t = imp_var.groupby(imp_var.index.map(tema)).agg(["sum", "count"])

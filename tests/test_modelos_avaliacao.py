@@ -136,3 +136,16 @@ def test_competir_quantilica_linear_nao_colapsa_com_sinal_forte(dados):
     assert (diag["linear: coeficientes ≠ 0"] > 0).all()
     assert perdas.loc["ganho vs baseline (%)", "Linear (regressão quantílica L1)"] > 50
     assert set(cruz.index) == {"Linear (regressão quantílica L1)", "XGBoost (quantile)", "LightGBM (quantile)"}
+
+
+def test_ranking_temas_ponderado_reflete_os_pesos():
+    from saeb_alfab.explicabilidade import ranking_temas_ponderado
+    # 3 temas. Sem peso, "a" domina. As escolas de peso alto têm |SHAP| concentrado em "c".
+    abs_escola = pd.DataFrame({"x1": [5, 5, 5, 0.1], "x2": [1, 1, 1, 1], "x3": [0, 0, 0, 10]})
+    meta = pd.DataFrame({"variavel": ["x1", "x2", "x3"], "tema": ["a", "b", "c"]})
+    tab, resumo = ranking_temas_ponderado(abs_escola, meta, [1, 1, 1, 1], n_boot=50, seed=0)
+    assert resumo.loc["Spearman sem × com peso", "valor"] == pytest.approx(1.0)       # pesos iguais: mesmo ranking
+    tab, resumo = ranking_temas_ponderado(abs_escola, meta, [1, 1, 1, 50], n_boot=50, seed=0)
+    assert tab.index[0] == "a"                                   # sem peso: a (15,1) > c (10)
+    assert resumo.loc["1º tema com peso", "valor"] == "c"        # com peso, a escola pesada põe c na frente
+    assert tab["participação com peso"].sum() == pytest.approx(1.0)

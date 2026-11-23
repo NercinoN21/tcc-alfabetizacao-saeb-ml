@@ -5,6 +5,7 @@
     uv run python -m saeb_alfab.pipeline --ate modelagem    # para numa etapa: base | modelagem | explicabilidade | robustez
     uv run python -m saeb_alfab.pipeline --apenas pinball   # só a base + a perda de quantil (análise complementar)
     uv run python -m saeb_alfab.pipeline --apenas pesos     # só a base + o diagnóstico dos pesos amostrais
+    uv run python -m saeb_alfab.pipeline --apenas ranking-pesos  # ranking de temas do SHAP sem × com peso amostral
 
 Cada execução grava em reports/execucoes/<data>_<modo>_s<semente>/ (tabelas .csv/.tex, figuras, run_info.json
 com checksums dos dados, versões e commit do git). Nada sobrescreve execuções anteriores.
@@ -31,7 +32,8 @@ from . import etl
 from .avaliacao import (comparar_no_teste, competir, competir_quantilica, cv_repetida, params_busca,
                         selecionar_modelo_final)
 from .config import RAIZ, Config
-from .explicabilidade import estabilidade, lime_vs_shap, shap_por_tema, shap_por_variavel
+from .explicabilidade import (estabilidade, lime_vs_shap, ranking_temas_ponderado, shap_abs_por_escola, shap_por_tema,
+                              shap_por_variavel)
 from .modelos import LINEAR, MODELOS, X_de, particao, pipeline_de, selecionar_variaveis, usa_peso_n
 from .robustez import (ablacao, auditar_equidade, construir_base_turma, diagnostico_pesos, sensibilidades,
                        teste_proxies, tres_execucoes)
@@ -129,6 +131,14 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
             _pinball(out, pop, ms_A, alvo, tr, idx_tr, idx_te, cfg)
             print(f"[pinball] {rot}: concluída")
         return _fechar(out, info, t0)
+    if apenas == "ranking-pesos":
+        info["apenas"] = "ranking-pesos"
+        for tr, (alvo, rot) in TRILHAS.items():
+            res, aj, _ = competir(pop, ms_A, alvo, tr, idx_tr, idx_te, cfg)
+            sel = selecionar_modelo_final(pop, ms_A, alvo, tr, idx_tr, aj, res, cfg)
+            _ranking_pesos(out, pop, ms_A, tr, aj[sel["selecionado"]].best_estimator_, idx_tr, idx_te, cfg)
+            print(f"[ranking-pesos] {rot}: selecionado = {sel['selecionado']}")
+        return _fechar(out, info, t0)
     R = {}
     for tr, (alvo, rot) in TRILHAS.items():
         res, aj, pr = competir(pop, ms_A, alvo, tr, idx_tr, idx_te, cfg)
@@ -164,6 +174,7 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
         desc = ms_A.set_index("variavel")[["tema", "descricao", "percepcao_desfecho"]]
         out.tabela(imp.head(25).rename("participação").to_frame().join(desc), f"03_shap_variaveis_{tr}")
         out.tabela(tema, f"03_shap_temas_{tr}")
+        _ranking_pesos(out, pop, ms_A, tr, pipe, idx_tr, idx_te, cfg)
         out.tabela(estabilidade(pop, ms_A, alvo, tr, nome, params_busca(R[tr]["aj"][nome]), cfg),
                    f"03_estabilidade_temas_{tr}")
         lime_tab, det = lime_vs_shap(pipe, pop, ms_A, idx_tr, idx_te, alvo, cfg,
@@ -192,6 +203,19 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
         out.tabela(gaps, f"04_equidade_gaps_{tr}")
         print(f"[robustez] {rot}: concluída")
     return _fechar(out, info, t0)
+
+
+def _ranking_pesos(out: Saida, pop, ms, tr, pipe, idx_tr, idx_te, cfg: Config) -> None:
+    """Ranking de temas sem × com peso amostral nas 604 escolas (o teste sozinho tem poucas escolas
+    efetivas). Checagem: o ranking sem peso nas 604 escolas deve acompanhar o oficial, do teste."""
+    from scipy.stats import spearmanr
+    tab, resumo = ranking_temas_ponderado(shap_abs_por_escola(pipe, pop, ms, pop.index, idx_tr), ms,
+                                          pop["PESO"].values, cfg.n_boot, cfg.seed)
+    oficial = shap_por_tema(shap_por_variavel(pipe, pop, ms, idx_te, idx_tr), ms)["participacao"]
+    resumo.loc["Spearman sem peso: 604 escolas × teste"] = float(
+        spearmanr(tab["participação sem peso"], oficial.reindex(tab.index).fillna(0)).statistic)
+    out.tabela(tab, f"03_shap_temas_ponderado_{tr}")
+    out.tabela(resumo, f"03_shap_temas_ponderado_resumo_{tr}")
 
 
 def _pesos(out: Saida, pop) -> None:
@@ -225,7 +249,7 @@ def main(argv=None):
     ap.add_argument("--modo", choices=["rapido", "completo"], default=None)
     ap.add_argument("--ate", choices=ETAPAS, default="robustez")
     ap.add_argument("--seed", type=int, default=None)
-    ap.add_argument("--apenas", choices=["pinball", "pesos"], default=None)
+    ap.add_argument("--apenas", choices=["pinball", "pesos", "ranking-pesos"], default=None)
     a = ap.parse_args(argv)
     cfg = Config()
     if a.modo:
