@@ -293,11 +293,9 @@ de forma exaustiva, para as 591 colunas reais das quatro bases de dados, a
 decisão de inclusão ou exclusão de cada variável candidata e sua
 justificativa, incluindo uma discussão explícita sobre vazamento de
 informação (a variável alvo de alfabetização é definida por um corte na
-própria proficiência contínua) e sobre a exclusão deliberada dos dados de
-cor/raça e de deficiência de professores e diretores do conjunto de
-preditores; a justificativa completa dessa exclusão, tratada como decisão
-de escopo e de ética de aplicação, e não como vedação legal automática dos
-dados já públicos e anonimizados, é desenvolvida na Seção~\ref{sec:etica}.
+própria proficiência contínua) e sobre o tratamento dos dados de cor/raça,
+fora do modelo principal e mantidos como variável de auditoria, e de
+deficiência de professores e diretores (Seção~\ref{sec:etica}).
 
 Em terceiro lugar, do ponto de vista de política pública, hierarquizar os
 grupos temáticos de contexto escolar por sua contribuição preditiva à
@@ -1275,40 +1273,55 @@ turma e escola são códigos sem correspondência divulgada com pessoas
 naturais. Seu uso neste trabalho tem \emph{finalidade exclusivamente
 acadêmica}, em conformidade com os termos de disponibilização da base.
 
-\textbf{Exclusão das variáveis de cor/raça e de deficiência.} As perguntas
-de cor/raça e de indicador de deficiência, Transtorno do Espectro Autista ou
-altas habilidades do professor e do diretor foram deliberadamente excluídas
-do conjunto de preditores. Convém ser preciso quanto ao fundamento dessa
-decisão: embora se trate de dado pessoal sensível nos termos do
+\textbf{Variáveis de deficiência.} As perguntas sobre deficiência,
+Transtorno do Espectro Autista ou altas habilidades do professor e do
+diretor ficam fora de todas as especificações. São dados de saúde, sem
+relação com a pergunta de pesquisa.
+
+\textbf{Cor/raça: duas especificações e uma auditoria.} A cor/raça declarada de
+professores e diretores é dado pessoal sensível nos termos do
 art.~5\textordmasculine{}, inciso~II, da Lei Geral de Proteção de Dados
-(LGPD, Lei n\textordmasculine{} 13.709/2018), essa qualificação \emph{não implica,
-por si só}, vedação ao uso em pesquisa com microdados públicos e
-anonimizados: a própria LGPD prevê hipótese de tratamento para realização
-de estudos por órgão de pesquisa (art.~7\textordmasculine{}, IV, e
-art.~11, II, ``c''). Pesquisas sobre desigualdade educacional legitimamente
-utilizam variáveis de raça, e fazê-lo pode ser condição para tornar
-desigualdades visíveis.
+(LGPD, Lei n\textordmasculine{} 13.709/2018). Essa qualificação não impede
+o uso em pesquisa com microdados públicos e anonimizados, porque a própria
+lei prevê o tratamento para a realização de estudos por órgão de pesquisa
+(art.~7\textordmasculine{}, IV, e art.~11, II, ``c''). Pesquisas sobre
+desigualdade educacional usam variáveis de raça legitimamente, e esse uso
+pode ser condição para tornar desigualdades visíveis. O trabalho trata a
+cor/raça, por isso, em duas especificações estimadas com o mesmo protocolo. Na
+especificação A, a principal, ela fica fora do conjunto de preditores. Na especificação
+B, entram quatro variáveis: as proporções de turmas cujo professor se
+declara preto ou pardo, branco ou de outra cor ou sem declaração, e a
+cor/raça do diretor. Os resultados das duas especificações são apresentados lado
+a lado no apêndice.
 
-A exclusão adotada aqui é, portanto, uma \textbf{decisão de escopo e de
-ética de aplicação}, não uma imposição legal. Ela se apoia em dois
-argumentos. O primeiro é de escopo: a pergunta de pesquisa
-(Seção~\ref{sec:problema-pesquisa}) versa sobre características
-\emph{modificáveis por política educacional} (formação, prática
-pedagógica, gestão, clima escolar), e atributos adscritos de professores e
-diretores não pertencem a essa classe. O segundo é de \textbf{risco de viés
-algorítmico}: incluir a cor/raça do docente como preditor de desempenho da
-escola produziria um modelo capaz de associar atributo racial a resultado
-educacional sem qualquer mecanismo explicativo, cuja ordenação de
-importâncias poderia ser lida (ou reutilizada em um dashboard) como
-evidência de diferença de qualidade atribuível a raça, quando refletiria a
-distribuição desigual de docentes entre escolas de contextos distintos. Como
-os modelos aqui estimados não permitem separar esses dois mecanismos
-(Seção~\ref{sec:registros-inferenciais}), a exclusão é a decisão prudente.
+A especificação A é a principal por dois motivos. O primeiro é de escopo: a
+pergunta de pesquisa (Seção~\ref{sec:problema-pesquisa}) trata de
+características \emph{modificáveis por política educacional} (formação,
+prática pedagógica, gestão, clima escolar), e atributos adscritos de
+professores e diretores não pertencem a essa classe. O segundo é o risco de
+leitura indevida. Com a cor/raça do docente entre os preditores, a
+ordenação de importâncias poderia ser lida, ou reutilizada em um
+\textit{dashboard}, como diferença de qualidade atribuível a raça, quando
+refletiria a distribuição desigual de docentes entre escolas de contextos
+distintos, mecanismos que os modelos aqui estimados não separam
+(Seção~\ref{sec:registros-inferenciais}). A exclusão não custa precisão. Na
+validação cruzada do treino, o MAE do modelo linear é de 0,1705 sem
+cor/raça e de 0,1703 com ela na trilha de proporção, e de 17,86 e 17,89
+pontos na de proficiência.
 
-Registre-se, por transparência, o custo dessa escolha: ao não incluir tais
-variáveis, o trabalho abdica de examinar dimensões de desigualdade que
-poderiam ser relevantes, e suas conclusões não devem ser lidas como
-evidência de ausência de tais desigualdades.
+Excluir a variável, porém, não remove a informação que ela carrega. Um
+modelo LightGBM treinado só com os preditores da especificação A recupera, em
+validação cruzada, a cor/raça do diretor (preto ou pardo, contra branco)
+com área sob a curva ROC de 0,72 e a proporção de turmas com professor
+preto ou pardo com R\textsuperscript{2} de 0,14. A cor/raça permanece no
+trabalho, assim, como variável de \emph{auditoria}. Os erros fora da
+amostra das especificações A e B são comparados entre grupos de escolas definidos
+pelo INSE, pela cor/raça do diretor e pela composição racial dos
+professores, e a mudança da diferença de erro entre os grupos, de A para B,
+é reportada com intervalo de confiança \textit{bootstrap} de 95\%. Esses
+intervalos são indicativos, porque não incorporam a incerteza do
+retreinamento dos modelos. A ausência da variável no modelo principal não
+autoriza concluir que não há desigualdade racial no desempenho das escolas.
 
 \section{Estratégia empírica: comparação de modelos em duas trilhas}
 \label{sec:estrategia-empirica}
