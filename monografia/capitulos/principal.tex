@@ -120,12 +120,13 @@ projeto pretende endereçar.
 \section{Problema de pesquisa}
 \label{sec:problema-pesquisa}
 
-Este trabalho parte da seguinte pergunta central: \emph{quais
-características da turma, do professor, da escola e da gestão escolar
-apresentam maior capacidade preditiva em relação à proporção de alunos
-alfabetizados e à proficiência média em Língua Portuguesa das escolas
-públicas com 2º ano do Ensino Fundamental, segundo os microdados do Saeb
-2023?}
+Este trabalho parte da seguinte pergunta central: \emph{quanto os
+questionários contextuais respondidos pelo professor e pelo diretor
+acrescentam, fora da amostra, à previsão da proporção de alunos
+alfabetizados e da proficiência média em Língua Portuguesa das escolas
+públicas com 2º ano do Ensino Fundamental, além do que o nível
+socioeconômico da escola e a geografia já preveem, segundo os microdados
+do Saeb 2023?}
 
 A formulação da pergunta reflete uma característica estrutural da base: o
 Saeb 2023 não aplica questionário contextual ao aluno do 2º ano, de modo
@@ -140,15 +141,24 @@ de gestão educacional efetivamente operam.
 \subsection{Hipóteses de pesquisa}
 \label{sec:hipoteses}
 
-Essa pergunta se desdobra em quatro sub-perguntas mais específicas, cada uma
-ancorada em um grupo temático distinto do questionário contextual do Saeb e
-detalhada, variável a variável, na Seção~\ref{sec:variaveis} da
-Metodologia. A Tabela~\ref{tab:hipoteses} resume as sub-perguntas e as
-hipóteses de pesquisa correspondentes. Todas são enunciadas em termos
-associativos e preditivos, no nível da escola: o desenho deste trabalho
-permite verificar quais variáveis contribuem para prever os desfechos
-agregados e como se ordenam em importância, não estabelecer relações
-causais entre elas (Seção~\ref{sec:registros-inferenciais}).
+Essa pergunta se desdobra em quatro hipóteses, uma para cada bloco de
+variáveis: o questionário do professor, o questionário do diretor, o INSE e
+a geografia. A Tabela~\ref{tab:hipoteses} as resume. Todas são enunciadas
+em termos preditivos e no nível da escola. O desenho deste trabalho permite
+verificar quanto cada bloco contribui para prever os desfechos agregados,
+sem estabelecer relações causais (Seção~\ref{sec:registros-inferenciais}).
+Cada hipótese é avaliada nas duas trilhas, pela mesma regra de decisão.
+Retira-se o bloco do conjunto completo de preditores e compara-se o erro
+nas mesmas dobras de uma validação cruzada repetida
+(Seção~\ref{sec:robustez}). A hipótese é considerada confirmada em uma
+trilha quando a retirada aumenta o MAE com intervalo de confiança de 95\%
+acima de zero, pelo teste $t$ corrigido de \citeonline{nadeau2003inference},
+e o aumento é de pelo menos 2\% do MAE do conjunto completo. A regra
+reproduz a que foi definida antes da estimação para a seleção do modelo
+final (Seção~\ref{sec:testes-significancia}). As hipóteses vêm do projeto
+avaliado no TCC I, mas a regra foi explicitada nesta versão, depois da
+execução final. Reutilizar o critério já fixado para a seleção do modelo
+limita a margem de escolha que essa ordem abriria.
 
 \begin{table}[H]
     \centering
@@ -158,25 +168,20 @@ causais entre elas (Seção~\ref{sec:registros-inferenciais}).
         \toprule
         \textbf{\#} & \textbf{Sub-pergunta} & \textbf{Hipótese} & \textbf{Grupo temático} \\
         \midrule
-        H1 & Características do corpo docente apresentam contribuição
-        preditiva para a proporção de alfabetizados da escola? & Variáveis
-        de formação continuada em alfabetização/letramento, experiência
-        docente e práticas pedagógicas figuram entre as de maior
-        importância preditiva. & Professor: formação, experiência e
-        prática \\ \addlinespace
-        H2 & Características da escola e da gestão escolar apresentam
-        contribuição preditiva para a proficiência média? & Variáveis de
-        clima e segurança escolar e de gestão e liderança pedagógica do
-        diretor estão associadas à proficiência média da escola. & Escola:
-        clima, segurança e gestão \\ \addlinespace
-        H3 & O INSE permanece entre os preditores mais importantes na
-        presença das demais variáveis? & Mesmo na presença das variáveis de
-        professor e diretor, o INSE figura entre as variáveis de maior
-        importância em todos os modelos. & Nível socioeconômico \\ \addlinespace
-        H4 & O contexto geográfico carrega informação própria? & Variáveis
-        de região, unidade da federação e localização apresentam
-        contribuição preditiva não redutível à do INSE. & Contexto
-        geográfico \\
+        H1 & O questionário do professor acrescenta capacidade preditiva além
+        do INSE, da geografia e do questionário do diretor? & Retirar o bloco
+        do professor aumenta o erro de previsão. & Professor: formação,
+        experiência e prática \\ \addlinespace
+        H2 & O questionário do diretor acrescenta capacidade preditiva além do
+        INSE, da geografia e do questionário do professor? & Retirar o bloco
+        do diretor aumenta o erro de previsão. & Escola: clima, segurança e
+        gestão \\ \addlinespace
+        H3 & O INSE mantém capacidade preditiva própria na presença dos dois
+        questionários? & Retirar o INSE aumenta o erro de previsão. & Nível
+        socioeconômico \\ \addlinespace
+        H4 & O contexto geográfico carrega informação própria? & Retirar as
+        variáveis de região, unidade da federação e localização aumenta o
+        erro de previsão. & Contexto geográfico \\
         \bottomrule
     \end{tabular}
     \vspace{0.1cm}
@@ -186,35 +191,24 @@ causais entre elas (Seção~\ref{sec:registros-inferenciais}).
     \label{tab:hipoteses}
 \end{table}
 
-As quatro hipóteses estão ancoradas em grupos temáticos distintos do
-questionário contextual do Saeb, cada um deles examinado pelo mesmo
-instrumento de importância agregada por grupo (Seção~\ref{sec:xai}). H1
-reúne formação continuada em alfabetização/letramento, experiência docente
-e práticas pedagógicas em sala de aula sob um único grupo temático de
-professor, testando se esse conjunto figura entre os preditores mais
-importantes da proporção de alfabetizados da escola. H2 reúne clima e
-segurança escolar com gestão e liderança pedagógica do diretor sob um grupo
-temático de escola, testando sua associação com a proficiência média. Ficou
-fora do conjunto de hipóteses testáveis a efetividade de ações de combate à
-repetência e ao abandono escolar: os itens correspondentes do questionário
-do Saeb registram apenas a \emph{existência declarada} dessas ações, não
-seu resultado, de modo que sua efetividade não é verificável com a
-informação disponível na base.
+H1 reúne, no bloco do professor, formação continuada em
+alfabetização e letramento, experiência docente e práticas pedagógicas em
+sala de aula. H2 reúne, no bloco do diretor, clima e segurança escolar e
+gestão e liderança pedagógica. Ficou fora do conjunto de hipóteses a
+efetividade de ações de combate à repetência e ao abandono escolar, porque
+os itens correspondentes registram apenas a \emph{existência declarada}
+dessas ações, sem medir seu resultado.
 
-A Hipótese~3 merece destaque metodológico particular: a literatura de
-sociologia da educação brasileira estabelece, com razoável consenso, que o
-nível socioeconômico da escola é um dos preditores mais robustos de
-desempenho escolar (Seção~\ref{sec:evidencias-brasileiras}). O que este
-trabalho se propõe a verificar é se as variáveis de contexto de professor e
-diretor apresentam contribuição preditiva \emph{além} da que o INSE já
-captura sozinho, ou se seu papel é, na prática, redundante com ele,
-pergunta endereçada diretamente pela comparação de modelos e pelos valores
-SHAP (\textit{SHapley Additive exPlanations},
-Seção~\ref{sec:xai-revisao}) agregados por grupo temático (Capítulo~3). A
-Hipótese~4 testa, na mesma lógica, se variáveis de região, unidade da
-federação e localização carregam informação preditiva não redutível à do
-INSE, ancorando-se nos achados de efeito-município da literatura brasileira
-(Seção~\ref{sec:evidencias-brasileiras}).
+H3 tem papel central. A sociologia da educação brasileira estabelece, com
+razoável consenso, que o nível socioeconômico da escola é um dos preditores
+mais fortes do desempenho escolar
+(Seção~\ref{sec:evidencias-brasileiras}). H1 e H2 verificam se os
+questionários acrescentam algo a ele, e H3 verifica se o INSE conserva
+informação própria quando os questionários estão presentes. H4 aplica a
+mesma lógica à geografia, ancorada nos achados de efeito-município da
+literatura brasileira (Seção~\ref{sec:evidencias-brasileiras}). A
+importância de cada bloco pelo SHAP (Seção~\ref{sec:xai}) é reportada ao
+lado do teste, como descrição do modelo, fora da regra de decisão.
 
 Uma limitação deve ser declarada já nesta introdução, por qualificar
 diretamente a Hipótese~1: o questionário do professor do 2º ano não
