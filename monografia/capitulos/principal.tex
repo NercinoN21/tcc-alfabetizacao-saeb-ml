@@ -1315,10 +1315,11 @@ a variável-alvo não utilizada pela outra trilha. Em cada trilha concorrem
 um \emph{modelo linear regularizado de referência} e três
 \textit{ensembles} de árvore, todos contrastados com um \textit{baseline}
 trivial que estabelece o piso de desempenho abaixo do qual nenhum modelo
-pode ser considerado útil. O modelo linear de referência é a regressão
-regularizada por Elastic Net (complementada, na trilha de proporção, pelo
-\textit{fractional logit} de \citeonline{papke1996fractional}, especificação
-canônica para desfechos fracionários) e representa, na terminologia de
+pode ser considerado útil. O modelo linear de referência é regularizado por
+Elastic Net nas duas trilhas: uma regressão linear na trilha de proficiência
+e, na trilha de proporção, o \textit{fractional logit} de
+\citeonline{papke1996fractional}, especificação canônica para desfechos
+fracionários. Ele representa, na terminologia de
 \citeonline{breiman2001two}, a ``cultura'' da modelagem estatística clássica
 diante da ``cultura'' algorítmica dos \textit{ensembles} de árvore.
 A Tabela~\ref{tab:trilhas} resume a estratégia.
@@ -1333,7 +1334,7 @@ A Tabela~\ref{tab:trilhas} resume a estratégia.
         \midrule
         Proporção de alfabetizados & Proporção de alunos alfabetizados
         $\in [0,1]$ & \textit{Baseline}: média/mediana. Referência linear:
-        Elastic Net e \textit{fractional logit}. \textit{Ensembles}: Random
+        \textit{fractional logit} com Elastic Net. \textit{Ensembles}: Random
         Forest, XGBoost, LightGBM & MAE & RMSE, R\textsuperscript{2},
         análise de resíduos, aderência das predições ao intervalo $[0,1]$ \\ \addlinespace
         Proficiência média & Proficiência média em LP (contínua) &
@@ -1389,13 +1390,12 @@ transformação ad hoc as escolas com proporções exatamente iguais a 0 ou 1
 (presentes na base), situação em que a alternativa paramétrica da
 regressão beta \cite{ferrari2004beta} tem verossimilhança indefinida, razão
 pela qual esta é citada como alternativa, mas não adotada. A estimação
-seguirá a quase-verossimilhança binomial com ligação logística proposta por
+segue a quase-verossimilhança binomial com ligação logística proposta por
 \citeonline{papke1996fractional}, com o número de alunos avaliados $n_e$
-como peso de precisão e erros-padrão robustos. Como referência linear
-adicional e diretamente comparável à da segunda trilha, estima-se também a
-regressão linear regularizada por Elastic Net sobre o mesmo alvo, com a
-aderência de suas predições ao intervalo $[0,1]$ reportada como métrica
-complementar. Os três \textit{ensembles} de árvore
+como peso de precisão e com a mesma penalidade Elastic Net da
+Equação~\ref{eq:elasticnet}, necessária com centenas de preditores e 483
+escolas de treino. Como o objetivo é preditivo, não se estimam erros-padrão
+dos coeficientes. Os três \textit{ensembles} de árvore
 (Random Forest \cite{breiman2001random}, XGBoost e LightGBM,
 implementações do \textit{gradient boosting},
 \citeonline{friedman2001greedy}) produzem, de forma geral, uma predição
@@ -1483,10 +1483,12 @@ de separar estritamente decisão de avaliação:
 Além do desempenho absoluto, cada modelo é comparado ao \textit{baseline}
 trivial de sua trilha (média ou mediana do desfecho no treino), de modo que
 o ganho informacional atribuível à modelagem seja explicitado, e não apenas
-o valor da métrica. Na trilha de proporção, será adicionalmente verificada
-a aderência das predições ao intervalo $[0,1]$, automática no
-\textit{fractional logit} mas não garantida nos demais modelos, cujas
-predições fora do intervalo serão truncadas e reportadas.
+o valor da métrica. Na trilha de proporção, verifica-se ainda a aderência
+das predições ao intervalo $[0,1]$. Ela é garantida por construção no
+\textit{fractional logit}, no Random Forest, cujas predições são médias de
+proporções observadas, e no XGBoost e no LightGBM, estimados nessa trilha
+com perda logística. Predições fora do intervalo, se ocorressem, seriam
+truncadas e reportadas.
 
 \section{Seleção do modelo final e testes de significância}
 \label{sec:testes-significancia}
