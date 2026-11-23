@@ -737,6 +737,29 @@ análise deve ser lida como insumo para a formulação de hipóteses causais a
 serem testadas em estudos com desenho apropriado, não como estimativa do
 efeito de intervir sobre essas variáveis.
 
+Métodos recentes de aprendizado de máquina para efeitos causais não
+dispensam essa exigência. As florestas causais de
+\citeonline{wager2018causal} estimam efeitos heterogêneos de um tratamento,
+e o \textit{double machine learning} de \citeonline{chernozhukov2018double}
+usa algoritmos como \textit{random forests}, lasso e \textit{boosting} para
+controlar covariáveis na estimação de efeitos médios. Os dois flexibilizam
+a forma funcional, mas dependem de um tratamento definido e de uma
+hipótese de identificação, em geral a de não confundimento (condicional às
+covariáveis, a atribuição do tratamento independe dos resultados
+potenciais) acompanhada de sobreposição entre tratados e não tratados, ou
+de uma variável instrumental. A biblioteca CausalML, que reúne métodos de
+\textit{uplift} e de efeitos heterogêneos, recomenda aplicá-los a dados
+experimentais e adverte que, em dados observacionais, confundidores
+omitidos enviesam a estimativa \cite{chen2020causalml}. O desenho deste
+trabalho não satisfaz essas condições. Seus preditores são centenas de
+itens de questionário correlacionados, sem um tratamento definido,
+observados em um único corte transversal, e a composição social das
+escolas torna implausível supor que as práticas declaradas por professores
+e diretores independam de fatores não observados. Esses métodos são um
+passo para estudos futuros que isolem uma prática modificável apontada por
+esta análise e disponham de variação capaz de identificá-la, como várias
+edições do Saeb ou um desenho quase experimental.
+
 \section{Análise no nível da escola: desfechos agregados, proporções e o alcance ecológico das conclusões}
 \label{sec:nivel-escola-teoria}
 
