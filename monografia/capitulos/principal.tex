@@ -1119,31 +1119,57 @@ sensibilidade.
 \section{Pesos amostrais e alcance das conclusões}
 \label{sec:pesos}
 
-O Saeb 2023 é uma avaliação amostral no 2º ano do Ensino
-Fundamental, e seu desenho prevê pesos amostrais e estratos documentados
-pelo Inep \cite{inep2024amostra}. Os modelos deste trabalho serão estimados
-\emph{sem ponderação pelos pesos amostrais}, por duas razões: os
-estimadores de aprendizado supervisionado empregados não incorporam
-naturalmente o desenho amostral complexo, e a variável \texttt{ESTRATO},
-que codifica parte desse desenho, é excluída do conjunto de preditores pelas
-razões expostas na Seção~\ref{sec:variaveis}.
+O Saeb 2023 é uma avaliação amostral no 2º ano do Ensino Fundamental. Cada
+escola sorteada representa outras escolas da rede, e o peso amostral indica
+quantas, conforme o desenho documentado pelo Inep \cite{inep2024amostra}.
+Esse peso difere do peso de precisão $n_e$, o número de alunos avaliados da
+escola, tratado no fim desta seção.
 
-Essa escolha tem uma consequência que deve ser declarada com clareza, e que
-a análise exploratória preliminar impede de tratar como inócua: os pesos
-amostrais do Saeb 2023 exibem forte variabilidade (coeficiente de variação
-superior a 2 na coorte examinada), de modo que a amostra não ponderada pode
-divergir de forma relevante do universo. Os resultados descrevem, portanto,
-os padrões preditivos observados \emph{no conjunto de escolas analisado}, e
-não constituem estimativas populacionais representativas do conjunto de
-escolas ou de estudantes do 2º ano do Brasil. Nenhuma generalização automática para o país será formulada a
-partir deles. Uma alternativa a ser considerada em TCC II, caso o
-cronograma permita, é a reestimação ponderada dos modelos lineares de
-referência como checagem da sensibilidade das conclusões ao desenho
-amostral. Questão distinta é a ponderação das \emph{escolas} pelo seu
-número de alunos avaliados na estimação e na avaliação: o cenário principal
-tratará cada escola como uma observação de igual peso (coerente com a
-unidade de decisão), e uma execução ponderada por $n_e$ será reportada como
-análise de sensibilidade.
+A necessidade de ponderar depende do que se quer estimar.
+\citeonline{solon2015weighting} distinguem dois propósitos. Para estimar
+estatísticas descritivas de uma população, como a proporção de alunos
+alfabetizados da rede, a ponderação é necessária sempre que a amostra não
+representa essa população. Para estimar relações entre variáveis, o peso
+pode ser desnecessário à consistência quando a probabilidade de seleção
+depende apenas das variáveis explicativas, e ponderar pode então reduzir a
+precisão. Os autores recomendam reportar as estimativas com e sem peso,
+porque o contraste entre elas serve de diagnóstico. O estimando deste
+trabalho pertence ao segundo tipo: os padrões preditivos e a importância das
+variáveis \emph{no conjunto de escolas analisado}. Os modelos não produzem
+estimativas populacionais do 2º ano do Brasil, e nenhuma generalização
+automática para o país será formulada a partir deles.
+
+Os pesos variam muito na população principal. O coeficiente de variação é
+de 2,14, e o efeito de desenho decorrente dessa variação,
+$\text{deff} = n\sum_e w_e^2 \big/ \left(\sum_e w_e\right)^2$, é de 5,59.
+Para fins de precisão, as 604 escolas equivalem a cerca de 108 escolas
+efetivas. Os pesos também se associam, ainda que fracamente, aos desfechos
+(correlação de Spearman de 0,15 com a proporção de alfabetizados e de 0,13
+com a proficiência média), e por isso as médias ponderadas superam as não
+ponderadas. A proporção média de alfabetizados passa de 43,9\% para 52,0\%
+(18,4\% a mais), e a proficiência média, de 731,6 para 739,9 pontos (1,1\%
+a mais). Estatísticas descritivas sem peso subestimariam, portanto, o
+desempenho da rede, e toda média que se refira à rede é reportada com peso.
+Em 4,6\% das escolas, as que não têm questionário do diretor, o peso é imputado a
+partir do peso médio de seus alunos, ajustado pela razão mediana entre os
+dois pesos.
+
+A estratégia segue a recomendação de reportar as duas versões. Os modelos
+são treinados sem o peso amostral, e as métricas de erro são reportadas sem
+peso e ponderadas por ele. Na análise de sensibilidade, o treino com peso
+piora o erro ponderado nas duas trilhas. O ganho sobre o \textit{baseline},
+medido com peso, cai de 15,3\% para 4,6\% na trilha de proporção e de
+15,4\% para 9,7\% na de proficiência, e truncar os pesos no percentil 99
+recupera só parte da perda (9,6\% e 9,5\%). O resultado é coerente com a
+perda de precisão esperada quando os pesos variam tanto: o modelo treinado
+sem peso prevê melhor a própria rede ponderada.
+
+O peso de precisão $n_e$ responde a outra questão. Como a proporção de
+alfabetizados de uma escola pequena oscila mais por acaso, todos os modelos
+da trilha de proporção usam $n_e$ como peso no ajuste. As métricas
+principais tratam cada escola com o mesmo peso, coerente com a unidade de
+decisão, e o MAE ponderado por $n_e$ é reportado como complemento
+(Seção~\ref{sec:estrategia-empirica}).
 
 \section{Viés de seleção associado à disponibilidade do INSE}
 \label{sec:vies-inse}
