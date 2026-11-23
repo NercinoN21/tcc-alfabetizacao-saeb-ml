@@ -1,0 +1,77 @@
+% Apêndices (gerado a partir de reports/final/; ver Seção 3.5.3)
+\begin{apendicesenv}
+
+\partapendices
+
+\chapter{Especificações com e sem cor/raça}
+\label{ap:cor-raca}
+
+Este apêndice apresenta lado a lado as duas especificações descritas na
+Seção~\ref{sec:etica}: a especificação A, principal, sem as variáveis de
+cor/raça, e a especificação B, com as proporções de turmas por cor/raça
+declarada do professor e a cor/raça do diretor. As duas usam a mesma
+partição, o mesmo protocolo de busca de hiperparâmetros e as mesmas
+métricas (Seções~\ref{sec:estrategia-empirica}
+e~\ref{sec:testes-significancia}). A Tabela~\ref{tab:ap-cor-raca-erro}
+compara o erro dos modelos, e a Tabela~\ref{tab:ap-cor-raca-equidade}, a
+diferença de erro entre grupos de escolas.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{MAE dos modelos nas especificações A (sem cor/raça) e B (com cor/raça)}
+    \label{tab:ap-cor-raca-erro}
+    \begin{tabular}{lcccccccc}
+        \toprule
+        & \multicolumn{4}{c}{\textbf{Proporção de alfabetizados}} & \multicolumn{4}{c}{\textbf{Proficiência média}} \\
+        \cmidrule(lr){2-5} \cmidrule(lr){6-9}
+        & \multicolumn{2}{c}{CV (treino)} & \multicolumn{2}{c}{Teste} & \multicolumn{2}{c}{CV (treino)} & \multicolumn{2}{c}{Teste} \\
+        \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9}
+        \textbf{Modelo} & A & B & A & B & A & B & A & B \\
+        \midrule
+        \textit{Baseline}: média & --- & --- & 0,1909 & 0,1909 & --- & --- & 18,86 & 18,86 \\
+        \textit{Baseline}: mediana & --- & --- & 0,1897 & 0,1897 & --- & --- & 18,90 & 18,90 \\
+        Linear de referência & 0,1705 & 0,1703 & 0,1617 & 0,1612 & 17,86 & 17,89 & 17,00 & 16,99 \\
+        Random Forest & 0,1656 & 0,1656 & 0,1617 & 0,1603 & 16,98 & 17,01 & 15,98 & 15,90 \\
+        XGBoost & 0,1646 & 0,1645 & 0,1582 & 0,1576 & 17,09 & 17,07 & 15,68 & 16,20 \\
+        LightGBM & 0,1682 & 0,1677 & 0,1569 & 0,1554 & 17,07 & 17,04 & 16,65 & 16,10 \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor com base nos microdados do Saeb 2023 (Inep).\\
+    Nota: o linear de referência é o \textit{fractional logit} com Elastic Net na proporção e a regressão linear
+    com Elastic Net na proficiência. CV (treino) é o MAE da validação cruzada de 5 dobras no conjunto de treino (483 escolas), usado na
+    busca de hiperparâmetros. Teste é o MAE nas 121 escolas de teste. Os \textit{baselines} não passam pela
+    validação cruzada. Na proporção, o MAE está na escala de 0 a 1. Na proficiência, em pontos da escala do Saeb.}
+    \end{flushleft}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Diferença de MAE entre grupos de escolas nas especificações A e B}
+    \label{tab:ap-cor-raca-equidade}
+    \setlength{\tabcolsep}{4pt}
+    \begin{tabular}{P{3.3cm}cccccccc}
+        \toprule
+        & \multicolumn{4}{c}{\textbf{Proporção (p.p.)}} & \multicolumn{4}{c}{\textbf{Proficiência (pontos)}} \\
+        \cmidrule(lr){2-5} \cmidrule(lr){6-9}
+        \textbf{Diferença de erro} & A & B & B $-$ A & IC 95\% & A & B & B $-$ A & IC 95\% \\
+        \midrule
+        INSE: baixo (I--III) $-$ alto (V--VIII) & 4,39 & 4,40 & 0,02 & $-$0,20 a 0,23 & 5,15 & 5,23 & 0,09 & $-$0,11 a 0,28 \\ \addlinespace
+        Cor do diretor: preto ou pardo $-$ branco & $-$0,88 & $-$0,64 & 0,25 & 0,08 a 0,42 & $-$1,18 & $-$0,91 & 0,27 & 0,11 a 0,42 \\ \addlinespace
+        Professores: maioria $-$ minoria preta ou parda & 0,53 & 0,46 & $-$0,08 & $-$0,28 a 0,12 & $-$0,08 & $-$0,14 & $-$0,05 & $-$0,24 a 0,12 \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor com base nos microdados do Saeb 2023 (Inep).\\
+    Nota: cada célula é o MAE do primeiro grupo menos o MAE do segundo, com as previsões fora da amostra da
+    validação cruzada repetida do modelo selecionado. Valor positivo indica erro maior no primeiro grupo. O
+    intervalo vem de \textit{bootstrap} das escolas e é indicativo, porque não incorpora a incerteza do
+    retreinamento dos modelos.}
+    \end{flushleft}
+\end{table}
+
+\end{apendicesenv}
