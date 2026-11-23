@@ -27,12 +27,13 @@ antes da pandemia \cite{worldbank2022learningpoverty}. O Brasil ilustra com
 precisão a natureza do problema: sua pobreza de aprendizagem é estimada em
 47\%, decomposta em 45,6 pontos percentuais de déficit de
 \emph{aprendizagem} e apenas 2,4 de déficit de \emph{acesso} à escola
-\cite{worldbank2024brazilbrief}. O desafio brasileiro, portanto, não é mais
-matricular, é ensinar. Em contextos de escassez de recursos, próximos da
-realidade de parte da rede pública, a evidência internacional mostra que
-insumos escolares básicos e a governança da escola voltam a ter associação
-relevante com o aprendizado, desde que efetivamente utilizados em sala de
-aula \cite{glewwe2011school}. Isso torna a pergunta sobre \emph{quais}
+\cite{worldbank2024brazilbrief}. No ensino fundamental, o desafio brasileiro
+deslocou-se, portanto, do acesso para a aprendizagem. Em países em
+desenvolvimento, contexto mais próximo da realidade de parte da rede
+pública brasileira, a revisão de \citeonline{glewwe2011school} encontra
+efeito estatisticamente significativo para poucas características de
+escolas e professores, como a disponibilidade de carteiras, o conhecimento
+do professor sobre a matéria que ensina e a ausência docente. Isso torna a pergunta sobre \emph{quais}
 características da escola acompanham melhores resultados uma pergunta de
 alocação de recursos, não apenas de pesquisa acadêmica.
 
@@ -98,17 +99,18 @@ pelo diretor da escola, cobrindo temas como formação docente, práticas
 pedagógicas, infraestrutura, gestão escolar e clima de segurança, e o Inep
 divulga o Indicador de Nível Socioeconômico (INSE) das escolas. Essa
 combinação de desfechos educacionais mensurados em larga escala com
-centenas de covariáveis de contexto escolar torna o Saeb uma base
-particularmente adequada à aplicação de técnicas de aprendizado de máquina
-supervisionado.
+centenas de covariáveis de contexto escolar torna o Saeb uma base que
+permite explorar com aprendizado de máquina supervisionado a associação
+entre o contexto escolar e o desempenho, ainda que com as restrições de
+tamanho amostral discutidas na Seção~\ref{sec:unidade-escola}.
 
 Há, contudo, uma lacuna específica a explorar. A literatura brasileira
 sobre fatores associados ao desempenho escolar apoia-se predominantemente
 em modelos de regressão multinível e de regressão quantílica
-\cite{franco2007qualidade, alves2007efeito, almeida2014determinantes}, e as
-aplicações de modelos interpretáveis de aprendizado de máquina aos
-microdados do Saeb concentram-se em etapas mais avançadas da escolarização
-\cite{tertulino2025multilevel}. A aplicação desse instrumental ao 2º ano do
+\cite{franco2007qualidade, alves2007efeito, almeida2014determinantes}, e a
+aplicação mais próxima de aprendizado de máquina interpretável aos
+microdados do Saeb localizada nesta revisão trata do 9º ano e do Ensino
+Médio \cite{tertulino2025multilevel}. A aplicação desse instrumental ao 2º ano do
 Ensino Fundamental permanece limitada: trata-se de uma etapa incorporada
 ao Saeb apenas a partir de 2019 e que, por não contar com
 questionário respondido pelo próprio aluno, impõe um desenho analítico
@@ -274,7 +276,7 @@ Model-agnostic Explanations}) tratado como checagem complementar e
 
 A contribuição pretendida por este trabalho é quádrupla. Em primeiro lugar,
 do ponto de vista metodológico, ele propõe aplicar ao Saeb uma combinação
-que o levantamento bibliográfico realizado no Capítulo~2 não identificou em
+que não foi localizada, na literatura consultada no Capítulo~2, em
 trabalhos anteriores sobre o 2º ano: uma comparação sistemática entre
 modelos lineares de referência e \textit{ensembles} de árvore, sobre
 \emph{duas} trilhas de regressão no nível da escola (proporção de
@@ -291,10 +293,9 @@ agregada, pelas duas trilhas de modelagem e por agregar a
 interpretabilidade SHAP por grupo temático de variáveis, não apenas por
 coluna isolada.
 
-Em segundo lugar, do ponto de vista do rigor de dados, o trabalho documenta
-de forma exaustiva, para as 591 colunas reais das quatro bases de dados, a
-decisão de inclusão ou exclusão de cada variável candidata e sua
-justificativa, incluindo uma discussão explícita sobre vazamento de
+Em segundo lugar, do ponto de vista do rigor de dados, o trabalho registra,
+para cada uma das 432 variáveis candidatas construídas a partir das quatro
+bases, a decisão de inclusão ou exclusão e sua justificativa, incluindo uma discussão explícita sobre vazamento de
 informação (a variável alvo de alfabetização é definida por um corte na
 própria proficiência contínua) e sobre o tratamento dos dados de cor/raça,
 fora do modelo principal e mantidos como variável de auditoria, e de
@@ -333,8 +334,10 @@ socioeconômico preveria e inspecionar a decomposição da predição em casos
 concretos. A lógica de negócio subjacente é a de um instrumento de
 \emph{triagem e priorização}: com recursos escassos, o gestor que precisa
 decidir onde concentrar formação docente, apoio pedagógico ou investimento
-em infraestrutura ganha um mapa ordenado por evidência, cuja lógica é
-inspecionável por quem o utiliza, não um número isolado.
+em infraestrutura dispõe de uma triagem descritiva, inspecionável por quem
+a utiliza: quais escolas destoam do esperado para seu contexto e quais
+grupos de fatores mais pesam na previsão. Antes de decisões de alocação,
+essa triagem precisa ser combinada com avaliações de impacto.
 
 \section{Estrutura do trabalho}
 
