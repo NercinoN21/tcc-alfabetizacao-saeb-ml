@@ -1,0 +1,45 @@
+{
+  "inicio": "2026-11-24T00:28:43",
+  "modo": "completo",
+  "semente": 2110,
+  "citavel_no_texto": true,
+  "git": "10a9d94",
+  "config": {
+    "modo": "completo",
+    "seed": "2110",
+    "n_min_alunos": "10",
+    "juncao": "esquerda",
+    "limite_ausencia": "0.3",
+    "teste": "0.2",
+    "margem_equivalencia": "0.02",
+    "excluir_percepcao_desfecho": "True",
+    "data_dir": "data/raw",
+    "saida_dir": "reports/execucoes"
+  },
+  "checksums_ok": {
+    "TS_ALUNO_2EF.csv": true,
+    "TS_ESCOLA.csv": true,
+    "TS_PROFESSOR.csv": true,
+    "TS_DIRETOR.csv": true,
+    "Dicionario_Saeb_2023.xlsx": true
+  },
+  "origem_dados": "cache local",
+  "escolas_pop": 604,
+  "escolas_universo": 887,
+  "variaveis_A": 363,
+  "variaveis_B": 367,
+  "n_treino": 483,
+  "n_teste": 121,
+  "apenas": "ranking-pesos",
+  "duracao_min": 7.3,
+  "python": "3.12.14",
+  "sistema": "macOS-26.5.1-arm64-arm-64bit",
+  "pacotes": {
+    "pandas": "2.3.3",
+    "numpy": "2.3.5",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.4.1",
+    "lightgbm": "4.7.0",
+    "shap": "0.52.0"
+  }
+}

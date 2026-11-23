@@ -1,0 +1,11 @@
+,valor
+escolas,604
+escolas efetivas (n / deff),108.01246332433962
+temas,46
+Spearman sem × com peso,0.9981360671015842
+IC95_inf,0.9922957440198817
+IC95_sup,0.9980118049083566
+temas em comum no top-5,4
+1º tema sem peso,Nível socioeconômico (INSE)
+1º tema com peso,Nível socioeconômico (INSE)
+Spearman sem peso: 604 escolas × teste,0.9963963963963964
