@@ -1162,7 +1162,14 @@ medido com peso, cai de 15,3\% para 4,6\% na trilha de proporção e de
 15,4\% para 9,7\% na de proficiência, e truncar os pesos no percentil 99
 recupera só parte da perda (9,6\% e 9,5\%). O resultado é coerente com a
 perda de precisão esperada quando os pesos variam tanto: o modelo treinado
-sem peso prevê melhor a própria rede ponderada.
+sem peso prevê melhor a própria rede ponderada. O mesmo contraste vale para
+a importância das variáveis. Calculada nas 604 escolas com o modelo
+selecionado (Seção~\ref{sec:xai}), a participação de cada tema no SHAP
+produz praticamente o mesmo ranking sem e com peso. A correlação de
+Spearman entre os dois rankings é de 0,998 na trilha de proporção e de
+0,994 na de proficiência, com limite inferior do intervalo \textit{bootstrap}
+de 95\% de 0,992 e 0,989. O primeiro tema é o mesmo nas duas versões, e
+coincidem quatro e cinco dos cinco primeiros temas, respectivamente.
 
 O peso de precisão $n_e$ responde a outra questão. Como a proporção de
 alfabetizados de uma escola pequena oscila mais por acaso, todos os modelos
