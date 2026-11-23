@@ -142,6 +142,23 @@ def diagnostico_pesos(pop, variaveis=("Y_PROP_ALFAB", "Y_PROF_MEDIA", "ESC_INSE"
     return resumo, pd.DataFrame(linhas).set_index("variável")
 
 
+def alfabetizacao_por_rede(aluno: pd.DataFrame, corte: float = 743) -> pd.DataFrame:
+    """Proporção de alunos do 2º ano no corte de alfabetização ou acima, por rede, com e sem o peso amostral
+    do aluno (PESO_ALUNO_LP). Universo: alunos com proficiência em LP calculada (IN_PROFICIENCIA_LP = 1).
+    Número de contexto da Introdução, calculado nos microdados (fonte primária)."""
+    num = lambda s: pd.to_numeric(s.astype(str).str.replace(",", "."), errors="coerce")
+    a = aluno.assign(_w=num(aluno["PESO_ALUNO_LP"]), _y=num(aluno["PROFICIENCIA_LP_SAEB"]))
+    a = a[(a["IN_PROFICIENCIA_LP"] == 1) & a["_w"].notna() & a["_y"].notna()]
+    alf = (a["_y"] >= corte).astype(float)
+    linhas = []
+    for rot, m in (("total", pd.Series(True, index=a.index)), ("pública", a["IN_PUBLICA"] == 1),
+                   ("privada", a["IN_PUBLICA"] == 0)):
+        linhas.append({"rede": rot, "alunos": int(m.sum()),
+                       "proporção com peso (%)": 100 * float(np.average(alf[m], weights=a.loc[m, "_w"])),
+                       "proporção sem peso (%)": 100 * float(alf[m].mean())})
+    return pd.DataFrame(linhas).set_index("rede")
+
+
 def teste_proxies(pop, meta_sel, cfg) -> pd.DataFrame:
     """Dá para recuperar cor/raça a partir das variáveis do cenário A? (excluir ≠ remover a informação)"""
     from lightgbm import LGBMClassifier, LGBMRegressor

@@ -72,3 +72,15 @@ def test_diagnostico_pesos_contrasta_medias():
     resumo, medias = diagnostico_pesos(pop)
     assert medias.loc["Y_PROP_ALFAB", "média ponderada"] == pytest.approx((0.2 + 0.4 + 1.2) / 4)
     assert resumo.loc["pesos imputados (sem questionário do diretor, %)", "valor"] == pytest.approx(100 / 3)
+
+
+def test_alfabetizacao_por_rede_usa_peso_e_corte():
+    from saeb_alfab.robustez import alfabetizacao_por_rede
+    aluno = pd.DataFrame({"IN_PROFICIENCIA_LP": [1, 1, 1, 0], "IN_PUBLICA": [1, 1, 0, 1],
+                          "PESO_ALUNO_LP": ["3,0", "1,0", "2,0", "9,0"],          # vírgula decimal, como no Inep
+                          "PROFICIENCIA_LP_SAEB": ["750,5", "700,0", "743,0", "800,0"]})
+    t = alfabetizacao_por_rede(aluno)
+    assert t.loc["pública", "alunos"] == 2                                    # sem proficiência calculada fica fora
+    assert t.loc["pública", "proporção com peso (%)"] == pytest.approx(75.0)  # 3/(3+1)
+    assert t.loc["pública", "proporção sem peso (%)"] == pytest.approx(50.0)
+    assert t.loc["privada", "proporção com peso (%)"] == pytest.approx(100.0) # 743 está no corte

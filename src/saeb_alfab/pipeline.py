@@ -35,8 +35,8 @@ from .config import RAIZ, Config
 from .explicabilidade import (estabilidade, lime_vs_shap, ranking_temas_ponderado, shap_abs_por_escola, shap_por_tema,
                               shap_por_variavel)
 from .modelos import LINEAR, MODELOS, X_de, particao, pipeline_de, selecionar_variaveis, usa_peso_n
-from .robustez import (ablacao, auditar_equidade, construir_base_turma, diagnostico_pesos, sensibilidades,
-                       teste_proxies, tres_execucoes)
+from .robustez import (ablacao, alfabetizacao_por_rede, auditar_equidade, construir_base_turma, diagnostico_pesos,
+                       sensibilidades, teste_proxies, tres_execucoes)
 
 ETAPAS = ["base", "modelagem", "explicabilidade", "robustez"]
 TRILHAS = {"prop": ("Y_PROP_ALFAB", "Proporção de alfabetizados"), "prof": ("Y_PROF_MEDIA", "Proficiência média")}
@@ -118,7 +118,7 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
     info.update(origem_dados=origem, escolas_pop=len(pop), escolas_universo=len(universo), variaveis_A=len(ms_A),
                 variaveis_B=len(ms_B))
     print(f"[base] pop={len(pop)} escolas · universo={len(universo)} · variáveis A={len(ms_A)} B={len(ms_B)}")
-    _pesos(out, pop)
+    _pesos(out, pop, aluno)
     if ate == "base" or apenas == "pesos":
         return _fechar(out, info, t0)
 
@@ -218,10 +218,11 @@ def _ranking_pesos(out: Saida, pop, ms, tr, pipe, idx_tr, idx_te, cfg: Config) -
     out.tabela(resumo, f"03_shap_temas_ponderado_resumo_{tr}")
 
 
-def _pesos(out: Saida, pop) -> None:
+def _pesos(out: Saida, pop, aluno) -> None:
     resumo, medias = diagnostico_pesos(pop)
     out.tabela(resumo, "01_pesos_diagnostico")
     out.tabela(medias, "01_pesos_medias")
+    out.tabela(alfabetizacao_por_rede(aluno), "01_alfabetizacao_por_rede")
 
 
 def _pinball(out: Saida, pop, ms, alvo, tr, idx_tr, idx_te, cfg: Config) -> None:
