@@ -1634,9 +1634,7 @@ trilha}, e não na interpretação detalhada de todos os modelos estimados.
 A razão é substantiva: importâncias produzidas por modelos que não serão
 adotados não informam sobre o fenômeno nem sobre o instrumento final, e
 multiplicar explicações de modelos concorrentes convida à seleção
-\textit{a posteriori} da narrativa mais conveniente. As importâncias dos
-demais modelos são examinadas apenas de forma agregada, como checagem de
-estabilidade (descrita ao fim desta seção).
+\textit{a posteriori} da narrativa mais conveniente.
 
 O método prioritário é o SHAP, que segue a abordagem unificada de
 \citeonline{lundberg2017shap}: para cada escola $e$, a predição do
@@ -1681,24 +1679,33 @@ uma mesma variável serão \textbf{reagrupadas}, somando-se as contribuições
 absolutas de suas categorias antes de qualquer ordenação ou agregação
 temática.
 
-\textbf{Estabilidade do ranking.} A ordenação de variáveis por importância é
-ela própria uma estimativa sujeita a variação amostral. Para evitar
-interpretar como achado uma flutuação de estimação, a estabilidade do
-\textit{ranking} será verificada \textbf{entre as dobras da validação
-cruzada e entre sementes aleatórias distintas}, reportando-se a variação de
-posição das variáveis e dos grupos temáticos de maior importância. Apenas
-ordenações estáveis entre repetições serão objeto de interpretação
-substantiva.
+\textbf{Estabilidade do ranking.} A ordenação dos temas por importância é
+ela própria uma estimativa sujeita a variação amostral. Para não
+interpretar como achado uma flutuação de estimação, a partição entre treino
+e teste é refeita com 20 sementes aleatórias distintas. Em cada repetição,
+o modelo selecionado é reajustado com os mesmos hiperparâmetros, e o SHAP é
+recalculado no novo conjunto de teste. Reportam-se, para cada tema, a
+posição média, o desvio-padrão da posição e a porcentagem de repetições em
+que ele figura entre os três primeiros. Apenas ordenações estáveis entre
+repetições serão objeto de interpretação substantiva.
 
-\textbf{LIME como checagem complementar e opcional.} Havendo tempo hábil no
-cronograma, duas ou três escolas de exemplo (uma predição acurada, um erro
-grande do modelo e um caso limítrofe, com proporção de alfabetizados
-próxima à mediana da rede) terão sua decomposição SHAP local (gráfico
-\textit{waterfall}) comparada qualitativamente à explicação produzida pelo
-LIME \cite{ribeiro2016lime} para o mesmo caso, e as divergências entre os
-dois métodos são tratadas como resultado a discutir. Trata-se de análise complementar: sua
-eventual supressão não compromete os objetivos do trabalho, que se apoiam no
-SHAP.
+\textbf{LIME como checagem local.} O LIME \cite{ribeiro2016lime} é
+aplicado a seis escolas do conjunto de teste, escolhidas por regra definida
+antes da análise. São elas a escola de menor resíduo absoluto (caso
+típico), a de maior resíduo positivo (acima do esperado), a de maior
+resíduo negativo (abaixo do esperado), a de desfecho mais próximo da
+mediana (caso limítrofe) e as de menor e de maior desfecho. Para cada
+escola, o LIME é executado com dez sementes aleatórias, e suas
+contribuições são reagrupadas na variável original, como no SHAP. Três
+medidas resumem a comparação. A fidelidade local do LIME é o
+R\textsuperscript{2} do modelo substituto na vizinhança da escola. A
+estabilidade do LIME é o índice de Jaccard médio entre os conjuntos das dez
+variáveis mais importantes de cada par de execuções. A concordância com o
+SHAP da mesma escola é medida pelo índice de Jaccard entre as dez variáveis
+mais importantes de cada método, pela correlação de Spearman entre as
+contribuições e pela concordância de sinal nas variáveis em comum. As
+divergências entre os dois métodos são tratadas como resultado a discutir.
+A análise é complementar, e os objetivos do trabalho se apoiam no SHAP.
 
 Em todas as análises, respeita-se a advertência metodológica de que os
 valores de SHAP e LIME descrevem o que o modelo aprendeu a partir dos dados
