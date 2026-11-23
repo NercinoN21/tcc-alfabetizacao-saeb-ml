@@ -1070,10 +1070,10 @@ uma estrutura de \emph{pseudo-replicação} que inflaciona o tamanho
 aparente da amostra sem acrescentar informação explicativa
 (Seção~\ref{sec:nivel-escola-teoria}). O mesmo ICC impõe, ainda, um
 \textbf{teto estrutural} à modelagem no nível individual: se apenas cerca
-de 20\% da variância da proficiência reside \emph{entre} grupos, nenhum
-modelo alimentado exclusivamente por preditores de grupo pode explicar mais
-do que essa fração da variância individual, por melhor que seja o
-algoritmo. A agregação reconhece esse limite e reformula o alvo para o
+de 20\% da variância da proficiência reside \emph{entre} escolas, um
+modelo alimentado apenas por preditores de escola não pode explicar mais
+que essa fração da variância individual, e preditores de turma ficam
+limitados, analogamente, à parcela da variância situada entre turmas. A agregação reconhece esse limite e reformula o alvo para o
 nível em que a variância explicável de fato reside. Além do argumento
 estatístico, há um argumento de decisão: a escola é a menor unidade sobre a
 qual a gestão educacional efetivamente atua (alocação de professores,
@@ -1135,9 +1135,11 @@ etapas obrigatórias, sob pena de sobreajuste. Além disso,
 aleatória por aluno produziria, e isso não é uma deficiência do desenho,
 mas sua correção: parte relevante do desempenho aparente sob partição por
 aluno decorre de o modelo reencontrar no teste vetores de preditores que já
-viu no treino. As métricas obtidas no nível da escola descrevem a
-capacidade real de generalização para escolas novas, que é a pergunta
-relevante para o uso previsto do instrumento.
+viu no treino. As métricas obtidas no nível da escola aproximam a
+capacidade de generalização para outras escolas da mesma população e da
+mesma edição, que é a pergunta relevante para o uso previsto do
+instrumento. Elas não garantem desempenho semelhante em edições futuras do
+Saeb.
 
 \textbf{Perda da leitura individual.} Ao agregar, o trabalho abdica de
 qualquer afirmação sobre alunos individuais: não haverá predição de risco
@@ -1746,11 +1748,12 @@ alfabetizados sob o mesmo protocolo da Seção~\ref{sec:protocolo}:
     \item \textbf{Variação do conjunto de preditores}. População: rede
     pública (a mesma da referência); preditores: excluindo o INSE e as
     demais variáveis derivadas de \texttt{TS\_ESCOLA}. Comparada à
-    referência, isola o quanto o INSE contribui, mantida constante a
-    população;
+    referência, aproxima a contribuição do INSE, mantida constante a
+    população, sabendo que preditores correlacionados podem compensar parte
+    da sua retirada;
     \item \textbf{Variação da população}. População: universo de escolas
     públicas e privadas; preditores: o mesmo conjunto reduzido da execução
-    anterior. Comparada à execução 2, isola o efeito da ampliação da
+    anterior. Comparada à execução 2, aproxima o efeito da ampliação da
     população, mantido constante o conjunto de preditores.
 \end{enumerate}
 
@@ -1760,11 +1763,10 @@ unidade de agregação}: a trilha da proporção será repetida com a
 Seção~\ref{sec:agregacao}: os preditores docentes variam por turma, e parte
 das escolas possui mais de uma turma avaliada, de modo que a agregação por
 escola funde vetores docentes distintos. A convergência das conclusões
-entre as duas unidades converterá a escolha da escola (justificada pelo
-alinhamento com a unidade de decisão gerencial) de escolha contestável em
-escolha validada; uma divergência será, ela própria, reportada e discutida.
+entre as duas unidades indicará que elas não dependem fortemente da escolha
+da unidade de agregação, e uma divergência será reportada e discutida.
 
-A leitura conjunta das três execuções principais permite atribuir
+A leitura conjunta das três execuções principais permite aproximar
 separadamente as diferenças observadas à retirada do INSE
 (1~\textit{vs.}~2) e à mudança de população (2~\textit{vs.}~3). A análise privilegiará a estabilidade do
 \emph{ordenamento} dos grupos temáticos entre execuções, mais informativa
