@@ -90,7 +90,10 @@ preditores (Seção~\ref{sec:variaveis}).
 A Tabela~\ref{tab:competicao} compara os modelos. Nas duas trilhas, todos
 superam o \textit{baseline}. No teste, o linear de referência erra em média
 16,2 pontos percentuais na proporção e 17,0 pontos na proficiência, com
-ganho de 15,3\% e 9,9\% sobre a média do treino. Os \textit{ensembles}
+ganho de 15,3\% e 9,9\% sobre a média do treino. Ponderado pelo número
+de alunos avaliados, o erro do linear na proporção é de 14,8 pontos
+percentuais, porque as escolas pequenas, de proporção mais volátil, pesam
+menos nessa versão. Os \textit{ensembles}
 ficam próximos. O menor erro de teste é o do LightGBM na proporção
 (15,7 pontos percentuais) e o do XGBoost na proficiência (15,7 pontos). Os
 intervalos de confiança do MAE de teste se sobrepõem em todos os pares, o
