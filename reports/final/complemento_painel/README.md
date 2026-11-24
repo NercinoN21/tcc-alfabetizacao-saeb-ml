@@ -26,3 +26,14 @@ uv run python -m saeb_alfab.painel reports/final/complemento_painel/tabelas repo
 As tabelas ganharam o IC95% das médias com peso (`IC inf`, `IC sup`), por bootstrap das escolas de cada grupo
 (2.000 reamostragens, semente 2110). As colunas que já existiam diferem da versão anterior em menos de 1e-5, efeito
 numérico do reajuste do modelo, sem mudança em nenhum valor exibido.
+
+## Atualização (commit `6db444b`): simulador
+
+`05_simulador_distribuicao.csv` resume, por faixa de INSE (I–II, III, IV, V, VI–VII), o número de escolas, a
+previsão média fora da amostra do modelo selecionado (validação cruzada 5 × 5), o erro absoluto médio e os
+percentis 10, 25, 50, 75 e 90 da proporção real de alfabetizados (sem peso amostral). Execução `completo`, semente
+2110, 5,9 min, com o código idêntico ao do commit `6db444b`.
+
+```bash
+uv run python -m saeb_alfab.pipeline --modo completo --apenas simulador
+```
