@@ -3,145 +3,375 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Painel da alfabetização no 2º ano</title>
+<title>Quem aprende a ler no 2º ano</title>
+<meta name="description" content="O que os dados do Saeb 2023 mostram sobre a alfabetização no 2º ano das escolas públicas, e onde a previsão falha.">
 <style>
-:root{--fundo:#f7f6f2;--cartao:#fff;--tinta:#1b1b1a;--tinta2:#5a5955;--grade:#e2e0da;--azul:#2a78d6;--laranja:#eb6834;--neg:#b8462a}
-*{box-sizing:border-box}body{margin:0;background:var(--fundo);color:var(--tinta);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
-header{padding:28px 16px 8px;max-width:1080px;margin:auto}h1{font-size:24px;margin:0 0 4px}header p{margin:0;color:var(--tinta2)}
-nav{display:flex;gap:6px;flex-wrap:wrap;max-width:1080px;margin:16px auto 0;padding:0 16px}
-nav button{border:1px solid var(--grade);background:var(--cartao);padding:8px 14px;border-radius:999px;cursor:pointer;font:inherit;color:var(--tinta)}
-nav button[aria-selected=true]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
-main{max-width:1080px;margin:auto;padding:16px}section{display:none}section.ativo{display:block}
-.cartao{background:var(--cartao);border:1px solid var(--grade);border-radius:12px;padding:18px;margin-bottom:16px}
-.cartao h2{font-size:17px;margin:0 0 6px}.nota{color:var(--tinta2);font-size:13px}
-.controles{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:8px 0 12px}
-select,label{font:inherit}select{padding:6px 8px;border-radius:8px;border:1px solid var(--grade);background:#fff}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
-.kpi{background:var(--cartao);border:1px solid var(--grade);border-radius:12px;padding:14px}.kpi b{display:block;font-size:24px}
-.kpi span{color:var(--tinta2);font-size:13px}
-table{width:100%;border-collapse:collapse;font-size:13.5px}th,td{padding:6px 8px;border-bottom:1px solid var(--grade);text-align:right}
-th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}th{color:var(--tinta2);font-weight:600}
-.tabela{overflow-x:auto}.sup{color:var(--tinta2);font-style:italic}
-svg text{font:12px system-ui,sans-serif;fill:var(--tinta)}svg .eixo{fill:var(--tinta2)}
-.regras li{margin-bottom:6px}footer{max-width:1080px;margin:auto;padding:8px 16px 32px;color:var(--tinta2);font-size:12.5px}
+:root{
+  color-scheme:light;
+  --pagina:#ffffff;--faixa:#f5f5f7;--tinta:#1d1d1f;--tinta2:#6e6e73;--muda:#86868b;
+  --linha:#d2d2d7;--grade:#e8e8ed;--azul:#2a78d6;--laranja:#eb6834;--vermelho:#e34948;
+  --ponto-vazio:#e8e8ed;--anel:#1d1d1f;--vidro:rgba(255,255,255,.78);
+}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme:dark;--pagina:#000000;--faixa:#161617;--tinta:#f5f5f7;--tinta2:#a1a1a6;--muda:#86868b;
+    --linha:#424245;--grade:#2c2c2e;--azul:#3987e5;--laranja:#d95926;--vermelho:#e66767;
+    --ponto-vazio:#2c2c2e;--anel:#f5f5f7;--vidro:rgba(22,22,23,.78);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;--pagina:#000000;--faixa:#161617;--tinta:#f5f5f7;--tinta2:#a1a1a6;--muda:#86868b;
+  --linha:#424245;--grade:#2c2c2e;--azul:#3987e5;--laranja:#d95926;--vermelho:#e66767;
+  --ponto-vazio:#2c2c2e;--anel:#f5f5f7;--vidro:rgba(22,22,23,.78);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--pagina);color:var(--tinta);
+  font:19px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+a{color:var(--azul);text-decoration:none}a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid var(--azul);outline-offset:3px;border-radius:6px}
+.topo{position:sticky;top:0;z-index:10;background:var(--vidro);backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--grade)}
+.topo nav{max-width:980px;margin:auto;padding:0 16px;height:48px;display:flex;align-items:center;gap:22px;font-size:13px}
+.topo nav b{font-weight:600;margin-right:auto;font-size:14px}
+.topo nav a{color:var(--tinta);opacity:.8}
+@media (max-width:720px){.topo nav a.opc{display:none}}
+section{padding:112px 16px}
+section.faixa{background:var(--faixa)}
+.coluna{max-width:980px;margin:auto}
+.texto{max-width:680px;margin:0 auto;text-align:center}
+h1,h2{font-weight:600;letter-spacing:-.025em;margin:0}
+h1{font-size:clamp(36px,6vw,64px);line-height:1.06}
+h2{font-size:clamp(30px,4.6vw,48px);line-height:1.08}
+.lead{font-size:clamp(19px,2.2vw,24px);color:var(--tinta2);margin:20px auto 0;line-height:1.4}
+p{margin:16px 0 0}
+.peq{font-size:14px;color:var(--tinta2)}
+/* abertura */
+.palpite{margin:48px auto 0;max-width:560px}
+.palpite output{display:block;font-size:clamp(56px,9vw,96px);font-weight:600;letter-spacing:-.04em;line-height:1}
+.palpite input[type=range]{width:100%;margin:24px 0 8px;accent-color:var(--azul);height:28px}
+.botao{display:inline-block;margin-top:20px;background:var(--azul);color:#fff;border:0;border-radius:980px;
+  padding:12px 26px;font:inherit;font-size:17px;cursor:pointer}
+.botao:hover{filter:brightness(1.08)}
+.botao.sec{background:transparent;color:var(--azul);padding:12px 4px}
+.pontos{display:grid;grid-template-columns:repeat(10,1fr);gap:10px;max-width:420px;margin:56px auto 0}
+.pontos span{aspect-ratio:1;border-radius:50%;background:var(--ponto-vazio);transition:background .25s ease, box-shadow .2s}
+.pontos span.chute{box-shadow:inset 0 0 0 1.5px var(--azul)}
+.pontos span.sim{background:var(--azul)}
+@media (prefers-reduced-motion:reduce){.pontos span{transition:none}}
+.resposta{margin-top:40px;min-height:150px}
+.resposta[hidden]{display:block;visibility:hidden}
+.resposta .grande{font-size:clamp(44px,7vw,80px);font-weight:600;letter-spacing:-.035em;line-height:1}
+/* gráficos */
+.grafico{margin:56px auto 0;max-width:820px}
+.grafico svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font-family:inherit;fill:var(--tinta);font-size:14px}
+svg .eixo{fill:var(--muda);font-size:12px}
+svg .rot{fill:var(--tinta2);font-size:14px}
+.legenda{display:flex;gap:20px;justify-content:center;font-size:14px;color:var(--tinta2);margin-top:16px;flex-wrap:wrap}
+.legenda i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:0}
+.alternar{display:inline-flex;background:var(--grade);border-radius:980px;padding:3px;margin-top:28px}
+.alternar button{border:0;background:transparent;font:inherit;font-size:14px;padding:7px 16px;border-radius:980px;color:var(--tinta);cursor:pointer}
+.alternar button[aria-pressed=true]{background:var(--pagina);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+details{max-width:680px;margin:40px auto 0;text-align:left;border-top:1px solid var(--linha);padding-top:14px}
+details summary{cursor:pointer;color:var(--azul);font-size:16px;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:" +"}details[open] summary::after{content:" −"}
+details .corpo{font-size:16px;color:var(--tinta2)}
+table{width:100%;border-collapse:collapse;font-size:15px;margin-top:12px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 6px;border-bottom:1px solid var(--grade);text-align:right}
+th:first-child,td:first-child{text-align:left}th{font-weight:600;color:var(--tinta2);font-size:13px}
+/* explorador */
+.uf-escolha{margin-top:36px}
+.uf-escolha select{font:inherit;font-size:19px;padding:10px 40px 10px 16px;border-radius:12px;border:1px solid var(--linha);
+  background:var(--pagina);color:var(--tinta)}
+.uf-numeros{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:40px 24px;margin:56px auto 0;max-width:820px;text-align:center}
+.uf-numeros b{display:block;font-size:clamp(36px,5vw,52px);font-weight:600;letter-spacing:-.03em;line-height:1.05}
+.uf-numeros span{font-size:15px;color:var(--tinta2)}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;max-width:820px;margin:48px auto 0;text-align:left}
+.links h3{font-size:19px;margin:0 0 6px;font-weight:600}
+.links p{margin:0;font-size:16px;color:var(--tinta2)}
+.cite{font-size:14px;color:var(--tinta2);background:var(--pagina);border:1px solid var(--grade);border-radius:12px;padding:16px;margin-top:12px;text-align:left}
+footer{padding:40px 16px 56px;font-size:13px;color:var(--muda);background:var(--faixa);border-top:1px solid var(--grade)}
+footer .coluna{display:flex;flex-direction:column;gap:6px}
+#dica{position:fixed;pointer-events:none;background:var(--tinta);color:var(--pagina);font-size:13px;padding:6px 10px;border-radius:8px;
+  opacity:0;transition:opacity .12s;z-index:20;max-width:260px}
+.alvo{cursor:default}
 </style>
 </head>
 <body>
-<header>
-<h1>Alfabetização no 2º ano: escolas públicas do Saeb 2023</h1>
-<p>Protótipo de painel com dados agregados das 604 escolas analisadas no trabalho. Nenhuma escola individual é exibida.</p>
-</header>
-<nav role="tablist">
-<button role="tab" aria-selected="true" data-aba="geo">Por unidade da federação</button>
-<button role="tab" aria-selected="false" data-aba="inse">Por nível socioeconômico</button>
-<button role="tab" aria-selected="false" data-aba="temas">Temas do modelo</button>
-<button role="tab" aria-selected="false" data-aba="erro">Onde o modelo erra</button>
-<button role="tab" aria-selected="false" data-aba="regras">Como ler</button>
-</nav>
+<header class="topo"><nav aria-label="Seções">
+  <b>Quem aprende a ler no 2º ano</b>
+  <a class="opc" href="#lugar">Lugar</a><a class="opc" href="#renda">Contexto</a><a class="opc" href="#questionarios">Escola</a>
+  <a class="opc" href="#erro">Limites</a><a href="#uf">Sua UF</a><a href="#dados">Dados</a>
+</nav></header>
+
 <main>
-<section id="geo" class="ativo">
-<div class="kpis" id="kpis"></div>
-<div class="cartao">
-<h2>Desfechos por unidade da federação</h2>
-<div class="controles">
-<label>Desfecho <select id="g-desf"><option value="prop">Proporção de alfabetizados</option><option value="prof">Proficiência média em LP</option></select></label>
-<label>Região <select id="g-reg"><option value="">Todas</option></select></label>
-<label><input type="checkbox" id="g-peso" checked> com peso amostral</label>
-</div>
-<div id="g-graf"></div>
-<p class="nota" id="g-nota"></p>
-<div class="tabela"><table id="g-tab"></table></div>
-</div>
+<section id="inicio">
+  <div class="texto">
+    <h1>De cada 100 crianças da escola pública, quantas terminam o 2º ano sabendo ler e escrever?</h1>
+    <p class="lead">Dê o seu palpite antes de ver o que o Saeb 2023 mostra.</p>
+    <div class="palpite">
+      <output id="palpite-valor" for="palpite" aria-live="polite">70</output>
+      <label for="palpite" class="peq">Arraste para escolher um número de 0 a 100</label>
+      <input id="palpite" type="range" min="0" max="100" value="70">
+      <button class="botao" id="revelar">Ver a resposta</button>
+    </div>
+  </div>
+  <div class="pontos" id="pontos" aria-hidden="true"></div>
+  <div class="texto resposta" id="resposta" hidden aria-live="polite">
+    <div class="grande" id="resp-num"></div>
+    <p id="resp-texto"></p>
+    <p class="peq">Estimativa com o peso amostral do Saeb, para os alunos da rede pública com proficiência calculada. Alfabetizado é quem atinge 743 pontos na escala de Língua Portuguesa, o padrão definido pelo Inep em 2023.</p>
+  </div>
 </section>
-<section id="inse">
-<div class="cartao">
-<h2>Desfechos por faixa de INSE da escola</h2>
-<div class="controles"><label>Desfecho <select id="i-desf"><option value="prop">Proporção de alfabetizados</option><option value="prof">Proficiência média em LP</option></select></label></div>
-<div id="i-graf"></div>
-<p class="nota">Azul: média simples das escolas. Laranja: média com o peso amostral. Com peso, as faixas baixas reúnem poucas escolas efetivas e a média é imprecisa.</p>
-</div>
+
+<section id="lugar" class="faixa">
+  <div class="texto">
+    <h2>O lugar onde a criança estuda pesa.</h2>
+    <p class="lead" id="lugar-lead"></p>
+  </div>
+  <div class="grafico" id="g-regiao" role="img"></div>
+  <details><summary>Ver os números</summary><div class="corpo">
+    <p>Proporção de alfabetizados nas escolas da base, sem e com o peso amostral. A média com peso aproxima a rede que a amostra representa.</p>
+    <table id="t-regiao"></table></div></details>
 </section>
-<section id="temas">
-<div class="cartao">
-<h2>Temas de maior participação na previsão (SHAP do modelo selecionado)</h2>
-<div class="controles"><label>Desfecho <select id="t-desf"><option value="prop">Proporção de alfabetizados</option><option value="prof">Proficiência média em LP</option></select></label></div>
-<div id="t-graf"></div>
-<p class="nota">Barra: participação média do tema na importância total em 20 partições. Número à direita: porcentagem das partições em que o tema ficou entre os três primeiros. Só ordenações estáveis devem ser interpretadas. Participação na previsão indica associação e não mede efeito causal.</p>
-</div>
+
+<section id="renda">
+  <div class="texto">
+    <h2>O nível socioeconômico da escola explica uma parte.</h2>
+    <p class="lead" id="renda-lead"></p>
+  </div>
+  <div class="grafico" id="g-inse" role="img"></div>
+  <div class="legenda"><span><i style="background:var(--azul)"></i>Média das escolas</span><span><i style="background:var(--laranja)"></i>Com peso amostral</span></div>
+  <details><summary>Como ler este gráfico</summary><div class="corpo">
+    <p>O Indicador de Nível Socioeconômico (INSE) do Inep resume a renda, a escolaridade e os bens das famílias dos alunos de cada escola, em níveis de I a VIII. Nas faixas baixas há poucas escolas efetivas depois da ponderação, e a média com peso é imprecisa.</p>
+    <table id="t-inse"></table></div></details>
 </section>
+
+<section id="questionarios" class="faixa">
+  <div class="texto">
+    <h2>O que professores e diretores respondem acrescenta pouco à previsão.</h2>
+    <p class="lead" id="quest-lead"></p>
+  </div>
+  <div class="grafico" id="g-quest" role="img"></div>
+  <details><summary>Como medimos</summary><div class="corpo">
+    <p>Um modelo de aprendizado de máquina tenta prever o desempenho de cada escola usando só o nível socioeconômico e a localização. Depois, acrescentamos os questionários do professor e do diretor e comparamos o erro nas mesmas amostras de validação. As barras mostram quanto o erro caiu, com o intervalo de confiança de 95%. Se o intervalo cruza o zero, a melhora não se distingue do acaso.</p>
+    <p>Cada bloco também foi retirado do modelo completo. A tabela mostra quanto o erro sobe sem ele. O critério de decisão exige intervalo acima de zero e aumento de pelo menos 2%.</p>
+    <table id="t-quest"></table></div></details>
+</section>
+
 <section id="erro">
-<div class="cartao">
-<h2>Resíduo médio por grupo de escolas</h2>
-<div class="controles">
-<label>Desfecho <select id="e-desf"><option value="prop">Proporção de alfabetizados</option><option value="prof">Proficiência média em LP</option></select></label>
-<label>Grupos <select id="e-eixo"><option value="inse">Faixa de INSE</option><option value="regiao">Região</option><option value="localizacao">Localização</option></select></label>
-</div>
-<div id="e-graf"></div>
-<p class="nota">Resíduo: desfecho observado menos o previsto pelo modelo fora da amostra. Positivo: o grupo fica, em média, acima do que o modelo prevê para o seu contexto. O erro absoluto médio mostra onde a previsão é menos precisa.</p>
-<div class="tabela"><table id="e-tab"></table></div>
-</div>
+  <div class="texto">
+    <h2>A previsão falha mais nos extremos.</h2>
+    <p class="lead" id="erro-lead"></p>
+    <div class="alternar" role="group" aria-label="Desfecho">
+      <button aria-pressed="true" data-k="prop">Alfabetização</button><button aria-pressed="false" data-k="prof">Proficiência</button>
+    </div>
+  </div>
+  <div class="grafico" id="g-erro" role="img"></div>
+  <div class="legenda"><span><i style="background:var(--azul)"></i>Acima do previsto</span><span><i style="background:var(--vermelho)"></i>Abaixo do previsto</span></div>
+  <details><summary>Por que isso importa</summary><div class="corpo">
+    <p>O resíduo é o desempenho observado menos o previsto pelo modelo para escolas que ele não viu. O modelo selecionado trata o nível socioeconômico como uma reta, mas a alfabetização fica parada nos níveis baixos e só sobe a partir do nível V. Por isso a previsão erra mais onde as necessidades são maiores, e este site não classifica escolas individuais.</p>
+    <table id="t-erro"></table></div></details>
 </section>
-<section id="regras">
-<div class="cartao regras">
-<h2>Como ler este painel</h2>
-<ul>
-<li>Os números descrevem as 604 escolas públicas com INSE e pelo menos 10 alunos avaliados no 2º ano do Saeb 2023.</li>
-<li>A média com peso amostral aproxima a rede representada pela amostra. Com 108 escolas efetivas, ela é imprecisa em grupos pequenos.</li>
-<li>Grupos com menos de <span id="r-nmin"></span> escolas têm os valores suprimidos, para evitar a identificação de escolas.</li>
-<li>Os temas e os resíduos vêm de um modelo preditivo. Eles indicam associações no nível da escola e não medem o efeito de mudar qualquer fator.</li>
-<li>O modelo erra mais nas escolas de INSE baixo. Por isso o painel não classifica escolas individuais como acima ou abaixo do esperado.</li>
-</ul>
-</div>
+
+<section id="temas" class="faixa">
+  <div class="texto">
+    <h2>Os temas que mais pesam falam da estrutura da escola.</h2>
+    <p class="lead">Depois do nível socioeconômico, o modelo se apoia em respostas sobre a oferta de Educação Infantil, a merenda conforme o tempo de permanência e as ações contra o abandono.</p>
+    <div class="alternar" role="group" aria-label="Desfecho">
+      <button aria-pressed="false" data-k="prop">Alfabetização</button><button aria-pressed="true" data-k="prof">Proficiência</button>
+    </div>
+  </div>
+  <div class="grafico" id="g-temas" role="img"></div>
+  <details><summary>Como ler</summary><div class="corpo">
+    <p>A barra mostra a participação média do tema na explicação do modelo (valores SHAP), em 20 sorteios diferentes de escolas. O número ao lado diz em quantos desses sorteios o tema ficou entre os três primeiros. Só ordens estáveis merecem leitura. Pesar na previsão indica associação e não mede o efeito de mudar o fator. A oferta de Educação Infantil, por exemplo, pode estar indicando o tipo de escola.</p>
+  </div></details>
+</section>
+
+<section id="uf">
+  <div class="texto">
+    <h2>Explore a sua unidade da federação.</h2>
+    <p class="lead">Escolha uma UF para ver as escolas dela na base do estudo.</p>
+    <div class="uf-escolha"><label for="uf-sel" class="peq" style="display:block;margin-bottom:8px">Unidade da federação</label><select id="uf-sel"></select></div>
+  </div>
+  <div class="uf-numeros" id="uf-num" aria-live="polite"></div>
+  <div class="texto"><p class="peq" id="uf-nota"></p></div>
+  <details><summary>Ver todas as UFs</summary><div class="corpo"><table id="t-uf"></table></div></details>
+</section>
+
+<section id="dados" class="faixa">
+  <div class="texto">
+    <h2>Dados e código abertos.</h2>
+    <p class="lead">Tudo o que está aqui pode ser conferido, reproduzido e reutilizado.</p>
+  </div>
+  <div class="links">
+    <div><h3><a id="l-repo" href="#">Repositório</a></h3><p>Código do pipeline, testes e o texto completo do trabalho, com licença MIT para o código e CC BY 4.0 para o texto.</p></div>
+    <div><h3><a id="l-tab" href="#">Tabelas dos resultados</a></h3><p>Todos os números citados, em CSV, com a versão do código que os gerou.</p></div>
+    <div><h3><a id="l-painel" href="#">Dados desta página</a></h3><p>Os agregados por UF, região, localização e faixa socioeconômica.</p></div>
+    <div><h3><a href="https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/saeb">Microdados do Saeb</a></h3><p>A fonte original, publicada pelo Inep.</p></div>
+  </div>
+  <div class="texto" style="margin-top:56px">
+    <p class="peq">Como citar</p>
+    <div class="cite">BARROS NETO, Nercino José de. <i>Preditores da alfabetização e da proficiência em Língua Portuguesa</i>: uma comparação de algoritmos aplicada ao 2º ano do Ensino Fundamental público. Trabalho de Conclusão de Curso (Bacharelado em Ciência de Dados para Negócios), Universidade Federal da Paraíba, João Pessoa, 2026.</div>
+  </div>
 </section>
 </main>
-<footer id="rodape"></footer>
+
+<footer><div class="coluna">
+  <span>Trabalho de Conclusão de Curso em Ciência de Dados para Negócios, UFPB. Orientação: Prof. Dr. Alessio Tony Cavalcanti De Almeida.</span>
+  <span id="rodape"></span>
+  <span>Os números descrevem as 604 escolas públicas com INSE e pelo menos 10 alunos avaliados no 2º ano do Saeb 2023. Grupos com menos de <span id="nmin"></span> escolas seriam suprimidos. Nenhuma escola individual é exibida.</span>
+</div></footer>
+<div id="dica" role="tooltip"></div>
+
 <script>
-const D={"dados": {"uf": [{"grupo": "AC", "região": "Norte", "escolas": 41.0, "alunos": 1185.0, "INSE médio": 3.6341463415, "prop sem peso": 0.3819178452, "prop com peso": 0.3996951921, "prop resíduo médio": 0.0124529295, "prop erro absoluto médio": 0.1641127999, "prof sem peso": 727.9203026211, "prof com peso": 728.0563999467, "prof resíduo médio": 2.3523109132, "prof erro absoluto médio": 16.900989706, "suprimido": false}, {"grupo": "AL", "região": "Nordeste", "escolas": 25.0, "alunos": 585.0, "INSE médio": 3.36, "prop sem peso": 0.3066375426, "prop com peso": 0.3668387863, "prop resíduo médio": -0.0821114188, "prop erro absoluto médio": 0.1448133464, "prof sem peso": 717.3215266653, "prof com peso": 724.3615877036, "prof resíduo médio": -11.0299937134, "prof erro absoluto médio": 16.4039723, "suprimido": false}, {"grupo": "AM", "região": "Norte", "escolas": 18.0, "alunos": 632.0, "INSE médio": 3.7222222222, "prop sem peso": 0.4156670083, "prop com peso": 0.4692924682, "prop resíduo médio": -0.0153838905, "prop erro absoluto médio": 0.1501255155, "prof sem peso": 731.2790701351, "prof com peso": 737.6338459991, "prof resíduo médio": 0.8205044877, "prof erro absoluto médio": 16.3421285648, "suprimido": false}, {"grupo": "AP", "região": "Norte", "escolas": 45.0, "alunos": 1406.0, "INSE médio": 3.8, "prop sem peso": 0.312450864, "prop com peso": 0.2929404325, "prop resíduo médio": -0.0570722127, "prop erro absoluto médio": 0.1443515477, "prof sem peso": 718.1477264888, "prof com peso": 716.695097963, "prof resíduo médio": -6.5696597732, "prof erro absoluto médio": 15.2285462304, "suprimido": false}, {"grupo": "BA", "região": "Nordeste", "escolas": 12.0, "alunos": 350.0, "INSE médio": 3.75, "prop sem peso": 0.4567758716, "prop com peso": 0.4853338363, "prop resíduo médio": 0.0003185883, "prop erro absoluto médio": 0.1848956178, "prof sem peso": 736.0479075503, "prof com peso": 736.3466375698, "prof resíduo médio": 1.0273694819, "prof erro absoluto médio": 15.2230294584, "suprimido": false}, {"grupo": "CE", "região": "Nordeste", "escolas": 20.0, "alunos": 470.0, "INSE médio": 3.3, "prop sem peso": 0.7321171231, "prop com peso": 0.7638525109, "prop resíduo médio": 0.2968737711, "prop erro absoluto médio": 0.3207985941, "prof sem peso": 763.1133009169, "prof com peso": 768.7029782806, "prof resíduo médio": 29.6283416659, "prof erro absoluto médio": 36.8767934102, "suprimido": false}, {"grupo": "DF", "região": "Centro-Oeste", "escolas": 15.0, "alunos": 497.0, "INSE médio": 5.2666666667, "prop sem peso": 0.5615225182, "prop com peso": 0.5797662536, "prop resíduo médio": 0.0680904772, "prop erro absoluto médio": 0.1411063598, "prof sem peso": 746.0324755303, "prof com peso": 747.4154220105, "prof resíduo médio": 9.9890126308, "prof erro absoluto médio": 12.8566311252, "suprimido": false}, {"grupo": "ES", "região": "Sudeste", "escolas": 21.0, "alunos": 630.0, "INSE médio": 4.3333333333, "prop sem peso": 0.6418544701, "prop com peso": 0.6765583538, "prop resíduo médio": 0.1577519847, "prop erro absoluto médio": 0.2050214656, "prof sem peso": 751.65750928, "prof com peso": 756.3440497161, "prof resíduo médio": 15.6226094752, "prof erro absoluto médio": 19.8656879399, "suprimido": false}, {"grupo": "GO", "região": "Centro-Oeste", "escolas": 20.0, "alunos": 659.0, "INSE médio": 4.65, "prop sem peso": 0.5665133421, "prop com peso": 0.4505250404, "prop resíduo médio": 0.0638222338, "prop erro absoluto médio": 0.1841654898, "prof sem peso": 743.9855819742, "prof com peso": 730.4937541341, "prof resíduo médio": 7.113402754, "prof erro absoluto médio": 19.0249312536, "suprimido": false}, {"grupo": "MA", "região": "Nordeste", "escolas": 16.0, "alunos": 437.0, "INSE médio": 3.4375, "prop sem peso": 0.2546732781, "prop com peso": 0.2934780547, "prop resíduo médio": -0.1041182308, "prop erro absoluto médio": 0.1215913602, "prof sem peso": 712.9077311739, "prof com peso": 715.9202436548, "prof resíduo médio": -10.860316447, "prof erro absoluto médio": 11.18382888, "suprimido": false}, {"grupo": "MG", "região": "Sudeste", "escolas": 13.0, "alunos": 395.0, "INSE médio": 4.4615384615, "prop sem peso": 0.507004872, "prop com peso": 0.619778498, "prop resíduo médio": 0.0186499444, "prop erro absoluto médio": 0.1387807769, "prof sem peso": 738.7645291776, "prof com peso": 749.6391968855, "prof resíduo médio": 3.1257503334, "prof erro absoluto médio": 14.9292954174, "suprimido": false}, {"grupo": "MS", "região": "Centro-Oeste", "escolas": 22.0, "alunos": 640.0, "INSE médio": 4.4545454545, "prop sem peso": 0.3486764943, "prop com peso": 0.3760295864, "prop resíduo médio": -0.0976255052, "prop erro absoluto médio": 0.1503414893, "prof sem peso": 723.0363334753, "prof com peso": 727.31591471, "prof resíduo médio": -12.063650897, "prof erro absoluto médio": 18.0847496027, "suprimido": false}, {"grupo": "MT", "região": "Centro-Oeste", "escolas": 25.0, "alunos": 721.0, "INSE médio": 4.4, "prop sem peso": 0.4551306094, "prop com peso": 0.4492224947, "prop resíduo médio": -0.0359400318, "prop erro absoluto médio": 0.1292797715, "prof sem peso": 733.8521273997, "prof com peso": 735.9725092249, "prof resíduo médio": -4.1947340739, "prof erro absoluto médio": 12.5887761932, "suprimido": false}, {"grupo": "PA", "região": "Norte", "escolas": 25.0, "alunos": 735.0, "INSE médio": 3.4, "prop sem peso": 0.3668576632, "prop com peso": 0.4430039408, "prop resíduo médio": 0.0159940077, "prop erro absoluto médio": 0.1416492147, "prof sem peso": 722.7182969945, "prof com peso": 728.2347041141, "prof resíduo médio": -0.4137077299, "prof erro absoluto médio": 16.9607148591, "suprimido": false}, {"grupo": "PB", "região": "Nordeste", "escolas": 27.0, "alunos": 631.0, "INSE médio": 3.7777777778, "prop sem peso": 0.4365525826, "prop com peso": 0.4517661518, "prop resíduo médio": 0.0027482987, "prop erro absoluto médio": 0.1890761455, "prof sem peso": 727.4638271379, "prof com peso": 731.3404978977, "prof resíduo médio": -1.8415584013, "prof erro absoluto médio": 20.3338034465, "suprimido": false}, {"grupo": "PE", "região": "Nordeste", "escolas": 19.0, "alunos": 544.0, "INSE médio": 3.8421052632, "prop sem peso": 0.505513043, "prop com peso": 0.5081722197, "prop resíduo médio": 0.0642699916, "prop erro absoluto médio": 0.1707489841, "prof sem peso": 735.3231411381, "prof com peso": 734.2002508401, "prof resíduo médio": 2.3310104005, "prof erro absoluto médio": 19.392127977, "suprimido": false}, {"grupo": "PI", "região": "Nordeste", "escolas": 23.0, "alunos": 543.0, "INSE médio": 3.3913043478, "prop sem peso": 0.4044456796, "prop com peso": 0.4369717317, "prop resíduo médio": -0.0076976052, "prop erro absoluto médio": 0.1391332658, "prof sem peso": 725.5887119693, "prof com peso": 727.003187757, "prof resíduo médio": -3.1153045767, "prof erro absoluto médio": 14.9794479427, "suprimido": false}, {"grupo": "PR", "região": "Sul", "escolas": 17.0, "alunos": 489.0, "INSE médio": 4.9411764706, "prop sem peso": 0.5852400589, "prop com peso": 0.5777033465, "prop resíduo médio": 0.0790506578, "prop erro absoluto médio": 0.1515298408, "prof sem peso": 748.3444749856, "prof com peso": 748.0065822029, "prof resíduo médio": 8.9830046635, "prof erro absoluto médio": 17.3314051959, "suprimido": false}, {"grupo": "RJ", "região": "Sudeste", "escolas": 15.0, "alunos": 400.0, "INSE médio": 4.2, "prop sem peso": 0.4186093404, "prop com peso": 0.3834903511, "prop resíduo médio": -0.0312542011, "prop erro absoluto médio": 0.1323577026, "prof sem peso": 729.4474760356, "prof com peso": 726.3530013626, "prof resíduo médio": -4.5429770656, "prof erro absoluto médio": 12.9053727808, "suprimido": false}, {"grupo": "RN", "região": "Nordeste", "escolas": 22.0, "alunos": 570.0, "INSE médio": 3.8636363636, "prop sem peso": 0.2440185198, "prop com peso": 0.261646285, "prop resíduo médio": -0.1321091727, "prop erro absoluto médio": 0.1624465082, "prof sem peso": 706.6929380786, "prof com peso": 708.9290833934, "prof resíduo médio": -17.5951025156, "prof erro absoluto médio": 20.6073583327, "suprimido": false}, {"grupo": "RO", "região": "Norte", "escolas": 26.0, "alunos": 889.0, "INSE médio": 4.3461538462, "prop sem peso": 0.5226529912, "prop com peso": 0.5132123555, "prop resíduo médio": 0.045055227, "prop erro absoluto médio": 0.1730609175, "prof sem peso": 743.4171894298, "prof com peso": 742.6080789121, "prof resíduo médio": 7.3494963918, "prof erro absoluto médio": 15.4906977412, "suprimido": false}, {"grupo": "RR", "região": "Norte", "escolas": 24.0, "alunos": 704.0, "INSE médio": 3.625, "prop sem peso": 0.3286356965, "prop com peso": 0.3931863839, "prop resíduo médio": -0.0378565398, "prop erro absoluto médio": 0.147475712, "prof sem peso": 721.7633362778, "prof com peso": 726.7523808233, "prof resíduo médio": -5.0469802531, "prof erro absoluto médio": 15.7891510663, "suprimido": false}, {"grupo": "RS", "região": "Sul", "escolas": 25.0, "alunos": 542.0, "INSE médio": 5.28, "prop sem peso": 0.6101154394, "prop com peso": 0.6627648881, "prop resíduo médio": 0.0562830833, "prop erro absoluto médio": 0.164028405, "prof sem peso": 749.236929751, "prof com peso": 754.2645419657, "prof resíduo médio": 6.526876619, "prof erro absoluto médio": 18.2354422686, "suprimido": false}, {"grupo": "SC", "região": "Sul", "escolas": 20.0, "alunos": 576.0, "INSE médio": 5.05, "prop sem peso": 0.5758053854, "prop com peso": 0.6866655584, "prop resíduo médio": 0.0616704725, "prop erro absoluto médio": 0.1591280632, "prof sem peso": 745.2222989053, "prof com peso": 758.2676567241, "prof resíduo médio": 8.4885733386, "prof erro absoluto médio": 18.4666361023, "suprimido": false}, {"grupo": "SE", "região": "Nordeste", "escolas": 27.0, "alunos": 725.0, "INSE médio": 3.7407407407, "prop sem peso": 0.3494234585, "prop com peso": 0.3430680727, "prop resíduo médio": -0.0571300207, "prop erro absoluto médio": 0.1683164256, "prof sem peso": 720.7334983837, "prof com peso": 720.7311420052, "prof resíduo médio": -9.0396717571, "prof erro absoluto médio": 17.0743050041, "suprimido": false}, {"grupo": "SP", "região": "Sudeste", "escolas": 20.0, "alunos": 671.0, "INSE médio": 5.0, "prop sem peso": 0.5496901599, "prop com peso": 0.5327342971, "prop resíduo médio": 0.0157299202, "prop erro absoluto médio": 0.1489070932, "prof sem peso": 743.2507871672, "prof com peso": 741.4764645049, "prof resíduo médio": 3.8549730512, "prof erro absoluto médio": 13.1982338994, "suprimido": false}, {"grupo": "TO", "região": "Norte", "escolas": 21.0, "alunos": 557.0, "INSE médio": 4.0952380952, "prop sem peso": 0.3422917989, "prop com peso": 0.2372096236, "prop resíduo médio": -0.1107913117, "prop erro absoluto médio": 0.1764862113, "prof sem peso": 725.8229477347, "prof com peso": 714.9660544916, "prof resíduo médio": -7.661629106, "prof erro absoluto médio": 14.9842773134, "suprimido": false}], "regiao": [{"grupo": "Centro-Oeste", "escolas": 82.0, "alunos": 2517.0, "INSE médio": 4.6341463415, "prop sem peso": 0.473198204, "prop com peso": 0.4556288684, "prop resíduo médio": -0.0091275619, "prop erro absoluto médio": 0.1504806371, "prof sem peso": 735.6500157791, "prof com peso": 733.660821895, "prof resíduo médio": -0.9532369151, "prof erro absoluto médio": 15.6820974151, "suprimido": false}, {"grupo": "Nordeste", "escolas": 191.0, "alunos": 4855.0, "INSE médio": 3.6073298429, "prop sem peso": 0.4050320572, "prop com peso": 0.4755270085, "prop resíduo médio": -0.0058010579, "prop erro absoluto médio": 0.1773205923, "prof sem peso": 726.4013364298, "prof com peso": 734.6743789938, "prof resíduo médio": -2.8945964197, "prof erro absoluto médio": 19.2963944346, "suprimido": false}, {"grupo": "Norte", "escolas": 200.0, "alunos": 6108.0, "INSE médio": 3.79, "prop sem peso": 0.3751836526, "prop com peso": 0.4233667662, "prop resíduo médio": -0.0199923895, "prop erro absoluto médio": 0.1560657273, "prof sem peso": 726.4290484251, "prof com peso": 729.5097962844, "prof resíduo médio": -1.4284919297, "prof erro absoluto médio": 15.963844672, "suprimido": false}, {"grupo": "Sudeste", "escolas": 69.0, "alunos": 2096.0, "INSE médio": 4.5217391304, "prop sem peso": 0.5412021813, "prop com peso": 0.5389686709, "prop resíduo médio": 0.0492902369, "prop erro absoluto médio": 0.1604798301, "prof sem peso": 741.963397943, "prof com peso": 741.92491105, "prof resíduo médio": 5.4733964979, "prof erro absoluto médio": 15.4899356067, "suprimido": false}, {"grupo": "Sul", "escolas": 62.0, "alunos": 1607.0, "INSE médio": 5.1129032258, "prop sem peso": 0.5922270112, "prop com peso": 0.6434826457, "prop resíduo médio": 0.0642636728, "prop erro absoluto médio": 0.1590206239, "prof sem peso": 747.6971822038, "prof com peso": 753.5234732901, "prof resíduo médio": 7.8331364762, "prof erro absoluto médio": 18.0621397918, "suprimido": false}], "localizacao": [{"grupo": "Rural", "escolas": 176.0, "alunos": 4225.0, "INSE médio": 3.6818181818, "prop sem peso": 0.421104724, "prop com peso": 0.4698042344, "prop resíduo médio": 0.0016077537, "prop erro absoluto médio": 0.1965950638, "prof sem peso": 729.8024125511, "prof com peso": 735.0249978574, "prof resíduo médio": -1.1656927061, "prof erro absoluto médio": 19.9285050753, "suprimido": false}, {"grupo": "Urbana", "escolas": 428.0, "alunos": 12958.0, "INSE médio": 4.2242990654, "prop sem peso": 0.4466044392, "prop com peso": 0.5332956391, "prop resíduo médio": 0.0029146481, "prop erro absoluto médio": 0.1489543144, "prof sem peso": 732.3814050998, "prof com peso": 741.1429249802, "prof resíduo médio": 0.3545537547, "prof erro absoluto médio": 15.9942840891, "suprimido": false}], "inse": [{"grupo": "I–II", "escolas": 21.0, "alunos": 335.0, "INSE médio": 1.9523809524, "prop sem peso": 0.3860808003, "prop com peso": 0.5701190532, "prop resíduo médio": 0.0992641413, "prop erro absoluto médio": 0.2450039994, "prof sem peso": 727.270290607, "prof com peso": 743.918125538, "prof resíduo médio": 5.6495898992, "prof erro absoluto médio": 23.0338675952, "suprimido": false}, {"grupo": "III", "escolas": 128.0, "alunos": 3112.0, "INSE médio": 3.0, "prop sem peso": 0.3711607301, "prop com peso": 0.5033428089, "prop resíduo médio": 0.0134532431, "prop erro absoluto médio": 0.1857233263, "prof sem peso": 723.0329411468, "prof com peso": 736.1454528499, "prof resíduo médio": -2.5443325035, "prof erro absoluto médio": 21.297890967, "suprimido": false}, {"grupo": "IV", "escolas": 281.0, "alunos": 8476.0, "INSE médio": 4.0, "prop sem peso": 0.3881448134, "prop com peso": 0.4069462319, "prop resíduo médio": -0.0346743094, "prop erro absoluto médio": 0.154097149, "prof sem peso": 726.5162718641, "prof com peso": 728.3002558137, "prof resíduo médio": -3.9105112974, "prof erro absoluto médio": 15.2670533981, "suprimido": false}, {"grupo": "V", "escolas": 138.0, "alunos": 4237.0, "INSE médio": 5.0, "prop sem peso": 0.5429970478, "prop com peso": 0.5791730358, "prop resíduo médio": 0.0278316177, "prop erro absoluto médio": 0.1494522128, "prof sem peso": 742.7413410266, "prof com peso": 746.6303800081, "prof resíduo médio": 4.751849714, "prof erro absoluto médio": 15.6761568856, "suprimido": false}, {"grupo": "VI–VII", "escolas": 36.0, "alunos": 1023.0, "INSE médio": 6.0277777778, "prop sem peso": 0.7122937771, "prop com peso": 0.7133256326, "prop resíduo médio": 0.1007386017, "prop erro absoluto médio": 0.1530501061, "prof sem peso": 762.0609990741, "prof com peso": 761.4227668236, "prof resíduo médio": 16.5755188154, "prof erro absoluto médio": 19.1604879184, "suprimido": false}], "total": [{"grupo": "Brasil (base analítica)", "escolas": 604.0, "alunos": 17183.0, "INSE médio": 4.0662251656, "prop sem peso": 0.4391740586, "prop com peso": 0.5198915921, "prop resíduo médio": 0.0025338312, "prop erro absoluto médio": 0.1628363871, "prof sem peso": 731.6299105823, "prof com peso": 739.851333102, "prof resíduo médio": -0.088431969, "prof erro absoluto médio": 17.1406796083, "suprimido": false}]}, "temas": {"prop": [{"tema": "Nível socioeconômico (INSE)", "participacao": 0.1348932860894534, "top3": 100.0, "posicao": 1.0}, {"tema": "Merenda escolar", "participacao": 0.0676398087723348, "top3": 50.0, "posicao": 4.35}, {"tema": "Ações contra repetência e abandono", "participacao": 0.0620335616471365, "top3": 40.0, "posicao": 4.5}, {"tema": "Gestão democrática e colegiados", "participacao": 0.0619538182885812, "top3": 35.0, "posicao": 4.55}, {"tema": "Infraestrutura — Educação Infantil", "participacao": 0.0611915100511309, "top3": 45.0, "posicao": 4.95}, {"tema": "Formação continuada percebida (equipe)", "participacao": 0.0548553579847141, "top3": 15.0, "posicao": 5.45}, {"tema": "Interrupções do calendário", "participacao": 0.0416333408663639, "top3": 0.0, "posicao": 9.3}, {"tema": "Composição de turmas e alocação de professores", "participacao": 0.0426122366875858, "top3": 5.0, "posicao": 9.5}, {"tema": "Segurança — episódios de violência", "participacao": 0.0327034885454159, "top3": 0.0, "posicao": 12.65}, {"tema": "Formação continuada (curta duração)", "participacao": 0.0320155070707932, "top3": 5.0, "posicao": 14.2}], "prof": [{"tema": "Infraestrutura — Educação Infantil", "participacao": 0.0900578974081966, "top3": 100.0, "posicao": 1.15}, {"tema": "Nível socioeconômico (INSE)", "participacao": 0.0643043346650573, "top3": 75.0, "posicao": 2.85}, {"tema": "Merenda escolar", "participacao": 0.0622581317094428, "top3": 55.00000000000001, "posicao": 3.4}, {"tema": "Ações contra repetência e abandono", "participacao": 0.0512333983116412, "top3": 25.0, "posicao": 5.3}, {"tema": "Formação continuada percebida (equipe)", "participacao": 0.0505274050995398, "top3": 25.0, "posicao": 5.5}, {"tema": "Recursos financeiros e de pessoal", "participacao": 0.0442237785967578, "top3": 0.0, "posicao": 7.45}, {"tema": "Formação continuada (curta duração)", "participacao": 0.0402124829520566, "top3": 10.0, "posicao": 9.0}, {"tema": "Interrupções do calendário", "participacao": 0.0404230422089797, "top3": 5.0, "posicao": 9.0}, {"tema": "Projetos temáticos", "participacao": 0.0327096042581288, "top3": 0.0, "posicao": 11.35}, {"tema": "Gestão democrática e colegiados", "participacao": 0.0332952574421416, "top3": 5.0, "posicao": 12.65}]}, "meta": {"n_min": 5, "versao": "2f67e25"}};
-const AZUL="#2a78d6",LARANJA="#eb6834";
-const fmt=(v,c)=>v==null||Number.isNaN(v)?"—":v.toLocaleString("pt-BR",{minimumFractionDigits:c,maximumFractionDigits:c});
-const pct=v=>v==null?"—":fmt(100*v,1)+"%";
-const val=(k,v)=>k==="prop"?pct(v):fmt(v,1);
-const rot={prop:"Proporção de alfabetizados",prof:"Proficiência média em LP"};
-document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll("nav button").forEach(x=>x.setAttribute("aria-selected",x===b));document.querySelectorAll("section").forEach(s=>s.classList.toggle("ativo",s.id===b.dataset.aba));});
-function barras(el,itens,o){ // itens: [{rot, v, v2?, dir?}]
-  const h=26,top=8,esq=o.esq||170,larg=Math.max(320,Math.min(980,el.clientWidth||900)),dir=o.dirTxt?64:70,W=larg-esq-dir;
-  const vals=itens.flatMap(i=>[i.v,i.v2]).filter(v=>v!=null);let lo=Math.min(0,...vals),hi=Math.max(0,...vals);if(o.lo!=null)lo=o.lo;if(o.hi!=null)hi=o.hi;if(hi===lo)hi=lo+1;
-  const x=v=>esq+(v-lo)/(hi-lo)*W,H=top+itens.length*h+24;let s=`<svg viewBox="0 0 ${larg} ${H}" width="100%" role="img" aria-label="${o.titulo||""}">`;
-  s+=`<line x1="${x(0)}" x2="${x(0)}" y1="${top}" y2="${H-20}" stroke="#bdbab2"/>`;
-  itens.forEach((it,i)=>{const y=top+i*h;s+=`<text x="${esq-8}" y="${y+h/2+4}" text-anchor="end">${it.rot}</text>`;
-    if(it.v==null){s+=`<text x="${esq+4}" y="${y+h/2+4}" class="eixo">suprimido (menos de ${D.meta.n_min} escolas)</text>`;return;}
-    const dupla=it.v2!=null,bh=dupla?9:16,y1=y+(h-(dupla?20:16))/2;
-    s+=`<rect x="${Math.min(x(0),x(it.v))}" y="${y1}" width="${Math.abs(x(it.v)-x(0))}" height="${bh}" rx="2" fill="${it.cor||AZUL}"><title>${it.rot}: ${o.f(it.v)}</title></rect>`;
-    if(dupla)s+=`<rect x="${Math.min(x(0),x(it.v2))}" y="${y1+11}" width="${Math.abs(x(it.v2)-x(0))}" height="${bh}" rx="2" fill="${LARANJA}"><title>${it.rot} (com peso): ${o.f(it.v2)}</title></rect>`;
-    const xt=Math.max(x(it.v),dupla?x(it.v2):-1e9);s+=`<text x="${(it.v>=0?xt+6:x(0)+6)}" y="${y+h/2+4}">${o.dirTxt?o.dirTxt(it):o.f(it.v)}</text>`;});
-  s+=`<text x="${esq}" y="${H-4}" class="eixo">${o.f(lo)}</text><text x="${esq+W}" y="${H-4}" text-anchor="end" class="eixo">${o.f(hi)}</text></svg>`;el.innerHTML=s;}
-// KPIs
-(()=>{const t=D.dados.total[0];document.getElementById("kpis").innerHTML=[["Escolas",fmt(t.escolas,0)],["Alunos avaliados",fmt(t.alunos,0)],["Alfabetizados (com peso)",pct(t["prop com peso"])],["Proficiência média (com peso)",fmt(t["prof com peso"],1)]].map(([a,b])=>`<div class="kpi"><span>${a}</span><b>${b}</b></div>`).join("");})();
-// Geografia
-const regs=[...new Set(D.dados.uf.map(r=>r["região"]).filter(Boolean))].sort();
-regs.forEach(r=>document.getElementById("g-reg").insertAdjacentHTML("beforeend",`<option>${r}</option>`));
-function geo(){const k=document.getElementById("g-desf").value,reg=document.getElementById("g-reg").value,peso=document.getElementById("g-peso").checked,col=`${k} ${peso?"com":"sem"} peso`;
-  let linhas=D.dados.uf.filter(r=>!reg||r["região"]===reg||r.suprimido);
-  linhas.sort((a,b)=>(b[col]??-1e9)-(a[col]??-1e9));
-  barras(document.getElementById("g-graf"),linhas.map(r=>({rot:r.grupo,v:r.suprimido?null:r[col]})),{f:v=>val(k,v),esq:60,lo:k==="prof"?650:0,titulo:rot[k]});
-  document.getElementById("g-nota").textContent=`${rot[k]} ${peso?"com":"sem"} peso amostral. Cada UF tem de 12 a 45 escolas na base, e as médias estaduais são imprecisas e não substituem as estimativas oficiais do Inep. UFs com menos de ${D.meta.n_min} escolas aparecem como suprimidas.`;
-  document.getElementById("g-tab").innerHTML="<tr><th>UF</th><th>Região</th><th>Escolas</th><th>Alunos</th><th>INSE médio</th><th>Sem peso</th><th>Com peso</th></tr>"+linhas.map(r=>r.suprimido?`<tr><td>${r.grupo}</td><td></td><td colspan="5" class="sup">suprimido</td></tr>`:`<tr><td>${r.grupo}</td><td>${r["região"]}</td><td>${fmt(r.escolas,0)}</td><td>${fmt(r.alunos,0)}</td><td>${fmt(r["INSE médio"],1)}</td><td>${val(k,r[k+" sem peso"])}</td><td>${val(k,r[k+" com peso"])}</td></tr>`).join("");}
-["g-desf","g-reg","g-peso"].forEach(i=>document.getElementById(i).onchange=geo);
-// INSE
-function inse(){const k=document.getElementById("i-desf").value;barras(document.getElementById("i-graf"),D.dados.inse.map(r=>({rot:`${r.grupo} (${r.suprimido?"—":fmt(r.escolas,0)} escolas)`,v:r.suprimido?null:r[k+" sem peso"],v2:r.suprimido?null:r[k+" com peso"]})),{f:v=>val(k,v),esq:170,lo:k==="prof"?650:0});}
-document.getElementById("i-desf").onchange=inse;
-// Temas
-function temas(){const k=document.getElementById("t-desf").value;barras(document.getElementById("t-graf"),D.temas[k].map(t=>({rot:t.tema.length>44?t.tema.slice(0,43)+"…":t.tema,v:t.participacao,top3:t.top3,cor:t.top3>=75?AZUL:"#9ec5f4"})),{f:v=>pct(v),esq:300,dirTxt:it=>`${fmt(it.top3,0)}%`});}
-document.getElementById("t-desf").onchange=temas;
-// Erro
-function erro(){const k=document.getElementById("e-desf").value,e=document.getElementById("e-eixo").value,linhas=D.dados[e];
-  barras(document.getElementById("e-graf"),linhas.map(r=>({rot:r.grupo,v:r.suprimido?null:r[k+" resíduo médio"],cor:(r[k+" resíduo médio"]??0)>=0?AZUL:LARANJA})),{f:v=>k==="prop"?fmt(100*v,1)+" p.p.":fmt(v,1)+" pts",esq:150});
-  document.getElementById("e-tab").innerHTML="<tr><th>Grupo</th><th></th><th>Escolas</th><th>Resíduo médio</th><th>Erro absoluto médio</th></tr>"+linhas.map(r=>r.suprimido?`<tr><td>${r.grupo}</td><td></td><td colspan="3" class="sup">suprimido</td></tr>`:`<tr><td>${r.grupo}</td><td></td><td>${fmt(r.escolas,0)}</td><td>${k==="prop"?fmt(100*r[k+" resíduo médio"],1)+" p.p.":fmt(r[k+" resíduo médio"],1)}</td><td>${k==="prop"?fmt(100*r[k+" erro absoluto médio"],1)+" p.p.":fmt(r[k+" erro absoluto médio"],1)}</td></tr>`).join("");}
-["e-desf","e-eixo"].forEach(i=>document.getElementById(i).onchange=erro);
-document.getElementById("r-nmin").textContent=D.meta.n_min;
-document.getElementById("rodape").textContent=`Fonte: microdados do Saeb 2023 (Inep, CC BY 4.0). Elaboração própria. Versão do código: ${D.meta.versao}.`;
-const aba=location.hash.slice(1);if(aba)document.querySelector(`nav button[data-aba="${aba}"]`)?.click();
-geo();inse();temas();erro();addEventListener("resize",()=>{geo();inse();temas();erro();});
+const D={"uf": [{"grupo": "AC", "região": "Norte", "escolas": 41.0, "alunos": 1185.0, "INSE médio": 3.6341463415, "prop sem peso": 0.3819178452, "prop com peso": 0.3996951921, "prop resíduo médio": 0.0124529295, "prop erro absoluto médio": 0.1641127999, "prof sem peso": 727.9203026211, "prof com peso": 728.0563999467, "prof resíduo médio": 2.3523109132, "prof erro absoluto médio": 16.900989706, "suprimido": false}, {"grupo": "AL", "região": "Nordeste", "escolas": 25.0, "alunos": 585.0, "INSE médio": 3.36, "prop sem peso": 0.3066375426, "prop com peso": 0.3668387863, "prop resíduo médio": -0.0821114188, "prop erro absoluto médio": 0.1448133464, "prof sem peso": 717.3215266653, "prof com peso": 724.3615877036, "prof resíduo médio": -11.0299937134, "prof erro absoluto médio": 16.4039723, "suprimido": false}, {"grupo": "AM", "região": "Norte", "escolas": 18.0, "alunos": 632.0, "INSE médio": 3.7222222222, "prop sem peso": 0.4156670083, "prop com peso": 0.4692924682, "prop resíduo médio": -0.0153838905, "prop erro absoluto médio": 0.1501255155, "prof sem peso": 731.2790701351, "prof com peso": 737.6338459991, "prof resíduo médio": 0.8205044877, "prof erro absoluto médio": 16.3421285648, "suprimido": false}, {"grupo": "AP", "região": "Norte", "escolas": 45.0, "alunos": 1406.0, "INSE médio": 3.8, "prop sem peso": 0.312450864, "prop com peso": 0.2929404325, "prop resíduo médio": -0.0570722127, "prop erro absoluto médio": 0.1443515477, "prof sem peso": 718.1477264888, "prof com peso": 716.695097963, "prof resíduo médio": -6.5696597732, "prof erro absoluto médio": 15.2285462304, "suprimido": false}, {"grupo": "BA", "região": "Nordeste", "escolas": 12.0, "alunos": 350.0, "INSE médio": 3.75, "prop sem peso": 0.4567758716, "prop com peso": 0.4853338363, "prop resíduo médio": 0.0003185883, "prop erro absoluto médio": 0.1848956178, "prof sem peso": 736.0479075503, "prof com peso": 736.3466375698, "prof resíduo médio": 1.0273694819, "prof erro absoluto médio": 15.2230294584, "suprimido": false}, {"grupo": "CE", "região": "Nordeste", "escolas": 20.0, "alunos": 470.0, "INSE médio": 3.3, "prop sem peso": 0.7321171231, "prop com peso": 0.7638525109, "prop resíduo médio": 0.2968737711, "prop erro absoluto médio": 0.3207985941, "prof sem peso": 763.1133009169, "prof com peso": 768.7029782806, "prof resíduo médio": 29.6283416659, "prof erro absoluto médio": 36.8767934102, "suprimido": false}, {"grupo": "DF", "região": "Centro-Oeste", "escolas": 15.0, "alunos": 497.0, "INSE médio": 5.2666666667, "prop sem peso": 0.5615225182, "prop com peso": 0.5797662536, "prop resíduo médio": 0.0680904772, "prop erro absoluto médio": 0.1411063598, "prof sem peso": 746.0324755303, "prof com peso": 747.4154220105, "prof resíduo médio": 9.9890126308, "prof erro absoluto médio": 12.8566311252, "suprimido": false}, {"grupo": "ES", "região": "Sudeste", "escolas": 21.0, "alunos": 630.0, "INSE médio": 4.3333333333, "prop sem peso": 0.6418544701, "prop com peso": 0.6765583538, "prop resíduo médio": 0.1577519847, "prop erro absoluto médio": 0.2050214656, "prof sem peso": 751.65750928, "prof com peso": 756.3440497161, "prof resíduo médio": 15.6226094752, "prof erro absoluto médio": 19.8656879399, "suprimido": false}, {"grupo": "GO", "região": "Centro-Oeste", "escolas": 20.0, "alunos": 659.0, "INSE médio": 4.65, "prop sem peso": 0.5665133421, "prop com peso": 0.4505250404, "prop resíduo médio": 0.0638222338, "prop erro absoluto médio": 0.1841654898, "prof sem peso": 743.9855819742, "prof com peso": 730.4937541341, "prof resíduo médio": 7.113402754, "prof erro absoluto médio": 19.0249312536, "suprimido": false}, {"grupo": "MA", "região": "Nordeste", "escolas": 16.0, "alunos": 437.0, "INSE médio": 3.4375, "prop sem peso": 0.2546732781, "prop com peso": 0.2934780547, "prop resíduo médio": -0.1041182308, "prop erro absoluto médio": 0.1215913602, "prof sem peso": 712.9077311739, "prof com peso": 715.9202436548, "prof resíduo médio": -10.860316447, "prof erro absoluto médio": 11.18382888, "suprimido": false}, {"grupo": "MG", "região": "Sudeste", "escolas": 13.0, "alunos": 395.0, "INSE médio": 4.4615384615, "prop sem peso": 0.507004872, "prop com peso": 0.619778498, "prop resíduo médio": 0.0186499444, "prop erro absoluto médio": 0.1387807769, "prof sem peso": 738.7645291776, "prof com peso": 749.6391968855, "prof resíduo médio": 3.1257503334, "prof erro absoluto médio": 14.9292954174, "suprimido": false}, {"grupo": "MS", "região": "Centro-Oeste", "escolas": 22.0, "alunos": 640.0, "INSE médio": 4.4545454545, "prop sem peso": 0.3486764943, "prop com peso": 0.3760295864, "prop resíduo médio": -0.0976255052, "prop erro absoluto médio": 0.1503414893, "prof sem peso": 723.0363334753, "prof com peso": 727.31591471, "prof resíduo médio": -12.063650897, "prof erro absoluto médio": 18.0847496027, "suprimido": false}, {"grupo": "MT", "região": "Centro-Oeste", "escolas": 25.0, "alunos": 721.0, "INSE médio": 4.4, "prop sem peso": 0.4551306094, "prop com peso": 0.4492224947, "prop resíduo médio": -0.0359400318, "prop erro absoluto médio": 0.1292797715, "prof sem peso": 733.8521273997, "prof com peso": 735.9725092249, "prof resíduo médio": -4.1947340739, "prof erro absoluto médio": 12.5887761932, "suprimido": false}, {"grupo": "PA", "região": "Norte", "escolas": 25.0, "alunos": 735.0, "INSE médio": 3.4, "prop sem peso": 0.3668576632, "prop com peso": 0.4430039408, "prop resíduo médio": 0.0159940077, "prop erro absoluto médio": 0.1416492147, "prof sem peso": 722.7182969945, "prof com peso": 728.2347041141, "prof resíduo médio": -0.4137077299, "prof erro absoluto médio": 16.9607148591, "suprimido": false}, {"grupo": "PB", "região": "Nordeste", "escolas": 27.0, "alunos": 631.0, "INSE médio": 3.7777777778, "prop sem peso": 0.4365525826, "prop com peso": 0.4517661518, "prop resíduo médio": 0.0027482987, "prop erro absoluto médio": 0.1890761455, "prof sem peso": 727.4638271379, "prof com peso": 731.3404978977, "prof resíduo médio": -1.8415584013, "prof erro absoluto médio": 20.3338034465, "suprimido": false}, {"grupo": "PE", "região": "Nordeste", "escolas": 19.0, "alunos": 544.0, "INSE médio": 3.8421052632, "prop sem peso": 0.505513043, "prop com peso": 0.5081722197, "prop resíduo médio": 0.0642699916, "prop erro absoluto médio": 0.1707489841, "prof sem peso": 735.3231411381, "prof com peso": 734.2002508401, "prof resíduo médio": 2.3310104005, "prof erro absoluto médio": 19.392127977, "suprimido": false}, {"grupo": "PI", "região": "Nordeste", "escolas": 23.0, "alunos": 543.0, "INSE médio": 3.3913043478, "prop sem peso": 0.4044456796, "prop com peso": 0.4369717317, "prop resíduo médio": -0.0076976052, "prop erro absoluto médio": 0.1391332658, "prof sem peso": 725.5887119693, "prof com peso": 727.003187757, "prof resíduo médio": -3.1153045767, "prof erro absoluto médio": 14.9794479427, "suprimido": false}, {"grupo": "PR", "região": "Sul", "escolas": 17.0, "alunos": 489.0, "INSE médio": 4.9411764706, "prop sem peso": 0.5852400589, "prop com peso": 0.5777033465, "prop resíduo médio": 0.0790506578, "prop erro absoluto médio": 0.1515298408, "prof sem peso": 748.3444749856, "prof com peso": 748.0065822029, "prof resíduo médio": 8.9830046635, "prof erro absoluto médio": 17.3314051959, "suprimido": false}, {"grupo": "RJ", "região": "Sudeste", "escolas": 15.0, "alunos": 400.0, "INSE médio": 4.2, "prop sem peso": 0.4186093404, "prop com peso": 0.3834903511, "prop resíduo médio": -0.0312542011, "prop erro absoluto médio": 0.1323577026, "prof sem peso": 729.4474760356, "prof com peso": 726.3530013626, "prof resíduo médio": -4.5429770656, "prof erro absoluto médio": 12.9053727808, "suprimido": false}, {"grupo": "RN", "região": "Nordeste", "escolas": 22.0, "alunos": 570.0, "INSE médio": 3.8636363636, "prop sem peso": 0.2440185198, "prop com peso": 0.261646285, "prop resíduo médio": -0.1321091727, "prop erro absoluto médio": 0.1624465082, "prof sem peso": 706.6929380786, "prof com peso": 708.9290833934, "prof resíduo médio": -17.5951025156, "prof erro absoluto médio": 20.6073583327, "suprimido": false}, {"grupo": "RO", "região": "Norte", "escolas": 26.0, "alunos": 889.0, "INSE médio": 4.3461538462, "prop sem peso": 0.5226529912, "prop com peso": 0.5132123555, "prop resíduo médio": 0.045055227, "prop erro absoluto médio": 0.1730609175, "prof sem peso": 743.4171894298, "prof com peso": 742.6080789121, "prof resíduo médio": 7.3494963918, "prof erro absoluto médio": 15.4906977412, "suprimido": false}, {"grupo": "RR", "região": "Norte", "escolas": 24.0, "alunos": 704.0, "INSE médio": 3.625, "prop sem peso": 0.3286356965, "prop com peso": 0.3931863839, "prop resíduo médio": -0.0378565398, "prop erro absoluto médio": 0.147475712, "prof sem peso": 721.7633362778, "prof com peso": 726.7523808233, "prof resíduo médio": -5.0469802531, "prof erro absoluto médio": 15.7891510663, "suprimido": false}, {"grupo": "RS", "região": "Sul", "escolas": 25.0, "alunos": 542.0, "INSE médio": 5.28, "prop sem peso": 0.6101154394, "prop com peso": 0.6627648881, "prop resíduo médio": 0.0562830833, "prop erro absoluto médio": 0.164028405, "prof sem peso": 749.236929751, "prof com peso": 754.2645419657, "prof resíduo médio": 6.526876619, "prof erro absoluto médio": 18.2354422686, "suprimido": false}, {"grupo": "SC", "região": "Sul", "escolas": 20.0, "alunos": 576.0, "INSE médio": 5.05, "prop sem peso": 0.5758053854, "prop com peso": 0.6866655584, "prop resíduo médio": 0.0616704725, "prop erro absoluto médio": 0.1591280632, "prof sem peso": 745.2222989053, "prof com peso": 758.2676567241, "prof resíduo médio": 8.4885733386, "prof erro absoluto médio": 18.4666361023, "suprimido": false}, {"grupo": "SE", "região": "Nordeste", "escolas": 27.0, "alunos": 725.0, "INSE médio": 3.7407407407, "prop sem peso": 0.3494234585, "prop com peso": 0.3430680727, "prop resíduo médio": -0.0571300207, "prop erro absoluto médio": 0.1683164256, "prof sem peso": 720.7334983837, "prof com peso": 720.7311420052, "prof resíduo médio": -9.0396717571, "prof erro absoluto médio": 17.0743050041, "suprimido": false}, {"grupo": "SP", "região": "Sudeste", "escolas": 20.0, "alunos": 671.0, "INSE médio": 5.0, "prop sem peso": 0.5496901599, "prop com peso": 0.5327342971, "prop resíduo médio": 0.0157299202, "prop erro absoluto médio": 0.1489070932, "prof sem peso": 743.2507871672, "prof com peso": 741.4764645049, "prof resíduo médio": 3.8549730512, "prof erro absoluto médio": 13.1982338994, "suprimido": false}, {"grupo": "TO", "região": "Norte", "escolas": 21.0, "alunos": 557.0, "INSE médio": 4.0952380952, "prop sem peso": 0.3422917989, "prop com peso": 0.2372096236, "prop resíduo médio": -0.1107913117, "prop erro absoluto médio": 0.1764862113, "prof sem peso": 725.8229477347, "prof com peso": 714.9660544916, "prof resíduo médio": -7.661629106, "prof erro absoluto médio": 14.9842773134, "suprimido": false}], "regiao": [{"grupo": "Centro-Oeste", "escolas": 82.0, "alunos": 2517.0, "INSE médio": 4.6341463415, "prop sem peso": 0.473198204, "prop com peso": 0.4556288684, "prop resíduo médio": -0.0091275619, "prop erro absoluto médio": 0.1504806371, "prof sem peso": 735.6500157791, "prof com peso": 733.660821895, "prof resíduo médio": -0.9532369151, "prof erro absoluto médio": 15.6820974151, "suprimido": false}, {"grupo": "Nordeste", "escolas": 191.0, "alunos": 4855.0, "INSE médio": 3.6073298429, "prop sem peso": 0.4050320572, "prop com peso": 0.4755270085, "prop resíduo médio": -0.0058010579, "prop erro absoluto médio": 0.1773205923, "prof sem peso": 726.4013364298, "prof com peso": 734.6743789938, "prof resíduo médio": -2.8945964197, "prof erro absoluto médio": 19.2963944346, "suprimido": false}, {"grupo": "Norte", "escolas": 200.0, "alunos": 6108.0, "INSE médio": 3.79, "prop sem peso": 0.3751836526, "prop com peso": 0.4233667662, "prop resíduo médio": -0.0199923895, "prop erro absoluto médio": 0.1560657273, "prof sem peso": 726.4290484251, "prof com peso": 729.5097962844, "prof resíduo médio": -1.4284919297, "prof erro absoluto médio": 15.963844672, "suprimido": false}, {"grupo": "Sudeste", "escolas": 69.0, "alunos": 2096.0, "INSE médio": 4.5217391304, "prop sem peso": 0.5412021813, "prop com peso": 0.5389686709, "prop resíduo médio": 0.0492902369, "prop erro absoluto médio": 0.1604798301, "prof sem peso": 741.963397943, "prof com peso": 741.92491105, "prof resíduo médio": 5.4733964979, "prof erro absoluto médio": 15.4899356067, "suprimido": false}, {"grupo": "Sul", "escolas": 62.0, "alunos": 1607.0, "INSE médio": 5.1129032258, "prop sem peso": 0.5922270112, "prop com peso": 0.6434826457, "prop resíduo médio": 0.0642636728, "prop erro absoluto médio": 0.1590206239, "prof sem peso": 747.6971822038, "prof com peso": 753.5234732901, "prof resíduo médio": 7.8331364762, "prof erro absoluto médio": 18.0621397918, "suprimido": false}], "localizacao": [{"grupo": "Rural", "escolas": 176.0, "alunos": 4225.0, "INSE médio": 3.6818181818, "prop sem peso": 0.421104724, "prop com peso": 0.4698042344, "prop resíduo médio": 0.0016077537, "prop erro absoluto médio": 0.1965950638, "prof sem peso": 729.8024125511, "prof com peso": 735.0249978574, "prof resíduo médio": -1.1656927061, "prof erro absoluto médio": 19.9285050753, "suprimido": false}, {"grupo": "Urbana", "escolas": 428.0, "alunos": 12958.0, "INSE médio": 4.2242990654, "prop sem peso": 0.4466044392, "prop com peso": 0.5332956391, "prop resíduo médio": 0.0029146481, "prop erro absoluto médio": 0.1489543144, "prof sem peso": 732.3814050998, "prof com peso": 741.1429249802, "prof resíduo médio": 0.3545537547, "prof erro absoluto médio": 15.9942840891, "suprimido": false}], "inse": [{"grupo": "I–II", "escolas": 21.0, "alunos": 335.0, "INSE médio": 1.9523809524, "prop sem peso": 0.3860808003, "prop com peso": 0.5701190532, "prop resíduo médio": 0.0992641413, "prop erro absoluto médio": 0.2450039994, "prof sem peso": 727.270290607, "prof com peso": 743.918125538, "prof resíduo médio": 5.6495898992, "prof erro absoluto médio": 23.0338675952, "suprimido": false}, {"grupo": "III", "escolas": 128.0, "alunos": 3112.0, "INSE médio": 3.0, "prop sem peso": 0.3711607301, "prop com peso": 0.5033428089, "prop resíduo médio": 0.0134532431, "prop erro absoluto médio": 0.1857233263, "prof sem peso": 723.0329411468, "prof com peso": 736.1454528499, "prof resíduo médio": -2.5443325035, "prof erro absoluto médio": 21.297890967, "suprimido": false}, {"grupo": "IV", "escolas": 281.0, "alunos": 8476.0, "INSE médio": 4.0, "prop sem peso": 0.3881448134, "prop com peso": 0.4069462319, "prop resíduo médio": -0.0346743094, "prop erro absoluto médio": 0.154097149, "prof sem peso": 726.5162718641, "prof com peso": 728.3002558137, "prof resíduo médio": -3.9105112974, "prof erro absoluto médio": 15.2670533981, "suprimido": false}, {"grupo": "V", "escolas": 138.0, "alunos": 4237.0, "INSE médio": 5.0, "prop sem peso": 0.5429970478, "prop com peso": 0.5791730358, "prop resíduo médio": 0.0278316177, "prop erro absoluto médio": 0.1494522128, "prof sem peso": 742.7413410266, "prof com peso": 746.6303800081, "prof resíduo médio": 4.751849714, "prof erro absoluto médio": 15.6761568856, "suprimido": false}, {"grupo": "VI–VII", "escolas": 36.0, "alunos": 1023.0, "INSE médio": 6.0277777778, "prop sem peso": 0.7122937771, "prop com peso": 0.7133256326, "prop resíduo médio": 0.1007386017, "prop erro absoluto médio": 0.1530501061, "prof sem peso": 762.0609990741, "prof com peso": 761.4227668236, "prof resíduo médio": 16.5755188154, "prof erro absoluto médio": 19.1604879184, "suprimido": false}], "total": [{"grupo": "Brasil (base analítica)", "escolas": 604.0, "alunos": 17183.0, "INSE médio": 4.0662251656, "prop sem peso": 0.4391740586, "prop com peso": 0.5198915921, "prop resíduo médio": 0.0025338312, "prop erro absoluto médio": 0.1628363871, "prof sem peso": 731.6299105823, "prof com peso": 739.851333102, "prof resíduo médio": -0.088431969, "prof erro absoluto médio": 17.1406796083, "suprimido": false}], "rede": {"total": {"com": 54.98861410105289, "sem": 51.57521751333146, "alunos": 28504}, "pública": {"com": 49.344458673161704, "sem": 43.14437174650174, "alunos": 20939}, "privada": {"com": 77.30303145941416, "sem": 74.91077329808327, "alunos": 7565}}, "inse_r2": {"prop": 0.1778361646210212, "prof": 0.1864949952882453}, "ablacao": {"prop": {"ganho": {"M0: só INSE": 9.232874016754678, "M1: INSE + geografia": 10.265497044870898, "M4: completo": 13.445273147566327}, "mae_m1": 0.1703822120356216, "delta": -0.0060386669349827, "ic": [-0.0123310458711161, 0.0002537120011507], "reducao_pct": 3.5441885997584084, "retirada": {"professor": 0.38967983653942173, "diretor": 3.577324786231548, "INSE": 6.864183735487342, "geografia": 2.546941789789692e-05}, "ic_retirada": {"professor": [-0.0018939414377114, 0.0031747773943922], "diretor": [-0.0007085876320921, 0.0124668717035014], "INSE": [0.0075748758066868, 0.014986962187685], "geografia": [-3.869777305243853e-05, 3.8781488305783585e-05]}}, "prof": {"ganho": {"M0: só INSE": 6.557121201188043, "M1: INSE + geografia": 7.449997500054995, "M4: completo": 11.35672888110365}, "mae_m1": 18.029023482167396, "delta": -0.7612651106354587, "ic": [-1.503373777043079, -0.0191564442278381], "reducao_pct": 4.222442282514248, "retirada": {"professor": 0.9145521730639499, "diretor": 3.4892104956536154, "INSE": 3.5760316741879614, "geografia": 0.16713577323060477}, "ic_retirada": {"professor": [-0.1298225093978197, 0.4456718868826044], "diretor": [-0.0764914751753992, 1.2815238346452942], "INSE": [0.3790475715179613, 0.8559693158993087], "geografia": [0.001918432622668, 0.0558035120461282]}}}, "temas": {"prop": [{"tema": "Nível socioeconômico (INSE)", "participacao": 0.1348932860894534, "top3": 100.0, "posicao": 1.0}, {"tema": "Merenda escolar", "participacao": 0.0676398087723348, "top3": 50.0, "posicao": 4.35}, {"tema": "Ações contra repetência e abandono", "participacao": 0.0620335616471365, "top3": 40.0, "posicao": 4.5}, {"tema": "Gestão democrática e colegiados", "participacao": 0.0619538182885812, "top3": 35.0, "posicao": 4.55}, {"tema": "Infraestrutura da Educação Infantil", "participacao": 0.0611915100511309, "top3": 45.0, "posicao": 4.95}, {"tema": "Formação continuada percebida (equipe)", "participacao": 0.0548553579847141, "top3": 15.0, "posicao": 5.45}], "prof": [{"tema": "Infraestrutura da Educação Infantil", "participacao": 0.0900578974081966, "top3": 100.0, "posicao": 1.15}, {"tema": "Nível socioeconômico (INSE)", "participacao": 0.0643043346650573, "top3": 75.0, "posicao": 2.85}, {"tema": "Merenda escolar", "participacao": 0.0622581317094428, "top3": 55.00000000000001, "posicao": 3.4}, {"tema": "Ações contra repetência e abandono", "participacao": 0.0512333983116412, "top3": 25.0, "posicao": 5.3}, {"tema": "Formação continuada percebida (equipe)", "participacao": 0.0505274050995398, "top3": 25.0, "posicao": 5.5}, {"tema": "Recursos financeiros e de pessoal", "participacao": 0.0442237785967578, "top3": 0.0, "posicao": 7.45}]}, "meta": {"n_min": 5, "versao": "2f67e25", "repo": "https://github.com/NercinoN21/tcc-alfabetizacao-saeb-ml"}};
+const $=s=>document.querySelector(s);
+const nf=(v,c=1)=>v==null||Number.isNaN(v)?"—":v.toLocaleString("pt-BR",{minimumFractionDigits:c,maximumFractionDigits:c});
+const pct=(v,c=1)=>v==null?"—":nf(100*v,c)+"%";
+const cor=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const reduz=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* dica (tooltip) */
+const dica=$("#dica");
+function liga(el,txt){
+  el.classList.add("alvo");el.setAttribute("tabindex","0");el.setAttribute("aria-label",txt);
+  const mostra=(x,y)=>{dica.textContent=txt;dica.style.opacity=1;const r=dica.getBoundingClientRect();
+    dica.style.left=Math.min(innerWidth-r.width-8,Math.max(8,x-r.width/2))+"px";dica.style.top=(y-r.height-12)+"px";};
+  el.addEventListener("mousemove",e=>mostra(e.clientX,e.clientY));
+  el.addEventListener("mouseleave",()=>dica.style.opacity=0);
+  el.addEventListener("focus",()=>{const b=el.getBoundingClientRect();mostra(b.left+b.width/2,b.top);});
+  el.addEventListener("blur",()=>dica.style.opacity=0);
+}
+const NS="http://www.w3.org/2000/svg";
+const larg=sel=>Math.max(320,Math.min(820,document.querySelector(sel).clientWidth||760));
+function svg(w,h){const s=document.createElementNS(NS,"svg");s.setAttribute("viewBox",`0 0 ${w} ${h}`);return s;}
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a={}){const t=el("text",{x,y,...a},p);t.textContent=s;return t;}
+/* barra horizontal com ponta arredondada (4px) e base reta */
+function barra(p,x0,x1,y,h,fill){const r=Math.min(4,Math.abs(x1-x0)/2),d=x1>=x0;
+  const path=d?`M${x0},${y}H${x1-r}Q${x1},${y} ${x1},${y+r}V${y+h-r}Q${x1},${y+h} ${x1-r},${y+h}H${x0}Z`
+             :`M${x0},${y}H${x1+r}Q${x1},${y} ${x1},${y+r}V${y+h-r}Q${x1},${y+h} ${x1+r},${y+h}H${x0}Z`;
+  return el("path",{d:path,fill},p);}
+
+/* 1. palpite */
+const pontos=$("#pontos");for(let i=0;i<100;i++)pontos.appendChild(document.createElement("span"));
+const P=[...pontos.children],resp=Math.round(D.rede["pública"].com);
+function marcaChute(v){P.forEach((s,i)=>s.classList.toggle("chute",i<v));}
+$("#palpite").addEventListener("input",e=>{$("#palpite-valor").textContent=e.target.value;marcaChute(+e.target.value);});
+marcaChute(70);
+$("#revelar").addEventListener("click",()=>{
+  const g=+$("#palpite").value;P.forEach(s=>s.classList.remove("sim"));
+  P.forEach((s,i)=>{if(i<resp){if(reduz)s.classList.add("sim");else setTimeout(()=>s.classList.add("sim"),i*18);}});
+  const dif=g-D.rede["pública"].com,priv=Math.round(D.rede["privada"].com);
+  $("#resp-num").textContent=`${resp} de cada 100`;
+  $("#resp-texto").textContent=(Math.abs(dif)<3?"Você acertou quase em cheio. ":`Seu palpite ficou ${Math.round(Math.abs(dif))} ${dif>0?"acima":"abaixo"}. `)+
+    `Na rede privada, são ${priv} de cada 100. Metade das crianças da escola pública chega ao fim do 2º ano sem o domínio esperado da leitura e da escrita.`;
+  $("#resposta").hidden=false;$("#revelar").textContent="Tentar outro palpite";
+});
+
+/* 2. regiões (uma série: com peso) */
+function regioes(){const R=[...D.regiao].sort((a,b)=>b["prop com peso"]-a["prop com peso"]);
+  const hi=R[0],lo=R[R.length-1];
+  $("#lugar-lead").textContent=`No ${hi.grupo}, ${Math.round(100*hi["prop com peso"])} de cada 100 crianças das escolas estudadas se alfabetizam. No ${lo.grupo}, ${Math.round(100*lo["prop com peso"])}.`;
+  const W=larg("#g-regiao"),esq=W<480?100:130,h=34,H=R.length*h+30,s=svg(W,H),x=v=>esq+v/.8*(W-esq-70);
+  [0,.25,.5,.75].forEach(v=>{el("line",{x1:x(v),x2:x(v),y1:0,y2:H-24,stroke:cor("--grade")},s);txt(s,x(v),H-6,pct(v,0),{class:"eixo","text-anchor":"middle"});});
+  R.forEach((r,i)=>{const y=i*h+8;txt(s,esq-14,y+14,r.grupo,{"text-anchor":"end",class:"rot"});
+    const b=barra(s,x(0),x(r["prop com peso"]),y+1,18,cor("--azul"));liga(b,`${r.grupo}: ${pct(r["prop com peso"])} com peso, ${pct(r["prop sem peso"])} sem peso, ${r.escolas} escolas`);
+    txt(s,x(r["prop com peso"])+8,y+15,pct(r["prop com peso"]));});
+  $("#g-regiao").replaceChildren(s);$("#g-regiao").setAttribute("aria-label","Proporção de alfabetizados por região, com peso amostral");
+  $("#t-regiao").innerHTML="<tr><th>Região</th><th>Escolas</th><th>Sem peso</th><th>Com peso</th></tr>"+R.map(r=>`<tr><td>${r.grupo}</td><td>${r.escolas}</td><td>${pct(r["prop sem peso"])}</td><td>${pct(r["prop com peso"])}</td></tr>`).join("");
+}
+
+/* 3. INSE (duas séries, eixo ordinal) */
+function inse(){const I=D.inse;const alto=I[I.length-1],med=I.find(r=>r.grupo==="IV");
+  $("#renda-lead").textContent=`Nas escolas de nível mais alto, ${Math.round(100*alto["prop sem peso"])} de cada 100 se alfabetizam. Nas de nível médio, ${Math.round(100*med["prop sem peso"])}. Sozinho, o nível socioeconômico descreve cerca de ${Math.round(100*D.inse_r2.prop)}% da diferença entre as escolas.`;
+  const W=larg("#g-inse"),H=320,esq=50,top=16,base=H-56,s=svg(W,H),n=I.length,x=i=>esq+40+i*(W-esq-80)/(n-1),y=v=>base-(v-.2)/(.6)*(base-top);
+  [.2,.4,.6,.8].forEach(v=>{el("line",{x1:esq,x2:W,y1:y(v),y2:y(v),stroke:cor("--grade")},s);txt(s,esq-10,y(v)+4,pct(v,0),{class:"eixo","text-anchor":"end"});});
+  [["prop sem peso","--azul"],["prop com peso","--laranja"]].forEach(([k,c])=>{
+    el("polyline",{points:I.map((r,i)=>`${x(i)},${y(r[k])}`).join(" "),fill:"none",stroke:cor(c),"stroke-width":2,"stroke-linejoin":"round","stroke-linecap":"round"},s);
+    I.forEach((r,i)=>{const d=el("circle",{cx:x(i),cy:y(r[k]),r:5,fill:cor(c),stroke:cor("--pagina"),"stroke-width":2},s);
+      liga(d,`Nível ${r.grupo}, ${k.includes("com")?"com peso":"média das escolas"}: ${pct(r[k])} (${r.escolas} escolas)`);});});
+  I.forEach((r,i)=>{txt(s,x(i),base+24,r.grupo,{"text-anchor":"middle",class:"rot"});txt(s,x(i),base+42,`${r.escolas} escolas`,{"text-anchor":"middle",class:"eixo"});});
+  $("#g-inse").replaceChildren(s);$("#g-inse").setAttribute("aria-label","Proporção de alfabetizados por faixa de nível socioeconômico, média das escolas e com peso amostral");
+  $("#t-inse").innerHTML="<tr><th>Nível</th><th>Escolas</th><th>Média das escolas</th><th>Com peso</th></tr>"+I.map(r=>`<tr><td>${r.grupo}</td><td>${r.escolas}</td><td>${pct(r["prop sem peso"])}</td><td>${pct(r["prop com peso"])}</td></tr>`).join("");
+}
+
+/* 4. questionários: redução do erro com IC */
+function quest(){const A=D.ablacao,L=[["prof","Proficiência média"],["prop","Proporção de alfabetizados"]];
+  const red=k=>({v:A[k].reducao_pct,lo:-100*A[k].ic[1]/A[k].mae_m1,hi:-100*A[k].ic[0]/A[k].mae_m1});
+  $("#quest-lead").textContent=`Somados ao nível socioeconômico e à localização, os questionários reduzem em ${nf(red("prof").v)}% o erro da previsão da proficiência. Na proporção de alfabetizados, a melhora não se distingue do acaso.`;
+  const W=larg("#g-quest"),estreito=W<560,esq=estreito?16:210,h=estreito?96:78,H=L.length*h+40,s=svg(W,H),x=v=>esq+(v+2)/(10)*(W-esq-(estreito?16:30));
+  [-2,0,2,4,6,8].forEach(v=>{el("line",{x1:x(v),x2:x(v),y1:0,y2:H-28,stroke:v===0?cor("--linha"):cor("--grade"),"stroke-width":v===0?1.5:1},s);txt(s,x(v),H-8,nf(v,0)+"%",{class:"eixo","text-anchor":"middle"});});
+  L.forEach(([k,rot],i)=>{const r=red(k),y=i*h+(estreito?44:26);
+    if(estreito)txt(s,esq,y-26,rot,{class:"rot"});else txt(s,esq-16,y+5,rot,{"text-anchor":"end",class:"rot"});
+    el("line",{x1:x(r.lo),x2:x(r.hi),y1:y,y2:y,stroke:cor("--azul"),"stroke-width":2,"stroke-linecap":"round"},s);
+    [r.lo,r.hi].forEach(v=>el("line",{x1:x(v),x2:x(v),y1:y-7,y2:y+7,stroke:cor("--azul"),"stroke-width":2,"stroke-linecap":"round"},s));
+    const c=el("circle",{cx:x(r.v),cy:y,r:7,fill:cor("--azul"),stroke:cor("--faixa"),"stroke-width":2},s);
+    liga(c,`${rot}: o erro cai ${nf(r.v)}%, intervalo de ${nf(r.lo)}% a ${nf(r.hi)}%`);
+    txt(s,x(r.v),y-16,`${nf(r.v)}%`,{"text-anchor":"middle"});
+    if(!estreito)txt(s,x(r.hi)+10,y+5,r.lo>0?"distinto de zero":"cruza o zero",{class:"eixo"});});
+  $("#g-quest").replaceChildren(s);$("#g-quest").setAttribute("aria-label","Redução do erro de previsão ao acrescentar os questionários, com intervalo de confiança");
+  const nomes={professor:"Professor",diretor:"Diretor",INSE:"Nível socioeconômico",geografia:"Localização"};
+  $("#t-quest").innerHTML="<tr><th>Bloco retirado</th><th>Alfabetização</th><th>Proficiência</th></tr>"+Object.keys(nomes).map(b=>`<tr><td>${nomes[b]}</td><td>${A.prop.retirada[b]>=0?"+":""}${nf(A.prop.retirada[b])}%</td><td>${A.prof.retirada[b]>=0?"+":""}${nf(A.prof.retirada[b])}%</td></tr>`).join("");
+}
+
+/* 5. erro por faixa de INSE (divergente) */
+function erro(k){const I=D.inse,col=k+" resíduo médio",abs=k+" erro absoluto médio",esc=k==="prop"?100:1,un=k==="prop"?" p.p.":" pontos";
+  const baixo=I[0];
+  $("#erro-lead").textContent=k==="prop"
+    ?`Nas escolas de nível socioeconômico mais baixo, a previsão erra em média ${nf(100*baixo[abs])} pontos percentuais. Nas de nível médio, ${nf(100*I.find(r=>r.grupo==="IV")[abs])}.`
+    :`Nas escolas de nível socioeconômico mais baixo, a previsão da proficiência erra em média ${nf(baixo[abs])} pontos. Nas de nível médio, ${nf(I.find(r=>r.grupo==="IV")[abs])}.`;
+  const vals=I.map(r=>r[col]*esc),m=Math.max(...vals.map(Math.abs))*1.15,W=larg("#g-erro"),esq=W<480?84:120,h=40,H=I.length*h+30,s=svg(W,H),
+    meio=esq+(W-esq-20)/2,x=v=>meio+v/m*((W-esq-20)/2);
+  el("line",{x1:meio,x2:meio,y1:0,y2:H-24,stroke:cor("--linha"),"stroke-width":1.5},s);
+  txt(s,meio,H-6,"previsto",{class:"eixo","text-anchor":"middle"});
+  I.forEach((r,i)=>{const v=r[col]*esc,y=i*h+8;txt(s,esq-14,y+16,`Nível ${r.grupo}`,{"text-anchor":"end",class:"rot"});
+    const b=barra(s,meio,x(v),y+2,20,cor(v>=0?"--azul":"--vermelho"));
+    liga(b,`Nível ${r.grupo}: ${v>=0?"+":""}${nf(v)}${un} em relação ao previsto, erro médio ${nf(r[abs]*esc)}${un}, ${r.escolas} escolas`);
+    txt(s,v>=0?x(v)+8:x(v)-8,y+17,`${v>=0?"+":""}${nf(v)}`,{"text-anchor":v>=0?"start":"end"});});
+  const g=$("#g-erro");g.innerHTML="";g.appendChild(s);g.setAttribute("aria-label","Resíduo médio do modelo por faixa de nível socioeconômico");
+  $("#t-erro").innerHTML=`<tr><th>Nível</th><th>Escolas</th><th>Resíduo médio</th><th>Erro médio</th></tr>`+I.map(r=>`<tr><td>${r.grupo}</td><td>${r.escolas}</td><td>${nf(r[col]*esc)}${un}</td><td>${nf(r[abs]*esc)}${un}</td></tr>`).join("");}
+
+/* 6. temas */
+function temas(k){const T=D.temas[k],W=larg("#g-temas"),estreito=W<620,esq=estreito?0:320,h=estreito?62:40,H=T.length*h+10,s=svg(W,H),m=Math.max(...T.map(t=>t.participacao))*1.1,x=v=>esq+v/m*(W-esq-110);
+  T.forEach((t,i)=>{const y=i*h+(estreito?24:6);
+    if(estreito)txt(s,0,y-6,t.tema,{class:"rot"});else txt(s,esq-14,y+16,t.tema.length>40?t.tema.slice(0,39)+"…":t.tema,{"text-anchor":"end",class:"rot"});
+    const b=barra(s,x(0),x(t.participacao),y+3,18,cor("--azul"));b.setAttribute("opacity",t.top3>=75?1:.45);
+    liga(b,`${t.tema}: ${pct(t.participacao)} da explicação, entre os três primeiros em ${nf(t.top3,0)}% dos sorteios`);
+    txt(s,x(t.participacao)+8,y+17,`${nf(t.top3,0)}% no top 3`,{class:"eixo"});});
+  const g=$("#g-temas");g.innerHTML="";g.appendChild(s);g.setAttribute("aria-label","Temas de maior participação na explicação do modelo");}
+
+document.querySelectorAll(".alternar").forEach(grp=>grp.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
+  grp.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  if(grp.closest("section").id==="erro"){kErro=b.dataset.k;erro(kErro);}else{kTemas=b.dataset.k;temas(kTemas);}}));
+
+/* 7. UF */
+(()=>{const U=[...D.uf].sort((a,b)=>a.grupo.localeCompare(b.grupo)),sel=$("#uf-sel");
+  U.forEach(u=>sel.insertAdjacentHTML("beforeend",`<option value="${u.grupo}">${u.grupo} · ${u["região"]}</option>`));
+  const ord=[...D.uf].filter(u=>!u.suprimido).sort((a,b)=>b["prop com peso"]-a["prop com peso"]);
+  function mostra(g){const u=U.find(x=>x.grupo===g);
+    if(u.suprimido){$("#uf-num").innerHTML=`<div><b>—</b><span>Menos de ${D.meta.n_min} escolas na base</span></div>`;return;}
+    const pos=ord.findIndex(x=>x.grupo===g)+1,r=u["prop resíduo médio"];
+    $("#uf-num").innerHTML=[[pct(u["prop com peso"],0),"alfabetizados, com peso amostral"],[nf(u["prof com peso"],0),"pontos de proficiência média"],
+      [`${u.escolas}`,"escolas na base do estudo"],[`${r>=0?"+":""}${nf(100*r)}`,"pontos percentuais em relação ao previsto"]]
+      .map(([a,b])=>`<div><b>${a}</b><span>${b}</span></div>`).join("");
+    $("#uf-nota").textContent=`${g} fica em ${pos}º lugar entre as ${ord.length} UFs na proporção com peso. Com ${u.escolas} escolas, a média estadual é imprecisa e não substitui as estimativas oficiais do Inep.`;}
+  sel.addEventListener("change",()=>mostra(sel.value));sel.value="PB";mostra("PB");
+  $("#t-uf").innerHTML="<tr><th>UF</th><th>Escolas</th><th>Sem peso</th><th>Com peso</th><th>Proficiência</th></tr>"+ord.map(u=>`<tr><td>${u.grupo}</td><td>${u.escolas}</td><td>${pct(u["prop sem peso"])}</td><td>${pct(u["prop com peso"])}</td><td>${nf(u["prof com peso"])}</td></tr>`).join("");
+})();
+
+/* links e rodapé */
+const R=D.meta.repo;$("#l-repo").href=R;$("#l-tab").href=R+"/tree/main/reports/final";$("#l-painel").href=R+"/tree/main/reports/final/complemento_painel/tabelas";
+$("#nmin").textContent=D.meta.n_min;$("#rodape").textContent=`Fonte: microdados do Saeb 2023 (Inep, CC BY 4.0). Versão do código dos dados: ${D.meta.versao}.`;
+if(location.hash==="#resposta"){$("#palpite").value=60;$("#palpite-valor").textContent="60";marcaChute(60);$("#revelar").click();}
+let kErro="prop",kTemas="prof";
+const desenha=()=>{regioes();inse();quest();erro(kErro);temas(kTemas);};
+desenha();let tm,ultima=innerWidth;addEventListener("resize",()=>{clearTimeout(tm);tm=setTimeout(()=>{if(innerWidth!==ultima){ultima=innerWidth;desenha();}},150);});
 </script>
 </body>
 </html>
