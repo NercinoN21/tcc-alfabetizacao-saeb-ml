@@ -1,0 +1,50 @@
+\chapter{Considerações Finais}
+\label{cap:consideracoes}
+
+Este trabalho perguntou quanto os questionários contextuais de professor e
+de diretor acrescentam, fora da amostra, à previsão dos desfechos das
+escolas públicas do 2º ano além do INSE e da geografia. A resposta é que
+acrescentam pouco. Na proficiência média, os dois questionários juntos
+reduzem o erro em 4,2\%, com intervalo de confiança que exclui zero. Na
+proporção de alfabetizados, o ganho não se distingue de zero. Das quatro
+hipóteses, só a do INSE (H3) é confirmada nas duas trilhas. A do diretor
+(H2) fica perto da margem sem confirmá-la, e as do professor (H1) e da
+geografia (H4) não se confirmam. O modelo linear regularizado foi
+selecionado nas duas trilhas, porque os \textit{ensembles} não superaram a
+regra de seleção definida antes da estimação.
+
+O trabalho deixa quatro contribuições, as mesmas que a
+Seção~\ref{sec:justificativa} anunciou. No plano metodológico, compara
+modelos lineares e \textit{ensembles} em duas trilhas no nível da escola,
+com o mesmo conjunto de preditores, e mostra que o INSE pesa nas duas
+trilhas e que a ordem dos demais temas muda de uma para a outra.
+No rigor de dados, registra a decisão de inclusão de cada variável
+candidata, trata o vazamento do alvo e mantém cor/raça como variável de
+auditoria, com as duas especificações lado a lado. Para a política pública,
+mostra que o INSE e a geografia já entregam a maior parte da capacidade de
+prever o desempenho das escolas e que o erro é maior nas escolas de INSE
+baixo, o que desaconselha usar a previsão para classificar escolas
+individuais. Para a Ciência de Dados para Negócios, percorre o ciclo
+inteiro, da integração de quatro bases a um \textit{pipeline}
+reprodutível, com seleção de modelo pré-registrada e explicações
+auditáveis.
+
+As limitações estão na Seção~\ref{sec:discussao}. As mais importantes são
+o caráter ecológico e transversal da análise, a ausência de medida do
+método de alfabetização no questionário do professor e o tamanho efetivo
+pequeno das médias ponderadas.
+
+Três linhas de trabalho futuro decorrem desses limites. A primeira é
+estimar o efeito de uma prática modificável apontada pelo ranking de
+temas, como as do bloco do diretor, com várias edições do Saeb ou com um
+desenho quase experimental. Florestas causais \cite{wager2018causal} e
+\textit{double machine learning} \cite{chernozhukov2018double}, com
+implementações como a do CausalML \cite{chen2020causalml}, servem a esse
+fim desde que as hipóteses de identificação discutidas na
+Seção~\ref{sec:registros-inferenciais} sejam plausíveis. A segunda é testar
+se os temas do diretor que mais pesam no modelo descrevem o tipo de escola,
+cruzando-os com o porte, o tempo de permanência dos alunos e a rede. A
+terceira depende do instrumento. Incluir no questionário do professor
+perguntas sobre o método de alfabetização permitiria levar à escola a
+evidência experimental sobre o ensino da leitura revisada na
+Seção~\ref{sec:alfabetizacao-2ef}.
