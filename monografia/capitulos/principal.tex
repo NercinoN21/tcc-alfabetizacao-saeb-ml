@@ -144,7 +144,7 @@ distingue de zero (Capítulo~\ref{cap:resultados}).
 
 Essa pergunta se desdobra em quatro hipóteses, uma para cada bloco de
 variáveis: o questionário do professor, o questionário do diretor, o INSE e
-a geografia. A Tabela~\ref{tab:hipoteses} as resume. Todas são enunciadas
+a geografia. O Quadro~\ref{quad:hipoteses} as resume. Todas são enunciadas
 em termos preditivos e no nível da escola. O desenho deste trabalho permite
 verificar quanto cada bloco contribui para prever os desfechos agregados,
 sem estabelecer relações causais (Seção~\ref{sec:registros-inferenciais}).
@@ -161,36 +161,36 @@ etapa de projeto deste trabalho, e a regra foi explicitada depois da
 execução final. Reutilizar o critério já fixado para a seleção do modelo
 limita a margem de escolha que essa ordem abriria.
 
-\begin{table}[H]
+\begin{quadro}[H]
     \centering
     \footnotesize
     \caption{Sub-perguntas de pesquisa e hipóteses testáveis}
-    \begin{tabular}{P{0.5cm}P{3.6cm}P{5.3cm}P{2.6cm}}
-        \toprule
+    \begin{tabular}{|P{0.5cm}|P{3.6cm}|P{5.3cm}|P{2.6cm}|}
+        \hline
         \textbf{\#} & \textbf{Sub-pergunta} & \textbf{Hipótese} & \textbf{Grupo temático} \\
-        \midrule
+        \hline
         H1 & O questionário do professor acrescenta capacidade preditiva além
         do INSE, da geografia e do questionário do diretor? & Retirar o bloco
         do professor aumenta o erro de previsão. & Professor: formação,
-        experiência e prática \\ \addlinespace
+        experiência e prática \\ \hline
         H2 & O questionário do diretor acrescenta capacidade preditiva além do
         INSE, da geografia e do questionário do professor? & Retirar o bloco
         do diretor aumenta o erro de previsão. & Escola: clima, segurança e
-        gestão \\ \addlinespace
+        gestão \\ \hline
         H3 & O INSE mantém capacidade preditiva própria na presença dos dois
         questionários? & Retirar o INSE aumenta o erro de previsão. & Nível
-        socioeconômico \\ \addlinespace
+        socioeconômico \\ \hline
         H4 & O contexto geográfico carrega informação própria? & Retirar as
         variáveis de região, unidade da federação e localização aumenta o
         erro de previsão. & Contexto geográfico \\
-        \bottomrule
+        \hline
     \end{tabular}
     \vspace{0.1cm}
     \begin{flushleft}
     {\footnotesize Fonte: elaborada pelo autor.}
     \end{flushleft}
-    \label{tab:hipoteses}
-\end{table}
+    \label{quad:hipoteses}
+\end{quadro}
 
 H1 reúne, no bloco do professor, formação continuada em
 alfabetização e letramento, experiência docente e práticas pedagógicas em
@@ -905,7 +905,7 @@ são integradas em uma única base analítica, descrita a seguir.
 \subsection{Chaves, filtros e registros sem correspondência}
 
 \textbf{Chaves e filtros de integração.} A junção das quatro fontes segue
-chaves e filtros distintos, resumidos na Tabela~\ref{tab:fontes-dados}. O
+chaves e filtros distintos, resumidos no Quadro~\ref{quad:fontes-dados}. O
 questionário do professor é unido pela chave \texttt{ID\_TURMA},
 restrito a \texttt{ID\_SERIE~==~2} e \texttt{SQ\_QUESTIONARIO~==~5}, código
 que o dicionário de dados do Inep identifica como o bloco \emph{Professor
@@ -938,27 +938,27 @@ preditores são excluídas, por não restar informação explicativa. A
 Tabela~\ref{tab:cobertura} mostra quantos alunos, turmas e escolas
 permanecem em cada etapa de filtragem e junção.
 
-\begin{table}[H]
+\begin{quadro}[H]
     \centering
     \footnotesize
     \caption{Fontes de microdados do Saeb 2023 utilizadas e critérios de integração}
-    \begin{tabular}{P{2.9cm}P{1.6cm}P{2.3cm}P{2.9cm}P{3.2cm}}
-        \toprule
+    \begin{tabular}{|P{2.9cm}|P{1.6cm}|P{2.3cm}|P{2.9cm}|P{3.2cm}|}
+        \hline
         \textbf{Fonte} & \textbf{Unidade de observação} & \textbf{Chave de junção} & \textbf{Cobertura} & \textbf{Papel na base analítica} \\
-        \midrule
-        TS\_ALUNO\_2EF & Aluno & --- & Universo do 2º ano & Desfechos (agregados por escola) e identificadores de vínculo \\ \addlinespace
-        TS\_PROFESSOR & Turma & ID\_TURMA & Universo (público+privado) & Preditores de perfil e prática docente (agregados por escola) \\ \addlinespace
-        TS\_DIRETOR & Escola & ID\_ESCOLA & 95,4\% das escolas da base & Preditores de gestão escolar \\ \addlinespace
+        \hline
+        TS\_ALUNO\_2EF & Aluno & --- & Universo do 2º ano & Desfechos (agregados por escola) e identificadores de vínculo \\ \hline
+        TS\_PROFESSOR & Turma & ID\_TURMA & Universo (público+privado) & Preditores de perfil e prática docente (agregados por escola) \\ \hline
+        TS\_DIRETOR & Escola & ID\_ESCOLA & 95,4\% das escolas da base & Preditores de gestão escolar \\ \hline
         TS\_ESCOLA & Escola & ID\_ESCOLA & Só rede pública (92,1\% das escolas públicas) & Única fonte do INSE \\
-        \bottomrule
+        \hline
     \end{tabular}
     \vspace{0.1cm}
     \begin{flushleft}
     {\footnotesize Fonte: elaborada pelo autor, com base no dicionário de
     dados do Saeb 2023 (Inep).}
     \end{flushleft}
-    \label{tab:fontes-dados}
-\end{table}
+    \label{quad:fontes-dados}
+\end{quadro}
 
 \texttt{TS\_ALUNO\_2EF} não contribui com covariáveis de
 contexto do aluno: no 2º ano não há questionário
@@ -1362,27 +1362,27 @@ e, na trilha de proporção, o \textit{fractional logit} de
 fracionários. Ele representa, na terminologia de
 \citeonline{breiman2001two}, a ``cultura'' da modelagem estatística clássica
 diante da ``cultura'' algorítmica dos \textit{ensembles} de árvore.
-A Tabela~\ref{tab:trilhas} resume a estratégia.
+O Quadro~\ref{quad:trilhas} resume a estratégia.
 
-\begin{table}[H]
+\begin{quadro}[H]
     \centering
     \footnotesize
     \caption{Trilhas de modelagem, alvos, modelos e métricas de avaliação}
-    \begin{tabular}{P{2.2cm}P{2.2cm}P{3.0cm}P{1.6cm}P{3.2cm}}
-        \toprule
+    \begin{tabular}{|P{2.2cm}|P{2.2cm}|P{3.0cm}|P{1.6cm}|P{3.2cm}|}
+        \hline
         \textbf{Trilha} & \textbf{Alvo (nível escola)} & \textbf{Modelos} & \textbf{Métrica principal} & \textbf{Métricas complementares} \\
-        \midrule
+        \hline
         Proporção de alfabetizados & Proporção de alunos alfabetizados
         $\in [0,1]$ & \textit{Baseline}: média/mediana. Referência linear:
         \textit{fractional logit} com Elastic Net. \textit{Ensembles}: Random
         Forest, XGBoost, LightGBM & MAE & RMSE, R\textsuperscript{2},
-        análise de resíduos, aderência das predições ao intervalo $[0,1]$ \\ \addlinespace
+        análise de resíduos, aderência das predições ao intervalo $[0,1]$ \\ \hline
         Proficiência média & Proficiência média em LP (contínua) &
         \textit{Baseline}: média/mediana. Referência linear: Regressão
         Linear com Elastic Net. \textit{Ensembles}: Random Forest, XGBoost,
         LightGBM & MAE & RMSE, R\textsuperscript{2}, sMAPE, análise de
         resíduos \\
-        \bottomrule
+        \hline
     \end{tabular}
     \vspace{0.1cm}
     \begin{flushleft}
@@ -1392,8 +1392,8 @@ A Tabela~\ref{tab:trilhas} resume a estratégia.
     R\textsuperscript{2}: coeficiente de determinação. sMAPE (\textit{symmetric
     Mean Absolute Percentage Error}): erro percentual absoluto médio simétrico.}
     \end{flushleft}
-    \label{tab:trilhas}
-\end{table}
+    \label{quad:trilhas}
+\end{quadro}
 
 A métrica principal das duas trilhas é definida \emph{previamente} à
 estimação, de modo a evitar que a escolha do critério de comparação seja
@@ -1791,31 +1791,31 @@ com licença MIT para o código e CC BY 4.0 para o texto. Os microdados do
 Saeb 2023 são públicos e distribuídos pelo Inep sob a licença CC BY 4.0. O
 repositório traz uma cópia comprimida dos arquivos usados, com a
 atribuição ao Inep, e as somas SHA-256 que permitem conferi-los contra o
-arquivo original. A Tabela~\ref{tab:reproducao} resume o que é preciso para
+arquivo original. O Quadro~\ref{quad:reproducao} resume o que é preciso para
 reproduzir os resultados.
 
-\begin{table}[H]
+\begin{quadro}[H]
     \centering
     \footnotesize
     \caption{Elementos para a reprodução dos resultados}
-    \begin{tabular}{L{4.2cm}L{10.0cm}}
-        \toprule
+    \begin{tabular}{|L{4.2cm}|L{10.0cm}|}
+        \hline
         \textbf{Elemento} & \textbf{Valor} \\
-        \midrule
-        Microdados & Saeb 2023 (Inep), \url{https://download.inep.gov.br/microdados/microdados_saeb_2023.zip} \\ \addlinespace
-        Cópia dos dados usados & \texttt{data/snapshot/}, conferida por SHA-256 \\ \addlinespace
-        Versão do código da execução final & \textit{commit} \texttt{4dc8262} \\ \addlinespace
-        Resultados citados no texto & \texttt{reports/final/}, com a versão do código de cada etapa complementar no arquivo \texttt{run\_info.json} da respectiva pasta \\ \addlinespace
-        Ambiente & Python 3.12, com as versões das bibliotecas fixadas em \texttt{uv.lock} \\ \addlinespace
-        Semente aleatória & 2110 \\ \addlinespace
+        \hline
+        Microdados & Saeb 2023 (Inep), \url{https://download.inep.gov.br/microdados/microdados_saeb_2023.zip} \\ \hline
+        Cópia dos dados usados & \texttt{data/snapshot/}, conferida por SHA-256 \\ \hline
+        Versão do código da execução final & \textit{commit} \texttt{4dc8262} \\ \hline
+        Resultados citados no texto & \texttt{reports/final/}, com a versão do código de cada etapa complementar no arquivo \texttt{run\_info.json} da respectiva pasta \\ \hline
+        Ambiente & Python 3.12, com as versões das bibliotecas fixadas em \texttt{uv.lock} \\ \hline
+        Semente aleatória & 2110 \\ \hline
         Comandos de reprodução & \texttt{uv sync -{}-frozen}, \texttt{make dados-snapshot} e \texttt{make completo} \\
-        \bottomrule
+        \hline
     \end{tabular}
     \vspace{0.1cm}
     \begin{flushleft}
     {\footnotesize Fonte: elaborada pelo autor.}
     \end{flushleft}
-    \label{tab:reproducao}
-\end{table}
+    \label{quad:reproducao}
+\end{quadro}
 
 
