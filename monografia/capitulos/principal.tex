@@ -591,13 +591,10 @@ de uma forma funcional. \citeonline{breiman2001two}, em seu influente
 ensaio sobre as ``duas culturas'' da modelagem estatística, argumenta que a
 modelagem algorítmica (da qual os \textit{ensembles} de árvore são exemplo)
 e a modelagem estatística clássica respondem a perguntas diferentes e
-complementares. Essa distinção justifica, neste trabalho, tratar os modelos
-lineares regularizados não como modelos descartáveis, mas como
-\emph{modelos lineares de referência} da comparação
-(Seção~\ref{sec:estrategia-empirica}), sem que disso decorra
-caracterizá-los como inferenciais ou causais: estimados sobre dados
-observacionais e sem desenho de identificação, seus coeficientes descrevem
-associações condicionais, não efeitos.
+complementares. Essa distinção justifica tratar os modelos lineares
+regularizados como \emph{modelos lineares de referência} da comparação
+(Seção~\ref{sec:estrategia-empirica}), cujos coeficientes descrevem
+associações condicionais (Seção~\ref{sec:registros-inferenciais}).
 
 Cabe distinguir, porém, o que as técnicas de explicabilidade pós-hoc
 (Seção~\ref{sec:xai-revisao}) recuperam e o que não recuperam da leitura
@@ -698,12 +695,7 @@ regularizados intrinsecamente interpretáveis como referência da comparação
 regra de seleção pré-registrada, o modelo interpretável será o selecionado,
 Seção~\ref{sec:testes-significancia})
 e restringe o uso do SHAP à explicação do \emph{modelo}, sem convertê-lo
-em afirmação sobre o fenômeno. Uma advertência metodológica atravessa toda
-essa literatura e é adotada explicitamente neste trabalho: os valores de
-SHAP e LIME descrevem o que o modelo aprendeu a partir dos dados de
-treinamento, não uma relação causal entre as variáveis e o desfecho, razão
-pela qual os resultados serão redigidos em termos de associação, nunca de
-causalidade.
+em afirmação sobre o fenômeno.
 
 \section{Previsão, associação, explicação do modelo e inferência causal}
 \label{sec:registros-inferenciais}
@@ -766,6 +758,17 @@ passo para estudos futuros que isolem uma prática modificável apontada por
 esta análise e disponham de variação capaz de identificá-la, como várias
 edições do Saeb ou um desenho quase experimental.
 
+\textbf{Regra de redação.} Os quatro registros resultam em uma regra
+única para todo o trabalho. Os resultados são enunciados como associações
+preditivas no nível da escola (``escolas com maior X apresentam, em média,
+maior proporção de alfabetizados''), nunca como efeitos causais nem como
+afirmações sobre alunos individuais. Os valores de SHAP e LIME descrevem o
+que o modelo aprendeu com os dados de treinamento, e a ordenação de
+variáveis serve como ponto de partida para hipóteses causais a testar em
+estudos com desenho apropriado. O
+fundamento da restrição ao nível da escola está na
+Seção~\ref{sec:nivel-escola-teoria}.
+
 \section{Análise no nível da escola: desfechos agregados, proporções e o alcance ecológico das conclusões}
 \label{sec:nivel-escola-teoria}
 
@@ -801,11 +804,9 @@ A advertência é clássica: \citeonline{robinson1950ecological} demonstrou
 que correlações calculadas sobre agregados (as chamadas correlações
 ecológicas) podem diferir substancialmente (em magnitude e até em sinal)
 das correlações no nível individual, erro de transposição conhecido
-como \emph{falácia ecológica}. A consequência para este trabalho é uma
-regra de redação: todas as associações estimadas serão enunciadas e
-interpretadas no nível da escola (``escolas com maior X apresentam, em
-média, maior proporção de alfabetizados''), nunca transpostas ao nível do
-aluno individual.
+como \emph{falácia ecológica}. Por isso, a regra de redação deste
+trabalho (Seção~\ref{sec:registros-inferenciais}) mantém as associações
+estimadas no nível da escola.
 
 \section{Alfabetização no 2º ano do Ensino Fundamental: especificidades do objeto}
 \label{sec:alfabetizacao-2ef}
@@ -1706,13 +1707,8 @@ contribuições e pela concordância de sinal nas variáveis em comum. As
 divergências entre os dois métodos são tratadas como resultado a discutir.
 A análise é complementar, e os objetivos do trabalho se apoiam no SHAP.
 
-Em todas as análises, respeita-se a advertência metodológica de que os
-valores de SHAP e LIME descrevem o que o modelo aprendeu a partir dos dados
-de treinamento, não uma relação causal
-(Seção~\ref{sec:registros-inferenciais}), razão pela qual a redação dos
-resultados em TCC II utilizará ``associado a'', nunca ``causa'', e
-sempre no nível da escola, nunca transposta ao aluno individual
-(Seção~\ref{sec:nivel-escola-teoria}).
+A interpretação de SHAP e LIME segue a regra de redação da
+Seção~\ref{sec:registros-inferenciais}.
 
 \section{Checagem de robustez}
 \label{sec:robustez}
