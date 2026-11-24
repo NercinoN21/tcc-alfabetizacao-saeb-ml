@@ -18,7 +18,7 @@ nenhum grupo ficou abaixo desse limite (a menor UF tem 12 escolas).
 uv sync --frozen
 make dados-snapshot
 uv run python -m saeb_alfab.pipeline --modo completo --apenas painel
-uv run python -m saeb_alfab.painel reports/final/complemento_painel/tabelas reports/final/tabelas docs/painel/index.html
+uv run python -m saeb_alfab.painel reports/final/complemento_painel/tabelas reports/final docs/painel/index.html
 ```
 
 ## Atualização (commit `325340e`)
