@@ -313,7 +313,7 @@ Em quarto lugar, do ponto de vista da Ciência de Dados para Negócios, o
 trabalho percorre integralmente o ciclo que caracteriza a área aplicada a
 um problema de decisão pública. Parte da integração de quatro bases
 heterogêneas, com granularidades e chaves distintas, em uma base analítica
-única no nível da escola. Organiza essa integração em um \textbf{pipeline
+única no nível da escola. Organiza essa integração em um \textbf{\textit{pipeline}
 reprodutível}, em que os critérios de inclusão, exclusão, agregação e
 codificação de cada variável residem em um módulo de configuração que
 funciona como fonte única de verdade, de modo que documentação e código não
@@ -962,7 +962,7 @@ permanecem em cada etapa de filtragem e junção.
     \label{quad:fontes-dados}
 \end{quadro}
 
-\texttt{TS\_ALUNO\_2EF} não contribui com covariáveis de
+\texttt{TS\_ALUNO\_2EF} não contribui com preditores de
 contexto do aluno: no 2º ano não há questionário
 respondido pelo estudante, de modo que essa base fornece apenas os
 desfechos, os identificadores de vínculo com turma e escola e as variáveis
@@ -1246,7 +1246,7 @@ As quatro bases integradas somam 591 colunas, a partir das quais se
 constroem 432 variáveis candidatas. Cada variável candidata foi avaliada
 individualmente quanto à sua inclusão como preditor, com a decisão e a
 justificativa registradas em um módulo de configuração que funciona como
-fonte única de verdade para todo o pipeline (\texttt{dicionario.py},
+fonte única de verdade para todo o \textit{pipeline} (\texttt{dicionario.py},
 exportado como tabela versionada a cada execução). Isso evita divergência
 entre o código de modelagem e a documentação da base. Além do vazamento
 descrito acima, foram excluídas as colunas de texto aberto, as colunas com
@@ -1521,7 +1521,7 @@ avaliação:
     de ausência, calculada sobre toda a população, que usa apenas a
     ausência dos preditores e nenhuma informação dos desfechos;
     \item \textbf{Avaliação única no teste final}: concluída a seleção, o
-    modelo escolhido de cada trilha é avaliado \emph{uma única vez} sobre o
+    modelo selecionado de cada trilha é avaliado \emph{uma única vez} sobre o
     conjunto de teste. O valor assim obtido é a estimativa de desempenho
     reportada. Reavaliações sucessivas no teste após ajustes seriam,
     na prática, uma forma indireta de ajustar o modelo a ele;
@@ -1570,7 +1570,7 @@ intrinsecamente interpretável, em coerência com a objeção de
 \citeonline{rudin2019stop} discutida na Seção~\ref{sec:xai-revisao}.
 
 O conjunto de teste não participa dessa decisão. Concluída a seleção, ele é
-utilizado uma única vez para reportar o desempenho do modelo escolhido, com
+utilizado uma única vez para reportar o desempenho do modelo selecionado, com
 intervalo de confiança \textit{bootstrap} de 95\% para o MAE, e, de forma
 descritiva, a diferença de erro entre o melhor \textit{ensemble} e o modelo
 linear nas mesmas escolas, acompanhada do teste não paramétrico de
@@ -1656,7 +1656,7 @@ permitir perguntas do tipo ``o grupo `clima escolar' pesa mais que o grupo
 `formação do professor'?''. O terceiro são gráficos de dependência
 (\textit{dependence plots}) para as variáveis de maior importância
 agregada, que mostram não linearidades na relação entre o valor da
-variável e seu impacto na predição.
+variável e sua contribuição para a predição.
 
 \textbf{Reagrupamento de categorias.} A codificação \textit{one-hot} de uma
 variável nominal a fragmenta em várias colunas binárias, cada uma recebendo
