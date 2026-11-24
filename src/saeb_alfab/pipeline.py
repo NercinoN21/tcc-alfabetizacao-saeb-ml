@@ -159,6 +159,17 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
                                params_busca(aj[nome]), cfg)
             print(f"[ranking-execucoes] {rot}: selecionado = {nome}")
         return _fechar(out, info, t0)
+    if apenas == "simulador":
+        info["apenas"] = "simulador"
+        from . import simulador as SIM
+        alvo, rot = TRILHAS["prop"]
+        res, aj, _ = competir(pop, ms_A, alvo, "prop", idx_tr, idx_te, cfg)
+        sel = selecionar_modelo_final(pop, ms_A, alvo, "prop", idx_tr, aj, res, cfg)
+        nome, params = sel["selecionado"], params_busca(aj[sel["selecionado"]])
+        cv = cv_repetida(pop, ms_A, alvo, "prop", nome, params, cfg)
+        out.tabela(SIM.distribuicao_por_inse(pop, alvo, cv["pred"]), "05_simulador_distribuicao")
+        print(f"[simulador] {rot}: selecionado = {nome}")
+        return _fechar(out, info, t0)
     if apenas == "painel":
         info["apenas"] = "painel"
         from .config import PAINEL_N_MIN
@@ -347,7 +358,7 @@ def main(argv=None):
     ap.add_argument("--modo", choices=["rapido", "completo"], default=None)
     ap.add_argument("--ate", choices=ETAPAS, default="robustez")
     ap.add_argument("--seed", type=int, default=None)
-    ap.add_argument("--apenas", choices=["painel", "descritivas", "pinball", "pesos", "ranking-pesos", "ablacao", "figuras-shap",
+    ap.add_argument("--apenas", choices=["simulador", "painel", "descritivas", "pinball", "pesos", "ranking-pesos", "ablacao", "figuras-shap",
                                           "ranking-execucoes"],
                     default=None)
     a = ap.parse_args(argv)

@@ -121,6 +121,10 @@ def dados_pagina(pasta_painel: Path, pasta_final: Path, n_min: int, versao: str)
                       "participacao": float(r["participação média"]), "top3": float(r["% repetições no top-3"]),
                       "posicao": float(r["posição média"])} for i, r in e.iterrows()]
     d["ablacao"], d["temas"] = abl, temas
+    f = pasta_painel / "05_simulador_distribuicao.csv"
+    if f.exists():
+        d["simulador"] = _registros(pd.read_csv(f, index_col=0))
+
     d["meta"] = {"n_min": n_min, "versao": versao,
                  "repo": "https://github.com/NercinoN21/tcc-alfabetizacao-saeb-ml"}
     return d
