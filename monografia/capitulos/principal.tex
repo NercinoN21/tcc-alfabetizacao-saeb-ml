@@ -271,14 +271,11 @@ sistemática entre modelos lineares de referência e \textit{ensembles} de
 alfabetizados e proficiência média), construídas a partir de um mesmo
 conjunto de preditores. Isso permitirá verificar se as variáveis mais
 relevantes para prever a proporção de alunos alfabetizados coincidem com as
-mais relevantes para prever o nível médio de proficiência. A proposta
-dialoga com a tradição de regressão quantílica aplicada a microdados
-educacionais brasileiros, da qual \citeonline{almeida2014determinantes} é
-referência direta (Seção~\ref{sec:quantilica-ml}), e com o precedente mais
-recente de aprendizado de máquina aplicado ao Saeb com múltiplas fontes de
-dados \cite{tertulino2025multilevel}. Distingue-se de ambos pela unidade
-de análise agregada, pelas duas trilhas de modelagem e pela agregação da
-interpretabilidade SHAP por grupo temático de variáveis.
+mais relevantes para prever o nível médio de proficiência. A relação da
+proposta com a regressão quantílica \cite{almeida2014determinantes} e com o
+precedente de aprendizado de máquina aplicado ao Saeb
+\cite{tertulino2025multilevel} é discutida na
+Seção~\ref{sec:quantilica-ml}.
 
 Em segundo lugar, do ponto de vista do rigor de dados, o trabalho registra,
 para cada uma das 432 variáveis candidatas construídas a partir das quatro
@@ -521,14 +518,12 @@ muito acima do esperado. O resultado sugere que o contexto geográfico e
 administrativo pode carregar informação própria, não redutível ao nível
 socioeconômico da escola, e é desse achado que deriva a Hipótese~4 deste
 trabalho (Seção~\ref{sec:hipoteses}). O alcance dessa transposição é
-limitado. Nos microdados do Saeb 2023 utilizados aqui, o identificador de
-município é um código anonimizado, sem correspondência divulgada com os
-códigos oficiais do Instituto Brasileiro de Geografia e Estatística (IBGE)
-(Seção~\ref{sec:fonte-dados}). Este trabalho pode, assim, empregar o
-município como variável de agrupamento na validação cruzada
-(Seção~\ref{sec:protocolo}), mas não como identificador para incorporar
-covariáveis municipais externas ou para nomear municípios específicos,
-como fazem \citeonline{soares2013efeitos}.
+limitado, porque o município é um código anonimizado nos microdados do
+Saeb 2023 utilizados aqui, sem correspondência divulgada com os códigos
+oficiais do Instituto Brasileiro de Geografia e Estatística (IBGE). Ele
+serve de agrupamento na validação cruzada, mas não permite incorporar
+covariáveis municipais nem nomear municípios, como fazem
+\citeonline{soares2013efeitos} (Seção~\ref{sec:fonte-dados}).
 
 Em conjunto, a literatura brasileira converge para um resultado de duas
 camadas: o contexto socioeconômico e familiar é o preditor mais robusto de
@@ -867,27 +862,15 @@ Metodologia.
 
 \chapter{Metodologia}
 
-Este capítulo descreve, de forma detalhada e replicável, os procedimentos
-empíricos previstos para responder à pergunta de pesquisa enunciada na
-Introdução. A Seção~\ref{sec:fonte-dados} apresenta as fontes de microdados
-e os critérios de integração. A Seção~\ref{sec:unidade-escola} justifica a
-adoção da escola como unidade de análise, descreve a agregação dos
-desfechos e dos preditores e discute as implicações dessa decisão. A
-Seção~\ref{sec:pesos} trata dos pesos amostrais, e a
-Seção~\ref{sec:vies-inse} do viés de seleção associado à disponibilidade do
-INSE. A Seção~\ref{sec:variaveis} detalha os critérios de seleção,
-codificação e exclusão de variáveis, incluindo o tratamento do vazamento de
-informação e as considerações éticas (Seção~\ref{sec:etica}). A
-Seção~\ref{sec:estrategia-empirica} formaliza a estratégia empírica de
-comparação de modelos nas duas trilhas de regressão e o protocolo
-experimental (Seção~\ref{sec:protocolo}). A
-Seção~\ref{sec:testes-significancia} descreve a regra de seleção do modelo
-final e os testes de significância pareados. A
-Seção~\ref{sec:xai} detalha o protocolo de explicabilidade (XAI, do inglês
-\textit{eXplainable Artificial Intelligence}), a
-Seção~\ref{sec:robustez} descreve a checagem de robustez frente à restrição
-da análise à rede pública, e a Seção~\ref{sec:cronograma} apresenta o
-cronograma de execução.
+Este capítulo descreve, de forma replicável, os procedimentos empíricos
+que respondem à pergunta de pesquisa. As Seções~\ref{sec:fonte-dados}
+a~\ref{sec:variaveis} tratam dos dados, da unidade de análise, dos pesos,
+do viés associado ao INSE e das variáveis. As
+Seções~\ref{sec:estrategia-empirica} a~\ref{sec:robustez} tratam da
+comparação de modelos, da seleção do modelo final, da explicabilidade (XAI,
+do inglês \textit{eXplainable Artificial Intelligence}), da robustez e do
+valor incremental dos blocos, e a Seção~\ref{sec:cronograma}, do
+cronograma.
 
 \section{Fonte de dados e integração das bases}
 \label{sec:fonte-dados}
@@ -1030,10 +1013,8 @@ A decisão metodológica mais consequente deste projeto é a adoção da
 \textbf{escola como unidade de análise}: cada linha da base analítica
 corresponde a uma escola pública com 2º ano avaliado no Saeb 2023, os
 desfechos são agregados dos alunos para a escola e os preditores são
-consolidados no mesmo nível. Esta seção expõe, nesta ordem, as razões da
-decisão, o procedimento de agregação e as implicações (inclusive os
-custos) que dela decorrem, de modo que a banca possa avaliar não apenas
-\emph{o que} será feito, mas \emph{por que} e \emph{com que consequências}.
+consolidados no mesmo nível. A seguir vêm as razões da decisão, o
+procedimento de agregação e suas implicações, inclusive os custos.
 
 \subsection{Por que a escola, e não o aluno}
 \label{sec:limitacao-estrutural}
@@ -1142,8 +1123,8 @@ Criança Alfabetizada.
 
 \textbf{Simplificação do protocolo de validação.} Com uma linha por escola,
 a partição treino/teste e a validação cruzada operam diretamente sobre
-escolas, eliminando por construção o vazamento entre colegas de turma que o
-desenho anterior precisava neutralizar com validação agrupada. Permanece
+escolas, o que elimina por construção o vazamento entre colegas de turma.
+Permanece
 uma dependência residual possível entre escolas de um mesmo município ou
 rede (gestão municipal comum, Seção~\ref{sec:evidencias-brasileiras}), que
 será tratada como checagem: a estabilidade das conclusões será examinada
@@ -1493,12 +1474,10 @@ alvo, seguindo a mesma forma geral da Equação~\ref{eq:ensemble}.
 \subsection{Protocolo experimental}
 \label{sec:protocolo}
 
-Com a escola como unidade de análise, cada linha da base carrega seu
-próprio vetor de preditores, e o vazamento entre colegas de turma que
-comprometeria uma partição por aluno (Seção~\ref{sec:limitacao-estrutural})
-é eliminado por construção. O protocolo abaixo, comum às duas trilhas e a
-todos os modelos estimados, preserva ainda assim a disciplina experimental
-de separar estritamente decisão de avaliação:
+Como a partição é feita por escola, o vazamento entre colegas de turma fica
+excluído (Seção~\ref{sec:implicacoes-agregacao}). O protocolo abaixo, comum
+às duas trilhas e a todos os modelos, separa estritamente decisão de
+avaliação:
 
 \begin{enumerate}
     \item \textbf{Separação treino/teste final por escola}: a partição é
@@ -1706,12 +1685,10 @@ Seção~\ref{sec:registros-inferenciais}.
 \section{Checagem de robustez}
 \label{sec:robustez}
 
-Como a variável de nível socioeconômico (INSE) está disponível apenas para
-a rede pública, o escopo principal deste trabalho é restrito a essa rede
-(decisão metodológica necessária, mas que poderia, em princípio, alterar as
-conclusões sobre a importância relativa dos grupos temáticos).
-
-A dificuldade de avaliar essa possibilidade é que a restrição altera
+A restrição do escopo principal à rede pública, imposta pela
+disponibilidade do INSE (Seção~\ref{sec:vies-inse}), poderia alterar as
+conclusões sobre a importância relativa dos grupos temáticos. A
+dificuldade de avaliar essa possibilidade é que a restrição altera
 \emph{dois} fatores ao mesmo tempo: a \textbf{população analisada} (escolas
 da rede pública apenas \textit{versus} universo público e privado) e o
 \textbf{conjunto de preditores disponível} (com \textit{versus} sem o INSE e
@@ -1722,8 +1699,8 @@ de população quanto à retirada de um preditor reconhecidamente forte, sem
 que se possa isolar a origem.
 
 Por isso, a checagem de robustez adota um desenho que varia \textbf{um fator
-de cada vez}, comparando três execuções da trilha da proporção de
-alfabetizados sob o mesmo protocolo da Seção~\ref{sec:protocolo}:
+de cada vez}, comparando três execuções de cada trilha sob o mesmo
+protocolo da Seção~\ref{sec:protocolo}:
 
 \begin{enumerate}
     \item \textbf{Execução de referência}. População: escolas da rede
@@ -1742,11 +1719,9 @@ alfabetizados sob o mesmo protocolo da Seção~\ref{sec:protocolo}:
 \end{enumerate}
 
 A essas três execuções soma-se uma \textbf{execução de sensibilidade à
-unidade de agregação}: a trilha da proporção será repetida com a
-\emph{turma} como unidade, sob o mesmo protocolo. A razão foi exposta na
-Seção~\ref{sec:agregacao}: os preditores docentes variam por turma, e parte
-das escolas possui mais de uma turma avaliada, de modo que a agregação por
-escola funde vetores docentes distintos. A convergência das conclusões
+unidade de agregação}, em que as duas trilhas são repetidas com a
+\emph{turma} como unidade, sob o mesmo protocolo (razão na
+Seção~\ref{sec:agregacao}). A convergência das conclusões
 entre as duas unidades indicará que elas não dependem fortemente da escolha
 da unidade de agregação, e uma divergência será reportada e discutida.
 
