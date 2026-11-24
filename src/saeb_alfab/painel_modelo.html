@@ -47,6 +47,8 @@ h1{font-size:clamp(36px,6vw,64px);line-height:1.06}
 h2{font-size:clamp(30px,4.6vw,48px);line-height:1.08}
 .lead{font-size:clamp(19px,2.2vw,24px);color:var(--tinta2);margin:20px auto 0;line-height:1.4}
 strong{font-weight:600;color:var(--tinta)}
+.texto p.lead{text-align:left}
+#inicio .texto p.lead,#inicio .apoio{text-align:center}
 .credito{font-size:14px;color:var(--tinta2);margin-top:28px}
 .apoio{font-size:15px;color:var(--tinta2);margin-top:12px}
 .lista-nao{max-width:680px;margin:40px auto 0;padding:0;list-style:none;text-align:left}
@@ -76,9 +78,9 @@ p{margin:16px 0 0}
 /* gráficos */
 .grafico{margin:56px auto 0;max-width:820px}
 .grafico svg{display:block;width:100%;height:auto;overflow:visible}
-svg text{font-family:inherit;fill:var(--tinta);font-size:14px}
-svg .eixo{fill:var(--muda);font-size:12px}
-svg .rot{fill:var(--tinta2);font-size:14px}
+svg text{font-family:inherit;fill:var(--tinta);font-size:16px}
+svg .eixo{fill:var(--muda);font-size:14px}
+svg .rot{fill:var(--tinta2);font-size:16px}
 .legenda{display:flex;gap:20px;justify-content:center;font-size:14px;color:var(--tinta2);margin-top:16px;flex-wrap:wrap}
 .legenda i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:0}
 .alternar{display:inline-flex;background:var(--grade);border-radius:980px;padding:3px;margin-top:28px}
@@ -120,8 +122,8 @@ footer .coluna{display:flex;flex-direction:column;gap:6px}
 <main>
 <section id="inicio">
   <div class="texto">
-    <h1>De cada 100 crianças do 2º ano da escola pública, quantas você acha que atingem o padrão de alfabetização do Saeb?</h1>
-    <p class="lead">Dê o seu palpite antes de ver o que mostram os dados de 2023.</p>
+    <h1>Quantas de cada 100?</h1>
+    <p class="lead">De cada 100 crianças do 2º ano da escola pública, quantas você acha que <strong>atingem o padrão de alfabetização do Saeb</strong>? Dê o seu palpite antes de ver os dados de 2023.</p>
     <p class="apoio">O padrão é uma nota de corte na prova de Língua Portuguesa. Ficar abaixo dela não quer dizer que a criança não lê nada.</p>
     <div class="palpite">
       <output id="palpite-valor" for="palpite" aria-live="polite">70</output>
@@ -315,12 +317,13 @@ $("#revelar").addEventListener("click",()=>{
 /* 2. regiões (uma série: com peso) */
 function regioes(){const R=[...D.regiao].sort((a,b)=>b["prop com peso"]-a["prop com peso"]);
   const hi=R[0],lo=R[R.length-1];
-  $("#lugar-lead").innerHTML=`No ${hi.grupo}, <strong>${Math.round(100*hi["prop com peso"])} de cada 100</strong> atingem o padrão. No ${lo.grupo}, <strong>${Math.round(100*lo["prop com peso"])}</strong>. A linha cinza mostra a margem de incerteza de cada região.`;
+  $("#lugar-lead").innerHTML=`No ${hi.grupo}, <strong>${Math.round(100*hi["prop com peso"])} de cada 100</strong> atingem o padrão. No ${lo.grupo}, <strong>${Math.round(100*lo["prop com peso"])}</strong>. A linha azul mostra a margem de incerteza de cada região.`;
   const W=larg("#g-regiao"),esq=W<480?100:130,h=34,H=R.length*h+30,s=svg(W,H),x=v=>esq+v/.8*(W-esq-70);
   [0,.25,.5,.75].forEach(v=>{el("line",{x1:x(v),x2:x(v),y1:0,y2:H-24,stroke:cor("--grade")},s);txt(s,x(v),H-6,pct(v,0),{class:"eixo","text-anchor":"middle"});});
   R.forEach((r,i)=>{const y=i*h+8;txt(s,esq-14,y+14,r.grupo,{"text-anchor":"end",class:"rot"});
-    const b=barra(s,x(0),x(r["prop com peso"]),y+1,18,cor("--azul"));liga(b,`${r.grupo}: ${pct(r["prop com peso"])} com peso (de ${pct(r["prop com peso IC inf"])} a ${pct(r["prop com peso IC sup"])}), ${r.escolas} escolas`);
-    el("line",{x1:x(r["prop com peso IC inf"]),x2:x(r["prop com peso IC sup"]),y1:y+10,y2:y+10,stroke:cor("--tinta2"),"stroke-width":2,"stroke-linecap":"round"},s);
+    const b=barra(s,x(0),x(r["prop com peso"]),y+1,18,cor("--hachura"));liga(b,`${r.grupo}: ${pct(r["prop com peso"])} com peso (de ${pct(r["prop com peso IC inf"])} a ${pct(r["prop com peso IC sup"])}), ${r.escolas} escolas`);
+    el("line",{x1:x(r["prop com peso IC inf"]),x2:x(r["prop com peso IC sup"]),y1:y+10,y2:y+10,stroke:cor("--azul"),"stroke-width":2.5,"stroke-linecap":"round"},s);
+    el("circle",{cx:x(r["prop com peso"]),cy:y+10,r:5,fill:cor("--azul"),stroke:cor("--pagina"),"stroke-width":2},s);
     txt(s,x(r["prop com peso IC sup"])+8,y+15,pct(r["prop com peso"]));});
   $("#g-regiao").replaceChildren(s);$("#g-regiao").setAttribute("aria-label","Proporção de alfabetizados por região, com peso amostral");
   $("#t-regiao").innerHTML="<tr><th>Região</th><th>Escolas</th><th>Sem peso</th><th>Com peso</th><th>IC95%</th></tr>"+R.map(r=>`<tr><td>${r.grupo}</td><td>${r.escolas}</td><td>${pct(r["prop sem peso"])}</td><td>${pct(r["prop com peso"])}</td><td>${pct(r["prop com peso IC inf"])} a ${pct(r["prop com peso IC sup"])}</td></tr>`).join("");
@@ -380,7 +383,7 @@ function erro(k){const I=D.inse,col=k+" resíduo médio",abs=k+" erro absoluto m
 function temas(k){const T=D.temas[k],W=larg("#g-temas"),estreito=W<620,esq=estreito?0:320,h=estreito?62:40,H=T.length*h+10,s=svg(W,H),m=Math.max(...T.map(t=>t.participacao))*1.1,x=v=>esq+v/m*(W-esq-110);
   T.forEach((t,i)=>{const y=i*h+(estreito?24:6);
     if(estreito)txt(s,0,y-6,t.tema,{class:"rot"});else txt(s,esq-14,y+16,t.tema.length>40?t.tema.slice(0,39)+"…":t.tema,{"text-anchor":"end",class:"rot"});
-    const b=barra(s,x(0),x(t.participacao),y+3,18,cor("--azul"));b.setAttribute("opacity",t.top3>=75?1:.45);
+    const b=barra(s,x(0),x(t.participacao),y+3,18,cor("--azul"));
     liga(b,`${t.tema}: ${pct(t.participacao)} da explicação, entre os três primeiros em ${nf(t.top3,0)}% dos sorteios`);
     txt(s,x(t.participacao)+8,y+17,`${nf(t.top3,0)}% no top 3`,{class:"eixo"});});
   const g=$("#g-temas");g.innerHTML="";g.appendChild(s);g.setAttribute("aria-label","Temas de maior participação na explicação do modelo");}
@@ -397,7 +400,7 @@ document.querySelectorAll(".alternar").forEach(grp=>grp.addEventListener("click"
     if(u.suprimido){$("#uf-num").innerHTML=`<div><b>—</b><span>Menos de ${D.meta.n_min} escolas na base</span></div>`;return;}
     const pos=ord.findIndex(x=>x.grupo===g)+1,r=u["prop resíduo médio"];
     $("#uf-num").innerHTML=[[pct(u["prop com peso"],0),`atingem o padrão, com peso (entre ${pct(u["prop com peso IC inf"],0)} e ${pct(u["prop com peso IC sup"],0)})`],[nf(u["prof com peso"],0),"pontos de proficiência média"],
-      [`${u.escolas}`,"escolas na base do estudo"],[`${r>=0?"+":""}${nf(100*r)}`,"pontos percentuais em relação ao previsto"]]
+      [`${u.escolas}`,"escolas na base do estudo"],[Math.abs(r)<.02?"Perto":(r>0?"Acima":"Abaixo"),"do que o modelo prevê para o contexto dela"]]
       .map(([a,b])=>`<div><b>${a}</b><span>${b}</span></div>`).join("");
     $("#uf-nota").textContent=`${g} fica em ${pos}º lugar entre as ${ord.length} UFs na proporção com peso. Com ${u.escolas} escolas, a média estadual é imprecisa e não substitui as estimativas oficiais do Inep.`;}
   sel.addEventListener("change",()=>mostra(sel.value));sel.value="PB";mostra("PB");
