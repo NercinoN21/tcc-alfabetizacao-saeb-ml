@@ -1,0 +1,7 @@
+execução,temas comuns,Spearman com R1: pública com INSE (referência),temas em comum no top-5,1º tema (sem INSE)
+R1: pública com INSE (referência),39,1.0,5,Infraestrutura — Educação Infantil
+R2: pública sem INSE,39,0.974089068825911,4,Infraestrutura — Educação Infantil
+R3: universo sem INSE,37,0.7444286391654812,3,Infraestrutura — Educação Infantil
+turma como unidade,34,0.7970970206264323,4,Infraestrutura — Educação Infantil
+n ≥ 20 alunos,34,0.7283422459893049,4,Infraestrutura — Educação Infantil
+junção interna (professor e diretor),37,0.8909435751541014,4,Infraestrutura — Educação Infantil
