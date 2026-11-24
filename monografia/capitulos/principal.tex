@@ -898,20 +898,19 @@ O Saeb 2023 disponibiliza, para o 2º ano do Ensino
 Fundamental, seis arquivos de microdados: \texttt{TS\_ALUNO\_2EF},
 \texttt{TS\_ESCOLA}, \texttt{TS\_PROFESSOR}, \texttt{TS\_DIRETOR},
 \texttt{TS\_SECRETARIO\_\allowbreak MUNICIPAL} e \texttt{TS\_ITEM}.
-Deste conjunto, os dois últimos foram excluídos do escopo:
+Os dois últimos foram excluídos do escopo.
 \texttt{TS\_\allowbreak SECRETARIO\_MUNICIPAL} tem granularidade municipal,
-incompatível com o nível de análise deste trabalho (o identificador de
-município do Saeb é, além disso, um código anonimizado, sem correspondência
-divulgada com os códigos oficiais do IBGE, o que impede vincular a base a
-fontes externas de dados municipais e restringe seu uso, neste trabalho, ao
-papel de variável de agrupamento na validação cruzada,
-Seção~\ref{sec:protocolo}). Já \texttt{TS\_ITEM} refere-se à análise
+incompatível com o nível de análise deste trabalho. Além disso, o
+identificador de município do Saeb é um código anonimizado, sem
+correspondência divulgada com os códigos oficiais do IBGE, o que impede
+vincular a base a fontes externas de dados municipais e restringe o uso do
+município ao papel de variável de agrupamento na validação cruzada
+(Seção~\ref{sec:protocolo}). Já \texttt{TS\_ITEM} refere-se à análise
 psicométrica, via TRI, de funcionamento diferencial de item (DIF, do inglês
-\textit{Differential Item Functioning}), uma pergunta
-de pesquisa distinta da investigação de fatores contextuais associados ao
-desempenho aqui proposta.
-As quatro bases restantes (aluno, escola, professor e diretor) serão
-integradas em uma única base analítica, descrita a seguir.
+\textit{Differential Item Functioning}), uma pergunta de pesquisa distinta
+da investigação de fatores contextuais associados ao desempenho aqui
+proposta. As quatro bases restantes (aluno, escola, professor e diretor)
+são integradas em uma única base analítica, descrita a seguir.
 
 \subsection{Chaves, filtros e registros sem correspondência}
 
@@ -932,13 +931,13 @@ por \texttt{ID\_TURMA}, e o resultado dessa verificação será reportado na
 versão final do trabalho.
 
 O questionário do diretor é unido pela chave \texttt{ID\_ESCOLA}, também
-restrito a \texttt{ID\_SERIE~==~2}, em relação um-para-um com a escola,
-cobrindo 95,4\% das escolas da base analítica. Já \texttt{TS\_ESCOLA},
-única fonte do Indicador de Nível Socioeconômico (INSE), cobre
-exclusivamente a rede pública: das 1.107 escolas com alunos de proficiência
-válida, 764 são públicas e 704 delas dispõem do INSE (92,1\% das públicas e
-63,6\% do total), assimetria de cobertura cujas implicações são discutidas
-na Seção~\ref{sec:vies-inse}.
+restrito a \texttt{ID\_SERIE~==~2}, em relação um-para-um com a escola, e
+cobre 95,4\% das escolas da base analítica. Já \texttt{TS\_ESCOLA}, única
+fonte do Indicador de Nível Socioeconômico (INSE), cobre exclusivamente a
+rede pública. Das 1.107 escolas com alunos de proficiência válida, 764 são
+públicas, e 704 delas dispõem do INSE (92,1\% das públicas e 63,6\% do
+total). As implicações dessa assimetria de cobertura são discutidas na
+Seção~\ref{sec:vies-inse}.
 
 \textbf{Registros sem correspondência.} A integração parte da base de
 alunos, por meio de junção à esquerda. Um aluno cuja turma não possua
@@ -1040,19 +1039,18 @@ custos) que dela decorrem, de modo que a banca possa avaliar não apenas
 \label{sec:limitacao-estrutural}
 
 No 2º ano do Ensino Fundamental não há questionário contextual respondido
-pelo aluno: as variáveis preditoras candidatas originam-se inteiramente de
+pelo aluno. As variáveis preditoras candidatas originam-se inteiramente de
 questionários de turma (professor) e de escola (diretor, escola,
-geografia). Na prática, alunos de uma mesma turma compartilham exatamente o
-mesmo vetor de variáveis preditoras. Uma \textbf{análise exploratória
-preliminar} da base integrada, conduzida durante a elaboração deste Projeto
-e sujeita a revisão na execução definitiva, dimensiona essa característica:
-na coorte de escolas públicas com questionários de professor e de diretor,
-13.810 alunos distribuem-se por 688 turmas em 498 escolas (na base analítica
-final, com junção à esquerda, são 17.183 alunos em 604 escolas), com
-correlação intraclasse (ICC, do inglês \textit{intraclass correlation
-coefficient}) da proficiência próxima de 0,20, o que
-situa o tamanho amostral \emph{efetivo} na ordem de poucos milhares de
-observações-equivalentes, muito abaixo do número de linhas-aluno.
+geografia), e alunos de uma mesma turma compartilham exatamente o mesmo
+vetor de variáveis preditoras. Uma \textbf{análise exploratória} da base
+integrada dimensiona essa característica. Na coorte de escolas públicas
+com questionários de professor e de diretor, 13.810 alunos distribuem-se
+por 688 turmas em 498 escolas. Na base analítica final, com junção à
+esquerda, são 17.183 alunos em 604 escolas. A correlação intraclasse (ICC,
+do inglês \textit{intraclass correlation coefficient}) da proficiência é
+próxima de 0,20, o que situa o tamanho amostral \emph{efetivo} na ordem de
+poucos milhares de observações-equivalentes, muito abaixo do número de
+linhas-aluno.
 
 Manter o aluno como unidade de observação, nesse cenário, significa repetir
 a mesma linha de preditores dezenas de vezes, variando apenas o desfecho:
@@ -1242,46 +1240,46 @@ completo.
 
 Este trabalho define duas variáveis-alvo complementares no nível da escola,
 ambas construídas a partir da proficiência contínua em Língua Portuguesa
-(\texttt{PROFICIENCIA\_LP\_SAEB}), estimada pela TRI \cite{klein2003tri}: a
-\textbf{proporção de alunos alfabetizados} da escola
+(\texttt{PROFICIENCIA\_LP\_SAEB}), estimada pela TRI \cite{klein2003tri}. A
+primeira é a \textbf{proporção de alunos alfabetizados} da escola
 (Equação~\ref{eq:prop-alfabetizado}), em que o indicador individual de
 alfabetização é definido pelo Inep (\citeyear{inep2023alfabetiza}) como
-$\mathbf{1}[\text{PROFICIENCIA\_LP\_SAEB}_i \geq 743]$, e a
+$\mathbf{1}[\text{PROFICIENCIA\_LP\_SAEB}_i \geq 743]$. A segunda é a
 \textbf{proficiência média} da escola. Como ambas derivam do mesmo processo
 de estimação por TRI, todo o bloco de colunas da tabela do aluno derivado
-desse processo (a própria proficiência, quando não compõe o alvo da
-trilha em questão, o erro-padrão de estimação e as respostas a itens
-individuais da prova) constitui vazamento de informação e foi excluído
-do conjunto de preditores em ambas as trilhas. Pela mesma razão, os dois
-alvos não podem figurar um como preditor do outro: são transformações
-distintas da mesma variável de origem.
+desse processo constitui vazamento de informação e foi excluído do
+conjunto de preditores nas duas trilhas. O bloco inclui a própria
+proficiência, quando não compõe o alvo da trilha, o erro-padrão de
+estimação e as respostas a itens individuais da prova. Pela mesma razão,
+os dois alvos não podem figurar um como preditor do outro, porque são
+transformações distintas da mesma variável de origem.
 
 \subsection{Seleção, codificação e engenharia das variáveis preditoras}
 
-As quatro bases integradas somam 591 colunas reais. Cada uma foi avaliada
+As quatro bases integradas somam 591 colunas, a partir das quais se
+constroem 432 variáveis candidatas. Cada variável candidata foi avaliada
 individualmente quanto à sua inclusão como preditor, com a decisão e a
 justificativa registradas em um módulo de configuração que funciona como
 fonte única de verdade para todo o pipeline (\texttt{dicionario.py},
-exportado como tabela versionada a cada execução),
-evitando divergência entre o código de modelagem e a documentação da base.
-Além do vazamento descrito acima, foram excluídas: colunas de texto aberto;
-colunas com mais de 30\% de ausência na amostra filtrada; e a variável
-\texttt{ESTRATO}, um metadado do desenho amostral \cite{inep2024amostra}
-que se comportava, em testes preliminares, como quase-identificador de
-escola e dominava desproporcionalmente a importância agregada de SHAP, sem
-corresponder a um fator de contexto substantivo. O processo resultou em 363
-variáveis preditoras candidatas, cada uma codificada como binária, ordinal
-(tipo Likert), numérica ou nominal a partir da coluna de tipo do dicionário
-do Inep e do texto das opções de resposta (nunca da posição da letra) e
-classificada em um de dezenas de grupos temáticos (por exemplo,
-``práticas pedagógicas em sala de aula'' ou ``clima escolar''). Esses grupos
-permitem agregar a importância de SHAP por tema, além da leitura por coluna
-isolada (Seção~\ref{sec:xai}). Nas escalas que incluem opções alheias à
-escala (``Não tem'', ``Não uso'', ``Não se aplica'', ``Não sei''), essas
-opções geram um indicador binário próprio, em vez de serem ordenadas
-artificialmente junto aos demais níveis. Com a adoção
-da escola como unidade de análise, o mesmo módulo de configuração passa a
-registrar, para cada variável de nível turma, a regra de agregação por
+exportado como tabela versionada a cada execução). Isso evita divergência
+entre o código de modelagem e a documentação da base. Além do vazamento
+descrito acima, foram excluídas as colunas de texto aberto, as colunas com
+mais de 30\% de ausência na amostra filtrada e a variável
+\texttt{ESTRATO}, um metadado do desenho amostral \cite{inep2024amostra}.
+Em testes preliminares, \texttt{ESTRATO} se comportava como
+quase-identificador de escola e dominava desproporcionalmente a importância
+agregada de SHAP, sem corresponder a um fator de contexto substantivo. O
+processo resultou em 363 variáveis preditoras. Cada uma foi codificada como
+binária, ordinal (tipo Likert), numérica ou nominal a partir da coluna de
+tipo do dicionário do Inep e do texto das opções de resposta (nunca da
+posição da letra) e classificada em um de dezenas de grupos temáticos (por
+exemplo, ``práticas pedagógicas em sala de aula'' ou ``clima escolar''). Esses
+grupos permitem agregar a importância de SHAP por tema, além da leitura por
+coluna isolada (Seção~\ref{sec:xai}). Nas escalas que incluem opções
+alheias à escala (``Não tem'', ``Não uso'', ``Não se aplica'', ``Não sei''),
+essas opções geram um indicador binário próprio, em vez de serem ordenadas
+artificialmente junto aos demais níveis. O mesmo módulo de configuração
+registra, para cada variável de nível turma, a regra de agregação por
 escola descrita na Seção~\ref{sec:agregacao}.
 
 Duas decisões complementam esse conjunto. Primeiro, foram retirados da
@@ -1348,14 +1346,14 @@ cor/raça e de 0,1703 com ela na trilha de proporção, e de 17,86 e 17,89
 pontos na de proficiência.
 
 Excluir a variável, porém, não remove a informação que ela carrega. Um
-modelo LightGBM treinado só com os preditores da especificação A recupera, em
-validação cruzada, a cor/raça do diretor (preto ou pardo, contra branco)
+modelo LightGBM treinado só com os preditores da especificação A recupera,
+em validação cruzada, a cor/raça do diretor (preto ou pardo, contra branco)
 com área sob a curva ROC de 0,72 e a proporção de turmas com professor
 preto ou pardo com R\textsuperscript{2} de 0,14. A cor/raça permanece no
 trabalho, assim, como variável de \emph{auditoria}. Os erros fora da
-amostra das especificações A e B são comparados entre grupos de escolas definidos
-pelo INSE, pela cor/raça do diretor e pela composição racial dos
-professores, e a mudança da diferença de erro entre os grupos, de A para B,
+amostra das especificações A e B são comparados entre grupos de escolas
+definidos pelo INSE, pela cor/raça do diretor e pela composição racial dos
+professores. A mudança da diferença de erro entre os grupos, de A para B,
 é reportada com intervalo de confiança \textit{bootstrap} de 95\%. Esses
 intervalos são indicativos, porque não incorporam a incerteza do
 retreinamento dos modelos. A ausência da variável no modelo principal não
@@ -1506,28 +1504,28 @@ de separar estritamente decisão de avaliação:
     \item \textbf{Separação treino/teste final por escola}: a partição é
     feita sobre as linhas-escola, na proporção aproximada de 80/20, com
     semente aleatória fixa documentada no código e estratificação pela
-    distribuição do desfecho e pela região, preservando a mesma partição
-    nas duas trilhas para permitir comparação direta de importância de
+    distribuição do desfecho e pela região. A mesma partição vale nas duas
+    trilhas, o que permite comparar diretamente a importância das
     variáveis entre elas;
     \item \textbf{Busca de hiperparâmetros restrita ao treino}: toda a busca
     é realizada exclusivamente sobre o conjunto de treino. O conjunto de
     teste final não participa de nenhuma decisão de modelagem: nem de
     seleção de hiperparâmetro, nem de escolha de modelo;
     \item \textbf{Validação cruzada}: a busca emprega validação cruzada de
-    5 dobras sobre as escolas do conjunto de treino. Como checagem de
-    sensibilidade à dependência residual entre escolas de um mesmo
-    município (Seção~\ref{sec:implicacoes-agregacao}), a estabilidade dos
-    resultados será examinada também sob validação cruzada agrupada por
-    município (\texttt{GroupKFold});
-    \item \textbf{Pré-processamento dentro de cada dobra}: imputação
+    5 dobras sobre as escolas do conjunto de treino. A dependência
+    residual entre escolas de um mesmo município
+    (Seção~\ref{sec:implicacoes-agregacao}) é checada com uma validação
+    cruzada agrupada por município (\texttt{GroupKFold});
+    \item \textbf{Pré-processamento dentro de cada dobra}: a imputação
     (mediana para variáveis numéricas e ordinais, categoria ``não
-    informado'' para nominais), codificação de variáveis nominais
-    (\textit{one-hot} para os modelos lineares de referência e para o Random
-    Forest; tipo categórico nativo no LightGBM) e qualquer seleção de
-    variáveis são ajustadas \emph{dentro} de cada dobra, a partir apenas dos
-    dados de treinamento daquela dobra, e então aplicadas à dobra de
-    validação. Nenhuma estatística derivada do conjunto completo precede a
-    partição. XGBoost e LightGBM toleram valores ausentes nativamente;
+    informado'' para nominais), a codificação \textit{one-hot} das
+    variáveis nominais e a padronização usada pelos modelos lineares são
+    ajustadas \emph{dentro} de cada dobra, a partir apenas dos dados de
+    treinamento daquela dobra, e então aplicadas à dobra de validação. O
+    mesmo pré-processamento vale para todos os modelos. A única etapa
+    aplicada antes da partição é a exclusão de variáveis com mais de 30\%
+    de ausência, calculada sobre toda a população, que usa apenas a
+    ausência dos preditores e nenhuma informação dos desfechos;
     \item \textbf{Avaliação única no teste final}: concluída a seleção, o
     modelo escolhido de cada trilha é avaliado \emph{uma única vez} sobre o
     conjunto de teste. O valor assim obtido é a estimativa de desempenho
@@ -1651,16 +1649,17 @@ polinomial explorando a estrutura interna das árvores, conforme o algoritmo
 TreeSHAP de \citeonline{lundberg2020tree}; o \texttt{LinearExplainer} é
 utilizado caso o modelo selecionado seja o linear de referência.
 
-A partir dos valores de SHAP do modelo selecionado, este trabalho produzirá
-três níveis de análise: (i) a importância agregada por variável, sumarizada
-em gráficos de resumo (\textit{summary plots}); (ii) a importância agregada
-por grupo temático, obtida somando o valor absoluto médio de SHAP de todas
-as variáveis pertencentes ao mesmo tema (Seção~\ref{sec:variaveis}), mais
-informativa à discussão de política pública do que uma lista de centenas de
-variáveis isoladas, por permitir perguntas do tipo ``o grupo `clima escolar'
-pesa mais que o grupo `formação do professor'?''; e (iii) gráficos de
-dependência (\textit{dependence plots}) para as variáveis de maior
-importância agregada, revelando não linearidades na relação entre o valor da
+A partir dos valores de SHAP do modelo selecionado, este trabalho produz
+três níveis de análise. O primeiro é a importância agregada por variável,
+resumida em gráficos de resumo (\textit{summary plots}). O segundo é a
+importância agregada por grupo temático, obtida somando o valor absoluto
+médio de SHAP de todas as variáveis do mesmo tema
+(Seção~\ref{sec:variaveis}). Ela é mais informativa para a discussão de
+política pública do que uma lista de centenas de variáveis isoladas, por
+permitir perguntas do tipo ``o grupo `clima escolar' pesa mais que o grupo
+`formação do professor'?''. O terceiro são gráficos de dependência
+(\textit{dependence plots}) para as variáveis de maior importância
+agregada, que mostram não linearidades na relação entre o valor da
 variável e seu impacto na predição.
 
 \textbf{Reagrupamento de categorias.} A codificação \textit{one-hot} de uma
