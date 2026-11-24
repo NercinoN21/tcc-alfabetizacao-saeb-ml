@@ -179,3 +179,11 @@ def test_pipeline_com_indices_por_tema_treina_e_preve(dados):
     pipe = pipeline_de("prof", "Linear (Elastic Net)", ms, 0, {"alpha": 0.01, "l1_ratio": 0.5}, indices_tema=True)
     p = pipe.fit(X_de(d2, ms), d2.Y_PROP_ALFAB).predict(X_de(d2, ms))
     assert len(p) == len(d2) and np.isfinite(p).all()
+
+
+def test_slug_dos_casos_lime_e_unico():
+    from saeb_alfab.explicabilidade import CASOS
+    from saeb_alfab.figuras_shap import slug_caso
+    slugs = [slug_caso(c) for c in CASOS]
+    assert len(set(slugs)) == len(CASOS)          # antes, ‘extremo inferior’ e ‘extremo superior’ colidiam
+    assert slug_caso(CASOS[1]) == "acima"

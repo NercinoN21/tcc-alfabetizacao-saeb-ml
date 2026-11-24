@@ -32,6 +32,7 @@ from . import base as B
 from . import descritivas as DS
 from . import dicionario as D
 from . import etl
+from . import figuras_shap as FS
 from .avaliacao import (comparar_no_teste, competir, competir_quantilica, cv_repetida, params_busca,
                         selecionar_modelo_final)
 from .config import RAIZ, Config
@@ -145,6 +146,18 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
             out.tabela(ablacao(pop, ms_A, alvo, tr, nome, params_busca(aj[nome]), cfg), f"04_ablacao_{tr}")
             print(f"[ablacao] {rot}: selecionado = {nome}")
         return _fechar(out, info, t0)
+    if apenas == "figuras-shap":
+        info["apenas"] = "figuras-shap"
+        for tr, (alvo, rot) in TRILHAS.items():
+            res, aj, _ = competir(pop, ms_A, alvo, tr, idx_tr, idx_te, cfg)
+            sel = selecionar_modelo_final(pop, ms_A, alvo, tr, idx_tr, aj, res, cfg)
+            pipe = aj[sel["selecionado"]].best_estimator_
+            lime_tab, det = lime_vs_shap(pipe, pop, ms_A, idx_tr, idx_te, alvo, cfg,
+                                         n_sementes=3 if cfg.rapido else 10, num_samples=2000 if cfg.rapido else 5000)
+            out.tabela(lime_tab, f"03_lime_vs_shap_{tr}")
+            _figuras_shap(out, pipe, pop, ms_A, idx_te, idx_tr, det, tr, rot)
+            print(f"[figuras-shap] {rot}: selecionado = {sel['selecionado']}")
+        return _fechar(out, info, t0)
     if apenas == "ranking-pesos":
         info["apenas"] = "ranking-pesos"
         for tr, (alvo, rot) in TRILHAS.items():
@@ -195,7 +208,8 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
                                      n_sementes=3 if cfg.rapido else 10, num_samples=2000 if cfg.rapido else 5000)
         out.tabela(lime_tab, f"03_lime_vs_shap_{tr}")
         for rotulo, df in det.items():
-            out.tabela(df, f"03_lime_detalhe_{tr}_{rotulo.split(' ')[0]}")
+            out.tabela(df, f"03_lime_detalhe_{tr}_{FS.slug_caso(rotulo)}")
+        _figuras_shap(out, pipe, pop, ms_A, idx_te, idx_tr, det, tr, rot)
         print(f"[explicabilidade] {rot}: top-3 temas = {', '.join(tema.index[:3])}")
     if ate == "explicabilidade":
         return _fechar(out, info, t0)
@@ -230,6 +244,13 @@ def _ranking_pesos(out: Saida, pop, ms, tr, pipe, idx_tr, idx_te, cfg: Config) -
         spearmanr(tab["participação sem peso"], oficial.reindex(tab.index).fillna(0)).statistic)
     out.tabela(tab, f"03_shap_temas_ponderado_{tr}")
     out.tabela(resumo, f"03_shap_temas_ponderado_resumo_{tr}")
+
+
+def _figuras_shap(out: Saida, pipe, pop, ms, idx_te, idx_tr, det, tr, rot) -> None:
+    import matplotlib.pyplot as plt
+    for nome, fig in FS.gerar(pipe, pop, ms, idx_te, idx_tr, det, rot).items():
+        out.figura(fig, f"03_shap_{nome}_{tr}")
+        plt.close(fig)
 
 
 def _descritivas(out: Saida, pop, base_todas, alunos_validos, alunos_interna, decisoes, prof_cod, dir_cod,
@@ -289,7 +310,8 @@ def main(argv=None):
     ap.add_argument("--modo", choices=["rapido", "completo"], default=None)
     ap.add_argument("--ate", choices=ETAPAS, default="robustez")
     ap.add_argument("--seed", type=int, default=None)
-    ap.add_argument("--apenas", choices=["descritivas", "pinball", "pesos", "ranking-pesos", "ablacao"], default=None)
+    ap.add_argument("--apenas", choices=["descritivas", "pinball", "pesos", "ranking-pesos", "ablacao", "figuras-shap"],
+                    default=None)
     a = ap.parse_args(argv)
     cfg = Config()
     if a.modo:
