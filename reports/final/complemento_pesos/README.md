@@ -28,3 +28,10 @@ make dados-snapshot
 git checkout d245c8e
 uv run python -m saeb_alfab.pipeline --modo completo --apenas pesos
 ```
+
+## Acréscimo: intervalo da proporção por rede (commit `325340e`)
+
+`01_alfabetizacao_por_rede_ic` traz o IC95% aproximado da proporção ponderada de alfabetizados por rede, por
+bootstrap de escolas (2.000 reamostragens, semente 2110). O intervalo ignora a estratificação do desenho e tende
+a ser um pouco mais largo. Rede pública: 49,3% (46,2% a 52,3%). Proveniência em `run_info_ic.json`. As demais
+tabelas desta nova execução saíram idênticas às congeladas aqui.
