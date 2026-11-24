@@ -49,6 +49,7 @@ h2{font-size:clamp(30px,4.6vw,48px);line-height:1.08}
 strong{font-weight:600;color:var(--tinta)}
 .texto p.lead{text-align:left}
 #inicio .texto p.lead,#inicio .apoio{text-align:center}
+.momento-num{font-size:clamp(96px,18vw,200px);font-weight:600;letter-spacing:-.05em;line-height:1;color:var(--azul)}
 .credito{font-size:14px;color:var(--tinta2);margin-top:28px}
 .apoio{font-size:15px;color:var(--tinta2);margin-top:12px}
 .lista-nao{max-width:680px;margin:40px auto 0;padding:0;list-style:none;text-align:left}
@@ -115,8 +116,7 @@ footer .coluna{display:flex;flex-direction:column;gap:6px}
 <body>
 <header class="topo"><nav aria-label="Seções">
   <b>Quem aprende a ler no 2º ano</b>
-  <a class="opc" href="#lugar">Lugar</a><a class="opc" href="#renda">Contexto</a><a class="opc" href="#questionarios">Escola</a>
-  <a class="opc" href="#erro">Erros</a><a class="opc" href="#limites">Limites</a><a href="#uf">Sua UF</a><a href="#dados">Dados</a>
+  <a class="opc" href="#lugar">Achados</a><a href="#uf">Sua UF</a><a class="opc" href="#limites">Limites</a><a href="#dados">Dados</a>
 </nav></header>
 
 <main>
@@ -178,6 +178,13 @@ footer .coluna{display:flex;flex-direction:column;gap:6px}
   <details><summary>Como ler este gráfico</summary><div class="corpo">
     <p>O Indicador de Nível Socioeconômico (INSE) do Inep resume a renda, a escolaridade e os bens das famílias dos alunos de cada escola, em níveis de I a VIII. Nas faixas baixas há poucas escolas efetivas depois da ponderação, e a média com peso é imprecisa.</p>
     <table id="t-inse"></table></div></details>
+</section>
+
+<section id="momento">
+  <div class="texto">
+    <div class="momento-num" id="momento-num"></div>
+    <p class="lead" style="text-align:center">é o quanto as respostas de professores e diretores melhoram a previsão da proficiência das escolas, <strong>além do que o nível socioeconômico e a região já dizem</strong>.</p>
+  </div>
 </section>
 
 <section id="questionarios" class="faixa">
@@ -411,6 +418,7 @@ document.querySelectorAll(".alternar").forEach(grp=>grp.addEventListener("click"
 const R=D.meta.repo;$("#l-repo").href=R;$("#l-tab").href=R+"/tree/main/reports/final";$("#l-painel").href=R+"/tree/main/reports/final/complemento_painel/tabelas";
 $("#nmin").textContent=D.meta.n_min;$("#rodape").textContent=`Fonte: microdados do Saeb 2023 (Inep, CC BY 4.0). Versão do código dos dados: ${D.meta.versao}.`;
 if(location.hash==="#resposta"){$("#palpite").value=60;$("#palpite-valor").textContent="60";marcaChute(60);$("#revelar").click();}
+$("#momento-num").textContent=nf(D.ablacao.prof.reducao_pct)+"%";
 let kErro="prop",kTemas="prof";
 const desenha=()=>{regioes();inse();quest();erro(kErro);temas(kTemas);};
 desenha();let tm,ultima=innerWidth;addEventListener("resize",()=>{clearTimeout(tm);tm=setTimeout(()=>{if(innerWidth!==ultima){ultima=innerWidth;desenha();}},150);});
