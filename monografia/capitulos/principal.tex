@@ -353,19 +353,19 @@ conforme o cronograma da Seção~\ref{sec:cronograma}.
 \chapter{Fundamentação Teórica}
 
 A investigação dos fatores associados ao desempenho escolar articula, ao
-longo do último meio século, duas tradições de pesquisa que vêm se aproximando
-nas últimas décadas. A primeira, de raiz sociológica e
+longo do último meio século, duas tradições de pesquisa que vêm se
+aproximando nas últimas décadas. A primeira, de raiz sociológica e
 econométrica, herda o desenho da função de produção educacional e da
-pesquisa sobre efeito-escola, e busca isolar, por meio de modelos
+pesquisa sobre efeito-escola. Ela busca isolar, por meio de modelos
 estatísticos com pressupostos distribucionais explícitos, a contribuição
 relativa de fatores familiares, escolares, docentes e de gestão sobre a
-proficiência dos estudantes. A segunda, de origem mais recente e vinculada
-à mineração de dados educacionais (\textit{Educational Data Mining}) e ao
+proficiência dos estudantes. A segunda, mais recente e vinculada à
+mineração de dados educacionais (\textit{Educational Data Mining}) e ao
 aprendizado de máquina, privilegia a capacidade preditiva e a flexibilidade
-funcional de algoritmos não paramétricos, historicamente ao custo de menor
-transparência interpretativa (lacuna apenas parcialmente superada com o
-amadurecimento recente das técnicas de explicabilidade). Este capítulo
-revisa criticamente as duas tradições e as articula ao objeto específico
+funcional de algoritmos não paramétricos. Historicamente, ela o fez ao
+custo de menor transparência interpretativa, lacuna apenas parcialmente
+superada pelo amadurecimento recente das técnicas de explicabilidade. Este
+capítulo revisa criticamente as duas tradições e as articula ao objeto
 desta pesquisa: os fatores associados à alfabetização e à proficiência em
 Língua Portuguesa no 2º ano do Ensino Fundamental da rede pública
 brasileira, analisados no nível da escola a partir dos microdados do Saeb
@@ -377,33 +377,32 @@ O Sistema de Avaliação da Educação Básica (Saeb), conduzido pelo Instituto
 Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep), é a
 principal fonte nacional de dados sobre desempenho escolar associados a
 características contextuais de alunos, professores, diretores e escolas. A
-proficiência dos estudantes não é uma nota bruta de acertos: ela é estimada
-por meio da Teoria de Resposta ao Item (TRI), que modela a probabilidade de
-acerto de cada item em função de um traço latente de habilidade, permitindo
-comparabilidade da escala entre edições e etapas de ensino
+proficiência dos estudantes não corresponde a uma nota bruta de acertos.
+Ela é estimada por meio da Teoria de Resposta ao Item (TRI), que modela a
+probabilidade de acerto de cada item em função de um traço latente de
+habilidade e permite comparar a escala entre edições e etapas de ensino
 \cite{klein2003tri}. Essa escolha metodológica tem uma consequência direta
 para o desenho empírico deste trabalho, detalhada na
-Seção~\ref{sec:variaveis} da Metodologia: como a proficiência contínua e o
-indicador binário de alfabetização são subprodutos do mesmo processo de
-estimação por TRI, as demais colunas derivadas da prova do aluno (erro
-padrão, respostas a itens individuais) não podem ser tratadas como
-preditores independentes, sob pena de vazamento de informação.
+Seção~\ref{sec:variaveis}. Como a proficiência contínua e o indicador
+binário de alfabetização são subprodutos do mesmo processo de estimação
+por TRI, as demais colunas derivadas da prova do aluno (erro padrão,
+respostas a itens individuais) não podem ser tratadas como preditores
+independentes, sob pena de vazamento de informação.
 
-O 2º ano do Ensino Fundamental integra o Saeb desde a
-edição de 2019. Em 2023, o Inep definiu o padrão oficial de alfabetização
-como o ponto 743 da escala de proficiência em Língua Portuguesa
-\cite{inep2023alfabetiza}, critério adotado na divulgação dos resultados da
-edição de 2023 e diretamente vinculado ao monitoramento do Compromisso
-Nacional Criança Alfabetizada. O desenho
-amostral que sustenta essa edição, incluindo pesos amostrais e estratos, é
-documentado pelo próprio Inep em notas técnicas específicas sobre a base
-amostral e sobre a construção do Indicador de Nível Socioeconômico (INSE)
-\cite{inep2024amostra, inep2024inse}, este último utilizado neste trabalho
-como proxy do contexto socioeconômico da escola (variável
+O 2º ano do Ensino Fundamental integra o Saeb desde a edição de 2019. Em
+2023, o Inep definiu o padrão oficial de alfabetização como o ponto 743 da
+escala de proficiência em Língua Portuguesa \cite{inep2023alfabetiza},
+critério adotado na divulgação dos resultados da edição de 2023 e
+vinculado ao monitoramento do Compromisso Nacional Criança Alfabetizada. O
+desenho amostral dessa edição, com pesos amostrais e estratos, é
+documentado pelo Inep em notas técnicas sobre a base amostral e sobre a
+construção do Indicador de Nível Socioeconômico (INSE)
+\cite{inep2024amostra, inep2024inse}. O INSE é usado neste trabalho como
+proxy do contexto socioeconômico da escola (variável
 \texttt{NIVEL\_SOCIO\_ECONOMICO}). \citeonline{costa2023reflexoes}
 investigam, por meio de entrevistas com professores, como a reintrodução da
-avaliação em larga escala do 2º ano foi recebida na prática pedagógica,
-concluindo que ainda é cedo para afirmações consistentes sobre a
+avaliação em larga escala do 2º ano foi recebida na prática pedagógica. Os
+autores concluem que ainda é cedo para afirmações consistentes sobre a
 intensidade dessa influência. Na literatura consultada neste trabalho, os
 estudos quantitativos sobre o 2º ano são poucos em comparação com os
 dedicados ao 5\textordmasculine{} e ao 9\textordmasculine{} anos.
@@ -414,40 +413,41 @@ dedicados ao 5\textordmasculine{} e ao 9\textordmasculine{} anos.
 O estudo empírico dos determinantes do desempenho escolar tem como marco
 fundador o relatório coordenado por \citeonline{coleman1966equality},
 encomendado pelo governo dos Estados Unidos para avaliar desigualdades
-entre escolas públicas americanas. Ao analisar dados de mais de 645 mil
-estudantes \cite[p.~8]{coleman1966equality}, o estudo chegou a uma conclusão que reorientou globalmente a
-agenda de pesquisa em sociologia da educação: diferenças em infraestrutura,
-financiamento e currículo escolar explicam uma parcela surpreendentemente
-pequena da variação do desempenho acadêmico, quando comparadas ao contexto socioeconômico
-e familiar do próprio aluno e à composição social do corpo discente. Na
-prova verbal, a parcela da variância do desempenho situada entre escolas
-ficou entre cerca de 5\% e 35\%, conforme a série e o grupo étnico-racial,
-de modo que mais de 70\% da variação ocorria entre alunos da mesma escola
+entre escolas públicas americanas. O estudo analisou dados de mais de 645
+mil estudantes \cite[p.~8]{coleman1966equality} e chegou a uma conclusão
+que reorientou a agenda de pesquisa em sociologia da educação. Diferenças
+em infraestrutura, financiamento e currículo escolar explicavam uma
+parcela surpreendentemente pequena da variação do desempenho acadêmico,
+quando comparadas ao contexto socioeconômico e familiar do próprio aluno e
+à composição social do corpo discente. Na prova verbal, a parcela da
+variância do desempenho situada entre escolas ficou entre cerca de 5\% e
+35\%, conforme a série e o grupo étnico-racial. Mais de 70\% da variação
+ocorria, portanto, entre alunos da mesma escola
 \cite[p.~296]{coleman1966equality}. Os fatores familiares medidos
 respondiam por 10\% a 25\% da variância do desempenho individual
 \cite[p.~299]{coleman1966equality}. Controlada a origem familiar, uma
 medida das instalações escolares respondia sozinha por no máximo 0,02\% da
 variância do desempenho verbal na 12\textordfeminine{} série de alunos
 brancos e negros, e a composição do corpo discente, por 2,0\% e 6,8\%,
-respectivamente \cite[p.~303]{coleman1966equality}. Esse
-achado inaugura a tensão que atravessa toda a literatura subsequente sobre
-fatores associados ao desempenho, e que orienta diretamente a formulação da
-Hipótese~3 deste trabalho (Seção~\ref{sec:hipoteses}): o quanto o
-desempenho escolar se associa à origem dos alunos em comparação com o que a
-escola, o professor e o diretor conseguem agregar independentemente dela.
+respectivamente \cite[p.~303]{coleman1966equality}. Esse achado inaugura a
+tensão que atravessa toda a literatura subsequente sobre fatores
+associados ao desempenho. É dessa tensão que parte a pergunta central
+deste trabalho (Seção~\ref{sec:problema-pesquisa}): quanto o que a escola,
+o professor e o diretor informam acrescenta à previsão do desempenho além
+da origem socioeconômica dos alunos.
 
 \citeonline{hanushek1970production} formaliza essa discussão por meio da
 função de produção educacional, um modelo analítico que trata a escola como
 um sistema em que insumos (recursos financeiros, infraestrutura,
 características familiares e docentes) são transformados em resultados de
-aprendizagem. Uma das descobertas mais contra-intuitivas do autor é que
+aprendizagem. Uma das descobertas mais contraintuitivas do autor é que
 métricas tradicionais de qualificação docente (anos de experiência,
-titulação) apresentam pouca correlação consistente com ganhos reais de
-proficiência, ainda que a eficácia real do professor varie substancialmente
+titulação) apresentam pouca correlação consistente com ganhos de
+proficiência, ainda que a eficácia do professor varie substancialmente
 entre profissionais. Essa distinção entre credenciais observáveis e
 eficácia efetiva é retomada, décadas depois, por
-\citeonline{hanushek2008role}, que reúnem evidência de que as habilidades
-cognitivas da população, medidas por avaliações padronizadas
+\citeonline{hanushek2008role}. Os autores reúnem evidência de que as
+habilidades cognitivas da população, medidas por avaliações padronizadas
 internacionais, se relacionam fortemente com os rendimentos individuais,
 com a distribuição de renda e com o crescimento econômico, e de que a
 simples expansão dos anos de escolaridade não garantiu melhores condições
@@ -468,66 +468,67 @@ mais adiante, a interpretação por grupos temáticos dos valores de SHAP.
 \label{sec:evidencias-brasileiras}
 
 A aplicação da função de produção educacional ao contexto brasileiro tem em
-\citeonline{barros2001determinantes} uma referência seminal. Com dados da
-Pesquisa Nacional por Amostra de Domicílios (PNAD) de 1996 e da Pesquisa
-sobre Padrões de Vida (PPV) de 1996/97, para jovens de 11 a 25 anos das áreas
-urbanas do Nordeste e do Sudeste, os autores mostram que a escolaridade dos
-pais, em especial a da mãe, é o fator mais associado aos anos de estudo
-alcançados: cada ano adicional de escolaridade dos pais corresponde a cerca
-de 0,3 ano de estudo a mais para os filhos, associação mais forte que a da
-renda domiciliar e superior à de três anos adicionais de escolaridade dos
-professores \cite[p.~34]{barros2001determinantes}. Os insumos escolares
-mantêm, ainda assim, uma margem de associação relevante: a qualidade da
+\citeonline{barros2001determinantes} uma referência seminal. Os autores
+usam dados da Pesquisa Nacional por Amostra de Domicílios (PNAD) de 1996 e
+da Pesquisa sobre Padrões de Vida (PPV) de 1996/97, para jovens de 11 a 25
+anos das áreas urbanas do Nordeste e do Sudeste. A escolaridade dos pais,
+em especial a da mãe, é o fator mais associado aos anos de estudo
+alcançados. Cada ano adicional de escolaridade dos pais corresponde a
+cerca de 0,3 ano de estudo a mais para os filhos, associação mais forte que
+a da renda domiciliar e superior à de três anos adicionais de escolaridade
+dos professores \cite[p.~34]{barros2001determinantes}. Os insumos escolares
+mantêm, ainda assim, uma margem de associação relevante. A qualidade da
 infraestrutura apresenta associação tão ou mais importante que a
-escolaridade docente, resultado consistente com o quadro de escassez
-relativa descrito por \citeonline{glewwe2011school}. \citeonline{albernaz2002qualidade}
-aprofundam essa margem por meio de modelos estatísticos multinível,
-estimando a associação entre a composição socioeconômica da escola e o
-desempenho (efeito de pares) e destacando a formação docente como um dos
-poucos insumos escolares associados a maior equidade, além do desempenho
-médio.
+escolaridade docente, resultado consistente com o quadro descrito por
+\citeonline{glewwe2011school} para países em desenvolvimento.
+\citeonline{albernaz2002qualidade} aprofundam essa margem por meio de
+modelos estatísticos multinível. Os autores estimam a associação entre a
+composição socioeconômica da escola e o desempenho (efeito de pares) e
+destacam a formação docente como um dos poucos insumos escolares
+associados a maior equidade, além do desempenho médio.
 
 O conceito de efeito-escola é sistematizado metodologicamente por
 \citeonline{alves2007efeito}, que discutem como isolar a contribuição
-própria da escola da composição socioeconômica de seus alunos, sendo uma
-discussão central para este trabalho, cuja Hipótese~3
-(Seção~\ref{sec:hipoteses}) testa exatamente se as variáveis de professor e
-diretor explicam desempenho além do que o nível socioeconômico da escola já
-captura sozinho. Utilizando dados do próprio Saeb (edição de 2001,
-4\textordfeminine{} série), \citeonline{franco2007qualidade}
-testam empiricamente quais fatores
-intraescolares (gestão, clima, prática docente) se associam a
-desempenho em Matemática controlando por contexto socioeconômico,
-constituindo o precedente brasileiro metodologicamente mais próximo deste
-TCC, ainda que por meio de regressão multinível clássica em vez de
-aprendizado de máquina. Os autores encontram 39\% da variância da
-proficiência entre escolas, ante cerca de 20\% usuais na Europa e nos
-Estados Unidos \cite[p.~288]{franco2007qualidade}. Mesmo com controle pelo
-nível socioeconômico médio da escola, a correção do dever de casa por todos
-os professores associa-se a 12,7 pontos a mais na média da escola, a
-presença de biblioteca em sala de aula a 4,4 pontos, e cada unidade dos
+própria da escola da composição socioeconômica de seus alunos. A discussão
+é central para este trabalho, cujas Hipóteses~1 e~2
+(Seção~\ref{sec:hipoteses}) verificam se as variáveis de professor e de
+diretor acrescentam capacidade preditiva além do que o nível
+socioeconômico da escola já captura. Com dados do próprio Saeb (edição de
+2001, 4\textordfeminine{} série), \citeonline{franco2007qualidade} testam
+quais fatores intraescolares (gestão, clima, prática docente) se associam
+ao desempenho em Matemática, controlado o contexto socioeconômico. É o
+precedente brasileiro metodologicamente mais próximo deste TCC, ainda que
+por meio de regressão multinível clássica em vez de aprendizado de
+máquina. Os autores encontram 39\% da variância da proficiência entre
+escolas, ante cerca de 20\% usuais na Europa e nos Estados Unidos
+\cite[p.~288]{franco2007qualidade}. Mesmo com controle pelo nível
+socioeconômico médio da escola, a correção do dever de casa por todos os
+professores associa-se a 12,7 pontos a mais na média da escola, e a
+presença de biblioteca em sala de aula, a 4,4 pontos. Cada unidade dos
 índices de equipamentos e de liderança do diretor indutora de colaboração
-docente a 4,5 e 0,8 pontos, respectivamente. Parte dessas práticas, porém,
-também amplia a desigualdade dentro da escola, e o dever de casa, por
-exemplo, eleva em 2,3 pontos o coeficiente do nível socioeconômico do aluno
-\cite[p.~291]{franco2007qualidade}. O modelo completo explica 62\% da
-variância das médias das escolas \cite[p.~293]{franco2007qualidade}. Por fim, \citeonline{soares2013efeitos} estendem a
-discussão ao nível do município. Com modelos hierárquicos e dados da Prova
-Brasil de 2005 a 2011, estimam efeitos de escolas e de municípios
-controlando as características dos alunos e o contexto das escolas, e
-identificam municípios com efeitos muito acima do esperado. O resultado
-sugere que o contexto geográfico e administrativo pode carregar informação
-própria, não redutível ao nível socioeconômico da escola. É desse achado da literatura
-que deriva diretamente a Hipótese~4 deste trabalho
-(Seção~\ref{sec:hipoteses}). O alcance dessa transposição é limitado. Nos
-microdados do Saeb 2023 utilizados aqui, o identificador
-de município é um código anonimizado, sem correspondência divulgada com os
+docente associa-se a 4,5 e 0,8 pontos, respectivamente. Parte dessas
+práticas, porém, também amplia a desigualdade dentro da escola. O dever de
+casa, por exemplo, eleva em 2,3 pontos o coeficiente do nível
+socioeconômico do aluno \cite[p.~291]{franco2007qualidade}. O modelo
+completo explica 62\% da variância das médias das escolas
+\cite[p.~293]{franco2007qualidade}.
+
+Por fim, \citeonline{soares2013efeitos} estendem a discussão ao nível do
+município. Com modelos hierárquicos e dados da Prova Brasil de 2005 a 2011,
+estimam efeitos de escolas e de municípios controlando as características
+dos alunos e o contexto das escolas, e identificam municípios com efeitos
+muito acima do esperado. O resultado sugere que o contexto geográfico e
+administrativo pode carregar informação própria, não redutível ao nível
+socioeconômico da escola, e é desse achado que deriva a Hipótese~4 deste
+trabalho (Seção~\ref{sec:hipoteses}). O alcance dessa transposição é
+limitado. Nos microdados do Saeb 2023 utilizados aqui, o identificador de
+município é um código anonimizado, sem correspondência divulgada com os
 códigos oficiais do Instituto Brasileiro de Geografia e Estatística (IBGE)
-(Seção~\ref{sec:fonte-dados}), de modo que este
-trabalho pode empregar o município como variável de agrupamento (na
-validação cruzada agrupada, Seção~\ref{sec:protocolo}), mas não como
-identificador para incorporar covariáveis municipais externas ou para
-nomear municípios específicos, como fazem \citeonline{soares2013efeitos}.
+(Seção~\ref{sec:fonte-dados}). Este trabalho pode, assim, empregar o
+município como variável de agrupamento na validação cruzada
+(Seção~\ref{sec:protocolo}), mas não como identificador para incorporar
+covariáveis municipais externas ou para nomear municípios específicos,
+como fazem \citeonline{soares2013efeitos}.
 
 Em conjunto, a literatura brasileira converge para um resultado de duas
 camadas: o contexto socioeconômico e familiar é o preditor mais robusto de
@@ -540,13 +541,13 @@ deste trabalho se propõem a dimensionar e hierarquizar tema a tema.
 \label{sec:quantilica-ml}
 
 Um segundo eixo metodológico relevante para este trabalho é o
-reconhecimento de que os fatores associados ao desempenho escolar podem não
-atuar de forma homogênea ao longo de toda a distribuição de proficiência.
+reconhecimento de que os fatores associados ao desempenho escolar podem
+atuar de forma heterogênea ao longo da distribuição de proficiência.
 \citeonline{koenker2005quantile} sistematiza a Regressão Quantílica como
-alternativa à Regressão por Mínimos Quadrados Ordinários (MQO): em vez de
+alternativa à Regressão por Mínimos Quadrados Ordinários (MQO). Em vez de
 estimar o efeito de covariáveis sobre a média condicional da variável
-dependente, a técnica permite avaliar esse efeito em diferentes quantis da
-distribuição, revelando heterogeneidades que uma análise centrada na média
+dependente, a técnica avalia esse efeito em diferentes quantis da
+distribuição e revela heterogeneidades que uma análise centrada na média
 esconde. Aplicada a dados educacionais, \citeonline{tian2006quantile}
 encontra associações assimétricas entre variáveis de contexto familiar e o
 desempenho em Matemática, mais acentuadas entre alunos situados nos
@@ -554,39 +555,39 @@ quantis inferiores da distribuição.
 
 É nessa tradição que se insere a pesquisa de
 \citeonline{almeida2014determinantes}, referência direta para este TCC.
-Utilizando os microdados da Prova Brasil 2011 e a
-Regressão Quantílica, o autor identifica os determinantes dos piores e dos
-melhores resultados educacionais de alunos da rede pública no
-5\textordmasculine{} e no 9\textordmasculine{} anos do Ensino Fundamental,
-trazendo como contribuições originais o uso de variáveis que captam a
-existência de programas de reforço escolar e a ausência de hábito de
-leitura (do próprio aluno e de seus colegas de escola) e a evidência de
-que a associação desses fatores com o desempenho difere entre alunos de
-baixo e de alto desempenho. O achado central do estudo (programas de reforço escolar não
-apresentam associação consistente com o desempenho, ao passo que a falta
-de hábito de leitura se associa consistentemente a desempenho menor) ilustra exatamente o tipo de
+Com os microdados da Prova Brasil 2011 e a Regressão Quantílica, o autor
+identifica os determinantes dos piores e dos melhores resultados
+educacionais de alunos da rede pública no 5\textordmasculine{} e no
+9\textordmasculine{} anos do Ensino Fundamental. As contribuições originais
+do estudo são o uso de variáveis sobre a existência de programas de
+reforço escolar e a ausência de hábito de leitura (do próprio aluno e de
+seus colegas de escola) e a evidência de que a associação desses fatores
+com o desempenho difere entre alunos de baixo e de alto desempenho.
+Programas de reforço escolar não apresentam associação consistente com o
+desempenho, ao passo que a falta de hábito de leitura se associa
+consistentemente a desempenho menor. O achado ilustra o tipo de
 heterogeneidade que uma análise de média (MQO) não captaria.
 
 Este trabalho compartilha com \citeonline{almeida2014determinantes} o
-compromisso de ir além da média condicional e de investigar quais fatores
-se associam ao desempenho e se o poder preditivo difere entre escolas de
-desempenho baixo e alto, mas persegue
-esse objetivo por uma via metodológica distinta e complementar. Em vez de
-estender o paradigma da regressão quantílica a novos quantis ou a uma nova
-etapa de ensino, este TCC recorre a uma comparação entre modelos lineares
-regularizados de referência e três \textit{ensembles} de árvore de decisão
-(Random Forest \cite{breiman2001random}, XGBoost e LightGBM, ambas
-implementações otimizadas do algoritmo de \textit{gradient boosting}
-\cite{friedman2001greedy}), capazes de capturar não linearidades e
-interações entre as variáveis candidatas sem exigir a especificação prévia
-de uma forma funcional. \citeonline{breiman2001two}, em seu influente
-ensaio sobre as ``duas culturas'' da modelagem estatística, argumenta que a
-modelagem algorítmica (da qual os \textit{ensembles} de árvore são exemplo)
-e a modelagem estatística clássica respondem a perguntas diferentes e
-complementares. Essa distinção justifica tratar os modelos lineares
-regularizados como \emph{modelos lineares de referência} da comparação
-(Seção~\ref{sec:estrategia-empirica}), cujos coeficientes descrevem
-associações condicionais (Seção~\ref{sec:registros-inferenciais}).
+compromisso de ir além da média condicional, de investigar quais fatores
+se associam ao desempenho e de verificar se o poder preditivo difere entre
+escolas de desempenho baixo e alto. Persegue esse objetivo, porém, por uma
+via metodológica distinta e complementar. Em vez de estender a regressão
+quantílica a novos quantis ou a uma nova etapa de ensino, este TCC compara
+modelos lineares regularizados de referência e três \textit{ensembles} de
+árvore de decisão: Random Forest \cite{breiman2001random}, XGBoost e
+LightGBM, estes dois implementações otimizadas do \textit{gradient
+boosting} \cite{friedman2001greedy}. Os \textit{ensembles} capturam não
+linearidades e interações entre as variáveis candidatas sem exigir a
+especificação prévia de uma forma funcional. \citeonline{breiman2001two},
+em seu influente ensaio sobre as ``duas culturas'' da modelagem
+estatística, argumenta que a modelagem algorítmica, da qual os
+\textit{ensembles} de árvore são exemplo, e a modelagem estatística
+clássica respondem a perguntas diferentes e complementares. Essa distinção
+justifica tratar os modelos lineares regularizados como \emph{modelos
+lineares de referência} da comparação (Seção~\ref{sec:estrategia-empirica}),
+cujos coeficientes descrevem associações condicionais
+(Seção~\ref{sec:registros-inferenciais}).
 
 Cabe distinguir, porém, o que as técnicas de explicabilidade pós-hoc
 (Seção~\ref{sec:xai-revisao}) recuperam e o que não recuperam da leitura
@@ -609,38 +610,38 @@ e \citeonline{tian2006quantile}.
 Este trabalho também se insere na literatura internacional de
 \textit{Educational Data Mining}, revisada por \citeonline{romero2010edm},
 que situa problemas como o deste TCC (modelagem supervisionada sobre
-microdados educacionais) dentro de uma taxonomia mais ampla de tarefas de
+microdados educacionais) em uma taxonomia mais ampla de tarefas de
 mineração de dados aplicadas à educação. No plano internacional,
-\citeonline{masci2018student} constituem precedente revisado por pares
-diretamente pertinente ao desenho aqui adotado: aplicando árvores de
+\citeonline{masci2018student} são um precedente revisado por pares
+diretamente pertinente ao desenho aqui adotado. Aplicando árvores de
 regressão e \textit{boosting} a dados do Programa Internacional de
-Avaliação de Estudantes (PISA) de nove países, os autores
-modelam o desempenho tanto de alunos quanto de \emph{escolas}, e mostram
-que os fatores associados ao desempenho escolar agregado diferem entre
-sistemas educacionais (evidência de que a análise no nível da escola é
-uma via legítima e informativa para esse tipo de pergunta). O precedente
-brasileiro mais direto e recente, no entanto, é o de
-\citeonline{tertulino2025multilevel}, que
-integra as mesmas quatro fontes de dados utilizadas aqui (aluno, professor,
-escola e diretor) em uma comparação de algoritmos de \textit{ensemble} para
-classificar a proficiência de alunos do 9\textordmasculine{} ano e do
-Ensino Médio, obtendo um modelo de Random Forest vencedor com 90,2\% de
-acurácia e área sob a curva ROC (AUC, do inglês \textit{Area Under the
-Curve}, em que ROC abrevia \textit{Receiver Operating Characteristic},
-característica de operação do receptor) de 96,7\%, e concluindo, via SHAP, que o nível
-socioeconômico médio da escola é o preditor dominante. Para os autores,
-``o desempenho acadêmico é um fenômeno sistêmico profundamente ligado ao
+Avaliação de Estudantes (PISA) de nove países, os autores modelam o
+desempenho tanto de alunos quanto de \emph{escolas}. Eles mostram que os
+fatores associados ao desempenho escolar agregado diferem entre sistemas
+educacionais, o que indica que a análise no nível da escola é uma via
+legítima e informativa para esse tipo de pergunta.
+
+O precedente brasileiro mais direto e recente é o de
+\citeonline{tertulino2025multilevel}, que integra as mesmas quatro fontes
+de dados utilizadas aqui (aluno, professor, escola e diretor) em uma
+comparação de algoritmos de \textit{ensemble} para classificar a
+proficiência de alunos do 9\textordmasculine{} ano e do Ensino Médio. O
+modelo vencedor, um Random Forest, alcança 90,2\% de acurácia e área sob a
+curva ROC (AUC, do inglês \textit{Area Under the Curve}, em que ROC
+abrevia \textit{Receiver Operating Characteristic}, característica de
+operação do receptor) de 96,7\%. Via SHAP, os autores concluem que o nível
+socioeconômico médio da escola é o preditor dominante. Para eles, ``o
+desempenho acadêmico é um fenômeno sistêmico profundamente ligado ao
 ecossistema da escola'' \cite[tradução nossa]{tertulino2025multilevel}.\footnote{A fonte consultada não é paginada.}
-Por se apoiar em SHAP, essa leitura permanece associativa. Esse precedente não cobre,
-contudo, o 2º ano do Ensino Fundamental, etapa em que, ao contrário do
-9\textordmasculine{} ano e do Ensino Médio, não existe questionário do
-aluno: uma ausência estrutural, não uma lacuna de atenção acadêmica, que
-impõe a este trabalho um desenho analítico necessariamente distinto
-(detalhado na Seção~\ref{sec:unidade-escola}) e que constitui, ao lado da
-unidade de análise agregada, da dupla trilha de modelagem sobre o mesmo
-conjunto de preditores e da agregação de SHAP por grupo temático, o
-diferencial pretendido por este TCC frente ao precedente mais próximo da
-literatura.
+Por se apoiar em SHAP, essa leitura permanece associativa. Esse precedente
+não cobre, contudo, o 2º ano do Ensino Fundamental. Nessa etapa, ao
+contrário do 9\textordmasculine{} ano e do Ensino Médio, não existe
+questionário do aluno, uma ausência estrutural que impõe a este trabalho
+um desenho analítico distinto (Seção~\ref{sec:unidade-escola}). Essa
+ausência, a unidade de análise agregada, a dupla trilha de modelagem sobre
+o mesmo conjunto de preditores e a agregação de SHAP por grupo temático
+formam o diferencial pretendido por este TCC frente ao precedente mais
+próximo da literatura.
 
 \section{Explicabilidade em aprendizado de máquina: abrindo a caixa-preta}
 \label{sec:xai-revisao}
@@ -648,20 +649,20 @@ literatura.
 A adoção de \textit{ensembles} de árvore de decisão como os empregados
 neste trabalho reabre, na prática, a discussão iniciada por
 \citeonline{coleman1966equality} e retomada por toda a literatura sobre
-fatores associados ao desempenho: não basta prever o desempenho escolar com
-acurácia, é preciso saber por quê. \citeonline{lundberg2017shap} respondem
-a essa exigência unificando métodos anteriores de importância de variáveis
-sob a teoria dos valores de Shapley, oriunda da teoria dos jogos
-cooperativos, dando origem ao SHAP (\textit{SHapley Additive
+fatores associados ao desempenho. Prever o desempenho escolar com acurácia
+é insuficiente, e é preciso saber por quê. \citeonline{lundberg2017shap}
+respondem a essa exigência unificando métodos anteriores de importância de
+variáveis sob a teoria dos valores de Shapley, oriunda da teoria dos jogos
+cooperativos. Disso resulta o SHAP (\textit{SHapley Additive
 exPlanations}), método que atribui a cada variável uma contribuição aditiva
-e consistente para a predição de cada observação individual, permitindo
-tanto explicações locais (por escola, no desenho deste trabalho) quanto
+e consistente para a predição de cada observação. Ele permite tanto
+explicações locais (por escola, no desenho deste trabalho) quanto
 agregações globais (por variável ou por grupo temático de variáveis).
 \citeonline{ribeiro2016lime} propõem, de forma independente, o LIME
 (\textit{Local Interpretable Model-agnostic Explanations}), que aproxima o
 comportamento do modelo por um modelo linear interpretável na vizinhança de
-uma predição específica, método utilizado neste trabalho como checagem
-cruzada das explicações locais do SHAP em casos individuais selecionados
+uma predição específica. Neste trabalho, o LIME serve como checagem
+cruzada das explicações locais do SHAP em casos selecionados
 (Seção~\ref{sec:xai}).
 
 A escolha de empregar simultaneamente dois métodos de explicabilidade, em
@@ -677,17 +678,17 @@ esses métodos em um panorama didático que serve de apoio complementar aos
 artigos originais.
 
 Essa literatura não é, contudo, isenta de crítica.
-\citeonline{rudin2019stop} argumenta que
-explicações pós-hoc de modelos caixa-preta podem ser infiéis ao
-comportamento real do modelo e que, em decisões de alto risco, modelos
-intrinsecamente interpretáveis deveriam ser preferidos. O desenho deste
-trabalho responde a essa objeção por duas vias: mantém modelos lineares
-regularizados intrinsecamente interpretáveis como referência da comparação
-(de modo que, se o ganho preditivo dos \textit{ensembles} não atender à
-regra de seleção pré-registrada, o modelo interpretável será o selecionado,
-Seção~\ref{sec:testes-significancia})
-e restringe o uso do SHAP à explicação do \emph{modelo}, sem convertê-lo
-em afirmação sobre o fenômeno.
+\citeonline{rudin2019stop} argumenta que explicações pós-hoc de modelos
+caixa-preta podem ser infiéis ao comportamento real do modelo e que, em
+decisões de alto risco, modelos intrinsecamente interpretáveis deveriam
+ser preferidos. O desenho deste trabalho responde a essa objeção por duas
+vias. Mantém modelos lineares regularizados, intrinsecamente
+interpretáveis, como referência da comparação, de modo que, se o ganho
+preditivo dos \textit{ensembles} não atender à regra de seleção
+pré-registrada, o modelo interpretável será o selecionado
+(Seção~\ref{sec:testes-significancia}). E restringe o uso do SHAP à
+explicação do \emph{modelo}, sem convertê-lo em afirmação sobre o
+fenômeno.
 
 \section{Previsão, associação, explicação do modelo e inferência causal}
 \label{sec:registros-inferenciais}
@@ -734,21 +735,22 @@ e o \textit{double machine learning} de \citeonline{chernozhukov2018double}
 usa algoritmos como \textit{random forests}, lasso e \textit{boosting} para
 controlar covariáveis na estimação de efeitos médios. Os dois flexibilizam
 a forma funcional, mas dependem de um tratamento definido e de uma
-hipótese de identificação, em geral a de não confundimento (condicional às
-covariáveis, a atribuição do tratamento independe dos resultados
-potenciais) acompanhada de sobreposição entre tratados e não tratados, ou
-de uma variável instrumental. A biblioteca CausalML, que reúne métodos de
+hipótese de identificação. Em geral, é a de não confundimento (condicional
+às covariáveis, a atribuição do tratamento independe dos resultados
+potenciais), acompanhada de sobreposição entre tratados e não tratados, ou
+a de uma variável instrumental. A biblioteca CausalML, que reúne métodos de
 \textit{uplift} e de efeitos heterogêneos, recomenda aplicá-los a dados
 experimentais e adverte que, em dados observacionais, confundidores
 omitidos enviesam a estimativa \cite{chen2020causalml}. O desenho deste
 trabalho não satisfaz essas condições. Seus preditores são centenas de
 itens de questionário correlacionados, sem um tratamento definido,
-observados em um único corte transversal, e a composição social das
-escolas torna implausível supor que as práticas declaradas por professores
-e diretores independam de fatores não observados. Esses métodos são um
-passo para estudos futuros que isolem uma prática modificável apontada por
-esta análise e disponham de variação capaz de identificá-la, como várias
-edições do Saeb ou um desenho quase experimental.
+observados em um único corte transversal. Além disso, a composição social
+das escolas torna implausível supor que as práticas declaradas por
+professores e diretores independam de fatores não observados. Esses
+métodos são um passo para estudos futuros que isolem uma prática
+modificável apontada por esta análise e disponham de variação capaz de
+identificá-la, como várias edições do Saeb ou um desenho quase
+experimental.
 
 \textbf{Regra de redação.} Os quatro registros resultam em uma regra
 única para todo o trabalho. Os resultados são enunciados como associações
@@ -783,14 +785,14 @@ modelo linear de referência da trilha de proporção
 fracionário, com a checagem de que as predições respeitem o intervalo
 unitário.
 
-O segundo fundamento é de desenho: quando todos os preditores disponíveis
-são medidos no nível do grupo, replicá-los para cada indivíduo do grupo não
-acrescenta informação: apenas repete a mesma linha muitas vezes,
-fenômeno conhecido como pseudo-replicação, que inflaciona artificialmente o
+O segundo fundamento é de desenho. Quando todos os preditores disponíveis
+são medidos no nível do grupo, replicá-los para cada indivíduo do grupo
+apenas repete a mesma linha muitas vezes, sem acrescentar informação. O
+fenômeno, conhecido como pseudorreplicação, inflaciona artificialmente o
 tamanho aparente da amostra e o desempenho aparente dos modelos. Agregar o
-desfecho ao nível em que os preditores variam torna a estrutura de
-informação dos dados explícita, em vez de escondê-la sob dezenas de
-milhares de linhas redundantes.
+desfecho ao nível em que os preditores variam torna explícita a estrutura
+de informação dos dados, em vez de escondê-la sob dezenas de milhares de
+linhas redundantes.
 
 A advertência é clássica: \citeonline{robinson1950ecological} demonstrou
 que correlações calculadas sobre agregados (as chamadas correlações
@@ -838,29 +840,29 @@ recente na prática das escolas.
 
 \section{Síntese e posicionamento da pesquisa}
 
-A fundamentação desenvolvida neste capítulo permite situar com precisão a
-contribuição pretendida por este TCC. Da função de produção educacional
+A fundamentação deste capítulo permite situar a contribuição pretendida por
+este TCC. Da função de produção educacional
 (Seção~\ref{sec:fundamentos-teoricos}) e das evidências brasileiras de
 efeito-escola e efeito-município (Seção~\ref{sec:evidencias-brasileiras}),
-herda-se a expectativa teórica de que o contexto socioeconômico domina, mas
-não esgota, a associação com o desempenho escolar, deixando uma margem
-empírica em aberto para professores, diretores e gestão municipal, que a
-comparação de modelos e a interpretabilidade SHAP deste trabalho se propõem
-a dimensionar. Da tradição de regressão quantílica
+herda-se a expectativa teórica de que o contexto socioeconômico domina a
+associação com o desempenho escolar sem esgotá-la. Resta uma margem
+empírica para professores, diretores e gestão municipal, que a comparação
+de modelos e a interpretabilidade SHAP deste trabalho se propõem a
+dimensionar. Da tradição de regressão quantílica
 (Seção~\ref{sec:quantilica-ml}), herda-se o compromisso de investigar
-heterogeneidade além da média condicional, perseguido aqui por duas vias: a
-comparação entre modelos lineares de referência e \textit{ensembles} de
+heterogeneidade além da média condicional, perseguido aqui por duas vias:
+a comparação entre modelos lineares de referência e \textit{ensembles} de
 árvore, interpretada por SHAP (Seção~\ref{sec:xai-revisao}), e a avaliação
 desses modelos em vários quantis pela perda de quantil
-(Seção~\ref{sec:testes-significancia}). Da literatura de desfechos agregados
-(Seção~\ref{sec:nivel-escola-teoria}), herda-se a especificação adequada a
-proporções e o limite ecológico das conclusões. Do precedente mais próximo
-em aprendizado de máquina aplicado ao Saeb
+(Seção~\ref{sec:testes-significancia}). Da literatura de desfechos
+agregados (Seção~\ref{sec:nivel-escola-teoria}), herda-se a especificação
+adequada a proporções e o limite ecológico das conclusões. Do precedente
+mais próximo em aprendizado de máquina aplicado ao Saeb
 \cite{tertulino2025multilevel}, herda-se o desenho de integração de quatro
-fontes de dados, mas identifica-se uma lacuna estrutural específica (a
-ausência de questionário do aluno no 2º ano do Ensino Fundamental,
-Seção~\ref{sec:alfabetizacao-2ef}) que esta pesquisa endereça com um
-desenho necessariamente distinto, detalhado a seguir no capítulo de
+fontes de dados. Identifica-se ali, porém, uma lacuna estrutural
+específica, a ausência de questionário do aluno no 2º ano do Ensino
+Fundamental (Seção~\ref{sec:alfabetizacao-2ef}). Esta pesquisa a endereça
+com um desenho necessariamente distinto, detalhado no capítulo de
 Metodologia.
 
 \chapter{Metodologia}
