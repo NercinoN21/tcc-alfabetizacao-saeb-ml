@@ -72,6 +72,50 @@ def tres_execucoes(pop, universo, meta, alvo, trilha, nome, params, cfg) -> pd.D
     return pd.DataFrame(linhas).set_index("execução")
 
 
+def ranking_temas(base, meta_sel, alvo, trilha, nome, params, cfg) -> pd.Series:
+    """Participação de cada tema no |SHAP| do modelo ajustado em toda a base da execução (mesmos
+    hiperparâmetros). Descreve o modelo de cada execução para comparar os ordenamentos (Seção 3.9)."""
+    from .explicabilidade import shap_por_tema, shap_por_variavel
+    from .modelos import pipeline_de
+    pipe = pipeline_de(trilha, nome, meta_sel, cfg.seed, params, cfg.n_arvores_rf)
+    kw = {"model__sample_weight": base["N_ALUNOS"].values} if trilha == "prop" else {}
+    pipe.fit(X_de(base, meta_sel), base[alvo].values, **kw)
+    return shap_por_tema(shap_por_variavel(pipe, base, meta_sel, base.index, base.index), meta_sel)["participacao"]
+
+
+def estabilidade_entre_execucoes(execucoes: dict, ref: str, sem_temas=("Nível socioeconômico (INSE)",), k: int = 5):
+    """Spearman entre o ranking de temas de cada execução e o da referência, sobre os temas comuns e sem os
+    temas que não existem em todas (o INSE sai em R2 e R3). Também o nº de temas em comum no top-k."""
+    from scipy.stats import spearmanr
+    m = pd.DataFrame(execucoes).fillna(0)
+    m = m.drop(index=[t for t in sem_temas if t in m.index])
+    linhas = []
+    top_ref = set(m[ref].sort_values(ascending=False).head(k).index)
+    for c in m.columns:
+        comuns = m[(m[ref] > 0) & (m[c] > 0)].index
+        rho = float(spearmanr(m.loc[comuns, ref], m.loc[comuns, c]).statistic) if len(comuns) > 2 else np.nan
+        top = set(m[c].sort_values(ascending=False).head(k).index)
+        linhas.append({"execução": c, "temas comuns": len(comuns), f"Spearman com {ref}": rho,
+                       f"temas em comum no top-{k}": len(top & top_ref),
+                       "1º tema (sem INSE)": m[c].idxmax()})
+    return m, pd.DataFrame(linhas).set_index("execução")
+
+
+def ranking_entre_execucoes(pop, universo, base_turma, base_interna, base_todas, meta, alvo, trilha, nome, params, cfg):
+    sel = lambda df, **kw: selecionar_variaveis(df, meta, com_cor=False, limite_ausencia=cfg.limite_ausencia,
+                                                 excluir_percepcao=cfg.excluir_percepcao_desfecho, **kw)[0]
+    n20 = base_todas[(base_todas.PUBLICA == 1) & base_todas.TEM_INSE & (base_todas.N_ALUNOS >= 20)]
+    pi = base_interna[base_interna.N_ALUNOS >= cfg.n_min_alunos]
+    bases = {"R1: pública com INSE (referência)": (pop, sel(pop)),
+             "R2: pública sem INSE": (pop, sel(pop, com_inse=False)),
+             "R3: universo sem INSE": (universo, sel(universo, com_inse=False)),
+             "turma como unidade": (base_turma, sel(base_turma)),
+             "n ≥ 20 alunos": (n20, sel(n20)),
+             "junção interna (professor e diretor)": (pi, sel(pi))}
+    exe = {k: ranking_temas(b, ms, alvo, trilha, nome, params, cfg) for k, (b, ms) in bases.items()}
+    return estabilidade_entre_execucoes(exe, "R1: pública com INSE (referência)")
+
+
 def construir_base_turma(alunos_validos, prof_cod_turma, pop, n_min_turma: int = 5) -> pd.DataFrame:
     """Turma como unidade: desfechos por turma; professor da própria turma; resto herdado da escola."""
     a = alunos_validos[alunos_validos.ID_ESCOLA.isin(pop.index)]

@@ -187,3 +187,15 @@ def test_slug_dos_casos_lime_e_unico():
     slugs = [slug_caso(c) for c in CASOS]
     assert len(set(slugs)) == len(CASOS)          # antes, ‘extremo inferior’ e ‘extremo superior’ colidiam
     assert slug_caso(CASOS[1]) == "acima"
+
+
+def test_estabilidade_entre_execucoes_ignora_inse_e_compara_rankings():
+    from saeb_alfab.robustez import estabilidade_entre_execucoes
+    ref = pd.Series({"Nível socioeconômico (INSE)": .5, "a": .3, "b": .2, "c": .1})
+    igual = pd.Series({"a": .6, "b": .3, "c": .1})                 # sem INSE (como R2/R3), mesma ordem
+    inv = pd.Series({"a": .1, "b": .3, "c": .6})
+    m, r = estabilidade_entre_execucoes({"ref": ref, "igual": igual, "inv": inv}, "ref", k=2)
+    assert "Nível socioeconômico (INSE)" not in m.index
+    assert r.loc["igual", "Spearman com ref"] == pytest.approx(1.0)
+    assert r.loc["inv", "Spearman com ref"] == pytest.approx(-1.0)
+    assert r.loc["igual", "1º tema (sem INSE)"] == "a"

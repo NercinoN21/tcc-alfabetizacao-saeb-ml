@@ -40,7 +40,7 @@ from .explicabilidade import (estabilidade, lime_vs_shap, ranking_temas_ponderad
                               shap_por_variavel)
 from .modelos import LINEAR, MODELOS, X_de, particao, pipeline_de, selecionar_variaveis, usa_peso_n
 from .robustez import (ablacao, alfabetizacao_por_rede, auditar_equidade, construir_base_turma, diagnostico_pesos,
-                       sensibilidades, teste_proxies, tres_execucoes)
+                       ranking_entre_execucoes, sensibilidades, teste_proxies, tres_execucoes)
 
 ETAPAS = ["base", "modelagem", "explicabilidade", "robustez"]
 TRILHAS = {"prop": ("Y_PROP_ALFAB", "Proporção de alfabetizados"), "prof": ("Y_PROF_MEDIA", "Proficiência média")}
@@ -146,6 +146,17 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
             out.tabela(ablacao(pop, ms_A, alvo, tr, nome, params_busca(aj[nome]), cfg), f"04_ablacao_{tr}")
             print(f"[ablacao] {rot}: selecionado = {nome}")
         return _fechar(out, info, t0)
+    if apenas == "ranking-execucoes":
+        info["apenas"] = "ranking-execucoes"
+        base_turma = construir_base_turma(alunos_validos, prof_cod_turma, pop)
+        for tr, (alvo, rot) in TRILHAS.items():
+            res, aj, _ = competir(pop, ms_A, alvo, tr, idx_tr, idx_te, cfg)
+            sel = selecionar_modelo_final(pop, ms_A, alvo, tr, idx_tr, aj, res, cfg)
+            nome = sel["selecionado"]
+            _ranking_execucoes(out, pop, universo, base_turma, base_interna, base_todas, meta, alvo, tr, nome,
+                               params_busca(aj[nome]), cfg)
+            print(f"[ranking-execucoes] {rot}: selecionado = {nome}")
+        return _fechar(out, info, t0)
     if apenas == "figuras-shap":
         info["apenas"] = "figuras-shap"
         for tr, (alvo, rot) in TRILHAS.items():
@@ -222,6 +233,7 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
         par = params_busca(R[tr]["aj"][nome])
         out.tabela(ablacao(pop, ms_A, alvo, tr, nome, par, cfg), f"04_ablacao_{tr}")
         out.tabela(tres_execucoes(pop, universo, meta, alvo, tr, nome, par, cfg), f"04_tres_execucoes_{tr}")
+        _ranking_execucoes(out, pop, universo, base_turma, base_interna, base_todas, meta, alvo, tr, nome, par, cfg)
         out.tabela(sensibilidades(pop, base_todas, base_interna, base_turma, meta, alvo, tr, nome, par, cfg),
                    f"04_sensibilidades_{tr}")
         oa = cv_repetida(pop, ms_A, alvo, tr, nome, par, cfg)["pred"]
@@ -244,6 +256,14 @@ def _ranking_pesos(out: Saida, pop, ms, tr, pipe, idx_tr, idx_te, cfg: Config) -
         spearmanr(tab["participação sem peso"], oficial.reindex(tab.index).fillna(0)).statistic)
     out.tabela(tab, f"03_shap_temas_ponderado_{tr}")
     out.tabela(resumo, f"03_shap_temas_ponderado_resumo_{tr}")
+
+
+def _ranking_execucoes(out: Saida, pop, universo, base_turma, base_interna, base_todas, meta, alvo, tr, nome, par,
+                       cfg: Config) -> None:
+    participacoes, resumo = ranking_entre_execucoes(pop, universo, base_turma, base_interna, base_todas, meta, alvo, tr,
+                                                    nome, par, cfg)
+    out.tabela(participacoes, f"04_ranking_temas_execucoes_{tr}")
+    out.tabela(resumo, f"04_ranking_temas_execucoes_resumo_{tr}")
 
 
 def _figuras_shap(out: Saida, pipe, pop, ms, idx_te, idx_tr, det, tr, rot) -> None:
@@ -310,7 +330,8 @@ def main(argv=None):
     ap.add_argument("--modo", choices=["rapido", "completo"], default=None)
     ap.add_argument("--ate", choices=ETAPAS, default="robustez")
     ap.add_argument("--seed", type=int, default=None)
-    ap.add_argument("--apenas", choices=["descritivas", "pinball", "pesos", "ranking-pesos", "ablacao", "figuras-shap"],
+    ap.add_argument("--apenas", choices=["descritivas", "pinball", "pesos", "ranking-pesos", "ablacao", "figuras-shap",
+                                          "ranking-execucoes"],
                     default=None)
     a = ap.parse_args(argv)
     cfg = Config()
