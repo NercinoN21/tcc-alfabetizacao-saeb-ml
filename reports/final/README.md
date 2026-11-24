@@ -32,7 +32,7 @@ make completo
 | `00_` | dicionário de variáveis: tipo, escala, mapa de codificação, tema |
 | `01_` | funil de cobertura, cobertura dos blocos e decisão sobre cada variável. O diagnóstico dos pesos amostrais está em `complemento_pesos/`, e as análises descritivas (desfechos, INSE, cobertura, viés de seleção, cor/raça), com figuras, em `complemento_descritivas/` |
 | `02_` | comparação de modelos e seleção do modelo final. A perda de quantil (pinball) está em `complemento_pinball/` |
-| `03_` | explicabilidade: SHAP por variável e por tema, estabilidade e comparação LIME × SHAP. O ranking de temas sem × com peso amostral está em `complemento_ranking_pesos/` |
+| `03_` | explicabilidade: SHAP por variável e por tema, estabilidade e comparação LIME × SHAP. O ranking de temas sem × com peso amostral está em `complemento_ranking_pesos/`, e as figuras (resumo do SHAP e SHAP × LIME dos casos do texto), em `complemento_figuras_shap/` |
 | `04_` | valor incremental dos blocos (ablação), robustez, sensibilidades, proxies e equidade. A ablação com índices por tema e o contraste com INSE + geografia estão em `complemento_ablacao_indices/` |
 
 Cada tabela existe em `.csv` (fonte) e `.tex` (para a monografia). As figuras estão em `figuras/`.
