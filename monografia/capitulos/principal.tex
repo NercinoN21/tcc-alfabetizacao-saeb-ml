@@ -390,11 +390,12 @@ O 2º ano do Ensino Fundamental integra o Saeb desde a edição de 2019. Em
 2023, o Inep definiu o padrão oficial de alfabetização como o ponto 743 da
 escala de proficiência em Língua Portuguesa \cite{inep2023alfabetiza},
 critério adotado na divulgação dos resultados da edição de 2023 e
-vinculado ao monitoramento do Compromisso Nacional Criança Alfabetizada. O
-desenho amostral dessa edição, com pesos amostrais e estratos, é
-documentado pelo Inep em notas técnicas sobre a base amostral e sobre a
-construção do Indicador de Nível Socioeconômico (INSE)
-\cite{inep2024amostra, inep2024inse}. O INSE é usado neste trabalho como
+vinculado ao monitoramento do Compromisso Nacional Criança Alfabetizada. Os
+pesos amostrais e os estratos dessa edição estão descritos no dicionário
+que acompanha os microdados, que remete ao relatório de amostragem do Saeb
+2023 \cite{inep2026microdados}. A construção do Indicador de Nível
+Socioeconômico (INSE) é documentada em nota técnica própria
+\cite{inep2024inse}. O INSE é usado neste trabalho como
 proxy do contexto socioeconômico da escola (variável
 \texttt{NIVEL\_SOCIO\_ECONOMICO}). \citeonline{costa2023reflexoes}
 investigam, por meio de entrevistas com professores, como a reintrodução da
@@ -1136,7 +1137,7 @@ sensibilidade.
 
 O Saeb 2023 é uma avaliação amostral no 2º ano do Ensino Fundamental. Cada
 escola sorteada representa outras escolas da rede, e o peso amostral indica
-quantas, conforme o desenho documentado pelo Inep \cite{inep2024amostra}.
+quantas, conforme o desenho descrito nos microdados \cite{inep2026microdados}.
 Esse peso difere do peso de precisão $n_e$, o número de alunos avaliados da
 escola, tratado no fim desta seção.
 
@@ -1246,7 +1247,7 @@ exportado como tabela versionada a cada execução). Isso evita divergência
 entre o código de modelagem e a documentação da base. Além do vazamento
 descrito acima, foram excluídas as colunas de texto aberto, as colunas com
 mais de 30\% de ausência na amostra filtrada e a variável
-\texttt{ESTRATO}, um metadado do desenho amostral \cite{inep2024amostra}.
+\texttt{ESTRATO}, um metadado do desenho amostral \cite{inep2026microdados}.
 Em testes preliminares, \texttt{ESTRATO} se comportava como
 quase-identificador de escola e dominava desproporcionalmente a importância
 agregada de SHAP, sem corresponder a um fator de contexto substantivo. O
