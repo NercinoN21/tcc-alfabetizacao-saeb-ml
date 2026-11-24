@@ -64,8 +64,14 @@
 }
 \makeatother
 
+\floatstyle{plaintop}
 \newfloat{quadro}{htbp}{loq}
 \floatname{quadro}{Quadro}
+\DeclareCaptionListFormat{quadro}{Quadro #2 \ --\ }
+\captionsetup[quadro]{listformat=quadro}
+\makeatletter
+\def\l@quadro{\@dottedtocline{1}{0em}{5.6em}}
+\makeatother
 
 \newcommand\tipoProjeto{Trabalho de Conclusão de Curso}
 \newcommand\tipoCurso{Graduação}
