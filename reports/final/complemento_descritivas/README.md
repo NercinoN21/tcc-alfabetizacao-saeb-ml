@@ -46,3 +46,10 @@ make dados-snapshot
 git checkout 0e37689
 uv run python -m saeb_alfab.pipeline --modo completo --apenas descritivas
 ```
+
+## Acréscimo: unicidade dos questionários (commit `ef2b140`)
+
+`01_unicidade_questionarios` foi gerada depois, pela mesma etapa (`--apenas descritivas`, modo completo, semente
+2110, código `ef2b140`, proveniência em `run_info_unicidade.json`). Todas as demais tabelas dessa nova execução
+saíram idênticas, byte a byte, às congeladas aqui. Depois dos filtros, há 1.045 questionários de professor para
+1.045 turmas e 904 de diretor para 904 escolas, sem chave repetida.
