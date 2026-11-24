@@ -83,3 +83,98 @@ escolas sem questionário de diretor, a proporção é de 37,7\%, contra 44,2\%
 ($p = 0{,}11$). As duas diferenças têm $p$ acima de 0,05 e apontam na mesma
 direção, o que justifica manter os indicadores de não resposta entre os
 preditores (Seção~\ref{sec:variaveis}).
+
+\section{Desempenho comparado e seleção do modelo final}
+\label{sec:res-modelos}
+
+A Tabela~\ref{tab:competicao} compara os modelos. Nas duas trilhas, todos
+superam o \textit{baseline}. No teste, o linear de referência erra em média
+16,2 pontos percentuais na proporção e 17,0 pontos na proficiência, com
+ganho de 15,3\% e 9,9\% sobre a média do treino. Os \textit{ensembles}
+ficam próximos. O menor erro de teste é o do LightGBM na proporção
+(15,7 pontos percentuais) e o do XGBoost na proficiência (15,7 pontos). Os
+intervalos de confiança do MAE de teste se sobrepõem em todos os pares, o
+que é esperado com 121 escolas de teste. O R² de teste fica entre 0,21 e
+0,28, e os preditores de escola descrevem pouco mais de um quinto da
+variação entre escolas.
+
+\input{capitulos/resultados/tab_competicao}
+
+A regra de seleção decide no treino (Tabela~\ref{tab:selecao}). Na
+validação cruzada 5~$\times$~5, o melhor \textit{ensemble} erra 3,3\% menos
+que o linear na proporção (XGBoost) e 4,5\% menos na proficiência (Random
+Forest). As duas diferenças passam da margem de 2\%, e os intervalos de
+confiança incluem zero, com $p$ corrigido de 0,08 nas duas trilhas. Pela
+regra pré-registrada, o modelo linear é o selecionado nas duas trilhas, e
+as Seções~\ref{sec:res-hipoteses} a~\ref{sec:res-equidade} tratam desse
+modelo. O conjunto de teste aponta na mesma direção: a diferença entre o
+linear e o melhor \textit{ensemble} também tem intervalo que inclui zero
+(de $-$0,9 a 1,5 ponto percentual na proporção e de $-$0,4 a 2,4 pontos
+na proficiência).
+
+\input{capitulos/resultados/tab_selecao}
+
+\section{Valor incremental dos questionários e decisão sobre as hipóteses}
+\label{sec:res-hipoteses}
+
+A Tabela~\ref{tab:ablacao} mostra o ganho de cada especificação sobre o
+\textit{baseline} e a diferença de MAE nas mesmas dobras. Na proficiência,
+os questionários de professor e de diretor, juntos, acrescentam
+capacidade preditiva ao INSE e à geografia. O conjunto completo (M4) erra
+0,76 ponto a menos que M1, com intervalo de confiança de 95\% de $-$1,50 a
+$-$0,02, uma redução de 4,2\%. Resumidos em índices por tema (M7), os
+questionários mantêm um ganho de 0,54 ponto (de $-$0,90 a $-$0,18), ou
+3,0\%. Na proporção, a diferença de 0,60 ponto percentual a favor do
+conjunto completo tem intervalo que inclui zero (de $-$1,23 a 0,03), e o
+mesmo ocorre com os índices por tema. A resposta à pergunta central é,
+portanto, positiva na proficiência, com ganho de poucos por cento. Na
+proporção, o ganho não se distingue de zero.
+
+\input{capitulos/resultados/tab_ablacao}
+
+A Tabela~\ref{tab:hipoteses} aplica a regra de decisão da
+Seção~\ref{sec:hipoteses}. H3 é confirmada nas duas trilhas. Retirar o
+INSE do conjunto completo aumenta o erro em 6,9\% na proporção e em 3,6\%
+na proficiência, com intervalos acima de zero, e o INSE conserva
+informação própria mesmo com os dois questionários no modelo. H1 não é
+confirmada: sem o bloco do professor, o erro sobe 0,4\% e 0,9\%, com
+intervalos que incluem zero. H2 é não conclusiva. Sem o bloco do diretor, o
+erro sobe 3,6\% e 3,5\%, acima da margem de 2\%, com intervalos que incluem
+zero (de $-$0,07 a 1,25 ponto percentual e de $-$0,08 a 1,28 ponto). H4 não
+é confirmada. A geografia não altera o erro na proporção, e na
+proficiência o aumento de 0,2\% tem intervalo acima de zero e fica abaixo
+da margem.
+
+\input{capitulos/resultados/tab_hipoteses}
+
+O ganho dos dois questionários juntos é maior que o de cada bloco isolado.
+Partindo de M1, o diretor sozinho (M3) reduz o erro da proficiência em 0,61
+ponto, e o professor sozinho (M2), em 0,16 ponto, sem que nenhum dos dois
+intervalos exclua zero. Com o diretor no modelo, retirar o professor quase
+não muda o erro (0,16 ponto). Com o professor no modelo, retirar o diretor
+aumenta o erro em 0,60 ponto, com intervalo que inclui zero. A geografia
+segue outro padrão. Ela acrescenta ao INSE sozinho (M0 contra M1, com
+intervalos acima de zero nas duas trilhas), e essa informação se torna
+redundante quando os questionários entram no modelo.
+
+\section{Desempenho por quantis}
+\label{sec:res-quantis}
+
+A regressão quantílica linear é a melhor das três famílias nas duas
+trilhas. Na média dos cinco quantis, o XGBoost e o LightGBM quantílicos
+ganham 9,7\% e 8,4\% sobre o quantil incondicional na proporção e 12,3\% e
+10,6\% na proficiência. A Tabela~\ref{tab:pinball} detalha a regressão
+quantílica linear, que reduz a perda \textit{pinball} em 12,3\% na
+proporção e em 15,1\% na proficiência, com intervalos que excluem zero. O
+ganho é maior no quantil inferior (16,3\% e 20,5\% em $\tau = 0{,}10$),
+onde estão as escolas de piores desfechos.
+
+\input{capitulos/resultados/tab_pinball}
+
+A exceção é o topo da proporção. Em $\tau = 0{,}90$, o modelo não supera o
+quantil incondicional ($-$0,7\%, com intervalo que inclui zero). Os
+preditores de escola ajudam a antecipar onde a alfabetização é baixa e
+não distinguem as escolas em que ela é muito alta. Os quantis previstos
+saem fora de ordem em 7,4\% das escolas de teste na proporção e em 14,0\%
+na proficiência, um limite da estimação separada por quantil
+(Seção~\ref{sec:testes-significancia}).

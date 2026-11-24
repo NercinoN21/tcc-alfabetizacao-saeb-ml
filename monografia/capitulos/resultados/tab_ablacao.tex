@@ -1,0 +1,29 @@
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \caption{Valor incremental dos blocos de preditores: ganho sobre o \textit{baseline} e diferença de MAE}
+    \begin{tabular}{L{3.4cm}C{0.9cm}C{1.1cm}C{1.9cm}C{0.9cm}C{1.1cm}C{1.9cm}}
+        \toprule
+        & \multicolumn{3}{c}{\textbf{Proporção (p.p.)}} & \multicolumn{3}{c}{\textbf{Proficiência (pontos)}} \\
+        \cmidrule(lr){2-4}\cmidrule(lr){5-7}
+        \textbf{Especificação} & \textbf{Ganho (\%)} & \textbf{$\Delta$ MAE} & \textbf{IC95\%} & \textbf{Ganho (\%)} & \textbf{$\Delta$ MAE} & \textbf{IC95\%} \\
+        \midrule
+        M0: só INSE & 9,2 & $+$0,20 & [0,04; 0,35] & 6,6 & $+$0,17 & [0,09; 0,26] \\
+        M1: INSE e geografia & 10,3 & --- & --- & 7,4 & --- & --- \\
+        M2: M1 e professor & 10,4 & $-$0,02 & [$-$0,35; 0,31] & 8,3 & $-$0,16 & [$-$0,52; 0,20] \\
+        M3: M1 e diretor & 13,1 & $-$0,54 & [$-$1,17; 0,09] & 10,6 & $-$0,61 & [$-$1,26; 0,05] \\
+        M4: completo & 13,4 & $-$0,60 & [$-$1,23; 0,03] & 11,4 & $-$0,76 & [$-$1,50; $-$0,02] \\
+        M7: M1 e índices por tema & 11,8 & $-$0,28 & [$-$0,64; 0,07] & 10,2 & $-$0,54 & [$-$0,90; $-$0,18] \\
+        \midrule
+        M4 sem INSE & 7,5 & $+$1,13 & [0,76; 1,50] & 8,2 & $+$0,62 & [0,38; 0,86] \\
+        M4 sem professor & 13,1 & $+$0,06 & [$-$0,19; 0,32] & 10,5 & $+$0,16 & [$-$0,13; 0,45] \\
+        M4 sem diretor & 10,4 & $+$0,59 & [$-$0,07; 1,25] & 8,3 & $+$0,60 & [$-$0,08; 1,28] \\
+        M4 sem geografia & 13,4 & 0,00 & [0,00; 0,00] & 11,2 & $+$0,03 & [0,00; 0,06] \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor, com base nos microdados do Saeb 2023 (Inep). Modelo linear, validação cruzada 5 $\times$ 5 nas mesmas dobras. Acima do traço, $\Delta$ MAE é a diferença para M1 (negativo: erro menor que o de INSE e geografia). Abaixo do traço, é a diferença para M4 (positivo: retirar o bloco aumenta o erro). IC95\% pelo teste $t$ corrigido de Nadeau e Bengio (2003).}
+    \end{flushleft}
+    \label{tab:ablacao}
+\end{table}

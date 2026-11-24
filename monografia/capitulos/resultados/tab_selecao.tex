@@ -1,0 +1,18 @@
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Regra de seleção do modelo final: melhor \textit{ensemble} contra o linear de referência}
+    \begin{tabular}{L{3.0cm}C{1.6cm}C{1.2cm}C{1.3cm}C{1.1cm}C{1.9cm}C{1.1cm}C{1.3cm}}
+        \toprule
+        \textbf{Trilha} & \textbf{Melhor ensemble} & \textbf{MAE linear} & \textbf{MAE ensemble} & \textbf{Diferença} & \textbf{IC95\%} & \textbf{Ganho (\%)} & \textbf{Selecionado} \\
+        \midrule
+        Proporção de alfabetizados (p.p.) & XGBoost & 16,91 & 16,36 & 0,55 & [$-$0,08; 1,18] & 3,3 & Linear \\
+        Proficiência média (pontos) & Random Forest & 17,72 & 16,92 & 0,80 & [$-$0,11; 1,71] & 4,5 & Linear \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor, com base nos microdados do Saeb 2023 (Inep). Validação cruzada 5 $\times$ 5 no treino (25 dobras pareadas). IC95\% pelo teste $t$ corrigido de Nadeau e Bengio (2003). O \textit{ensemble} só é selecionado se o IC excluir zero e o ganho for de pelo menos 2\%.}
+    \end{flushleft}
+    \label{tab:selecao}
+\end{table}
