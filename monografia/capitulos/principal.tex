@@ -134,6 +134,11 @@ adotada como unidade de análise. Os desfechos individuais são agregados por
 escola, e a pergunta é enunciada no nível em que tanto os preditores
 quanto as decisões de gestão educacional efetivamente operam.
 
+Antecipando o resultado, os dois questionários juntos reduzem em 4,2\% o
+erro de previsão da proficiência média, com intervalo de confiança que
+exclui zero. Na previsão da proporção de alfabetizados, o ganho não se
+distingue de zero (Capítulo~\ref{cap:resultados}).
+
 \subsection{Hipóteses de pesquisa}
 \label{sec:hipoteses}
 
@@ -241,7 +246,13 @@ com modelos interpretáveis de aprendizado de máquina.
     de referência e \textit{ensembles} de árvores de decisão, avaliados por
     um protocolo experimental único com partição e validação cruzada no
     nível da escola (Seção~\ref{sec:protocolo}) e contrastados com
-    \textit{baselines} simples, como a média e a mediana dos desfechos;
+    \textit{baselines} simples, como a média e a mediana dos desfechos, e
+    avaliar o desempenho ao longo da distribuição dos desfechos pela perda
+    \textit{pinball} em cinco quantis;
+    \item Medir o valor incremental de cada bloco de preditores pela
+    retirada do bloco do conjunto completo, nas mesmas dobras de uma
+    validação cruzada repetida, e decidir as hipóteses pela regra da
+    Seção~\ref{sec:hipoteses};
     \item Aplicar SHAP como método prioritário de explicabilidade ao modelo
     selecionado de cada trilha e hierarquizar a importância dos grupos
     temáticos de variáveis, usando o LIME (\textit{Local Interpretable
