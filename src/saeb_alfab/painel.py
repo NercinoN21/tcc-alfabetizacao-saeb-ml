@@ -78,6 +78,8 @@ def _registros(t: pd.DataFrame) -> list:
 def gerar_html(pasta_painel: Path, pasta_tabelas: Path, n_min: int, versao: str) -> str:
     dados = {k: _registros(pd.read_csv(pasta_painel / f"05_painel_{k}.csv", index_col=0))
              for k in ("uf", "regiao", "localizacao", "inse", "total")}
+    ordem = ["I–II", "III", "IV", "V", "VI–VII"]
+    dados["inse"].sort(key=lambda r: ordem.index(r["grupo"]) if r["grupo"] in ordem else 99)
     for k in ("uf", "regiao", "localizacao", "inse", "total"):
         for r in dados[k]:
             r["suprimido"] = bool(r.get("suprimido"))
@@ -196,7 +198,7 @@ const val=(k,v)=>k==="prop"?pct(v):fmt(v,1);
 const rot={prop:"Proporção de alfabetizados",prof:"Proficiência média em LP"};
 document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll("nav button").forEach(x=>x.setAttribute("aria-selected",x===b));document.querySelectorAll("section").forEach(s=>s.classList.toggle("ativo",s.id===b.dataset.aba));});
 function barras(el,itens,o){ // itens: [{rot, v, v2?, dir?}]
-  const h=26,top=8,esq=o.esq||170,larg=Math.max(320,Math.min(980,el.clientWidth||900)),dir=o.dirTxt?64:24,W=larg-esq-dir;
+  const h=26,top=8,esq=o.esq||170,larg=Math.max(320,Math.min(980,el.clientWidth||900)),dir=o.dirTxt?64:70,W=larg-esq-dir;
   const vals=itens.flatMap(i=>[i.v,i.v2]).filter(v=>v!=null);let lo=Math.min(0,...vals),hi=Math.max(0,...vals);if(o.lo!=null)lo=o.lo;if(o.hi!=null)hi=o.hi;if(hi===lo)hi=lo+1;
   const x=v=>esq+(v-lo)/(hi-lo)*W,H=top+itens.length*h+24;let s=`<svg viewBox="0 0 ${larg} ${H}" width="100%" role="img" aria-label="${o.titulo||""}">`;
   s+=`<line x1="${x(0)}" x2="${x(0)}" y1="${top}" y2="${H-20}" stroke="#bdbab2"/>`;
@@ -216,7 +218,7 @@ function geo(){const k=document.getElementById("g-desf").value,reg=document.getE
   let linhas=D.dados.uf.filter(r=>!reg||r["região"]===reg||r.suprimido);
   linhas.sort((a,b)=>(b[col]??-1e9)-(a[col]??-1e9));
   barras(document.getElementById("g-graf"),linhas.map(r=>({rot:r.grupo,v:r.suprimido?null:r[col]})),{f:v=>val(k,v),esq:60,lo:k==="prof"?650:0,titulo:rot[k]});
-  document.getElementById("g-nota").textContent=`${rot[k]} ${peso?"com":"sem"} peso amostral. UFs com menos de ${D.meta.n_min} escolas na base aparecem como suprimidas.`;
+  document.getElementById("g-nota").textContent=`${rot[k]} ${peso?"com":"sem"} peso amostral. Cada UF tem de 12 a 45 escolas na base, e as médias estaduais são imprecisas e não substituem as estimativas oficiais do Inep. UFs com menos de ${D.meta.n_min} escolas aparecem como suprimidas.`;
   document.getElementById("g-tab").innerHTML="<tr><th>UF</th><th>Região</th><th>Escolas</th><th>Alunos</th><th>INSE médio</th><th>Sem peso</th><th>Com peso</th></tr>"+linhas.map(r=>r.suprimido?`<tr><td>${r.grupo}</td><td></td><td colspan="5" class="sup">suprimido</td></tr>`:`<tr><td>${r.grupo}</td><td>${r["região"]}</td><td>${fmt(r.escolas,0)}</td><td>${fmt(r.alunos,0)}</td><td>${fmt(r["INSE médio"],1)}</td><td>${val(k,r[k+" sem peso"])}</td><td>${val(k,r[k+" com peso"])}</td></tr>`).join("");}
 ["g-desf","g-reg","g-peso"].forEach(i=>document.getElementById(i).onchange=geo);
 // INSE
@@ -232,6 +234,7 @@ function erro(){const k=document.getElementById("e-desf").value,e=document.getEl
 ["e-desf","e-eixo"].forEach(i=>document.getElementById(i).onchange=erro);
 document.getElementById("r-nmin").textContent=D.meta.n_min;
 document.getElementById("rodape").textContent=`Fonte: microdados do Saeb 2023 (Inep, CC BY 4.0). Elaboração própria. Versão do código: ${D.meta.versao}.`;
+const aba=location.hash.slice(1);if(aba)document.querySelector(`nav button[data-aba="${aba}"]`)?.click();
 geo();inse();temas();erro();addEventListener("resize",()=>{geo();inse();temas();erro();});
 </script>
 </body>
