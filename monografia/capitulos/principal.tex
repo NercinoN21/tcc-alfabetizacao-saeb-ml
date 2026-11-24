@@ -1016,7 +1016,7 @@ desfechos são agregados dos alunos para a escola e os preditores são
 consolidados no mesmo nível. A seguir vêm as razões da decisão, o
 procedimento de agregação e suas implicações, inclusive os custos.
 
-\subsection{Por que a escola, e não o aluno}
+\subsection{Por que a escola é a unidade de análise}
 \label{sec:limitacao-estrutural}
 
 No 2º ano do Ensino Fundamental não há questionário contextual respondido
@@ -1451,9 +1451,9 @@ erro residual das árvores anteriores (\textit{boosting}) no XGBoost e no
 LightGBM. Um detalhe de implementação relevante para o alvo fracionário
 será documentado no código: as funções-objetivo empregadas devem aceitar
 rótulos contínuos em $[0,1]$ (\texttt{reg:logistic} no XGBoost e
-\texttt{cross\_entropy} no LightGBM), e não os objetivos de classificação
-binária, que exigem rótulos em $\{0,1\}$ e falhariam silenciosamente com
-proporções.
+\texttt{cross\_entropy} no LightGBM). Os objetivos de classificação
+binária ficam excluídos, porque exigem rótulos em $\{0,1\}$ e falhariam
+silenciosamente com proporções.
 
 \subsection{Trilha da proficiência média}
 
@@ -1516,9 +1516,9 @@ avaliação:
 \end{enumerate}
 
 Além do desempenho absoluto, cada modelo é comparado ao \textit{baseline}
-trivial de sua trilha (média ou mediana do desfecho no treino), de modo que
-o ganho informacional atribuível à modelagem seja explicitado, e não apenas
-o valor da métrica. Na trilha de proporção, verifica-se ainda a aderência
+trivial de sua trilha (média ou mediana do desfecho no treino). Assim, o
+ganho informacional atribuível à modelagem fica explícito, além do valor da
+métrica. Na trilha de proporção, verifica-se ainda a aderência
 das predições ao intervalo $[0,1]$. Ela é garantida por construção no
 \textit{fractional logit}, no Random Forest, cujas predições são médias de
 proporções observadas, e no XGBoost e no LightGBM, estimados nessa trilha
@@ -1601,7 +1601,7 @@ análise é complementar e não entra na regra de seleção do modelo final.
 \label{sec:xai}
 
 A explicabilidade concentra-se no \textbf{modelo selecionado de cada
-trilha}, e não na interpretação detalhada de todos os modelos estimados.
+trilha}, sem interpretar em detalhe todos os modelos estimados.
 A razão é substantiva: importâncias produzidas por modelos que não serão
 adotados não informam sobre o fenômeno nem sobre o instrumento final, e
 multiplicar explicações de modelos concorrentes convida à seleção
@@ -1820,7 +1820,7 @@ aqui sob o desenho anterior. Segunda, o desenvolvimento do protótipo do
 artefato de dados (o \emph{dashboard} interativo destinado a gestores
 educacionais e potenciais financiadores, Seção~\ref{sec:justificativa})
 inicia-se tão logo os primeiros modelos estejam estimados, de modo que o
-instrumento evolua junto com os resultados, e não após eles. Terceira, o
+instrumento evolua junto com os resultados. Terceira, o
 mês de agosto compreende apenas os últimos dias do calendário letivo (o
 período inicia-se em 28 de agosto), de modo que as atividades ali alocadas
 correspondem à retomada e ao planejamento, com carga concentrada a partir de
