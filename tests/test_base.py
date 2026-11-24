@@ -84,3 +84,23 @@ def test_alfabetizacao_por_rede_usa_peso_e_corte():
     assert t.loc["pública", "proporção com peso (%)"] == pytest.approx(75.0)  # 3/(3+1)
     assert t.loc["pública", "proporção sem peso (%)"] == pytest.approx(50.0)
     assert t.loc["privada", "proporção com peso (%)"] == pytest.approx(100.0) # 743 está no corte
+
+
+def test_icc_valores_extremos_e_intermediario():
+    from saeb_alfab.descritivas import icc1
+    # toda a variação entre grupos: ICC = 1. Nenhuma diferença entre médias de grupo: ICC <= 0.
+    entre = pd.DataFrame({"g": [1, 1, 2, 2, 3, 3], "y": [1.0, 1.0, 5.0, 5.0, 9.0, 9.0]})
+    assert icc1(entre, "g", "y") == pytest.approx(1.0)
+    dentro = pd.DataFrame({"g": [1, 1, 2, 2], "y": [0.0, 2.0, 0.0, 2.0]})
+    assert icc1(dentro, "g", "y") <= 0
+    rng = np.random.default_rng(0)
+    g = np.repeat(np.arange(300), 20)
+    y = rng.normal(0, np.sqrt(.2), 300)[g] + rng.normal(0, np.sqrt(.8), len(g))   # ICC verdadeiro = 0,2
+    assert icc1(pd.DataFrame({"g": g, "y": y}), "g", "y") == pytest.approx(0.2, abs=0.04)
+
+
+def test_smd_valores_conhecidos():
+    from saeb_alfab.descritivas import smd
+    assert smd([1, 2, 3], [1, 2, 3]) == pytest.approx(0.0)
+    assert smd([2, 4], [0, 2]) == pytest.approx(2 / np.sqrt(2))       # médias 3 e 1, variâncias 2 e 2
+    assert smd([1, 1], [1, 1]) == 0.0                                   # sem variância: 0 por definição

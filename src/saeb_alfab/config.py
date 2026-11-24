@@ -18,6 +18,14 @@ ARQUIVOS_SAEB = ["TS_ALUNO_2EF.csv", "TS_ESCOLA.csv", "TS_PROFESSOR.csv", "TS_DI
                  "Dicionario_Saeb_2023.xlsx"]
 QUANTIS = (0.10, 0.25, 0.50, 0.75, 0.90)
 
+# Rótulos da geografia do Saeb (códigos do IBGE para região e UF; localização e área do Inep)
+REGIAO = {"1": "Norte", "2": "Nordeste", "3": "Sudeste", "4": "Sul", "5": "Centro-Oeste"}
+UF = {"11": "RO", "12": "AC", "13": "AM", "14": "RR", "15": "PA", "16": "AP", "17": "TO", "21": "MA", "22": "PI",
+      "23": "CE", "24": "RN", "25": "PB", "26": "PE", "27": "AL", "28": "SE", "29": "BA", "31": "MG", "32": "ES",
+      "33": "RJ", "35": "SP", "41": "PR", "42": "SC", "43": "RS", "50": "MS", "51": "MT", "52": "GO", "53": "DF"}
+LOCALIZACAO = {"1": "Urbana", "2": "Rural"}
+AREA = {"1": "Capital", "2": "Interior"}
+
 # Colunas que NUNCA podem entrar em X (vazamento de alvo, desenho amostral, identificadores).
 COLUNAS_PROIBIDAS_EM_X = {
     "Y_PROP_ALFAB", "Y_PROF_MEDIA", "Y_PROF_MEDIANA", "PROFICIENCIA_LP_SAEB", "IN_ALFABETIZADO",

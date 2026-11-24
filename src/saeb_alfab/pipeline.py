@@ -5,6 +5,7 @@
     uv run python -m saeb_alfab.pipeline --ate modelagem    # para numa etapa: base | modelagem | explicabilidade | robustez
     uv run python -m saeb_alfab.pipeline --apenas pinball   # só a base + a perda de quantil (análise complementar)
     uv run python -m saeb_alfab.pipeline --apenas pesos     # só a base + o diagnóstico dos pesos amostrais
+    uv run python -m saeb_alfab.pipeline --apenas descritivas  # só a base + as análises descritivas
     uv run python -m saeb_alfab.pipeline --apenas ranking-pesos  # ranking de temas do SHAP sem × com peso amostral
     uv run python -m saeb_alfab.pipeline --apenas ablacao   # valor incremental dos blocos, com os índices por tema
 
@@ -28,6 +29,7 @@ import numpy as np
 import pandas as pd
 
 from . import base as B
+from . import descritivas as DS
 from . import dicionario as D
 from . import etl
 from .avaliacao import (comparar_no_teste, competir, competir_quantilica, cv_repetida, params_busca,
@@ -99,7 +101,8 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
     aluno, escola, prof, dire, planilhas = etl.ler_bases(cfg.data_dir)
     meta = D.montar_meta(D.parse_dicionario(planilhas["TS_PROFESSOR"]), D.parse_dicionario(planilhas["TS_DIRETOR"]))
     out.tabela(D.meta_para_csv(meta), "00_meta_variaveis", indice=False)
-    base_todas, alunos_validos, prof_cod_turma, _ = B.construir_base(aluno, escola, prof, dire, meta, cfg.juncao, 1)
+    base_todas, alunos_validos, prof_cod_turma, dir_cod_escola = B.construir_base(aluno, escola, prof, dire, meta,
+                                                                                    cfg.juncao, 1)
     pop, universo = B.populacoes(base_todas, cfg.n_min_alunos)
     base_interna, alunos_interna, _, _ = B.construir_base(aluno, escola, prof, dire, meta, "interna", 1)
     base_interna = base_interna[(base_interna.PUBLICA == 1) & base_interna.TEM_INSE]
@@ -120,7 +123,8 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
                 variaveis_B=len(ms_B))
     print(f"[base] pop={len(pop)} escolas · universo={len(universo)} · variáveis A={len(ms_A)} B={len(ms_B)}")
     _pesos(out, pop, aluno)
-    if ate == "base" or apenas == "pesos":
+    _descritivas(out, pop, base_todas, alunos_validos, alunos_interna, dec_A, prof_cod_turma, dir_cod_escola, cfg)
+    if ate == "base" or apenas in ("pesos", "descritivas"):
         return _fechar(out, info, t0)
 
     # ---------------------------------------------------------------- 2. modelagem (cenário A e B)
@@ -228,6 +232,27 @@ def _ranking_pesos(out: Saida, pop, ms, tr, pipe, idx_tr, idx_te, cfg: Config) -
     out.tabela(resumo, f"03_shap_temas_ponderado_resumo_{tr}")
 
 
+def _descritivas(out: Saida, pop, base_todas, alunos_validos, alunos_interna, decisoes, prof_cod, dir_cod,
+                 cfg: Config) -> None:
+    """Descritivas do capítulo de Resultados (sem peso e com o peso amostral da escola, decisão D2)."""
+    out.tabela(DS.tabela_unidade(alunos_interna, alunos_validos, pop), "01_unidade_analise")
+    out.tabela(DS.estatisticas_desfechos(pop), "01_desfechos")
+    out.tabela(DS.por_geografia(pop), "01_desfechos_por_geografia")
+    niveis, resumo = DS.por_inse(pop)
+    out.tabela(niveis, "01_desfechos_por_inse")
+    out.tabela(resumo, "01_inse_sozinho")
+    out.tabela(DS.funil_binomial(pop), "01_funil_binomial")
+    cob = DS.cobertura_por_variavel(pop, decisoes, prof_cod, dir_cod)
+    out.tabela(cob, "01_cobertura_por_variavel")
+    out.tabela(DS.cobertura_por_tema(cob), "01_cobertura_por_tema")
+    out.tabela(DS.ausencia_informativa(pop), "01_ausencia_informativa")
+    out.tabela(DS.vies_inse(base_todas, cfg.n_min_alunos), "01_vies_selecao_inse")
+    out.tabela(DS.composicao_cor(pop), "01_cor_composicao")
+    bruta, estrato = DS.associacao_cor(pop)
+    out.tabela(bruta, "01_cor_associacao_bruta")
+    out.tabela(estrato, "01_cor_por_faixa_de_inse")
+
+
 def _pesos(out: Saida, pop, aluno) -> None:
     resumo, medias = diagnostico_pesos(pop)
     out.tabela(resumo, "01_pesos_diagnostico")
@@ -260,7 +285,7 @@ def main(argv=None):
     ap.add_argument("--modo", choices=["rapido", "completo"], default=None)
     ap.add_argument("--ate", choices=ETAPAS, default="robustez")
     ap.add_argument("--seed", type=int, default=None)
-    ap.add_argument("--apenas", choices=["pinball", "pesos", "ranking-pesos", "ablacao"], default=None)
+    ap.add_argument("--apenas", choices=["descritivas", "pinball", "pesos", "ranking-pesos", "ablacao"], default=None)
     a = ap.parse_args(argv)
     cfg = Config()
     if a.modo:
