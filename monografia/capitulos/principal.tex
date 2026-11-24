@@ -1782,6 +1782,78 @@ por vez do conjunto completo (8) e a que retira o INSE (6) aplicam a regra de
 decisão das hipóteses (Seção~\ref{sec:hipoteses}). As demais descrevem o
 ganho acumulado de cada bloco a partir do INSE e da geografia.
 
+\section{Implementação e verificação do código}
+\label{sec:implementacao}
+
+O processamento roda em um \textit{pipeline} em Python, dividido em módulos
+com uma responsabilidade cada (Quadro~\ref{quad:modulos}). Um orquestrador
+executa as etapas principais em sequência (base, modelagem, explicabilidade
+e robustez) ou uma etapa complementar isolada. Cada execução grava suas
+tabelas em uma pasta própria, que nunca sobrescreve as anteriores, junto com
+um arquivo \texttt{run\_info.json} que registra o modo, a semente, a versão
+do código, as versões das bibliotecas e a conferência dos dados. Os
+parâmetros do protocolo, como a semente e a margem da regra de seleção,
+ficam em um único módulo de configuração.
+
+\begin{quadro}[H]
+    \centering
+    \footnotesize
+    \caption{Módulos do \textit{pipeline}}
+    \begin{tabular}{|L{3.4cm}|L{10.8cm}|}
+        \hline
+        \textbf{Módulo} & \textbf{Responsabilidade} \\
+        \hline
+        \texttt{etl} & Extração dos microdados do portal do Inep e conferência por SHA-256 \\ \hline
+        \texttt{dicionario} & Leitura do dicionário do Inep, tipo e escala de cada item e codificação \\ \hline
+        \texttt{base} & Integração das quatro bases, agregação por escola, desfechos, pesos e funil de cobertura \\ \hline
+        \texttt{modelos} & Seleção de variáveis, pré-processamento, estimadores e espaços de busca \\ \hline
+        \texttt{avaliacao} & Métricas, competição, validação cruzada repetida, regra de seleção e perda \textit{pinball} \\ \hline
+        \texttt{explicabilidade} & SHAP global e por tema, estabilidade do ranking e LIME \\ \hline
+        \texttt{robustez} & Ablação por blocos, três execuções, sensibilidades, \textit{proxies} e equidade \\ \hline
+        \texttt{descritivas} & Análises descritivas da base, sem e com peso amostral \\ \hline
+        \texttt{painel} e \texttt{simulador} & Tabelas agregadas do painel, com supressão de grupos pequenos, e a página \\ \hline
+        \texttt{pipeline} e \texttt{config} & Orquestração das etapas e parâmetros do protocolo \\
+        \hline
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborado pelo autor.}
+    \end{flushleft}
+    \label{quad:modulos}
+\end{quadro}
+
+A extração abre o arquivo compactado dos microdados no portal do Inep, com
+cerca de 700 MB, e baixa só os cinco arquivos usados (as quatro bases e o
+dicionário) por requisições HTTP de intervalo de bytes. O servidor do Inep
+não envia o certificado intermediário da cadeia TLS. O \textit{pipeline} guarda esse certificado no
+repositório e confere sua impressão digital SHA-256 antes de usá-lo. Cada
+arquivo extraído é comparado com somas SHA-256 registradas, porque o Inep
+pode republicar o arquivo compactado, e o resultado fica no
+\texttt{run\_info.json} da execução. A construção da base também interrompe
+a execução se a classificação de alfabetizado dos microdados divergir do
+corte de 743 pontos.
+
+O código tem 36 testes automatizados, escritos com a biblioteca
+\textit{pytest}. Deles, 34 usam dados sintéticos pequenos, com resultado
+conhecido, e conferem, por exemplo, que a variável-alvo nunca entra na
+matriz de preditores, que a proporção prevista fica entre 0 e 1, que a
+regra de seleção escolhe o modelo linear quando o ganho do \textit{ensemble}
+fica abaixo da margem de 2\% e que o painel suprime grupos com menos de 5
+escolas. Os outros dois leem o dicionário e os microdados reais e conferem
+cada item dos questionários de professor e de diretor. As letras presentes
+nos dados precisam existir no dicionário, as escalas ordinais precisam
+seguir a ordem do texto das opções, os itens binários precisam ter o polo
+positivo igual a 1 e os numéricos precisam ficar dentro da faixa
+documentada. Se algum item fosse codificado pela posição da letra, itens
+como ``Suficiente/Insuficiente'' entrariam com o sentido invertido, e esse
+teste falharia.
+
+A cada envio ao repositório, um serviço de integração contínua (GitHub
+Actions) monta o ambiente com as versões fixadas, restaura a cópia dos
+dados conferindo as somas SHA-256 e roda os 36 testes. Uma alteração que
+quebre a construção da base, a codificação ou a regra de seleção fica
+registrada como falha no próprio repositório.
+
 \section{Disponibilidade de dados e código}
 \label{sec:disponibilidade}
 
