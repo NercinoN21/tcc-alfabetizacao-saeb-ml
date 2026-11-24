@@ -40,7 +40,7 @@ from .config import RAIZ, Config
 from .explicabilidade import (estabilidade, lime_vs_shap, ranking_temas_ponderado, shap_abs_por_escola, shap_por_tema,
                               shap_por_variavel)
 from .modelos import LINEAR, MODELOS, X_de, particao, pipeline_de, selecionar_variaveis, usa_peso_n
-from .robustez import (ablacao, alfabetizacao_por_rede, auditar_equidade, construir_base_turma, diagnostico_pesos,
+from .robustez import (ablacao, alfabetizacao_por_rede, ic_alfabetizacao_por_rede, auditar_equidade, construir_base_turma, diagnostico_pesos,
                        ranking_entre_execucoes, sensibilidades, teste_proxies, tres_execucoes)
 
 ETAPAS = ["base", "modelagem", "explicabilidade", "robustez"]
@@ -319,6 +319,7 @@ def _pesos(out: Saida, pop, aluno) -> None:
     out.tabela(resumo, "01_pesos_diagnostico")
     out.tabela(medias, "01_pesos_medias")
     out.tabela(alfabetizacao_por_rede(aluno), "01_alfabetizacao_por_rede")
+    out.tabela(ic_alfabetizacao_por_rede(aluno, seed=2110), "01_alfabetizacao_por_rede_ic")
 
 
 def _pinball(out: Saida, pop, ms, alvo, tr, idx_tr, idx_te, cfg: Config) -> None:

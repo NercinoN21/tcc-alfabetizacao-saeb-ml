@@ -130,3 +130,17 @@ def test_painel_suprime_celulas_pequenas_e_mantem_rotulo():
     assert uf.loc["RO", "suprimido"] and np.isnan(uf.loc["RO", "prop sem peso"]) and uf.loc["RO", "região"] == "Norte"
     assert not uf.loc["PB", "suprimido"] and uf.loc["PB", "escolas"] == 9
     assert abs(a["total"]["prop resíduo médio"].iloc[0] - (pop.Y_PROP_ALFAB.mean() - 0.5)) < 1e-12
+
+
+def test_ic_alfabetizacao_por_rede_contem_a_estimativa():
+    import numpy as np
+    import pandas as pd
+    from saeb_alfab.robustez import ic_alfabetizacao_por_rede
+    rng = np.random.default_rng(1)
+    n = 600
+    aluno = pd.DataFrame({"ID_ESCOLA": rng.integers(0, 60, n), "IN_PUBLICA": rng.integers(0, 2, n),
+                          "IN_PROFICIENCIA_LP": 1, "PESO_ALUNO_LP": rng.uniform(1, 3, n).astype(str),
+                          "PROFICIENCIA_LP_SAEB": rng.normal(740, 40, n).astype(str)})
+    t = ic_alfabetizacao_por_rede(aluno, n_boot=300, seed=0)
+    for r in t.itertuples():
+        assert r._3 <= r._2 <= r._4

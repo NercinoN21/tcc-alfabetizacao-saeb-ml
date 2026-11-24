@@ -30,14 +30,24 @@ def _media_pond(x, w) -> float:
     return float(np.average(x[ok], weights=w[ok])) if ok.any() else np.nan
 
 
-def _resumo(g: pd.DataFrame) -> pd.Series:
+def _resumo(g: pd.DataFrame, n_boot: int = 2000, seed: int = 2110) -> pd.Series:
     d = {"escolas": len(g), "alunos": int(g.N_ALUNOS.sum()), "INSE médio": g.ESC_INSE.mean()}
+    rng = np.random.default_rng(seed)
     for y, k in DESFECHOS.items():
         d[f"{k} sem peso"] = g[y].mean()
         d[f"{k} com peso"] = _media_pond(g[y], g.PESO)
+        d[f"{k} com peso IC inf"], d[f"{k} com peso IC sup"] = _ic_pond(g, y, n_boot, rng)
         d[f"{k} resíduo médio"] = g[f"_res_{k}"].mean()
         d[f"{k} erro absoluto médio"] = g[f"_res_{k}"].abs().mean()
     return pd.Series(d)
+
+
+def _ic_pond(g: pd.DataFrame, y: str, n_boot: int, rng) -> tuple[float, float]:
+    """IC95% da média ponderada pelo peso amostral, por bootstrap das escolas do grupo."""
+    v, w = g[y].to_numpy(float), g.PESO.to_numpy(float)
+    idx = rng.integers(0, len(v), size=(n_boot, len(v)))
+    est = (v[idx] * w[idx]).sum(axis=1) / w[idx].sum(axis=1)
+    return float(np.quantile(est, .025)), float(np.quantile(est, .975))
 
 
 def suprimir(t: pd.DataFrame, n_min: int) -> pd.DataFrame:

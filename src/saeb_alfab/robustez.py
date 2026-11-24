@@ -207,6 +207,28 @@ def alfabetizacao_por_rede(aluno: pd.DataFrame, corte: float = 743) -> pd.DataFr
     return pd.DataFrame(linhas).set_index("rede")
 
 
+def ic_alfabetizacao_por_rede(aluno: pd.DataFrame, corte: float = 743, n_boot: int = 2000,
+                              seed: int = 0) -> pd.DataFrame:
+    """IC95% aproximado da proporção ponderada de alfabetizados por rede, por bootstrap de escolas (a escola é a
+    unidade sorteada, o que respeita a correlação entre alunos da mesma escola). Ignora a estratificação do
+    desenho, o que tende a deixar o intervalo um pouco mais largo."""
+    num = lambda s: pd.to_numeric(s.astype(str).str.replace(",", "."), errors="coerce")
+    a = aluno.assign(_w=num(aluno["PESO_ALUNO_LP"]), _y=num(aluno["PROFICIENCIA_LP_SAEB"]))
+    a = a[(a["IN_PROFICIENCIA_LP"] == 1) & a["_w"].notna() & a["_y"].notna()]
+    a = a.assign(_wy=a["_w"] * (a["_y"] >= corte))
+    rng = np.random.default_rng(seed)
+    linhas = []
+    for rot, m in (("total", pd.Series(True, index=a.index)), ("pública", a["IN_PUBLICA"] == 1),
+                   ("privada", a["IN_PUBLICA"] == 0)):
+        g = a[m].groupby("ID_ESCOLA")[["_wy", "_w"]].sum().to_numpy()
+        idx = rng.integers(0, len(g), size=(n_boot, len(g)))
+        est = g[idx, 0].sum(axis=1) / g[idx, 1].sum(axis=1)
+        linhas.append({"rede": rot, "escolas": len(g), "proporção com peso (%)": 100 * g[:, 0].sum() / g[:, 1].sum(),
+                       "IC95% inf (%)": 100 * float(np.quantile(est, .025)),
+                       "IC95% sup (%)": 100 * float(np.quantile(est, .975))})
+    return pd.DataFrame(linhas).set_index("rede")
+
+
 def teste_proxies(pop, meta_sel, cfg) -> pd.DataFrame:
     """Dá para recuperar cor/raça a partir das variáveis do cenário A? (excluir ≠ remover a informação)"""
     from lightgbm import LGBMClassifier, LGBMRegressor
