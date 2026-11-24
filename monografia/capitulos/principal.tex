@@ -710,7 +710,7 @@ intervenção.
 de como um modelo \emph{já estimado} chegou a determinada predição. O objeto
 explicado é o modelo, não o fenômeno educacional. Duas consequências
 decorrem daí: as importâncias de SHAP dependem do modelo escolhido e podem
-variar entre algoritmos igualmente acurados; e uma variável pode receber
+variar entre algoritmos igualmente acurados, e uma variável pode receber
 alta importância por atuar como \textit{proxy} de outra, ausente ou mal
 medida na base.
 
@@ -771,7 +771,7 @@ recomenda especificações que respeitem esse suporte.
 \citeonline{papke1996fractional} propõem o modelo de resposta fracionária
 (\textit{fractional logit}), que modela a esperança condicional da
 proporção por meio de uma função de ligação logística sem exigir
-transformações ad hoc dos valores extremos 0 e 1;
+transformações ad hoc dos valores extremos 0 e 1.
 \citeonline{ferrari2004beta} desenvolvem alternativa paramétrica pela
 regressão beta. Neste trabalho, essas especificações informam o papel do
 modelo linear de referência da trilha de proporção
@@ -1625,7 +1625,7 @@ dados que não participaram de sua estimação. O explicador
 \texttt{TreeExplainer} é utilizado quando o modelo selecionado for um
 \textit{ensemble} de árvore, por computar valores de SHAP exatos em tempo
 polinomial explorando a estrutura interna das árvores, conforme o algoritmo
-TreeSHAP de \citeonline{lundberg2020tree}; o \texttt{LinearExplainer} é
+TreeSHAP de \citeonline{lundberg2020tree}. O \texttt{LinearExplainer} é
 utilizado caso o modelo selecionado seja o linear de referência.
 
 A partir dos valores de SHAP do modelo selecionado, este trabalho produz
@@ -1704,16 +1704,16 @@ protocolo da Seção~\ref{sec:protocolo}:
 
 \begin{enumerate}
     \item \textbf{Execução de referência}. População: escolas da rede
-    pública; preditores: conjunto completo, incluindo o INSE. É o escopo
+    pública. Preditores: conjunto completo, incluindo o INSE. É o escopo
     principal do trabalho;
     \item \textbf{Variação do conjunto de preditores}. População: rede
-    pública (a mesma da referência); preditores: excluindo o INSE e as
+    pública (a mesma da referência). Preditores: excluindo o INSE e as
     demais variáveis derivadas de \texttt{TS\_ESCOLA}. Comparada à
     referência, aproxima a contribuição do INSE, mantida constante a
     população, sabendo que preditores correlacionados podem compensar parte
     da sua retirada;
     \item \textbf{Variação da população}. População: universo de escolas
-    públicas e privadas; preditores: o mesmo conjunto reduzido da execução
+    públicas e privadas. Preditores: o mesmo conjunto reduzido da execução
     anterior. Comparada à execução 2, aproxima o efeito da ampliação da
     população, mantido constante o conjunto de preditores.
 \end{enumerate}
