@@ -97,6 +97,9 @@ def dados_pagina(pasta_painel: Path, pasta_final: Path, n_min: int, versao: str)
     rede = pd.read_csv(pasta_final / "complemento_pesos/tabelas/01_alfabetizacao_por_rede.csv", index_col=0)
     d["rede"] = {k: {"com": float(rede.loc[k, "proporção com peso (%)"]), "sem": float(rede.loc[k, "proporção sem peso (%)"]),
                      "alunos": int(rede.loc[k, "alunos"])} for k in rede.index}
+    ic = pd.read_csv(pasta_final / "complemento_pesos/tabelas/01_alfabetizacao_por_rede_ic.csv", index_col=0)
+    for k in d["rede"]:
+        d["rede"][k]["ic"] = [float(ic.loc[k, "IC95% inf (%)"]), float(ic.loc[k, "IC95% sup (%)"])]
     so = pd.read_csv(pasta_final / "complemento_descritivas/tabelas/01_inse_sozinho.csv", index_col=0)
     d["inse_r2"] = {"prop": float(so.iloc[0, 1]), "prof": float(so.iloc[1, 1])}
     abl, temas = {}, {}

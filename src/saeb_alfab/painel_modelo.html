@@ -9,19 +9,19 @@
 :root{
   color-scheme:light;
   --pagina:#ffffff;--faixa:#f5f5f7;--tinta:#1d1d1f;--tinta2:#6e6e73;--muda:#86868b;
-  --linha:#d2d2d7;--grade:#e8e8ed;--azul:#2a78d6;--laranja:#eb6834;--vermelho:#e34948;
+  --linha:#d2d2d7;--grade:#e8e8ed;--azul:#0071e3;--laranja:#86868b;--vermelho:#a1a1a6;--hachura:#9ec5f4;
   --ponto-vazio:#e8e8ed;--anel:#1d1d1f;--vidro:rgba(255,255,255,.78);
 }
 @media (prefers-color-scheme:dark){
   :root:where(:not([data-theme="light"])){
     color-scheme:dark;--pagina:#000000;--faixa:#161617;--tinta:#f5f5f7;--tinta2:#a1a1a6;--muda:#86868b;
-    --linha:#424245;--grade:#2c2c2e;--azul:#3987e5;--laranja:#d95926;--vermelho:#e66767;
+    --linha:#424245;--grade:#2c2c2e;--azul:#2997ff;--laranja:#86868b;--vermelho:#6e6e73;--hachura:#1d4f80;
     --ponto-vazio:#2c2c2e;--anel:#f5f5f7;--vidro:rgba(22,22,23,.78);
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;--pagina:#000000;--faixa:#161617;--tinta:#f5f5f7;--tinta2:#a1a1a6;--muda:#86868b;
-  --linha:#424245;--grade:#2c2c2e;--azul:#3987e5;--laranja:#d95926;--vermelho:#e66767;
+  --linha:#424245;--grade:#2c2c2e;--azul:#2997ff;--laranja:#86868b;--vermelho:#6e6e73;--hachura:#1d4f80;
   --ponto-vazio:#2c2c2e;--anel:#f5f5f7;--vidro:rgba(22,22,23,.78);
 }
 *{box-sizing:border-box}
@@ -46,6 +46,14 @@ h1,h2{font-weight:600;letter-spacing:-.025em;margin:0}
 h1{font-size:clamp(36px,6vw,64px);line-height:1.06}
 h2{font-size:clamp(30px,4.6vw,48px);line-height:1.08}
 .lead{font-size:clamp(19px,2.2vw,24px);color:var(--tinta2);margin:20px auto 0;line-height:1.4}
+strong{font-weight:600;color:var(--tinta)}
+.credito{font-size:14px;color:var(--tinta2);margin-top:28px}
+.apoio{font-size:15px;color:var(--tinta2);margin-top:12px}
+.lista-nao{max-width:680px;margin:40px auto 0;padding:0;list-style:none;text-align:left}
+.lista-nao li{padding:18px 0;border-top:1px solid var(--linha);font-size:17px;color:var(--tinta2)}
+.dupla{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;max-width:640px;margin:48px auto 0;text-align:center}
+.dupla b{display:block;font-size:clamp(40px,6vw,64px);font-weight:600;letter-spacing:-.03em;line-height:1}
+.dupla span{font-size:15px;color:var(--tinta2)}
 p{margin:16px 0 0}
 .peq{font-size:14px;color:var(--tinta2)}
 /* abertura */
@@ -60,6 +68,7 @@ p{margin:16px 0 0}
 .pontos span{aspect-ratio:1;border-radius:50%;background:var(--ponto-vazio);transition:background .25s ease, box-shadow .2s}
 .pontos span.chute{box-shadow:inset 0 0 0 1.5px var(--azul)}
 .pontos span.sim{background:var(--azul)}
+.pontos span.faixa-ic{background:repeating-linear-gradient(135deg,var(--hachura) 0 3px,transparent 3px 6px)}
 @media (prefers-reduced-motion:reduce){.pontos span{transition:none}}
 .resposta{margin-top:40px;min-height:150px}
 .resposta[hidden]{display:block;visibility:hidden}
@@ -105,18 +114,19 @@ footer .coluna{display:flex;flex-direction:column;gap:6px}
 <header class="topo"><nav aria-label="Seções">
   <b>Quem aprende a ler no 2º ano</b>
   <a class="opc" href="#lugar">Lugar</a><a class="opc" href="#renda">Contexto</a><a class="opc" href="#questionarios">Escola</a>
-  <a class="opc" href="#erro">Limites</a><a href="#uf">Sua UF</a><a href="#dados">Dados</a>
+  <a class="opc" href="#erro">Erros</a><a class="opc" href="#limites">Limites</a><a href="#uf">Sua UF</a><a href="#dados">Dados</a>
 </nav></header>
 
 <main>
 <section id="inicio">
   <div class="texto">
-    <h1>De cada 100 crianças da escola pública, quantas terminam o 2º ano sabendo ler e escrever?</h1>
-    <p class="lead">Dê o seu palpite antes de ver o que o Saeb 2023 mostra.</p>
+    <h1>De cada 100 crianças do 2º ano da escola pública, quantas você acha que atingem o padrão de alfabetização do Saeb?</h1>
+    <p class="lead">Dê o seu palpite antes de ver o que mostram os dados de 2023.</p>
+    <p class="apoio">O padrão é uma nota de corte na prova de Língua Portuguesa. Ficar abaixo dela não quer dizer que a criança não lê nada.</p>
     <div class="palpite">
       <output id="palpite-valor" for="palpite" aria-live="polite">70</output>
       <label for="palpite" class="peq">Arraste para escolher um número de 0 a 100</label>
-      <input id="palpite" type="range" min="0" max="100" value="70">
+      <input id="palpite" type="range" min="0" max="100" value="70" aria-valuetext="70 de cada 100">
       <button class="botao" id="revelar">Ver a resposta</button>
     </div>
   </div>
@@ -124,13 +134,21 @@ footer .coluna{display:flex;flex-direction:column;gap:6px}
   <div class="texto resposta" id="resposta" hidden aria-live="polite">
     <div class="grande" id="resp-num"></div>
     <p id="resp-texto"></p>
-    <p class="peq">Estimativa com o peso amostral do Saeb, para os alunos da rede pública com proficiência calculada. Alfabetizado é quem atinge 743 pontos na escala de Língua Portuguesa, o padrão definido pelo Inep em 2023.</p>
+    <p class="peq">Estimativa com o peso amostral do Saeb, para os alunos da rede pública com proficiência calculada. Os pontos cheios vão até o limite inferior do intervalo de confiança de 95%, e os hachurados, até o superior. O Inep publica o Indicador Criança Alfabetizada com metodologia própria, e ele pode não coincidir com este número.</p>
+  </div>
+  <div class="texto"><p class="credito">Um Trabalho de Conclusão de Curso de Nercino José De Barros Neto, em Ciência de Dados para Negócios na UFPB, com orientação do Prof. Dr. Alessio Tony Cavalcanti De Almeida.</p></div>
+</section>
+
+<section id="padrao" class="faixa">
+  <div class="texto">
+    <h2>O que conta como alfabetizada.</h2>
+    <p class="lead">Em 2023, o Inep fixou o padrão em <strong>743 pontos</strong> na escala de Língua Portuguesa do Saeb, aplicada no 2º ano. A criança que chega a essa nota conta como alfabetizada. É uma régua única para todo o país. Ela não resume tudo o que cada criança sabe.</p>
   </div>
 </section>
 
-<section id="lugar" class="faixa">
+<section id="lugar">
   <div class="texto">
-    <h2>O lugar onde a criança estuda pesa.</h2>
+    <h2>A região do país pesa.</h2>
     <p class="lead" id="lugar-lead"></p>
   </div>
   <div class="grafico" id="g-regiao" role="img"></div>
@@ -139,13 +157,22 @@ footer .coluna{display:flex;flex-direction:column;gap:6px}
     <table id="t-regiao"></table></div></details>
 </section>
 
+<section id="ponte" class="faixa">
+  <div class="texto">
+    <h2>A partir daqui, cada ponto é uma escola.</h2>
+    <p class="lead">Um modelo de aprendizado de máquina tenta prever o resultado de cada escola com o que se sabe dela: o <strong>nível socioeconômico</strong> das famílias, a <strong>região</strong> e as <strong>respostas de professores e diretores</strong>. Medimos o quanto cada informação ajuda a acertar escolas que o modelo não viu.</p>
+  </div>
+  <div class="dupla"><div><b>604</b><span>escolas públicas na base</span></div><div><b>17.183</b><span>alunos avaliados nelas</span></div></div>
+  <div class="texto"><p class="peq">O que vale para escolas não vale automaticamente para cada criança. As conclusões seguintes falam de diferenças entre escolas.</p></div>
+</section>
+
 <section id="renda">
   <div class="texto">
-    <h2>O nível socioeconômico da escola explica uma parte.</h2>
+    <h2>A renda e a escolaridade das famílias acompanham só parte da diferença.</h2>
     <p class="lead" id="renda-lead"></p>
   </div>
   <div class="grafico" id="g-inse" role="img"></div>
-  <div class="legenda"><span><i style="background:var(--azul)"></i>Média das escolas</span><span><i style="background:var(--laranja)"></i>Com peso amostral</span></div>
+  <div class="legenda"><span><i style="background:var(--azul)"></i>Média das escolas</span><span><i style="background:var(--laranja)"></i>Com peso amostral (impreciso nas faixas baixas)</span></div>
   <details><summary>Como ler este gráfico</summary><div class="corpo">
     <p>O Indicador de Nível Socioeconômico (INSE) do Inep resume a renda, a escolaridade e os bens das famílias dos alunos de cada escola, em níveis de I a VIII. Nas faixas baixas há poucas escolas efetivas depois da ponderação, e a média com peso é imprecisa.</p>
     <table id="t-inse"></table></div></details>
@@ -153,7 +180,7 @@ footer .coluna{display:flex;flex-direction:column;gap:6px}
 
 <section id="questionarios" class="faixa">
   <div class="texto">
-    <h2>O que professores e diretores respondem acrescenta pouco à previsão.</h2>
+    <h2>O que professores e diretores responderam ajudou pouco a prever.</h2>
     <p class="lead" id="quest-lead"></p>
   </div>
   <div class="grafico" id="g-quest" role="img"></div>
@@ -172,7 +199,7 @@ footer .coluna{display:flex;flex-direction:column;gap:6px}
     </div>
   </div>
   <div class="grafico" id="g-erro" role="img"></div>
-  <div class="legenda"><span><i style="background:var(--azul)"></i>Acima do previsto</span><span><i style="background:var(--vermelho)"></i>Abaixo do previsto</span></div>
+  <div class="legenda"><span><i style="background:var(--azul)"></i>Acima do previsto</span><span><i style="background:var(--vermelho)"></i>Abaixo do previsto</span><span>Nenhuma escola é exibida individualmente</span></div>
   <details><summary>Por que isso importa</summary><div class="corpo">
     <p>O resíduo é o desempenho observado menos o previsto pelo modelo para escolas que ele não viu. O modelo selecionado trata o nível socioeconômico como uma reta, mas a alfabetização fica parada nos níveis baixos e só sobe a partir do nível V. Por isso a previsão erra mais onde as necessidades são maiores, e este site não classifica escolas individuais.</p>
     <table id="t-erro"></table></div></details>
@@ -203,7 +230,17 @@ footer .coluna{display:flex;flex-direction:column;gap:6px}
   <details><summary>Ver todas as UFs</summary><div class="corpo"><table id="t-uf"></table></div></details>
 </section>
 
-<section id="dados" class="faixa">
+<section id="limites" class="faixa">
+  <div class="texto"><h2>O que estes dados não dizem.</h2></div>
+  <ul class="lista-nao">
+    <li><strong>Não dizem o que causa a alfabetização.</strong> Os números mostram associações em um único ano. Medir o efeito de mudar algo pede outro tipo de estudo.</li>
+    <li><strong>Não falam de cada criança.</strong> O modelo compara escolas, e o que vale para uma escola em média não vale para cada aluno dela.</li>
+    <li><strong>Não ranqueiam escolas.</strong> A previsão erra mais justamente nas escolas de nível socioeconômico mais baixo e mais alto.</li>
+    <li><strong>Não substituem os números oficiais.</strong> As médias por região e UF vêm de uma amostra e têm margem de incerteza larga.</li>
+  </ul>
+</section>
+
+<section id="dados">
   <div class="texto">
     <h2>Dados e código abertos.</h2>
     <p class="lead">Tudo o que está aqui pode ser conferido, reproduzido e reutilizado.</p>
@@ -262,34 +299,36 @@ function barra(p,x0,x1,y,h,fill){const r=Math.min(4,Math.abs(x1-x0)/2),d=x1>=x0;
 const pontos=$("#pontos");for(let i=0;i<100;i++)pontos.appendChild(document.createElement("span"));
 const P=[...pontos.children],resp=Math.round(D.rede["pública"].com);
 function marcaChute(v){P.forEach((s,i)=>s.classList.toggle("chute",i<v));}
-$("#palpite").addEventListener("input",e=>{$("#palpite-valor").textContent=e.target.value;marcaChute(+e.target.value);});
+$("#palpite").addEventListener("input",e=>{$("#palpite-valor").textContent=e.target.value;e.target.setAttribute("aria-valuetext",`${e.target.value} de cada 100`);marcaChute(+e.target.value);});
 marcaChute(70);
 $("#revelar").addEventListener("click",()=>{
-  const g=+$("#palpite").value;P.forEach(s=>s.classList.remove("sim"));
-  P.forEach((s,i)=>{if(i<resp){if(reduz)s.classList.add("sim");else setTimeout(()=>s.classList.add("sim"),i*18);}});
+  const g=+$("#palpite").value,lo=Math.round(D.rede["pública"].ic[0]),hi=Math.round(D.rede["pública"].ic[1]);
+  P.forEach(s=>s.classList.remove("sim","faixa-ic"));
+  P.forEach((s,i)=>{const c=i<lo?"sim":(i<hi?"faixa-ic":null);if(!c)return;if(reduz)s.classList.add(c);else setTimeout(()=>s.classList.add(c),i*18);});
   const dif=g-D.rede["pública"].com,priv=Math.round(D.rede["privada"].com);
-  $("#resp-num").textContent=`${resp} de cada 100`;
-  $("#resp-texto").textContent=(Math.abs(dif)<3?"Você acertou quase em cheio. ":`Seu palpite ficou ${Math.round(Math.abs(dif))} ${dif>0?"acima":"abaixo"}. `)+
-    `Na rede privada, são ${priv} de cada 100. Metade das crianças da escola pública chega ao fim do 2º ano sem o domínio esperado da leitura e da escrita.`;
+  $("#resp-num").textContent=`Cerca de ${resp}`;
+  $("#resp-texto").innerHTML=(Math.abs(dif)<3?"Você acertou quase em cheio. ":`Seu palpite ficou <strong>${Math.round(Math.abs(dif))} ${dif>0?"acima":"abaixo"}</strong>. `)+
+    `A estimativa fica <strong>entre ${lo} e ${hi}</strong> de cada 100. Na rede privada, são ${priv}, uma diferença que acompanha a origem social dos alunos e não mede, sozinha, a qualidade do ensino de cada rede.`;
   $("#resposta").hidden=false;$("#revelar").textContent="Tentar outro palpite";
 });
 
 /* 2. regiões (uma série: com peso) */
 function regioes(){const R=[...D.regiao].sort((a,b)=>b["prop com peso"]-a["prop com peso"]);
   const hi=R[0],lo=R[R.length-1];
-  $("#lugar-lead").textContent=`No ${hi.grupo}, ${Math.round(100*hi["prop com peso"])} de cada 100 crianças das escolas estudadas se alfabetizam. No ${lo.grupo}, ${Math.round(100*lo["prop com peso"])}.`;
+  $("#lugar-lead").innerHTML=`No ${hi.grupo}, <strong>${Math.round(100*hi["prop com peso"])} de cada 100</strong> atingem o padrão. No ${lo.grupo}, <strong>${Math.round(100*lo["prop com peso"])}</strong>. A linha cinza mostra a margem de incerteza de cada região.`;
   const W=larg("#g-regiao"),esq=W<480?100:130,h=34,H=R.length*h+30,s=svg(W,H),x=v=>esq+v/.8*(W-esq-70);
   [0,.25,.5,.75].forEach(v=>{el("line",{x1:x(v),x2:x(v),y1:0,y2:H-24,stroke:cor("--grade")},s);txt(s,x(v),H-6,pct(v,0),{class:"eixo","text-anchor":"middle"});});
   R.forEach((r,i)=>{const y=i*h+8;txt(s,esq-14,y+14,r.grupo,{"text-anchor":"end",class:"rot"});
-    const b=barra(s,x(0),x(r["prop com peso"]),y+1,18,cor("--azul"));liga(b,`${r.grupo}: ${pct(r["prop com peso"])} com peso, ${pct(r["prop sem peso"])} sem peso, ${r.escolas} escolas`);
-    txt(s,x(r["prop com peso"])+8,y+15,pct(r["prop com peso"]));});
+    const b=barra(s,x(0),x(r["prop com peso"]),y+1,18,cor("--azul"));liga(b,`${r.grupo}: ${pct(r["prop com peso"])} com peso (de ${pct(r["prop com peso IC inf"])} a ${pct(r["prop com peso IC sup"])}), ${r.escolas} escolas`);
+    el("line",{x1:x(r["prop com peso IC inf"]),x2:x(r["prop com peso IC sup"]),y1:y+10,y2:y+10,stroke:cor("--tinta2"),"stroke-width":2,"stroke-linecap":"round"},s);
+    txt(s,x(r["prop com peso IC sup"])+8,y+15,pct(r["prop com peso"]));});
   $("#g-regiao").replaceChildren(s);$("#g-regiao").setAttribute("aria-label","Proporção de alfabetizados por região, com peso amostral");
-  $("#t-regiao").innerHTML="<tr><th>Região</th><th>Escolas</th><th>Sem peso</th><th>Com peso</th></tr>"+R.map(r=>`<tr><td>${r.grupo}</td><td>${r.escolas}</td><td>${pct(r["prop sem peso"])}</td><td>${pct(r["prop com peso"])}</td></tr>`).join("");
+  $("#t-regiao").innerHTML="<tr><th>Região</th><th>Escolas</th><th>Sem peso</th><th>Com peso</th><th>IC95%</th></tr>"+R.map(r=>`<tr><td>${r.grupo}</td><td>${r.escolas}</td><td>${pct(r["prop sem peso"])}</td><td>${pct(r["prop com peso"])}</td><td>${pct(r["prop com peso IC inf"])} a ${pct(r["prop com peso IC sup"])}</td></tr>`).join("");
 }
 
 /* 3. INSE (duas séries, eixo ordinal) */
 function inse(){const I=D.inse;const alto=I[I.length-1],med=I.find(r=>r.grupo==="IV");
-  $("#renda-lead").textContent=`Nas escolas de nível mais alto, ${Math.round(100*alto["prop sem peso"])} de cada 100 se alfabetizam. Nas de nível médio, ${Math.round(100*med["prop sem peso"])}. Sozinho, o nível socioeconômico descreve cerca de ${Math.round(100*D.inse_r2.prop)}% da diferença entre as escolas.`;
+  $("#renda-lead").innerHTML=`Nas escolas de nível socioeconômico mais alto, ${Math.round(100*alto["prop sem peso"])} de cada 100 atingem o padrão. Nas de nível médio, ${Math.round(100*med["prop sem peso"])}. Sozinho, esse nível descreve <strong>cerca de ${Math.round(100*D.inse_r2.prop)}% da diferença entre as escolas</strong>.`;
   const W=larg("#g-inse"),H=320,esq=50,top=16,base=H-56,s=svg(W,H),n=I.length,x=i=>esq+40+i*(W-esq-80)/(n-1),y=v=>base-(v-.2)/(.6)*(base-top);
   [.2,.4,.6,.8].forEach(v=>{el("line",{x1:esq,x2:W,y1:y(v),y2:y(v),stroke:cor("--grade")},s);txt(s,esq-10,y(v)+4,pct(v,0),{class:"eixo","text-anchor":"end"});});
   [["prop sem peso","--azul"],["prop com peso","--laranja"]].forEach(([k,c])=>{
@@ -304,7 +343,7 @@ function inse(){const I=D.inse;const alto=I[I.length-1],med=I.find(r=>r.grupo===
 /* 4. questionários: redução do erro com IC */
 function quest(){const A=D.ablacao,L=[["prof","Proficiência média"],["prop","Proporção de alfabetizados"]];
   const red=k=>({v:A[k].reducao_pct,lo:-100*A[k].ic[1]/A[k].mae_m1,hi:-100*A[k].ic[0]/A[k].mae_m1});
-  $("#quest-lead").textContent=`Somados ao nível socioeconômico e à localização, os questionários reduzem em ${nf(red("prof").v)}% o erro da previsão da proficiência. Na proporção de alfabetizados, a melhora não se distingue do acaso.`;
+  $("#quest-lead").innerHTML=`Somados ao nível socioeconômico e à região, os questionários reduzem em <strong>${nf(red("prof").v)}%</strong> o erro da previsão da proficiência. Na proporção que atinge o padrão, a melhora não se distingue do acaso. As respostas disponíveis acrescentam pouca informação além do contexto, o que é diferente de dizer que professores e gestão não importam.`;
   const W=larg("#g-quest"),estreito=W<560,esq=estreito?16:210,h=estreito?96:78,H=L.length*h+40,s=svg(W,H),x=v=>esq+(v+2)/(10)*(W-esq-(estreito?16:30));
   [-2,0,2,4,6,8].forEach(v=>{el("line",{x1:x(v),x2:x(v),y1:0,y2:H-28,stroke:v===0?cor("--linha"):cor("--grade"),"stroke-width":v===0?1.5:1},s);txt(s,x(v),H-8,nf(v,0)+"%",{class:"eixo","text-anchor":"middle"});});
   L.forEach(([k,rot],i)=>{const r=red(k),y=i*h+(estreito?44:26);
@@ -357,12 +396,12 @@ document.querySelectorAll(".alternar").forEach(grp=>grp.addEventListener("click"
   function mostra(g){const u=U.find(x=>x.grupo===g);
     if(u.suprimido){$("#uf-num").innerHTML=`<div><b>—</b><span>Menos de ${D.meta.n_min} escolas na base</span></div>`;return;}
     const pos=ord.findIndex(x=>x.grupo===g)+1,r=u["prop resíduo médio"];
-    $("#uf-num").innerHTML=[[pct(u["prop com peso"],0),"alfabetizados, com peso amostral"],[nf(u["prof com peso"],0),"pontos de proficiência média"],
+    $("#uf-num").innerHTML=[[pct(u["prop com peso"],0),`atingem o padrão, com peso (entre ${pct(u["prop com peso IC inf"],0)} e ${pct(u["prop com peso IC sup"],0)})`],[nf(u["prof com peso"],0),"pontos de proficiência média"],
       [`${u.escolas}`,"escolas na base do estudo"],[`${r>=0?"+":""}${nf(100*r)}`,"pontos percentuais em relação ao previsto"]]
       .map(([a,b])=>`<div><b>${a}</b><span>${b}</span></div>`).join("");
     $("#uf-nota").textContent=`${g} fica em ${pos}º lugar entre as ${ord.length} UFs na proporção com peso. Com ${u.escolas} escolas, a média estadual é imprecisa e não substitui as estimativas oficiais do Inep.`;}
   sel.addEventListener("change",()=>mostra(sel.value));sel.value="PB";mostra("PB");
-  $("#t-uf").innerHTML="<tr><th>UF</th><th>Escolas</th><th>Sem peso</th><th>Com peso</th><th>Proficiência</th></tr>"+ord.map(u=>`<tr><td>${u.grupo}</td><td>${u.escolas}</td><td>${pct(u["prop sem peso"])}</td><td>${pct(u["prop com peso"])}</td><td>${nf(u["prof com peso"])}</td></tr>`).join("");
+  $("#t-uf").innerHTML="<tr><th>UF</th><th>Escolas</th><th>Com peso</th><th>IC95%</th><th>Proficiência</th></tr>"+ord.map(u=>`<tr><td>${u.grupo}</td><td>${u.escolas}</td><td>${pct(u["prop com peso"])}</td><td>${pct(u["prop com peso IC inf"],0)} a ${pct(u["prop com peso IC sup"],0)}</td><td>${nf(u["prof com peso"])}</td></tr>`).join("");
 })();
 
 /* links e rodapé */
