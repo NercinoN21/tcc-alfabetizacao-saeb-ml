@@ -323,29 +323,34 @@ localização e faixa de INSE. Grupos com menos de 5 escolas têm os valores
 suprimidos, e nenhuma escola individual aparece, pelo critério de
 anonimização da Lei Geral de Proteção de Dados (Seção~\ref{sec:etica}).
 
-O painel tem quatro telas. A primeira mostra os desfechos por unidade da
-federação, sem e com peso amostral, com filtro por região
-(Figura~\ref{fig:painel-uf}). Cada unidade da federação tem de 12 a 45
-escolas na base, e o painel avisa que as médias estaduais são imprecisas e
-não substituem as estimativas oficiais. A segunda repete a
-Figura~\ref{fig:desfechos-inse} por faixa de INSE. A terceira mostra a
-ordem dos temas no SHAP e a estabilidade dessa ordem, com a advertência de
-que participação na previsão indica associação. A quarta mostra o resíduo
-médio e o erro absoluto médio por grupo de escolas
-(Figura~\ref{fig:painel-erro}).
+O público principal são pesquisadores, estudantes e jornalistas de
+educação, e os gestores vêm em segundo lugar. Por isso o painel é uma
+narrativa curta, com um achado por tela, e cada gráfico traz a tabela dos
+números e a explicação do método. A abertura pede ao leitor um palpite
+sobre quantas crianças de cada 100 se alfabetizam na rede pública e só
+então revela a estimativa com peso amostral, de 49 em cada 100
+(Figura~\ref{fig:painel-abertura}). As telas seguintes tratam do lugar,
+do nível socioeconômico, do pouco que os questionários acrescentam, dos
+limites da previsão e dos temas de maior peso, e o leitor termina
+explorando a própria unidade da federação e baixando os dados. Cada
+unidade da federação tem de 12 a 45 escolas na base, e o painel avisa que
+as médias estaduais são imprecisas e não substituem as estimativas
+oficiais.
 
 \begin{figure}[H]
     \centering
-    \caption{Tela do painel com os desfechos por unidade da federação}
-    \includegraphics[width=0.85\textwidth]{figuras/painel_uf.png}
+    \caption{Abertura do painel, depois do palpite do leitor}
+    \includegraphics[width=0.7\textwidth]{figuras/painel_abertura.png}
     \begin{flushleft}
     {\footnotesize Fonte: elaborada pelo autor, com base nos microdados do
-    Saeb 2023 (Inep).}
+    Saeb 2023 (Inep). Os pontos cheios são a estimativa, e os contornados
+    vão até o palpite.}
     \end{flushleft}
-    \label{fig:painel-uf}
+    \label{fig:painel-abertura}
 \end{figure}
 
-A quarta tela é a que mais informa o gestor. Por faixa de INSE, o resíduo
+A tela sobre os limites da previsão é a que mais informa o gestor
+(Figura~\ref{fig:painel-erro}). Por faixa de INSE, o resíduo
 médio da proporção de alfabetizados tem forma de U. As escolas das faixas
 I e II ficam 9,9 pontos percentuais acima do previsto, as da faixa IV
 ficam 3,5 pontos abaixo, e as das faixas VI e VII, 10,1 pontos acima. O
