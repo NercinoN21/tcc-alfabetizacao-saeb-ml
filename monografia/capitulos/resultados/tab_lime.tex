@@ -4,7 +4,7 @@
     \caption{Concordância entre LIME e SHAP nas três escolas discutidas no texto}
     \begin{tabular}{L{1.9cm}L{2.6cm}C{1.5cm}C{1.6cm}C{1.6cm}C{1.5cm}C{1.4cm}}
         \toprule
-        \textbf{Trilha} & \textbf{Caso} & \textbf{Fidelidade (R²)} & \textbf{Estabilidade (Jaccard)} & \textbf{Top-10 comum (Jaccard)} & \textbf{Spearman} & \textbf{Mesmo sinal (\%)} \\
+        \textbf{Trilha} & \textbf{Caso} & \textbf{Fidelidade (R\textsuperscript{2})} & \textbf{Estabilidade (Jaccard)} & \textbf{Top-10 comum (Jaccard)} & \textbf{Spearman} & \textbf{Mesmo sinal (\%)} \\
         \midrule
         Proporção & típica & 0,45 & 0,76 & 0,05 & 0,48 & 100 \\
         Proporção & acima do esperado & 0,73 & 0,87 & 0,05 & 0,52 & 100 \\
@@ -16,7 +16,7 @@
     \end{tabular}
     \vspace{0.1cm}
     \begin{flushleft}
-    {\footnotesize Fonte: elaborada pelo autor, com base nos microdados do Saeb 2023 (Inep). Fidelidade: R² médio do modelo local do LIME. Estabilidade: Jaccard médio das 10 variáveis principais entre repetições do LIME. Top-10 comum: Jaccard entre as 10 principais do LIME e do SHAP. Spearman: correlação das importâncias. Mesmo sinal: variáveis comuns com contribuição de mesmo sinal.}
+    {\footnotesize Fonte: elaborada pelo autor, com base nos microdados do Saeb 2023 (Inep). Fidelidade: R\textsuperscript{2} médio do modelo local do LIME. Estabilidade: Jaccard médio das 10 variáveis principais entre repetições do LIME. Top-10 comum: Jaccard entre as 10 principais do LIME e do SHAP. Spearman: correlação das importâncias. Mesmo sinal: variáveis comuns com contribuição de mesmo sinal.}
     \end{flushleft}
     \label{tab:lime}
 \end{table}
