@@ -1,0 +1,51 @@
+tema,variaveis,ausencia_mediana,nao_resposta_mediana,incluidas,cortadas_por_ausencia
+Saúde/deficiência (sensível — excluído sempre),8,0.9768211920529801,0.9805825242718447,0,0
+"Educação Infantil (esparso, excluído)",4,0.9561258278145695,0.9539930555555556,0,0
+Critérios de matrícula,8,0.7466887417218543,0.734375,1,7
+Pós-graduação do professor,3,0.7102649006622517,0.7323162274618585,1,2
+Atendimento Educacional Especializado (AEE),10,0.4130794701986755,0.3845486111111111,3,7
+"Gestão escolar, PPP e conselho de classe (visão do professor)",14,0.2193708609271523,0.1262135922330097,9,5
+Educação especial (AEE) na turma,3,0.20033112582781457,0.0957004160887656,3,0
+Formação continuada (curta duração),13,0.19039735099337748,0.08737864077669903,13,0
+Clima escolar — relação com estudantes,8,0.18211920529801323,0.06449375866851595,8,0
+Gestão democrática e colegiados,9,0.1804635761589404,0.140625,5,4
+Clima escolar — segurança e violência,13,0.17880794701986755,0.05547850208044383,13,0
+Autonomia pedagógica,6,0.17798013245033112,0.05825242718446602,6,0
+Liderança do diretor e colaboração (visão do professor),12,0.17549668874172186,0.052704576976421634,12,0
+"Crenças pedagógicas (repetência, avaliações externas)",5,0.16556291390728478,0.044382801664355064,4,0
+Práticas pedagógicas em sala de aula,16,0.16473509933774835,0.04022191400832178,16,0
+"Experiência, vínculo e carga horária",10,0.16473509933774835,0.039528432732316224,10,0
+Infraestrutura da sala de aula (percepção),25,0.16225165562913907,0.038834951456310676,21,4
+Necessidade percebida de formação continuada,11,0.15728476821192053,0.027739251040221916,11,0
+Perfil demográfico do professor,2,0.1564569536423841,0.03536754507628294,2,0
+Formação e escolaridade do professor,1,0.15562913907284767,0.024965325936199722,1,0
+Hábitos culturais e lazer do professor,7,0.15397350993377484,0.023578363384188627,7,0
+"Cor/raça do respondente (sensível, LGPD)",4,0.14735099337748345,,0,0
+Satisfação e identidade profissional,5,0.14735099337748345,0.011095700416088766,5,0
+Projeto Político-Pedagógico,17,0.12417218543046357,0.08159722222222222,17,0
+Infraestrutura — equipamentos gerais,12,0.09188741721854304,0.04774305555555556,11,1
+Infraestrutura — Educação Infantil,29,0.07781456953642384,0.03298611111111111,16,13
+Merenda escolar,15,0.0695364238410596,0.024305555555555556,12,2
+Financiamento da escola,10,0.06870860927152317,0.0234375,7,3
+Ações contra repetência e abandono,16,0.06291390728476821,0.017361111111111112,16,0
+Interrupções do calendário,12,0.061258278145695365,0.015625,11,1
+Composição de turmas e alocação de professores,17,0.061258278145695365,0.015625,17,0
+Perfil demográfico do diretor,2,0.060430463576158944,0.014756944444444444,2,0
+Carga horária e condições de trabalho do diretor,9,0.057947019867549666,0.012152777777777778,9,0
+Estímulo acadêmico e extracurricular,6,0.057947019867549666,0.012152777777777778,6,0
+Caracterização institucional,2,0.057119205298013245,0.011284722222222222,2,0
+Formação continuada percebida (equipe),12,0.056291390728476824,0.010416666666666666,12,0
+Parcerias externas,8,0.056291390728476824,0.010416666666666666,8,0
+Projetos temáticos,11,0.056291390728476824,0.010416666666666666,11,0
+Segurança — episódios de violência,13,0.054635761589403975,0.008680555555555556,13,0
+Recursos financeiros e de pessoal,13,0.05132450331125828,0.005208333333333333,13,0
+Segurança física e acessibilidade,6,0.05132450331125828,0.005208333333333333,6,0
+Formação e carreira do diretor,5,0.05132450331125828,0.005208333333333333,5,0
+"Rede pública/privada (redundante, excluído)",1,0.04966887417218543,0.003472222222222222,0,0
+Percepções pedagógicas do diretor,5,0.048013245033112585,0.001736111111111111,4,0
+Caracterização da escola (etapas oferecidas),5,0.046357615894039736,0.0,5,0
+Formação docente (escola),1,0.0,,1,0
+Contexto geográfico,4,0.0,,4,0
+Contexto de agregação,1,0.0,,1,0
+Nível socioeconômico (INSE),1,0.0,,1,0
+Não resposta ao questionário,2,0.0,,2,0

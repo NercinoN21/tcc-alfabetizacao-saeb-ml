@@ -1,0 +1,433 @@
+variavel,tema,tipo,decisao,ausência na base por escola,não resposta entre quem recebeu,ausência ponderada pelo peso
+PROF_TX_Q001,Perfil demográfico do professor,nominal,incluída,0.14735099337748345,0.020804438280166437,0.15433860016997106
+PROF_TX_Q002,Perfil demográfico do professor,numerico,incluída,0.16556291390728478,0.049930651872399444,0.16266035160530948
+PROF_TX_Q004,Saúde/deficiência (sensível — excluído sempre),binario,excluída: texto aberto / saúde / redundante,0.15066225165562913,0.018030513176144243,0.15758717836788905
+PROF_TX_Q005,Saúde/deficiência (sensível — excluído sempre),binario,excluída: texto aberto / saúde / redundante,0.9685430463576159,0.9736477115117892,0.9810039609313584
+PROF_TX_Q006,Saúde/deficiência (sensível — excluído sempre),binario,excluída: texto aberto / saúde / redundante,0.9768211920529801,0.9805825242718447,0.9836117696119351
+PROF_TX_Q007,Saúde/deficiência (sensível — excluído sempre),binario,excluída: texto aberto / saúde / redundante,0.9768211920529801,0.9805825242718447,0.9836117696119351
+PROF_TX_Q008,Hábitos culturais e lazer do professor,ordinal,incluída,0.152317880794702,0.022191400832177532,0.16082475249280584
+PROF_TX_Q009,Hábitos culturais e lazer do professor,ordinal,incluída,0.15397350993377484,0.020804438280166437,0.1652958053888333
+PROF_TX_Q010,Hábitos culturais e lazer do professor,ordinal,incluída,0.15728476821192053,0.030513176144244106,0.16569734535803124
+PROF_TX_Q011,Hábitos culturais e lazer do professor,ordinal,incluída,0.15562913907284767,0.030513176144244106,0.16791371944914044
+PROF_TX_Q012,Hábitos culturais e lazer do professor,ordinal,incluída,0.15397350993377484,0.027739251040221916,0.16839201161261466
+PROF_TX_Q013,Hábitos culturais e lazer do professor,ordinal,incluída,0.152317880794702,0.023578363384188627,0.16303161866181887
+PROF_TX_Q014,Hábitos culturais e lazer do professor,ordinal,incluída,0.14735099337748345,0.015256588072122053,0.1549399389454537
+PROF_TX_Q015,Satisfação e identidade profissional,ordinal,incluída,0.14735099337748345,0.011095700416088766,0.1551691878251477
+PROF_TX_Q016,Satisfação e identidade profissional,ordinal,incluída,0.1490066225165563,0.013869625520110958,0.15566712320693576
+PROF_TX_Q017,Satisfação e identidade profissional,ordinal,incluída,0.14735099337748345,0.011095700416088766,0.1549399389454537
+PROF_TX_Q018,Satisfação e identidade profissional,ordinal,incluída,0.14735099337748345,0.011095700416088766,0.1549399389454537
+PROF_TX_Q019,Satisfação e identidade profissional,ordinal,incluída,0.14735099337748345,0.011095700416088766,0.1549399389454537
+PROF_TX_Q020,Formação e escolaridade do professor,ordinal,incluída,0.15562913907284767,0.024965325936199722,0.15837927066012397
+PROF_TX_Q021,Formação continuada (curta duração),ordinal,incluída,0.1771523178807947,0.05825242718446602,0.17373620238672555
+PROF_TX_Q022,Formação continuada (curta duração),ordinal,incluída,0.17218543046357615,0.04854368932038835,0.167731436649363
+PROF_TX_Q023,Formação continuada (curta duração),ordinal,incluída,0.17549668874172186,0.05825242718446602,0.17111687263962103
+PROF_TX_Q024,Formação continuada (curta duração),ordinal,incluída,0.19536423841059603,0.09292649098474341,0.21731524609548555
+PROF_TX_Q025,Formação continuada (curta duração),ordinal,incluída,0.19701986754966888,0.0957004160887656,0.21405587812391558
+PROF_TX_Q026,Formação continuada (curta duração),ordinal,incluída,0.19701986754966888,0.09292649098474341,0.21588520460872562
+PROF_TX_Q027,Formação continuada (curta duração),ordinal,incluída,0.19039735099337748,0.08737864077669903,0.213116532134272
+PROF_TX_Q028,Formação continuada (curta duração),ordinal,incluída,0.19536423841059603,0.0957004160887656,0.22070043694407274
+PROF_TX_Q029,Formação continuada (curta duração),ordinal,incluída,0.19039735099337748,0.09015256588072122,0.21245766549768214
+PROF_TX_Q030,Formação continuada (curta duração),ordinal,incluída,0.18874172185430463,0.08599167822468794,0.2124399646173428
+PROF_TX_Q031,Formação continuada (curta duração),ordinal,incluída,0.18874172185430463,0.08599167822468794,0.2124399646173428
+PROF_TX_Q032,Formação continuada (curta duração),ordinal,incluída,0.19370860927152317,0.09153952843273232,0.21852070024148765
+PROF_TX_Q033,Formação continuada (curta duração),ordinal,incluída,0.18874172185430463,0.08737864077669903,0.2124433148239829
+PROF_TX_Q034,Pós-graduação do professor,ordinal,incluída,0.15894039735099338,0.030513176144244106,0.1645777199941362
+PROF_TX_Q035,Pós-graduação do professor,ordinal,excluída: >30% de ausência,0.7102649006622517,0.7323162274618585,0.7340262462099252
+PROF_TX_Q036,Pós-graduação do professor,nominal,excluída: >30% de ausência,0.7168874172185431,0.7378640776699029,0.7351374159778199
+PROF_TX_Q037,Necessidade percebida de formação continuada,ordinal,incluída,0.15728476821192053,0.027739251040221916,0.1592900409232804
+PROF_TX_Q038,Necessidade percebida de formação continuada,ordinal,incluída,0.15562913907284767,0.027739251040221916,0.15917362923863462
+PROF_TX_Q039,Necessidade percebida de formação continuada,ordinal,incluída,0.1605960264900662,0.03467406380027739,0.1616173492823489
+PROF_TX_Q040,Necessidade percebida de formação continuada,ordinal,incluída,0.15728476821192053,0.027739251040221916,0.15921905690444416
+PROF_TX_Q041,Necessidade percebida de formação continuada,ordinal,incluída,0.15562913907284767,0.023578363384188627,0.15917362923863462
+PROF_TX_Q042,Necessidade percebida de formação continuada,ordinal,incluída,0.15562913907284767,0.023578363384188627,0.15917362923863462
+PROF_TX_Q043,Necessidade percebida de formação continuada,ordinal,incluída,0.15728476821192053,0.02912621359223301,0.1600862133174314
+PROF_TX_Q044,Necessidade percebida de formação continuada,ordinal,incluída,0.15894039735099338,0.027739251040221916,0.16175599481230632
+PROF_TX_Q045,Necessidade percebida de formação continuada,ordinal,incluída,0.15894039735099338,0.030513176144244106,0.15962514177808104
+PROF_TX_Q046,Necessidade percebida de formação continuada,ordinal,incluída,0.15894039735099338,0.02912621359223301,0.16087525466283195
+PROF_TX_Q047,Necessidade percebida de formação continuada,ordinal,incluída,0.15728476821192053,0.027739251040221916,0.1603866634537516
+PROF_TX_Q048,"Experiência, vínculo e carga horária",numerico,incluída,0.1804635761589404,0.0651872399445215,0.17055505915243194
+PROF_TX_Q049,"Experiência, vínculo e carga horária",numerico,incluída,0.17549668874172186,0.056865464632454926,0.17202203537671193
+PROF_TX_Q050,"Experiência, vínculo e carga horária",binario,incluída,0.16225165562913907,0.03744798890429958,0.16094060144175293
+PROF_TX_Q051,"Experiência, vínculo e carga horária",ordinal,incluída,0.1605960264900662,0.03467406380027739,0.16024087282813013
+PROF_TX_Q052,"Experiência, vínculo e carga horária",nominal,incluída,0.1605960264900662,0.038834951456310676,0.16024087282813013
+PROF_TX_Q053,"Experiência, vínculo e carga horária",numerico,incluída,0.16887417218543047,0.056865464632454926,0.16753885131432372
+PROF_TX_Q054,"Experiência, vínculo e carga horária",ordinal,incluída,0.16225165562913907,0.038834951456310676,0.1707702909838943
+PROF_TX_Q055,"Experiência, vínculo e carga horária",numerico,incluída,0.18211920529801323,0.06934812760055478,0.1737557217877916
+PROF_TX_Q056,"Experiência, vínculo e carga horária",binario,incluída,0.16556291390728478,0.04022191400832178,0.1651701032655869
+PROF_TX_Q057,"Experiência, vínculo e carga horária",binario,incluída,0.16390728476821192,0.038834951456310676,0.1637567147899141
+PROF_TX_Q058,Infraestrutura da sala de aula (percepção),ordinal,incluída,0.1605960264900662,0.03467406380027739,0.16024087282813013
+PROF_TX_Q059,Infraestrutura da sala de aula (percepção),ordinal,incluída,0.1605960264900662,0.038834951456310676,0.16024087282813013
+PROF_TX_Q060,Infraestrutura da sala de aula (percepção),ordinal,incluída,0.16390728476821192,0.04022191400832178,0.1605555520573772
+PROF_TX_Q061,Infraestrutura da sala de aula (percepção),ordinal,incluída,0.1605960264900662,0.036061026352288486,0.16024087282813013
+PROF_TX_Q062,Infraestrutura da sala de aula (percepção),ordinal,incluída,0.1605960264900662,0.03744798890429958,0.16024087282813013
+PROF_TX_Q063,Infraestrutura da sala de aula (percepção),ordinal,incluída,0.1605960264900662,0.03467406380027739,0.16024087282813013
+PROF_TX_Q064,Infraestrutura da sala de aula (percepção),ordinal,incluída,0.16556291390728478,0.04022191400832178,0.1634056722008178
+PROF_TX_Q065,Infraestrutura da sala de aula (percepção),ordinal,incluída,0.16225165562913907,0.038834951456310676,0.16499627918407336
+PROF_TX_Q066,Infraestrutura da sala de aula (percepção),ordinal,incluída,0.16225165562913907,0.03744798890429958,0.16039815927437673
+PROF_TX_Q067,Infraestrutura da sala de aula (percepção),ordinal,incluída,0.1605960264900662,0.03467406380027739,0.16024087282813013
+PROF_TX_Q068,Infraestrutura da sala de aula (percepção),ordinal,incluída,0.1605960264900662,0.03467406380027739,0.16024087282813013
+PROF_TX_Q069,Infraestrutura da sala de aula (percepção),ordinal,incluída,0.18543046357615894,0.07489597780859916,0.1998601877867334
+PROF_TX_Q069__FORA_ESCALA,Infraestrutura da sala de aula (percepção),binario,incluída,0.16225165562913907,0.036061026352288486,0.16216561727547846
+PROF_TX_Q070,Infraestrutura da sala de aula (percepção),ordinal,excluída: >30% de ausência,0.4370860927152318,0.4147018030513176,0.47148820029695837
+PROF_TX_Q070__FORA_ESCALA,Infraestrutura da sala de aula (percepção),binario,incluída,0.16556291390728478,0.038834951456310676,0.16125398686084977
+PROF_TX_Q071,Infraestrutura da sala de aula (percepção),ordinal,excluída: >30% de ausência,0.3394039735099338,0.29819694868238555,0.3817578165440337
+PROF_TX_Q071__FORA_ESCALA,Infraestrutura da sala de aula (percepção),binario,incluída,0.16225165562913907,0.03744798890429958,0.160478437274803
+PROF_TX_Q072,Infraestrutura da sala de aula (percepção),ordinal,excluída: >30% de ausência,0.3708609271523179,0.3314840499306519,0.3961135239267999
+PROF_TX_Q072__FORA_ESCALA,Infraestrutura da sala de aula (percepção),binario,incluída,0.16390728476821192,0.03744798890429958,0.1636984459926672
+PROF_TX_Q073,Infraestrutura da sala de aula (percepção),ordinal,excluída: >30% de ausência,0.4602649006622517,0.43828016643550627,0.4863912325625258
+PROF_TX_Q073__FORA_ESCALA,Infraestrutura da sala de aula (percepção),binario,incluída,0.16390728476821192,0.04299583911234397,0.16195085700137624
+PROF_TX_Q074,Infraestrutura da sala de aula (percepção),ordinal,incluída,0.22682119205298013,0.13453536754507628,0.21385310174894623
+PROF_TX_Q074__FORA_ESCALA,Infraestrutura da sala de aula (percepção),binario,incluída,0.1605960264900662,0.03467406380027739,0.16024087282813013
+PROF_TX_Q075,Infraestrutura da sala de aula (percepção),ordinal,incluída,0.29304635761589404,0.21497919556171982,0.30864537935294994
+PROF_TX_Q075__FORA_ESCALA,Infraestrutura da sala de aula (percepção),binario,incluída,0.16225165562913907,0.036061026352288486,0.1602743078243278
+PROF_TX_Q076,"Crenças pedagógicas (repetência, avaliações externas)",ordinal,incluída,0.16887417218543047,0.044382801664355064,0.1733529179666171
+PROF_TX_Q077,"Crenças pedagógicas (repetência, avaliações externas)",ordinal,incluída,0.16556291390728478,0.04160887656033287,0.16222964289593358
+PROF_TX_Q078,"Crenças pedagógicas (repetência, avaliações externas)",ordinal,incluída,0.1672185430463576,0.04576976421636616,0.16503094407237123
+PROF_TX_Q079,"Crenças pedagógicas (repetência, avaliações externas)",ordinal,incluída,0.16556291390728478,0.044382801664355064,0.16222964289593358
+PROF_TX_Q080,"Crenças pedagógicas (repetência, avaliações externas)",ordinal,excluída: percepção do desfecho,0.16556291390728478,0.04160887656033287,0.16222964289593358
+PROF_TX_Q081,Práticas pedagógicas em sala de aula,ordinal,incluída,0.16390728476821192,0.038834951456310676,0.16081625442026082
+PROF_TX_Q082,Práticas pedagógicas em sala de aula,ordinal,incluída,0.16390728476821192,0.04022191400832178,0.16081625442026082
+PROF_TX_Q083,Práticas pedagógicas em sala de aula,ordinal,incluída,0.16390728476821192,0.04299583911234397,0.16081625442026082
+PROF_TX_Q084,Práticas pedagógicas em sala de aula,ordinal,incluída,0.16390728476821192,0.04022191400832178,0.16081625442026082
+PROF_TX_Q085,Práticas pedagógicas em sala de aula,ordinal,incluída,0.16390728476821192,0.038834951456310676,0.16081625442026082
+PROF_TX_Q086,Práticas pedagógicas em sala de aula,ordinal,incluída,0.16390728476821192,0.038834951456310676,0.16081625442026082
+PROF_TX_Q087,Práticas pedagógicas em sala de aula,ordinal,incluída,0.16556291390728478,0.04022191400832178,0.16449677787162958
+PROF_TX_Q088,Práticas pedagógicas em sala de aula,ordinal,incluída,0.16556291390728478,0.04022191400832178,0.16557166077620405
+PROF_TX_Q089,Práticas pedagógicas em sala de aula,ordinal,incluída,0.16390728476821192,0.038834951456310676,0.16081625442026082
+PROF_TX_Q090,Práticas pedagógicas em sala de aula,ordinal,incluída,0.1672185430463576,0.04299583911234397,0.16334877666701544
+PROF_TX_Q091,Práticas pedagógicas em sala de aula,ordinal,incluída,0.16556291390728478,0.044382801664355064,0.16105534117879153
+PROF_TX_Q092,Práticas pedagógicas em sala de aula,ordinal,incluída,0.16556291390728478,0.04022191400832178,0.16251725985185092
+PROF_TX_Q093,Práticas pedagógicas em sala de aula,ordinal,incluída,0.16390728476821192,0.038834951456310676,0.16081625442026082
+PROF_TX_Q094,Práticas pedagógicas em sala de aula,ordinal,incluída,0.1672185430463576,0.044382801664355064,0.1642930108414641
+PROF_TX_Q095,Práticas pedagógicas em sala de aula,ordinal,incluída,0.1672185430463576,0.04576976421636616,0.16187845692831393
+PROF_TX_Q096,Práticas pedagógicas em sala de aula,ordinal,incluída,0.16556291390728478,0.04299583911234397,0.1612018894113847
+PROF_TX_Q097,Educação especial (AEE) na turma,binario,incluída,0.173841059602649,0.05547850208044383,0.16826831725486752
+PROF_TX_Q098,Educação especial (AEE) na turma,ordinal,incluída,0.20033112582781457,0.0957004160887656,0.19519195294000252
+PROF_TX_Q099,Educação especial (AEE) na turma,binario,incluída,0.20033112582781457,0.0957004160887656,0.19519195294000252
+PROF_TX_Q100,"Gestão escolar, PPP e conselho de classe (visão do professor)",binario,incluída,0.1771523178807947,0.05547850208044383,0.16420844737855736
+PROF_TX_Q101,"Gestão escolar, PPP e conselho de classe (visão do professor)",binario,incluída,0.23178807947019867,0.14840499306518723,0.19813507330614144
+PROF_TX_Q101__FORA_ESCALA,"Gestão escolar, PPP e conselho de classe (visão do professor)",binario,incluída,0.2052980132450331,0.10124826629680998,0.1821580833716358
+PROF_TX_Q102,"Gestão escolar, PPP e conselho de classe (visão do professor)",binario,incluída,0.2533112582781457,0.17891816920943135,0.2190498172774289
+PROF_TX_Q102__FORA_ESCALA,"Gestão escolar, PPP e conselho de classe (visão do professor)",binario,incluída,0.2052980132450331,0.10263522884882108,0.1821580833716358
+PROF_TX_Q103,"Gestão escolar, PPP e conselho de classe (visão do professor)",binario,excluída: >30% de ausência,0.33112582781456956,0.29403606102635227,0.3180139326315663
+PROF_TX_Q103__FORA_ESCALA,"Gestão escolar, PPP e conselho de classe (visão do professor)",binario,incluída,0.2052980132450331,0.10263522884882108,0.1821580833716358
+PROF_TX_Q104,"Gestão escolar, PPP e conselho de classe (visão do professor)",binario,excluída: >30% de ausência,0.35927152317880795,0.3259361997226075,0.3381298260407989
+PROF_TX_Q104__FORA_ESCALA,"Gestão escolar, PPP e conselho de classe (visão do professor)",binario,incluída,0.20695364238410596,0.10402219140083217,0.18240079667737355
+PROF_TX_Q105,"Gestão escolar, PPP e conselho de classe (visão do professor)",binario,excluída: >30% de ausência,0.3890728476821192,0.3606102635228849,0.35324826492296485
+PROF_TX_Q105__FORA_ESCALA,"Gestão escolar, PPP e conselho de classe (visão do professor)",binario,incluída,0.2052980132450331,0.10263522884882108,0.1821580833716358
+PROF_TX_Q106,"Gestão escolar, PPP e conselho de classe (visão do professor)",binario,incluída,0.17549668874172186,0.06102635228848821,0.16405505619353544
+PROF_TX_Q107,"Gestão escolar, PPP e conselho de classe (visão do professor)",numerico,excluída: >30% de ausência,0.39072847682119205,0.34674063800277394,0.3252444360664105
+PROF_TX_Q108,"Gestão escolar, PPP e conselho de classe (visão do professor)",numerico,excluída: >30% de ausência,0.40066225165562913,0.3550624133148405,0.3305126283095733
+PROF_TX_Q109,Autonomia pedagógica,nominal,incluída,0.1804635761589404,0.056865464632454926,0.16909617421876277
+PROF_TX_Q110,Autonomia pedagógica,nominal,incluída,0.17880794701986755,0.06102635228848821,0.16902242055067757
+PROF_TX_Q111,Autonomia pedagógica,nominal,incluída,0.1771523178807947,0.059639389736477116,0.16886113637947622
+PROF_TX_Q112,Autonomia pedagógica,nominal,incluída,0.1771523178807947,0.05547850208044383,0.16886113637947622
+PROF_TX_Q113,Autonomia pedagógica,nominal,incluída,0.1804635761589404,0.06241331484049931,0.16947379299935725
+PROF_TX_Q114,Autonomia pedagógica,nominal,incluída,0.1771523178807947,0.05547850208044383,0.169227114040568
+PROF_TX_Q115,Liderança do diretor e colaboração (visão do professor),ordinal,incluída,0.17549668874172186,0.05409153952843273,0.16405377023214274
+PROF_TX_Q116,Liderança do diretor e colaboração (visão do professor),ordinal,incluída,0.17549668874172186,0.052704576976421634,0.16405377023214274
+PROF_TX_Q117,Liderança do diretor e colaboração (visão do professor),ordinal,incluída,0.17549668874172186,0.05131761442441054,0.16405377023214274
+PROF_TX_Q118,Liderança do diretor e colaboração (visão do professor),ordinal,incluída,0.17549668874172186,0.052704576976421634,0.16405377023214274
+PROF_TX_Q119,Liderança do diretor e colaboração (visão do professor),ordinal,incluída,0.1771523178807947,0.052704576976421634,0.16450514268082242
+PROF_TX_Q120,Liderança do diretor e colaboração (visão do professor),ordinal,incluída,0.1771523178807947,0.05409153952843273,0.1640788464792916
+PROF_TX_Q121,Liderança do diretor e colaboração (visão do professor),ordinal,incluída,0.1771523178807947,0.052704576976421634,0.16880917658808597
+PROF_TX_Q122,Liderança do diretor e colaboração (visão do professor),ordinal,incluída,0.17549668874172186,0.052704576976421634,0.16405377023214274
+PROF_TX_Q123,Liderança do diretor e colaboração (visão do professor),ordinal,incluída,0.173841059602649,0.049930651872399444,0.1640203352359451
+PROF_TX_Q124,Liderança do diretor e colaboração (visão do professor),ordinal,incluída,0.173841059602649,0.05131761442441054,0.1640203352359451
+PROF_TX_Q125,Liderança do diretor e colaboração (visão do professor),ordinal,incluída,0.17549668874172186,0.05131761442441054,0.16418333084241274
+PROF_TX_Q126,Liderança do diretor e colaboração (visão do professor),ordinal,incluída,0.17549668874172186,0.052704576976421634,0.16418333084241274
+PROF_TX_Q127,Clima escolar — relação com estudantes,ordinal,incluída,0.1837748344370861,0.06657420249653259,0.17162633998086538
+PROF_TX_Q128,Clima escolar — relação com estudantes,ordinal,incluída,0.18211920529801323,0.0651872399445215,0.16841726391989367
+PROF_TX_Q129,Clima escolar — relação com estudantes,ordinal,incluída,0.1837748344370861,0.0651872399445215,0.17138579829286804
+PROF_TX_Q130,Clima escolar — relação com estudantes,ordinal,incluída,0.18211920529801323,0.0638002773925104,0.16836711142559593
+PROF_TX_Q131,Clima escolar — relação com estudantes,ordinal,incluída,0.1804635761589404,0.06241331484049931,0.16834203517844704
+PROF_TX_Q132,Clima escolar — relação com estudantes,ordinal,incluída,0.1804635761589404,0.06241331484049931,0.16834203517844704
+PROF_TX_Q133,Clima escolar — relação com estudantes,ordinal,incluída,0.18211920529801323,0.06657420249653259,0.16842410289638812
+PROF_TX_Q134,Clima escolar — relação com estudantes,ordinal,incluída,0.18211920529801323,0.0638002773925104,0.1707092307759388
+PROF_TX_Q135,Clima escolar — segurança e violência,ordinal,incluída,0.1771523178807947,0.05409153952843273,0.16625833432430728
+PROF_TX_Q136,Clima escolar — segurança e violência,ordinal,incluída,0.17880794701986755,0.056865464632454926,0.16772687925410532
+PROF_TX_Q137,Clima escolar — segurança e violência,ordinal,incluída,0.1771523178807947,0.05409153952843273,0.16625833432430728
+PROF_TX_Q138,Clima escolar — segurança e violência,ordinal,incluída,0.1771523178807947,0.05547850208044383,0.16625833432430728
+PROF_TX_Q139,Clima escolar — segurança e violência,ordinal,incluída,0.17880794701986755,0.05547850208044383,0.16628341057145615
+PROF_TX_Q140,Clima escolar — segurança e violência,ordinal,incluída,0.17880794701986755,0.05547850208044383,0.1695936273066194
+PROF_TX_Q141,Clima escolar — segurança e violência,ordinal,incluída,0.1771523178807947,0.05409153952843273,0.16625833432430728
+PROF_TX_Q142,Clima escolar — segurança e violência,ordinal,incluída,0.1804635761589404,0.059639389736477116,0.16965213854996591
+PROF_TX_Q143,Clima escolar — segurança e violência,ordinal,incluída,0.1771523178807947,0.05547850208044383,0.16625833432430728
+PROF_TX_Q144,Clima escolar — segurança e violência,ordinal,incluída,0.17880794701986755,0.056865464632454926,0.16693490184123652
+PROF_TX_Q145,Clima escolar — segurança e violência,ordinal,incluída,0.1771523178807947,0.05547850208044383,0.16625833432430728
+PROF_TX_Q146,Clima escolar — segurança e violência,ordinal,incluída,0.17880794701986755,0.05547850208044383,0.16641006814313344
+PROF_TX_Q147,Clima escolar — segurança e violência,ordinal,incluída,0.17880794701986755,0.056865464632454926,0.16901850710072044
+DIR_TX_Q001,Caracterização da escola (etapas oferecidas),binario,incluída,0.046357615894039736,0.0,0.034559306708001954
+DIR_TX_Q002,Caracterização da escola (etapas oferecidas),binario,incluída,0.046357615894039736,0.0,0.034559306708001954
+DIR_TX_Q003,Caracterização da escola (etapas oferecidas),binario,incluída,0.046357615894039736,0.0,0.034559306708001954
+DIR_TX_Q004,Caracterização da escola (etapas oferecidas),binario,incluída,0.046357615894039736,0.0,0.034559306708001954
+DIR_TX_Q005,Caracterização da escola (etapas oferecidas),binario,incluída,0.046357615894039736,0.0,0.034559306708001954
+DIR_TX_Q006,"Rede pública/privada (redundante, excluído)",nominal,excluída: texto aberto / saúde / redundante,0.04966887417218543,0.003472222222222222,0.03644933987108777
+DIR_TX_Q007,Perfil demográfico do diretor,nominal,incluída,0.061258278145695365,0.015625,0.041986889299635004
+DIR_TX_Q008,Perfil demográfico do diretor,numerico,incluída,0.059602649006622516,0.013888888888888888,0.06970999498710195
+DIR_TX_Q010,Saúde/deficiência (sensível — excluído sempre),binario,excluída: texto aberto / saúde / redundante,0.059602649006622516,0.013888888888888888,0.04206905255284932
+DIR_TX_Q011,Saúde/deficiência (sensível — excluído sempre),binario,excluída: texto aberto / saúde / redundante,0.9867549668874173,0.9861111111111112,0.992437410915945
+DIR_TX_Q012,Saúde/deficiência (sensível — excluído sempre),binario,excluída: texto aberto / saúde / redundante,0.9917218543046358,0.9913194444444444,0.996927841333282
+DIR_TX_Q013,Saúde/deficiência (sensível — excluído sempre),binario,excluída: texto aberto / saúde / redundante,0.9917218543046358,0.9913194444444444,0.996927841333282
+DIR_TX_Q014,Formação e carreira do diretor,ordinal,incluída,0.04966887417218543,0.003472222222222222,0.04623188662495594
+DIR_TX_Q015_A,Formação e carreira do diretor,numerico,incluída,0.07781456953642384,0.03298611111111111,0.058476190865807846
+DIR_TX_Q015_B,Formação e carreira do diretor,binario,incluída,0.046357615894039736,0.0,0.034559306708001954
+DIR_TX_Q016,Formação e carreira do diretor,numerico,incluída,0.057947019867549666,0.012152777777777778,0.041063892958804804
+DIR_TX_Q017,Formação e carreira do diretor,numerico,incluída,0.05132450331125828,0.005208333333333333,0.04161466863021197
+DIR_TX_Q018,Carga horária e condições de trabalho do diretor,numerico,incluída,0.057947019867549666,0.012152777777777778,0.045928755203489297
+DIR_TX_Q019,Carga horária e condições de trabalho do diretor,numerico,incluída,0.056291390728476824,0.010416666666666666,0.05720441424464563
+DIR_TX_Q020,Carga horária e condições de trabalho do diretor,numerico,incluída,0.054635761589403975,0.008680555555555556,0.035543032258497156
+DIR_TX_Q021,Carga horária e condições de trabalho do diretor,numerico,incluída,0.061258278145695365,0.015625,0.062016034613736185
+DIR_TX_Q022,Carga horária e condições de trabalho do diretor,numerico,incluída,0.061258278145695365,0.015625,0.0622575618421224
+DIR_TX_Q023,Carga horária e condições de trabalho do diretor,numerico,incluída,0.10430463576158941,0.06076388888888889,0.09478548723075945
+DIR_TX_Q024,Carga horária e condições de trabalho do diretor,numerico,incluída,0.057947019867549666,0.012152777777777778,0.046118691322328854
+DIR_TX_Q025,Carga horária e condições de trabalho do diretor,ordinal,incluída,0.04966887417218543,0.003472222222222222,0.0347763145504409
+DIR_TX_Q026,Carga horária e condições de trabalho do diretor,binario,incluída,0.048013245033112585,0.001736111111111111,0.0346563164452076
+DIR_TX_Q027,Percepções pedagógicas do diretor,ordinal,incluída,0.048013245033112585,0.001736111111111111,0.04298284123281391
+DIR_TX_Q028,Percepções pedagógicas do diretor,ordinal,incluída,0.05132450331125828,0.005208333333333333,0.0448627817544386
+DIR_TX_Q029,Percepções pedagógicas do diretor,ordinal,incluída,0.048013245033112585,0.001736111111111111,0.03459285958871825
+DIR_TX_Q030,Percepções pedagógicas do diretor,ordinal,excluída: percepção do desfecho,0.048013245033112585,0.001736111111111111,0.03483716411797251
+DIR_TX_Q031,Percepções pedagógicas do diretor,ordinal,incluída,0.046357615894039736,0.0,0.034559306708001954
+DIR_TX_Q032,Infraestrutura — equipamentos gerais,ordinal,incluída,0.25,0.21354166666666666,0.31681073764859047
+DIR_TX_Q032__FORA_ESCALA,Infraestrutura — equipamentos gerais,binario,incluída,0.057947019867549666,0.012152777777777778,0.04740930312392738
+DIR_TX_Q033,Infraestrutura — equipamentos gerais,ordinal,incluída,0.14072847682119205,0.09895833333333333,0.12545137959939642
+DIR_TX_Q033__FORA_ESCALA,Infraestrutura — equipamentos gerais,binario,incluída,0.056291390728476824,0.010416666666666666,0.04602795911623737
+DIR_TX_Q034,Infraestrutura — equipamentos gerais,ordinal,incluída,0.11258278145695365,0.06944444444444445,0.08944777618727306
+DIR_TX_Q034__FORA_ESCALA,Infraestrutura — equipamentos gerais,binario,incluída,0.059602649006622516,0.013888888888888888,0.04686601397862457
+DIR_TX_Q035,Infraestrutura — equipamentos gerais,ordinal,excluída: >30% de ausência,0.4900662251655629,0.4652777777777778,0.42042287166005676
+DIR_TX_Q035__FORA_ESCALA,Infraestrutura — equipamentos gerais,binario,incluída,0.07119205298013245,0.026041666666666668,0.049349637593588895
+DIR_TX_Q036,Infraestrutura — equipamentos gerais,ordinal,incluída,0.1804635761589404,0.140625,0.17598227284610898
+DIR_TX_Q036__FORA_ESCALA,Infraestrutura — equipamentos gerais,binario,incluída,0.059602649006622516,0.013888888888888888,0.050446063981373745
+DIR_TX_Q037,Infraestrutura — equipamentos gerais,ordinal,incluída,0.21026490066225165,0.171875,0.21951251261149207
+DIR_TX_Q037__FORA_ESCALA,Infraestrutura — equipamentos gerais,binario,incluída,0.059602649006622516,0.013888888888888888,0.0481668942220475
+DIR_TX_Q038,Infraestrutura — Educação Infantil,ordinal,incluída,0.07781456953642384,0.03298611111111111,0.08512192621958244
+DIR_TX_Q038__FORA_ESCALA,Infraestrutura — Educação Infantil,binario,incluída,0.057947019867549666,0.012152777777777778,0.06941636384196359
+DIR_TX_Q039,Infraestrutura — Educação Infantil,ordinal,excluída: >30% de ausência,0.5496688741721855,0.5277777777777778,0.5319156032407195
+DIR_TX_Q039__FORA_ESCALA,Infraestrutura — Educação Infantil,binario,incluída,0.061258278145695365,0.015625,0.06390237490175264
+DIR_TX_Q040,Infraestrutura — Educação Infantil,ordinal,incluída,0.2433774834437086,0.2065972222222222,0.21139066472858456
+DIR_TX_Q040__FORA_ESCALA,Infraestrutura — Educação Infantil,binario,incluída,0.06291390728476821,0.017361111111111112,0.06588146542042617
+DIR_TX_Q041,Infraestrutura — Educação Infantil,ordinal,excluída: >30% de ausência,0.39403973509933776,0.3645833333333333,0.3934870732383638
+DIR_TX_Q041__FORA_ESCALA,Infraestrutura — Educação Infantil,binario,incluída,0.061258278145695365,0.015625,0.06360465007923548
+DIR_TX_Q042,Infraestrutura — Educação Infantil,ordinal,excluída: >30% de ausência,0.41887417218543044,0.390625,0.3791964983546675
+DIR_TX_Q042__FORA_ESCALA,Infraestrutura — Educação Infantil,binario,incluída,0.06291390728476821,0.017361111111111112,0.0632619385307224
+DIR_TX_Q043,Infraestrutura — Educação Infantil,ordinal,excluída: >30% de ausência,0.7384105960264901,0.7256944444444444,0.7013858638957843
+DIR_TX_Q043__FORA_ESCALA,Infraestrutura — Educação Infantil,binario,incluída,0.056291390728476824,0.010416666666666666,0.06185986698817467
+DIR_TX_Q044,Infraestrutura — Educação Infantil,ordinal,excluída: >30% de ausência,0.8526490066225165,0.8454861111111112,0.7572410478955788
+DIR_TX_Q044__FORA_ESCALA,Infraestrutura — Educação Infantil,binario,incluída,0.056291390728476824,0.010416666666666666,0.06185986698817467
+DIR_TX_Q045,Infraestrutura — Educação Infantil,ordinal,excluída: >30% de ausência,0.8377483443708609,0.8298611111111112,0.8840757000847056
+DIR_TX_Q045__FORA_ESCALA,Infraestrutura — Educação Infantil,binario,incluída,0.059602649006622516,0.013888888888888888,0.06474932861805822
+DIR_TX_Q046,Infraestrutura — Educação Infantil,ordinal,excluída: >30% de ausência,0.7566225165562914,0.7447916666666666,0.732969676758634
+DIR_TX_Q046__FORA_ESCALA,Infraestrutura — Educação Infantil,binario,incluída,0.059602649006622516,0.013888888888888888,0.0666130726323689
+DIR_TX_Q047,Infraestrutura — Educação Infantil,ordinal,excluída: >30% de ausência,0.6456953642384106,0.6284722222222222,0.5766529151068053
+DIR_TX_Q047__FORA_ESCALA,Infraestrutura — Educação Infantil,binario,incluída,0.056291390728476824,0.010416666666666666,0.06185986698817467
+DIR_TX_Q048,Infraestrutura — Educação Infantil,ordinal,excluída: >30% de ausência,0.7897350993377483,0.7795138888888888,0.7637229196408812
+DIR_TX_Q048__FORA_ESCALA,Infraestrutura — Educação Infantil,binario,incluída,0.061258278145695365,0.015625,0.06451378893042037
+DIR_TX_Q049,Infraestrutura — Educação Infantil,ordinal,excluída: >30% de ausência,0.7119205298013245,0.6979166666666666,0.6367304972155777
+DIR_TX_Q049__FORA_ESCALA,Infraestrutura — Educação Infantil,binario,incluída,0.057947019867549666,0.012152777777777778,0.06234531026092564
+DIR_TX_Q050,Infraestrutura — Educação Infantil,ordinal,excluída: >30% de ausência,0.8211920529801324,0.8125,0.7870558729116817
+DIR_TX_Q050__FORA_ESCALA,Infraestrutura — Educação Infantil,binario,incluída,0.057947019867549666,0.012152777777777778,0.06291879623064575
+DIR_TX_Q051,Infraestrutura — Educação Infantil,ordinal,excluída: >30% de ausência,0.4718543046357616,0.4461805555555556,0.41812226712870865
+DIR_TX_Q051__FORA_ESCALA,Infraestrutura — Educação Infantil,binario,incluída,0.06291390728476821,0.017361111111111112,0.06597147984360299
+DIR_TX_Q052,"Educação Infantil (esparso, excluído)",ordinal,excluída: texto aberto / saúde / redundante,0.9900662251655629,0.9895833333333334,0.9931688447532501
+DIR_TX_Q052__FORA_ESCALA,"Educação Infantil (esparso, excluído)",binario,excluída: texto aberto / saúde / redundante,0.9221854304635762,0.9184027777777778,0.8905518681211024
+DIR_TX_Q053,"Educação Infantil (esparso, excluído)",ordinal,excluída: texto aberto / saúde / redundante,0.9917218543046358,0.9913194444444444,0.9926347049539851
+DIR_TX_Q053__FORA_ESCALA,"Educação Infantil (esparso, excluído)",binario,excluída: texto aberto / saúde / redundante,0.9205298013245033,0.9166666666666666,0.8893388339059854
+DIR_TX_Q054,Infraestrutura — Educação Infantil,nominal,excluída: >30% de ausência,0.6705298013245033,0.6545138888888888,0.5653150875984672
+DIR_TX_Q055,Recursos financeiros e de pessoal,ordinal,incluída,0.04966887417218543,0.003472222222222222,0.035491664191155396
+DIR_TX_Q056,Recursos financeiros e de pessoal,ordinal,incluída,0.052980132450331126,0.006944444444444444,0.03601156241192975
+DIR_TX_Q057,Recursos financeiros e de pessoal,ordinal,incluída,0.04966887417218543,0.003472222222222222,0.03539414545224284
+DIR_TX_Q058,Recursos financeiros e de pessoal,ordinal,incluída,0.048013245033112585,0.001736111111111111,0.03535026201973232
+DIR_TX_Q059,Recursos financeiros e de pessoal,ordinal,incluída,0.052980132450331126,0.006944444444444444,0.035514953838316134
+DIR_TX_Q060,Recursos financeiros e de pessoal,ordinal,incluída,0.04966887417218543,0.003472222222222222,0.03674822803452882
+DIR_TX_Q061,Recursos financeiros e de pessoal,ordinal,incluída,0.05132450331125828,0.005208333333333333,0.038760379455733636
+DIR_TX_Q062,Recursos financeiros e de pessoal,ordinal,incluída,0.04966887417218543,0.003472222222222222,0.03753375470095276
+DIR_TX_Q063,Recursos financeiros e de pessoal,ordinal,incluída,0.056291390728476824,0.010416666666666666,0.039841776233720066
+DIR_TX_Q064,Recursos financeiros e de pessoal,ordinal,incluída,0.04966887417218543,0.003472222222222222,0.03753375470095276
+DIR_TX_Q065,Recursos financeiros e de pessoal,ordinal,incluída,0.052980132450331126,0.006944444444444444,0.03952031454002475
+DIR_TX_Q066,Recursos financeiros e de pessoal,ordinal,incluída,0.056291390728476824,0.010416666666666666,0.04443202714805154
+DIR_TX_Q067,Recursos financeiros e de pessoal,ordinal,incluída,0.05132450331125828,0.005208333333333333,0.03786327375094832
+DIR_TX_Q068,Atendimento Educacional Especializado (AEE),ordinal,incluída,0.05132450331125828,0.005208333333333333,0.037555248627079284
+DIR_TX_Q069,Atendimento Educacional Especializado (AEE),ordinal,incluída,0.05132450331125828,0.005208333333333333,0.03767926930675996
+DIR_TX_Q070,Atendimento Educacional Especializado (AEE),binario,incluída,0.08112582781456953,0.036458333333333336,0.047470124586144136
+DIR_TX_Q071,Atendimento Educacional Especializado (AEE),binario,excluída: >30% de ausência,0.5033112582781457,0.4791666666666667,0.5296303862140519
+DIR_TX_Q072,Atendimento Educacional Especializado (AEE),binario,excluída: >30% de ausência,0.4817880794701987,0.4565972222222222,0.5197160991209127
+DIR_TX_Q073,Atendimento Educacional Especializado (AEE),binario,excluída: >30% de ausência,0.4768211920529801,0.4513888888888889,0.5141065955017539
+DIR_TX_Q074,Atendimento Educacional Especializado (AEE),binario,excluída: >30% de ausência,0.5099337748344371,0.4861111111111111,0.560335697693688
+DIR_TX_Q075,Atendimento Educacional Especializado (AEE),binario,excluída: >30% de ausência,0.36258278145695366,0.3315972222222222,0.3704756814625457
+DIR_TX_Q076,Atendimento Educacional Especializado (AEE),binario,excluída: >30% de ausência,0.46357615894039733,0.4375,0.4925104836043261
+DIR_TX_Q077,Atendimento Educacional Especializado (AEE),binario,excluída: >30% de ausência,0.33774834437086093,0.3055555555555556,0.29750769293150775
+DIR_TX_Q078,Interrupções do calendário,binario,incluída,0.057947019867549666,0.012152777777777778,0.055687481260425206
+DIR_TX_Q079,Interrupções do calendário,binario,incluída,0.061258278145695365,0.015625,0.05754368589669677
+DIR_TX_Q080,Interrupções do calendário,binario,incluída,0.06291390728476821,0.017361111111111112,0.05665571946286735
+DIR_TX_Q081,Interrupções do calendário,binario,incluída,0.057947019867549666,0.012152777777777778,0.05653550193309908
+DIR_TX_Q082,Interrupções do calendário,binario,incluída,0.061258278145695365,0.015625,0.05663064321571848
+DIR_TX_Q083,Interrupções do calendário,binario,incluída,0.057947019867549666,0.012152777777777778,0.05416084839140946
+DIR_TX_Q084,Interrupções do calendário,binario,incluída,0.061258278145695365,0.015625,0.05663064321571848
+DIR_TX_Q085,Interrupções do calendário,binario,incluída,0.061258278145695365,0.015625,0.05663064321571848
+DIR_TX_Q086,Interrupções do calendário,binario,incluída,0.06291390728476821,0.017361111111111112,0.05711608648846946
+DIR_TX_Q087,Interrupções do calendário,binario,incluída,0.059602649006622516,0.013888888888888888,0.05657371335732569
+DIR_TX_Q088,Interrupções do calendário,binario,incluída,0.13741721854304637,0.0954861111111111,0.15411783393484174
+DIR_TX_Q090,Interrupções do calendário,numerico,excluída: >30% de ausência,0.6357615894039735,0.6180555555555556,0.710228144759759
+DIR_TX_Q091,Segurança — episódios de violência,ordinal,incluída,0.054635761589403975,0.008680555555555556,0.05107168491701946
+DIR_TX_Q092,Segurança — episódios de violência,ordinal,incluída,0.061258278145695365,0.015625,0.06851185673820755
+DIR_TX_Q093,Segurança — episódios de violência,ordinal,incluída,0.054635761589403975,0.008680555555555556,0.05134257254986152
+DIR_TX_Q094,Segurança — episódios de violência,ordinal,incluída,0.052980132450331126,0.006944444444444444,0.05091212465178054
+DIR_TX_Q095,Segurança — episódios de violência,ordinal,incluída,0.054635761589403975,0.008680555555555556,0.053241342592461806
+DIR_TX_Q096,Segurança — episódios de violência,ordinal,incluída,0.054635761589403975,0.008680555555555556,0.05196918491621376
+DIR_TX_Q097,Segurança — episódios de violência,ordinal,incluída,0.052980132450331126,0.006944444444444444,0.05091212465178054
+DIR_TX_Q098,Segurança — episódios de violência,ordinal,incluída,0.054635761589403975,0.008680555555555556,0.05105532950194101
+DIR_TX_Q099,Segurança — episódios de violência,ordinal,incluída,0.052980132450331126,0.006944444444444444,0.05091212465178054
+DIR_TX_Q100,Segurança — episódios de violência,ordinal,incluída,0.052980132450331126,0.006944444444444444,0.05091212465178054
+DIR_TX_Q101,Segurança — episódios de violência,ordinal,incluída,0.057947019867549666,0.012152777777777778,0.05357572447407616
+DIR_TX_Q102,Segurança — episódios de violência,ordinal,incluída,0.056291390728476824,0.010416666666666666,0.05576349942451011
+DIR_TX_Q103,Segurança — episódios de violência,ordinal,incluída,0.052980132450331126,0.006944444444444444,0.05091212465178054
+DIR_TX_Q104,Segurança física e acessibilidade,ordinal,incluída,0.048013245033112585,0.001736111111111111,0.03535026201973232
+DIR_TX_Q105,Segurança física e acessibilidade,ordinal,incluída,0.04966887417218543,0.003472222222222222,0.03537533826688119
+DIR_TX_Q106,Segurança física e acessibilidade,ordinal,incluída,0.05132450331125828,0.005208333333333333,0.0354136073049943
+DIR_TX_Q107,Segurança física e acessibilidade,ordinal,incluída,0.05132450331125828,0.005208333333333333,0.042663650429285466
+DIR_TX_Q108,Segurança física e acessibilidade,ordinal,incluída,0.054635761589403975,0.008680555555555556,0.039660517870572363
+DIR_TX_Q109,Segurança física e acessibilidade,ordinal,incluída,0.057947019867549666,0.012152777777777778,0.041090312234670995
+DIR_TX_Q110,Gestão democrática e colegiados,binario,incluída,0.059602649006622516,0.013888888888888888,0.04746089602188691
+DIR_TX_Q111,Gestão democrática e colegiados,numerico,incluída,0.1804635761589404,0.140625,0.15212776429441408
+DIR_TX_Q112,Gestão democrática e colegiados,binario,incluída,0.06291390728476821,0.017361111111111112,0.0440698838812091
+DIR_TX_Q113,Gestão democrática e colegiados,numerico,excluída: >30% de ausência,0.347682119205298,0.3159722222222222,0.230731987773359
+DIR_TX_Q114,Gestão democrática e colegiados,numerico,excluída: >30% de ausência,0.3543046357615894,0.3229166666666667,0.23510505722178734
+DIR_TX_Q115,Gestão democrática e colegiados,binario,incluída,0.059602649006622516,0.013888888888888888,0.04644207939906338
+DIR_TX_Q116,Gestão democrática e colegiados,numerico,excluída: >30% de ausência,0.6423841059602649,0.625,0.5373429233841067
+DIR_TX_Q117,Gestão democrática e colegiados,binario,incluída,0.059602649006622516,0.013888888888888888,0.05202004542480608
+DIR_TX_Q118,Gestão democrática e colegiados,binario,excluída: >30% de ausência,0.8576158940397351,0.8506944444444444,0.8482918632970357
+DIR_TX_Q119,Caracterização institucional,binario,incluída,0.057947019867549666,0.012152777777777778,0.03802455843837176
+DIR_TX_Q120,Caracterização institucional,binario,incluída,0.056291390728476824,0.010416666666666666,0.037454641090638056
+DIR_TX_Q121,Parcerias externas,binario,incluída,0.054635761589403975,0.008680555555555556,0.037427635901401385
+DIR_TX_Q122,Parcerias externas,binario,incluída,0.054635761589403975,0.008680555555555556,0.037427635901401385
+DIR_TX_Q123,Parcerias externas,binario,incluída,0.054635761589403975,0.008680555555555556,0.037427635901401385
+DIR_TX_Q124,Parcerias externas,binario,incluída,0.056291390728476824,0.010416666666666666,0.04171612228166101
+DIR_TX_Q125,Parcerias externas,binario,incluída,0.059602649006622516,0.013888888888888888,0.04649313281310389
+DIR_TX_Q126,Parcerias externas,binario,incluída,0.056291390728476824,0.010416666666666666,0.04171612228166101
+DIR_TX_Q127,Parcerias externas,binario,incluída,0.057947019867549666,0.012152777777777778,0.037479091470645015
+DIR_TX_Q128,Parcerias externas,binario,incluída,0.061258278145695365,0.015625,0.04896548598691221
+DIR_TX_Q129,Financiamento da escola,binario,incluída,0.057947019867549666,0.012152777777777778,0.041528601913671026
+DIR_TX_Q130,Financiamento da escola,binario,incluída,0.06456953642384106,0.019097222222222224,0.054721799996459486
+DIR_TX_Q131,Financiamento da escola,binario,incluída,0.0695364238410596,0.024305555555555556,0.050994365267684826
+DIR_TX_Q132,Financiamento da escola,binario,incluída,0.0695364238410596,0.024305555555555556,0.06365219201084886
+DIR_TX_Q133,Financiamento da escola,binario,incluída,0.06622516556291391,0.020833333333333332,0.056781126393048525
+DIR_TX_Q134,Financiamento da escola,binario,incluída,0.06788079470198675,0.022569444444444444,0.05198038044262055
+DIR_TX_Q135,Financiamento da escola,binario,incluída,0.061258278145695365,0.015625,0.04816617132394955
+DIR_TX_Q136,Financiamento da escola,nominal,excluída: >30% de ausência,0.6672185430463576,0.6510416666666666,0.5577431246535768
+DIR_TX_Q137,Financiamento da escola,nominal,excluída: >30% de ausência,0.6655629139072847,0.6493055555555556,0.5575675909235348
+DIR_TX_Q138,Financiamento da escola,nominal,excluída: >30% de ausência,0.6688741721854304,0.6527777777777778,0.564121060643098
+DIR_TX_Q139,Merenda escolar,binario,excluída: constante,0.06622516556291391,0.020833333333333332,0.040967382099485965
+DIR_TX_Q140,Merenda escolar,ordinal,incluída,0.13410596026490065,0.0920138888888889,0.14457561882393286
+DIR_TX_Q140__FORA_ESCALA,Merenda escolar,binario,incluída,0.08278145695364239,0.03819444444444445,0.05841124397005659
+DIR_TX_Q141,Merenda escolar,ordinal,excluída: >30% de ausência,0.6738410596026491,0.6579861111111112,0.6145883988595353
+DIR_TX_Q141__FORA_ESCALA,Merenda escolar,binario,incluída,0.10927152317880795,0.06597222222222222,0.06457433744387822
+DIR_TX_Q142,Merenda escolar,ordinal,excluída: >30% de ausência,0.7996688741721855,0.7899305555555556,0.7422410279504251
+DIR_TX_Q142__FORA_ESCALA,Merenda escolar,binario,incluída,0.11258278145695365,0.06944444444444445,0.07148422123967572
+DIR_TX_Q143,Merenda escolar,ordinal,incluída,0.06622516556291391,0.020833333333333332,0.040967382099485965
+DIR_TX_Q144,Merenda escolar,ordinal,incluída,0.0695364238410596,0.024305555555555556,0.0418235120266248
+DIR_TX_Q145,Merenda escolar,ordinal,incluída,0.06788079470198675,0.022569444444444444,0.041621200268189114
+DIR_TX_Q146,Merenda escolar,ordinal,incluída,0.06788079470198675,0.022569444444444444,0.041621200268189114
+DIR_TX_Q147,Merenda escolar,ordinal,incluída,0.06788079470198675,0.022569444444444444,0.041621200268189114
+DIR_TX_Q148,Merenda escolar,ordinal,incluída,0.0695364238410596,0.024305555555555556,0.04232634864295504
+DIR_TX_Q149,Merenda escolar,ordinal,incluída,0.06788079470198675,0.022569444444444444,0.041621200268189114
+DIR_TX_Q150,Merenda escolar,binario,incluída,0.0728476821192053,0.027777777777777776,0.04486920642730128
+DIR_TX_Q151,Projeto Político-Pedagógico,binario,incluída,0.061258278145695365,0.015625,0.043566213266824
+DIR_TX_Q152,Projeto Político-Pedagógico,binario,incluída,0.12417218543046357,0.08159722222222222,0.08832603429769119
+DIR_TX_Q152__FORA_ESCALA,Projeto Político-Pedagógico,binario,incluída,0.12086092715231789,0.078125,0.08689893927332602
+DIR_TX_Q153,Projeto Político-Pedagógico,binario,incluída,0.12417218543046357,0.08159722222222222,0.08714225441035196
+DIR_TX_Q153__FORA_ESCALA,Projeto Político-Pedagógico,binario,incluída,0.12086092715231789,0.078125,0.08689893927332602
+DIR_TX_Q154,Projeto Político-Pedagógico,binario,incluída,0.1357615894039735,0.09375,0.10020660221561449
+DIR_TX_Q154__FORA_ESCALA,Projeto Político-Pedagógico,binario,incluída,0.12086092715231789,0.078125,0.08689893927332602
+DIR_TX_Q155,Projeto Político-Pedagógico,binario,incluída,0.13741721854304637,0.0954861111111111,0.10009455162552205
+DIR_TX_Q155__FORA_ESCALA,Projeto Político-Pedagógico,binario,incluída,0.12086092715231789,0.078125,0.08689893927332602
+DIR_TX_Q156,Projeto Político-Pedagógico,binario,incluída,0.14072847682119205,0.09895833333333333,0.09033692629229284
+DIR_TX_Q156__FORA_ESCALA,Projeto Político-Pedagógico,binario,incluída,0.12086092715231789,0.078125,0.08689893927332602
+DIR_TX_Q157,Projeto Político-Pedagógico,binario,incluída,0.12748344370860928,0.08506944444444445,0.09929264524309749
+DIR_TX_Q157__FORA_ESCALA,Projeto Político-Pedagógico,binario,incluída,0.12417218543046357,0.08159722222222222,0.0969314065066866
+DIR_TX_Q158,Projeto Político-Pedagógico,binario,incluída,0.13245033112582782,0.09027777777777778,0.09087991095557131
+DIR_TX_Q158__FORA_ESCALA,Projeto Político-Pedagógico,binario,incluída,0.12086092715231789,0.078125,0.08689893927332602
+DIR_TX_Q159,Projeto Político-Pedagógico,binario,incluída,0.1390728476821192,0.09722222222222222,0.09908572123215197
+DIR_TX_Q159__FORA_ESCALA,Projeto Político-Pedagógico,binario,incluída,0.12417218543046357,0.08159722222222222,0.08766971243134636
+DIR_TX_Q160,Critérios de matrícula,binario,incluída,0.0728476821192053,0.027777777777777776,0.049217056402638716
+DIR_TX_Q161,Critérios de matrícula,binario,excluída: >30% de ausência,0.7466887417218543,0.734375,0.8169408214981345
+DIR_TX_Q162,Critérios de matrícula,binario,excluída: >30% de ausência,0.7450331125827815,0.7326388888888888,0.8096451339689207
+DIR_TX_Q163,Critérios de matrícula,binario,excluída: >30% de ausência,0.7483443708609272,0.7361111111111112,0.8224202079885765
+DIR_TX_Q164,Critérios de matrícula,binario,excluída: >30% de ausência,0.7450331125827815,0.7326388888888888,0.8096451339689207
+DIR_TX_Q165,Critérios de matrícula,binario,excluída: >30% de ausência,0.7466887417218543,0.734375,0.8169408214981345
+DIR_TX_Q166,Critérios de matrícula,binario,excluída: >30% de ausência,0.7466887417218543,0.734375,0.8169408214981345
+DIR_TX_Q167,Critérios de matrícula,binario,excluída: >30% de ausência,0.7466887417218543,0.734375,0.8169408214981345
+DIR_TX_Q169,Composição de turmas e alocação de professores,binario,incluída,0.059602649006622516,0.013888888888888888,0.049375772761994396
+DIR_TX_Q170,Composição de turmas e alocação de professores,binario,incluída,0.057947019867549666,0.012152777777777778,0.04947583557158489
+DIR_TX_Q171,Composição de turmas e alocação de professores,binario,incluída,0.061258278145695365,0.015625,0.05089781467581721
+DIR_TX_Q172,Composição de turmas e alocação de professores,binario,incluída,0.06291390728476821,0.017361111111111112,0.05348556672589353
+DIR_TX_Q173,Composição de turmas e alocação de professores,binario,incluída,0.061258278145695365,0.015625,0.05316661093019282
+DIR_TX_Q174,Composição de turmas e alocação de professores,binario,incluída,0.057947019867549666,0.012152777777777778,0.04576584198435457
+DIR_TX_Q175,Composição de turmas e alocação de professores,binario,incluída,0.056291390728476824,0.010416666666666666,0.0482583322761768
+DIR_TX_Q176,Composição de turmas e alocação de professores,binario,incluída,0.057947019867549666,0.012152777777777778,0.04883682506920609
+DIR_TX_Q177,Composição de turmas e alocação de professores,binario,incluída,0.059602649006622516,0.013888888888888888,0.053061529513568385
+DIR_TX_Q178,Composição de turmas e alocação de professores,binario,incluída,0.061258278145695365,0.015625,0.07579941925189813
+DIR_TX_Q179,Composição de turmas e alocação de professores,binario,incluída,0.059602649006622516,0.013888888888888888,0.051095821837442316
+DIR_TX_Q180,Composição de turmas e alocação de professores,binario,incluída,0.061258278145695365,0.015625,0.047522512983840054
+DIR_TX_Q181,Composição de turmas e alocação de professores,binario,incluída,0.061258278145695365,0.015625,0.05213648609412049
+DIR_TX_Q182,Composição de turmas e alocação de professores,binario,incluída,0.06291390728476821,0.017361111111111112,0.05261081033893438
+DIR_TX_Q183,Composição de turmas e alocação de professores,binario,incluída,0.059602649006622516,0.013888888888888888,0.050279244909424405
+DIR_TX_Q184,Composição de turmas e alocação de professores,binario,incluída,0.06456953642384106,0.019097222222222224,0.06270220783082175
+DIR_TX_Q185,Composição de turmas e alocação de professores,binario,incluída,0.06291390728476821,0.017361111111111112,0.052150362249024626
+DIR_TX_Q186,Ações contra repetência e abandono,ordinal,incluída,0.152317880794702,0.1111111111111111,0.12206561118229721
+DIR_TX_Q186__FORA_ESCALA,Ações contra repetência e abandono,binario,incluída,0.061258278145695365,0.015625,0.04328501845956926
+DIR_TX_Q187,Ações contra repetência e abandono,ordinal,incluída,0.1456953642384106,0.10416666666666667,0.10911970997448914
+DIR_TX_Q187__FORA_ESCALA,Ações contra repetência e abandono,binario,incluída,0.059602649006622516,0.013888888888888888,0.03974176969003237
+DIR_TX_Q188,Ações contra repetência e abandono,ordinal,incluída,0.06622516556291391,0.020833333333333332,0.04526405348763234
+DIR_TX_Q188__FORA_ESCALA,Ações contra repetência e abandono,binario,incluída,0.059602649006622516,0.013888888888888888,0.04284140744312192
+DIR_TX_Q189,Ações contra repetência e abandono,ordinal,incluída,0.07119205298013245,0.026041666666666668,0.05233404664267584
+DIR_TX_Q189__FORA_ESCALA,Ações contra repetência e abandono,binario,incluída,0.056291390728476824,0.010416666666666666,0.03824269365251863
+DIR_TX_Q190,Ações contra repetência e abandono,ordinal,incluída,0.06291390728476821,0.017361111111111112,0.04084316364508653
+DIR_TX_Q190__FORA_ESCALA,Ações contra repetência e abandono,binario,incluída,0.056291390728476824,0.010416666666666666,0.03824269365251863
+DIR_TX_Q191,Ações contra repetência e abandono,ordinal,incluída,0.07119205298013245,0.026041666666666668,0.057245397199816195
+DIR_TX_Q191__FORA_ESCALA,Ações contra repetência e abandono,binario,incluída,0.059602649006622516,0.013888888888888888,0.05050640291031131
+DIR_TX_Q192,Ações contra repetência e abandono,ordinal,incluída,0.22019867549668873,0.18229166666666666,0.16610960644634748
+DIR_TX_Q192__FORA_ESCALA,Ações contra repetência e abandono,binario,incluída,0.06291390728476821,0.017361111111111112,0.05737064731544761
+DIR_TX_Q193,Ações contra repetência e abandono,ordinal,incluída,0.1357615894039735,0.09375,0.10184610691864969
+DIR_TX_Q193__FORA_ESCALA,Ações contra repetência e abandono,binario,incluída,0.06291390728476821,0.017361111111111112,0.053954058178514466
+DIR_TX_Q194,Projetos temáticos,binario,incluída,0.061258278145695365,0.015625,0.04970615946063573
+DIR_TX_Q195,Projetos temáticos,binario,incluída,0.059602649006622516,0.013888888888888888,0.038070737064453894
+DIR_TX_Q196,Projetos temáticos,binario,incluída,0.054635761589403975,0.008680555555555556,0.04140936945939054
+DIR_TX_Q197,Projetos temáticos,binario,incluída,0.061258278145695365,0.015625,0.0424740569722953
+DIR_TX_Q198,Projetos temáticos,binario,incluída,0.054635761589403975,0.008680555555555556,0.03905977812245732
+DIR_TX_Q199,Projetos temáticos,binario,incluída,0.056291390728476824,0.010416666666666666,0.037989499513704506
+DIR_TX_Q200,Projetos temáticos,binario,incluída,0.059602649006622516,0.013888888888888888,0.041667180489062906
+DIR_TX_Q201,Projetos temáticos,binario,incluída,0.056291390728476824,0.010416666666666666,0.03805353903023723
+DIR_TX_Q202,Projetos temáticos,binario,incluída,0.059602649006622516,0.013888888888888888,0.05245337608324904
+DIR_TX_Q203,Projetos temáticos,binario,incluída,0.052980132450331126,0.006944444444444444,0.03712088307913092
+DIR_TX_Q204,Projetos temáticos,binario,incluída,0.054635761589403975,0.008680555555555556,0.03745040212912648
+DIR_TX_Q205,Estímulo acadêmico e extracurricular,binario,incluída,0.054635761589403975,0.008680555555555556,0.04323499711339714
+DIR_TX_Q206,Estímulo acadêmico e extracurricular,binario,incluída,0.057947019867549666,0.012152777777777778,0.04980856753565695
+DIR_TX_Q207,Estímulo acadêmico e extracurricular,binario,incluída,0.057947019867549666,0.012152777777777778,0.050545944356787616
+DIR_TX_Q208,Estímulo acadêmico e extracurricular,binario,incluída,0.06788079470198675,0.022569444444444444,0.054502386272477214
+DIR_TX_Q209,Estímulo acadêmico e extracurricular,binario,incluída,0.056291390728476824,0.010416666666666666,0.043366353329847125
+DIR_TX_Q210,Estímulo acadêmico e extracurricular,binario,incluída,0.10927152317880795,0.06597222222222222,0.0885328338721862
+DIR_TX_Q212,Formação continuada percebida (equipe),binario,incluída,0.06622516556291391,0.020833333333333332,0.05335174347183333
+DIR_TX_Q213,Formação continuada percebida (equipe),binario,incluída,0.05132450331125828,0.005208333333333333,0.03697536847332371
+DIR_TX_Q214,Formação continuada percebida (equipe),binario,incluída,0.059602649006622516,0.013888888888888888,0.05037234477624452
+DIR_TX_Q215,Formação continuada percebida (equipe),binario,incluída,0.056291390728476824,0.010416666666666666,0.04623028917876871
+DIR_TX_Q216,Formação continuada percebida (equipe),binario,incluída,0.059602649006622516,0.013888888888888888,0.048675582372231824
+DIR_TX_Q217,Formação continuada percebida (equipe),binario,incluída,0.059602649006622516,0.013888888888888888,0.057483185752180095
+DIR_TX_Q218,Formação continuada percebida (equipe),binario,incluída,0.054635761589403975,0.008680555555555556,0.042839296903569114
+DIR_TX_Q219,Formação continuada percebida (equipe),binario,incluída,0.056291390728476824,0.010416666666666666,0.04577339909311844
+DIR_TX_Q220,Formação continuada percebida (equipe),binario,incluída,0.061258278145695365,0.015625,0.0472616538084454
+DIR_TX_Q221,Formação continuada percebida (equipe),binario,incluída,0.054635761589403975,0.008680555555555556,0.043839189707761926
+DIR_TX_Q222,Formação continuada percebida (equipe),binario,incluída,0.054635761589403975,0.008680555555555556,0.0376534339339617
+DIR_TX_Q223,Formação continuada percebida (equipe),binario,incluída,0.056291390728476824,0.010416666666666666,0.04387014857189664
+GEO_ID_REGIAO,Contexto geográfico,nominal,incluída,0.0,,0.0
+GEO_ID_UF,Contexto geográfico,nominal,incluída,0.0,,0.0
+GEO_ID_AREA,Contexto geográfico,nominal,incluída,0.0,,0.0
+GEO_ID_LOCALIZACAO,Contexto geográfico,nominal,incluída,0.0,,0.0
+ESC_INSE,Nível socioeconômico (INSE),ordinal,incluída,0.0,,0.0
+ESC_PC_FORMACAO_DOCENTE_INICIAL,Formação docente (escola),numerico,incluída,0.0,,0.0
+CTX_N_TURMAS,Contexto de agregação,numerico,incluída,0.0,,0.0
+PROF_SEM_QUESTIONARIO,Não resposta ao questionário,binario,incluída,0.0,,0.0
+DIR_SEM_QUESTIONARIO,Não resposta ao questionário,binario,incluída,0.0,,0.0
+PROF_COR_PCT_PRETA_PARDA,"Cor/raça do respondente (sensível, LGPD)",numerico,"excluída no cenário A (cor/raça, sensível)",0.14735099337748345,,0.15448177745208025
+PROF_COR_PCT_BRANCA,"Cor/raça do respondente (sensível, LGPD)",numerico,"excluída no cenário A (cor/raça, sensível)",0.14735099337748345,,0.15448177745208025
+PROF_COR_PCT_OUTRA_ND,"Cor/raça do respondente (sensível, LGPD)",numerico,"excluída no cenário A (cor/raça, sensível)",0.14735099337748345,,0.15448177745208025
+DIR_COR,"Cor/raça do respondente (sensível, LGPD)",nominal,"excluída no cenário A (cor/raça, sensível)",0.04966887417218543,,0.036038120785849205
