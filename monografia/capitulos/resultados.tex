@@ -309,6 +309,64 @@ linear é de 0,1705 na A e de 0,1703 na B na proporção, e de 17,86 e 17,89
 pontos na proficiência. O Apêndice~\ref{ap:cor-raca} traz as duas
 especificações lado a lado.
 
+\section{Protótipo do painel}
+\label{sec:painel}
+
+O produto aplicado do trabalho é um protótipo de painel, uma página que
+qualquer navegador abre sem instalação e que acompanha o código no
+repositório (Seção~\ref{sec:disponibilidade}). O fluxo é o mesmo dos
+resultados. Os microdados passam pelo \textit{pipeline}, que gera a base
+de escolas e as previsões fora da amostra do modelo selecionado, e o
+painel recebe só tabelas agregadas por unidade da federação, região,
+localização e faixa de INSE. Grupos com menos de 5 escolas têm os valores
+suprimidos, e nenhuma escola individual aparece, pelo critério de
+anonimização da Lei Geral de Proteção de Dados (Seção~\ref{sec:etica}).
+
+O painel tem quatro telas. A primeira mostra os desfechos por unidade da
+federação, sem e com peso amostral, com filtro por região
+(Figura~\ref{fig:painel-uf}). Cada unidade da federação tem de 12 a 45
+escolas na base, e o painel avisa que as médias estaduais são imprecisas e
+não substituem as estimativas oficiais. A segunda repete a
+Figura~\ref{fig:desfechos-inse} por faixa de INSE. A terceira mostra a
+ordem dos temas no SHAP e a estabilidade dessa ordem, com a advertência de
+que participação na previsão indica associação. A quarta mostra o resíduo
+médio e o erro absoluto médio por grupo de escolas
+(Figura~\ref{fig:painel-erro}).
+
+\begin{figure}[H]
+    \centering
+    \caption{Tela do painel com os desfechos por unidade da federação}
+    \includegraphics[width=0.85\textwidth]{figuras/painel_uf.png}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor, com base nos microdados do
+    Saeb 2023 (Inep).}
+    \end{flushleft}
+    \label{fig:painel-uf}
+\end{figure}
+
+A quarta tela é a que mais informa o gestor. Por faixa de INSE, o resíduo
+médio da proporção de alfabetizados tem forma de U. As escolas das faixas
+I e II ficam 9,9 pontos percentuais acima do previsto, as da faixa IV
+ficam 3,5 pontos abaixo, e as das faixas VI e VII, 10,1 pontos acima. O
+modelo linear trata o INSE como uma reta, e a
+Figura~\ref{fig:desfechos-inse} mostra uma relação plana nos níveis
+baixos que só sobe a partir do nível 5. O erro absoluto médio chega a 24,5
+pontos percentuais nas faixas I e II, contra 14,9 a 15,4 nas faixas IV a
+VII. A tela mostra, portanto, onde a previsão merece menos confiança, e
+esse é o motivo de o painel tratar grupos de escolas.
+
+\begin{figure}[H]
+    \centering
+    \caption{Tela do painel com o resíduo médio do modelo por faixa de INSE}
+    \includegraphics[width=0.85\textwidth]{figuras/painel_erro.png}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor, com base nos microdados do
+    Saeb 2023 (Inep). Resíduo: desfecho observado menos o previsto fora da
+    amostra.}
+    \end{flushleft}
+    \label{fig:painel-erro}
+\end{figure}
+
 \section{Discussão}
 \label{sec:discussao}
 
