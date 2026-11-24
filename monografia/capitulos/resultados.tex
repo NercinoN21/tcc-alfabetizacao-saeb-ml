@@ -308,3 +308,94 @@ geral, as duas especificações se equivalem: o MAE de validação do modelo
 linear é de 0,1705 na A e de 0,1703 na B na proporção, e de 17,86 e 17,89
 pontos na proficiência. O Apêndice~\ref{ap:cor-raca} traz as duas
 especificações lado a lado.
+
+\section{Discussão}
+\label{sec:discussao}
+
+O resultado central reproduz, no 2º ano, as duas camadas que a literatura
+brasileira descreve (Seção~\ref{sec:evidencias-brasileiras}). O nível
+socioeconômico é o preditor de maior peso, e os questionários de professor
+e de diretor acrescentam uma margem pequena. Na proficiência, essa margem é
+de 4,2\% do erro de INSE e geografia. Na proporção de alfabetizados, ela
+não se distingue de zero. A parcela da variância situada entre escolas,
+de 0,21 na proficiência, fica dentro do intervalo de 5\% a 35\% relatado
+por \citeonline[p.~296]{coleman1966equality} e abaixo dos 39\% de
+\citeonline[p.~288]{franco2007qualidade}. A comparação tem limites, porque
+série, disciplina e edição diferem, e porque a restrição à rede pública
+retira a variação entre redes. A execução R3 mostra o peso dessa variação.
+Com as escolas privadas, o ganho sobre o \textit{baseline} sobe de 13,4\%
+para 22,5\% na proporção e de 11,4\% para 23,8\% na proficiência.
+
+O poder explicativo também é menor que o desses estudos. O modelo completo
+de \citeonline[p.~293]{franco2007qualidade} explica 62\% da variância das
+médias das escolas, e aqui o R² de teste não passa de 0,28. As duas
+medidas respondem a perguntas diferentes. A de Franco et al.\ é um ajuste
+dentro da amostra, com o nível socioeconômico do aluno entre os controles.
+A deste trabalho é uma previsão para escolas fora da amostra, só com
+preditores de escola, numa etapa sem questionário do aluno. Pelo mesmo
+motivo, a acurácia de 90,2\% de \citeonline{tertulino2025multilevel} não é
+comparável. Os autores classificam alunos do 9º ano e do Ensino Médio, com
+o questionário do próprio aluno. O ponto em comum é o lugar do nível
+socioeconômico. Como naquele estudo, o INSE é o primeiro tema na proporção
+em todas as partições. Na proficiência, ele cede o primeiro lugar à
+infraestrutura da Educação Infantil, tema que pode estar indicando o tipo
+de escola (Seção~\ref{sec:res-xai}).
+
+A não confirmação de H1 é compatível com três explicações, que os dados
+não separam. O questionário do 2º ano mede práticas genéricas e não mede o
+método de alfabetização, que é onde a evidência experimental se concentra
+(Seção~\ref{sec:alfabetizacao-2ef}). Itens declarados pelo professor
+carregam erro de medida, que atenua associações. A agregação por escola
+funde os vetores de professores diferentes em 41,4\% das escolas. A
+execução com a turma como unidade enfraquece a terceira explicação, porque
+preserva o vetor de cada professor e não aumenta o ganho. Os achados de
+\citeonline{franco2007qualidade} sobre práticas específicas, como a
+correção do dever de casa, sugerem que o limite está na medida disponível
+no questionário.
+
+O bloco do diretor fica perto da margem sem confirmá-la (H2). Os temas
+desse bloco que mais pesam no modelo (merenda conforme o tempo de permanência,
+infraestrutura da Educação Infantil, grêmio estudantil e etapas oferecidas)
+descrevem sobretudo a estrutura da escola, e pouco a prática de gestão. É
+uma hipótese a testar em estudo próprio, cruzando esses itens com o porte, o
+tempo de permanência e a rede de cada escola. A geografia, por sua vez, acrescenta ao
+INSE sozinho e perde valor próprio quando os questionários entram (H4).
+Parte do que distingue regiões e unidades da federação aparece, assim, nas
+condições das escolas que os questionários descrevem. O município, cujo
+código é anonimizado nos microdados, não pôde ser testado como fazem
+\citeonline{soares2013efeitos}.
+
+Os quantis acrescentam uma leitura que a média não dá. Como em
+\citeonline{almeida2014determinantes}, o poder dos preditores muda ao longo
+da distribuição. O ganho é maior no quantil inferior e desaparece no topo
+da proporção. Os preditores de escola reconhecem o contexto das escolas de
+pior desempenho e não reconhecem o das escolas em que quase todos os
+alunos se alfabetizam. As escolas de INSE baixo, além disso, concentram o
+maior erro absoluto, de 4,4 pontos percentuais a mais que as de INSE alto.
+O instrumento é menos preciso justamente onde as necessidades são maiores,
+e acrescentar cor/raça não muda esse quadro. Na seleção dos modelos, a
+complexidade não compensou com 604 escolas. Os \textit{ensembles} erram até
+4,5\% menos na validação, com intervalos que incluem zero, e o modelo
+linear, mais simples de auditar, foi selecionado nas duas trilhas.
+
+Os resultados têm limites que restringem a leitura. A análise é ecológica,
+e as associações valem para escolas (Seção~\ref{sec:nivel-escola-teoria}).
+O desenho é transversal, de uma única edição. Ele não sustenta afirmação
+causal (Seção~\ref{sec:registros-inferenciais}). Os modelos foram
+treinados sem peso, e as conclusões preditivas se referem às 604 escolas
+analisadas. As médias ponderadas, com 108 escolas efetivas, são
+imprecisas. As escolas sem questionário têm desfechos um pouco piores,
+sem significância estatística, e entram no modelo por indicadores de não
+resposta.
+A regra de decisão das hipóteses foi explicitada depois da execução final,
+embora reproduza o critério de seleção fixado antes dela.
+
+Para a gestão pública, os resultados sugerem um uso modesto. O INSE e a
+geografia já entregam a maior parte da capacidade de prever o desempenho
+das escolas, e os questionários acrescentam pouco a essa previsão. O valor
+dos questionários está sobretudo em descrever as condições das escolas. Os temas mais associados à previsão
+(tempo de permanência, merenda, oferta de Educação Infantil e gestão
+democrática) servem
+para formular hipóteses a testar com desenhos causais, e o erro maior nas
+escolas de INSE baixo desaconselha usar a previsão para classificar escolas
+individuais.
