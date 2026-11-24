@@ -1,0 +1,45 @@
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Espaços da busca aleatória de hiperparâmetros}
+    \begin{tabular}{L{3.4cm}L{4.0cm}L{6.6cm}}
+        \toprule
+        \textbf{Modelo} & \textbf{Hiperparâmetro} & \textbf{Faixa sorteada} \\
+        \midrule
+        Linear (proporção) & \texttt{C} & log-uniforme em [0,001; 10] \\
+         & \texttt{l1\_ratio} & uniforme em [0,05; 0,95] \\
+        \addlinespace
+        Random Forest & \texttt{max\_features} & \{0,05; 0,10; 0,20; 0,33; 0,50; $\sqrt{p}$\} \\
+         & \texttt{min\_samples\_leaf} & inteiro de 1 a 20 \\
+         & \texttt{max\_samples} & uniforme em [0,50; 1,00] \\
+         & \texttt{max\_depth} & \{sem limite; 4; 8; 16\} \\
+         & \texttt{n\_estimators} & fixo em 500 \\
+        \addlinespace
+        XGBoost & \texttt{n\_estimators} & inteiro de 100 a 1000 \\
+         & \texttt{learning\_rate} & log-uniforme em [0,005; 0,2] \\
+         & \texttt{max\_depth} & inteiro de 2 a 6 \\
+         & \texttt{subsample} & uniforme em [0,50; 1,00] \\
+         & \texttt{colsample\_bytree} & uniforme em [0,20; 1,00] \\
+         & \texttt{min\_child\_weight} & log-uniforme em [1; 50] \\
+         & \texttt{reg\_lambda} & log-uniforme em [0,1; 50] \\
+         & \texttt{reg\_alpha} & log-uniforme em [0,001; 10] \\
+        \addlinespace
+        LightGBM & \texttt{n\_estimators} & inteiro de 100 a 1000 \\
+         & \texttt{learning\_rate} & log-uniforme em [0,005; 0,2] \\
+         & \texttt{num\_leaves} & inteiro de 4 a 31 \\
+         & \texttt{min\_child\_samples} & inteiro de 5 a 40 \\
+         & \texttt{colsample\_bytree} & uniforme em [0,20; 1,00] \\
+         & \texttt{subsample} & uniforme em [0,50; 1,00] \\
+         & \texttt{subsample\_freq} & \{1\} \\
+         & \texttt{reg\_lambda} & log-uniforme em [0,1; 50] \\
+        \addlinespace
+        Linear (proficiência) & \texttt{alpha} & log-uniforme em [0,001; 10] \\
+         & \texttt{l1\_ratio} & uniforme em [0,05; 0,95] \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor, com base nos microdados do Saeb 2023 (Inep). Busca aleatória com 40 combinações por modelo e validação cruzada de 5 dobras no treino. Os \textit{ensembles} usam o mesmo espaço nas duas trilhas. $p$: número de preditores.}
+    \end{flushleft}
+    \label{tab:ap-espacos}
+\end{table}

@@ -1491,7 +1491,17 @@ avaliação:
     \item \textbf{Busca de hiperparâmetros restrita ao treino}: toda a busca
     é realizada exclusivamente sobre o conjunto de treino. O conjunto de
     teste final não participa de nenhuma decisão de modelagem: nem de
-    seleção de hiperparâmetro, nem de escolha de modelo;
+    seleção de hiperparâmetro, nem de escolha de modelo. A busca é
+    aleatória, com 40 combinações por modelo, porque em geral poucos
+    hiperparâmetros importam em cada base e o sorteio cobre suas faixas
+    melhor que uma grade \cite{bergstra2012random}. As faixas privilegiam
+    regularização forte, dado o número de escolas, e seguem os estudos de
+    tunabilidade, que estimam em dezenas de bases quanto vale ajustar cada
+    hiperparâmetro e em que faixas \cite{probst2019tunability}. O número de
+    árvores do Random Forest é fixado em 500, porque basta um número grande
+    de árvores quando a medida de erro é uma perda média
+    \cite{probst2018tune}. O Apêndice~\ref{ap:hiperparametros} lista as
+    faixas;
     \item \textbf{Validação cruzada}: a busca emprega validação cruzada de
     5 dobras sobre as escolas do conjunto de treino. A dependência
     residual entre escolas de um mesmo município
