@@ -152,7 +152,8 @@ Cada hipótese é avaliada nas duas trilhas, pela mesma regra de decisão.
 Retira-se o bloco do conjunto completo de preditores e compara-se o erro
 nas mesmas dobras de uma validação cruzada repetida
 (Seção~\ref{sec:robustez}). A hipótese é considerada confirmada em uma
-trilha quando a retirada aumenta o MAE com intervalo de confiança de 95\%
+trilha quando a retirada aumenta o erro médio absoluto (MAE, do inglês
+\textit{Mean Absolute Error}) com intervalo de confiança de 95\% (IC95\%)
 acima de zero, pelo teste $t$ corrigido de \citeonline{nadeau2003inference},
 e o aumento é de pelo menos 2\% do MAE do conjunto completo. A regra
 reproduz a que foi definida antes da estimação para a seleção do modelo
@@ -208,7 +209,8 @@ questionários acrescentam algo a ele, e H3 verifica se o INSE conserva
 informação própria quando os questionários estão presentes. H4 aplica a
 mesma lógica à geografia, ancorada nos achados de efeito-município da
 literatura brasileira (Seção~\ref{sec:evidencias-brasileiras}). A
-importância de cada bloco pelo SHAP (Seção~\ref{sec:xai}) é reportada ao
+importância de cada bloco pelo SHAP (\textit{SHapley Additive exPlanations},
+Seção~\ref{sec:xai}) é reportada ao
 lado do teste, como descrição do modelo, fora da regra de decisão.
 
 Uma limitação qualifica diretamente a Hipótese~1. O questionário do
