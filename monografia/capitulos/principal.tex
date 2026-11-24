@@ -112,7 +112,7 @@ Médio \cite{tertulino2025multilevel}. No 2º ano do Ensino Fundamental, esse
 instrumental permanece pouco aplicado. Trata-se de uma etapa incorporada ao
 Saeb apenas a partir de 2019 e que, sem questionário respondido pelo
 próprio aluno, impõe um desenho analítico distinto do adotado nas etapas
-mais estudadas. É essa lacuna que o presente projeto pretende endereçar.
+mais estudadas. Este trabalho trata dessa lacuna.
 
 \section{Problema de pesquisa}
 \label{sec:problema-pesquisa}
@@ -151,8 +151,8 @@ trilha quando a retirada aumenta o MAE com intervalo de confiança de 95\%
 acima de zero, pelo teste $t$ corrigido de \citeonline{nadeau2003inference},
 e o aumento é de pelo menos 2\% do MAE do conjunto completo. A regra
 reproduz a que foi definida antes da estimação para a seleção do modelo
-final (Seção~\ref{sec:testes-significancia}). As hipóteses vêm do projeto
-avaliado no TCC I, mas a regra foi explicitada nesta versão, depois da
+final (Seção~\ref{sec:testes-significancia}). As hipóteses foram formuladas na
+etapa de projeto deste trabalho, e a regra foi explicitada depois da
 execução final. Reutilizar o critério já fixado para a seleção do modelo
 limita a margem de escolha que essa ordem abriria.
 
@@ -211,8 +211,8 @@ professor do 2º ano não pergunta sobre \emph{método} de alfabetização
 (fônico, silábico, global), apenas sobre práticas pedagógicas genéricas
 (Seção~\ref{sec:alfabetizacao-2ef}). H1 capta, portanto, proxies de
 qualidade pedagógica geral. A escolha do método de alfabetização fica fora
-do alcance dos dados, o que deverá ser retomado na discussão dos
-resultados em Trabalho de Conclusão de Curso II (TCC II).
+do alcance dos dados, e o ponto é retomado na discussão dos
+resultados.
 
 \section{Objetivos}
 \label{sec:objetivos}
@@ -262,17 +262,17 @@ com modelos interpretáveis de aprendizado de máquina.
 \section{Justificativa}
 \label{sec:justificativa}
 
-A contribuição pretendida por este trabalho é quádrupla. Em primeiro lugar,
-do ponto de vista metodológico, ele propõe aplicar ao Saeb uma combinação
+Este trabalho contribui em quatro frentes. Em primeiro lugar,
+do ponto de vista metodológico, ele aplica ao Saeb uma combinação
 que não foi localizada, na literatura consultada no Capítulo~2, em
 trabalhos anteriores sobre o 2º ano. Trata-se de uma comparação
 sistemática entre modelos lineares de referência e \textit{ensembles} de
 árvore em \emph{duas} trilhas de regressão no nível da escola (proporção de
 alfabetizados e proficiência média), construídas a partir de um mesmo
-conjunto de preditores. Isso permitirá verificar se as variáveis mais
+conjunto de preditores. Isso permite verificar se as variáveis mais
 relevantes para prever a proporção de alunos alfabetizados coincidem com as
-mais relevantes para prever o nível médio de proficiência. A relação da
-proposta com a regressão quantílica \cite{almeida2014determinantes} e com o
+mais relevantes para prever o nível médio de proficiência. A relação desse
+desenho com a regressão quantílica \cite{almeida2014determinantes} e com o
 precedente de aprendizado de máquina aplicado ao Saeb
 \cite{tertulino2025multilevel} é discutida na
 Seção~\ref{sec:quantilica-ml}.
@@ -307,12 +307,12 @@ funciona como fonte única de verdade, de modo que documentação e código não
 divergem. Submete os modelos a uma \textbf{comparação preditiva} sob
 protocolo experimental único e traduz os modelos resultantes em
 explicações auditáveis por meio de técnicas de explicabilidade. O produto
-final previsto para o TCC II é o protótipo de um \textbf{dashboard
+final é o protótipo de um \textbf{dashboard
 interativo}, um artefato de dados nos moldes do que se apresentaria a um
 comitê de investimento ou a um secretário de educação. O painel
 disponibiliza essas evidências em formato explorável. Ele permite filtrar
 por unidade da federação e região (variáveis de contexto geográfico
-previstas entre os preditores, Hipótese~4), consultar a ordenação dos
+incluídas entre os preditores, Hipótese~4), consultar a ordenação dos
 grupos temáticos, localizar escolas cuja proporção de alfabetizados destoa
 do que seu contexto socioeconômico preveria e inspecionar a decomposição
 da predição em casos concretos. A lógica de negócio subjacente é a de um
@@ -326,7 +326,7 @@ com avaliações de impacto.
 
 \section{Estrutura do trabalho}
 
-Além desta introdução, este Projeto está organizado em mais dois capítulos.
+Além desta introdução, o trabalho está organizado em mais quatro capítulos.
 O Capítulo~2 apresenta a fundamentação teórica, cobrindo a avaliação do
 Saeb e a Teoria de Resposta ao Item, a literatura brasileira sobre fatores
 associados ao desempenho escolar, a tradição de regressão quantílica e o
@@ -335,16 +335,13 @@ adotadas e os fundamentos da análise com desfechos agregados no nível da
 escola. O Capítulo~3 detalha a metodologia: as fontes de dados, a unidade
 de análise e a delimitação da amostra, os critérios de agregação, seleção e
 engenharia de variáveis, o modelo empírico e o protocolo experimental da
-comparação de algoritmos, a abordagem de explicabilidade e o cronograma de
-execução.
-
-Por se tratar de Projeto apresentado na disciplina Projetos em Ciência de
-Dados I (TCC I), os capítulos de Resultados e de Considerações Finais não
-integram esta versão: a análise descritiva da base, o desempenho comparado
-dos modelos, a interpretação por SHAP do modelo selecionado de cada trilha
-e a checagem de robustez serão desenvolvidos e discutidos na versão final
-do trabalho, na disciplina Projetos em Ciência de Dados II (TCC II),
-conforme o cronograma da Seção~\ref{sec:cronograma}.
+comparação de algoritmos, a abordagem de explicabilidade e a checagem de
+robustez. O Capítulo~4 apresenta e discute os resultados: a análise
+descritiva da base, o desempenho comparado dos modelos, o teste das
+hipóteses pela retirada de blocos, a interpretação do modelo selecionado de
+cada trilha por SHAP e LIME e a checagem de robustez. O Capítulo~5 reúne as
+considerações finais, com as limitações do estudo e as possibilidades de
+trabalho futuro.
 
 
 \chapter{Fundamentação Teórica}
@@ -459,7 +456,7 @@ políticas.
 
 Tomados em conjunto, esses três trabalhos fornecem o andaime conceitual
 (insumos familiares, insumos docentes, insumos escolares) que orienta a
-seleção das variáveis candidatas deste TCC (Seção~\ref{sec:variaveis}) e,
+seleção das variáveis candidatas deste Trabalho de Conclusão de Curso (TCC) (Seção~\ref{sec:variaveis}) e,
 mais adiante, a interpretação por grupos temáticos dos valores de SHAP.
 
 \section{Evidências brasileiras: efeito-escola, efeito-município e o papel residual do contexto escolar}
