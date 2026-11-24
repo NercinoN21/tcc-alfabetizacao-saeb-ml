@@ -12,6 +12,68 @@
 
 \input{config/pretextual}
 
+\begin{resumo}
+Este trabalho mede quanto os questionários contextuais de professor e de
+diretor acrescentam, fora da amostra, à previsão dos desfechos das escolas
+públicas do 2º ano do Ensino Fundamental além do nível socioeconômico
+(INSE) e da geografia. Com os microdados do Saeb 2023, a análise integra as
+bases de aluno, escola, professor e diretor numa base de 604 escolas e
+modela duas trilhas no nível da escola, a proporção de alunos alfabetizados
+e a proficiência média em Língua Portuguesa. Modelos lineares regularizados
+e três \textit{ensembles} de árvores (Random Forest, XGBoost e LightGBM) são
+comparados por validação cruzada repetida, com regra de seleção definida
+antes da estimação, e o valor de cada bloco de preditores é medido pela
+retirada do bloco nas mesmas dobras. O modelo linear é selecionado nas duas
+trilhas, porque os \textit{ensembles} erram até 4,5\% menos com intervalos
+de confiança que incluem zero. Os dois questionários juntos reduzem o erro
+de previsão da proficiência em 0,76 ponto, ou 4,2\% (IC95\% de 0,02 a 1,50
+ponto). Na proporção de alfabetizados, o ganho não se distingue de zero. Só
+a hipótese do INSE se confirma nas duas trilhas. A do diretor fica perto da
+margem sem confirmá-la, e as do professor e da geografia não se confirmam.
+A explicação pelo SHAP, conferida pelo LIME em escolas escolhidas antes da
+análise, põe o INSE em primeiro lugar na proporção em todas as 20 partições
+e a infraestrutura da Educação Infantil à frente na proficiência. O modelo
+erra mais nas escolas de INSE baixo, e incluir cor/raça não reduz essa
+diferença. Os resultados são associações no nível da escola e indicam que o
+INSE e a geografia já concentram a maior parte da capacidade de prever o
+desempenho das escolas.
+
+\vspace{\onelineskip}
+\noindent\textbf{Palavras-chave}: Saeb. Alfabetização. Aprendizado de máquina. Explicabilidade. Nível socioeconômico.
+\end{resumo}
+
+\begin{resumo}[Abstract]
+\begin{otherlanguage*}{english}
+This study measures how much the teacher and principal contextual
+questionnaires add, out of sample, to the prediction of school outcomes in
+the 2nd grade of Brazilian public elementary schools beyond the
+socioeconomic index (INSE) and geography. Using the 2023 Saeb microdata,
+the analysis merges the student, school, teacher and principal files into a
+dataset of 604 schools and models two school-level targets, the literacy
+rate and the mean Portuguese proficiency. Regularized linear models and
+three tree ensembles (Random Forest, XGBoost and LightGBM) are compared by
+repeated cross-validation, with a selection rule set before estimation, and
+the value of each block of predictors is measured by removing the block
+within the same folds. The linear model is selected for both targets,
+because the ensembles reduce the error by at most 4.5\% with confidence
+intervals that include zero. Together, the two questionnaires reduce the
+proficiency prediction error by 0.76 points, or 4.2\% (95\% CI from 0.02
+to 1.50 points). For the literacy rate, the gain is indistinguishable from
+zero. Only the INSE hypothesis is confirmed for both targets. The principal
+hypothesis falls near the margin without confirmation, and the teacher and
+geography hypotheses are not confirmed. SHAP explanations, checked with
+LIME on schools chosen before the analysis, rank INSE first for the
+literacy rate in all 20 partitions and early childhood education
+infrastructure first for proficiency. The model errs more in low-INSE
+schools, and adding race does not reduce this gap. The results are
+school-level associations and indicate that INSE and geography already
+hold most of the capacity to predict school performance.
+
+\vspace{\onelineskip}
+\noindent\textbf{Keywords}: Saeb. Literacy. Machine learning. Explainability. Socioeconomic status.
+\end{otherlanguage*}
+\end{resumo}
+
 \pdfbookmark[0]{\listfigurename}{lof}
 \listoffigures*
 \cleardoublepage
