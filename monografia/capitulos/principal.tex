@@ -904,11 +904,10 @@ que o dicionário de dados do Inep identifica como o bloco \emph{Professor
 questionário que a base do professor concatena em um mesmo arquivo, aquele
 efetivamente aplicado ao docente regente da turma avaliada (sem ele, um
 mesmo professor apareceria replicado em mais de um registro por turma, com
-conjuntos distintos de itens respondidos). A relação um-para-um entre
-professor e turma resultante desses filtros \emph{será verificada
-empiricamente} na etapa de preparação dos dados, por contagem de registros
-por \texttt{ID\_TURMA}, e o resultado dessa verificação será reportado na
-versão final do trabalho.
+conjuntos distintos de itens respondidos). A contagem de registros
+por \texttt{ID\_TURMA} confirmou a relação um para um entre professor e
+turma resultante desses filtros, com 1.045 questionários para 1.045
+turmas.
 
 O questionário do diretor é unido pela chave \texttt{ID\_ESCOLA}, também
 restrito a \texttt{ID\_SERIE~==~2}, em relação um-para-um com a escola, e
@@ -925,13 +924,9 @@ questionário de professor correspondente, ou cuja escola não possua
 questionário de diretor, permanece na base com as variáveis daquele bloco
 ausentes, sendo tratado pelo procedimento de imputação descrito na
 Seção~\ref{sec:protocolo}. Escolas que percam a totalidade dos blocos de
-preditores são excluídas, por não restar informação explicativa. O número
-de registros perdidos em cada etapa de junção e agregação será apurado e
-reportado conforme a estrutura da Tabela~\ref{tab:cobertura}, apresentada a
-seguir como \textbf{modelo do formato de apresentação}, ainda sem os
-valores observados: as colunas serão preenchidas com a contagem efetiva de
-alunos, turmas e escolas em cada etapa na versão final do trabalho, em TCC
-II.
+preditores são excluídas, por não restar informação explicativa. A
+Tabela~\ref{tab:cobertura} mostra quantos alunos, turmas e escolas
+permanecem em cada etapa de filtragem e junção.
 
 \begin{table}[H]
     \centering
@@ -964,28 +959,31 @@ de estrato e localização.
 \begin{table}[H]
     \centering
     \footnotesize
-    \caption{Estrutura de apuração da cobertura e das perdas por etapa de integração}
-    \begin{tabular}{L{6.0cm}C{2.2cm}C{2.2cm}C{2.2cm}}
+    \caption{Alunos, turmas e escolas em cada etapa de filtragem e integração}
+    \begin{tabular}{L{7.2cm}C{1.9cm}C{1.9cm}C{1.9cm}}
         \toprule
         \textbf{Etapa} & \textbf{Alunos} & \textbf{Turmas} & \textbf{Escolas} \\
         \midrule
-        Registros iniciais (TS\_ALUNO\_2EF)            & & & \\
-        Após consistência com o Censo Escolar          & & & \\
-        Após preenchimento adequado do questionário    & & & \\
-        Após proficiência em LP calculável (TRI)       & & & \\
-        Após junção com TS\_PROFESSOR                  & & & \\
-        Após junção com TS\_DIRETOR                    & & & \\
-        Após restrição à rede pública (escopo principal) & & & \\
-        Após junção com TS\_ESCOLA (disponibilidade do INSE) & & & \\
-        Após agregação por escola e filtro de nº mínimo de alunos & & & \\
+        Registros iniciais (TS\_ALUNO\_2EF) & 37.104 & 1.612 & 1.181 \\
+        Consistência com o Censo Escolar & 36.989 & 1.611 & 1.181 \\
+        Prova de LP preenchida & 28.532 & 1.504 & 1.107 \\
+        Proficiência em LP calculável (TRI) & 28.516 & 1.504 & 1.107 \\
+        Rede pública (escopo principal) & 20.939 & 1.069 & 764 \\
+        Com INSE (junção com TS\_ESCOLA) & 19.361 & 985 & 704 \\
+        \quad dos quais, turma com questionário de professor & 14.613 & 730 & 527 \\
+        \quad dos quais, escola com questionário de diretor & 16.466 & 825 & 587 \\
+        Escola com ao menos um bloco de preditores & 17.269 & 867 & 616 \\
+        \textbf{Escola com 10 ou mais alunos (base analítica final)} & 17.183 & 854 & 604 \\
         \midrule
-        \textbf{Base analítica final (linhas = escolas)} & & & \\
+        Coorte interna (professor e diretor, sensibilidade) & 13.810 & 688 & 498 \\
         \bottomrule
     \end{tabular}
     \vspace{0.1cm}
     \begin{flushleft}
-    {\footnotesize Fonte: elaborada pelo autor. Modelo de apresentação, a
-    ser preenchido com os valores observados na versão final do trabalho.}
+    {\footnotesize Fonte: elaborada pelo autor, com base nos microdados do Saeb
+    2023 (Inep). As linhas recuadas não são filtros. Elas indicam quantos
+    registros da etapa anterior têm o questionário correspondente, já que a
+    integração usa junção à esquerda.}
     \end{flushleft}
     \label{tab:cobertura}
 \end{table}
