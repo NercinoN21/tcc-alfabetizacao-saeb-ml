@@ -33,6 +33,7 @@ from . import descritivas as DS
 from . import dicionario as D
 from . import etl
 from . import figuras_shap as FS
+from . import painel as PN
 from .avaliacao import (comparar_no_teste, competir, competir_quantilica, cv_repetida, params_busca,
                         selecionar_modelo_final)
 from .config import RAIZ, Config
@@ -157,6 +158,20 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
             _ranking_execucoes(out, pop, universo, base_turma, base_interna, base_todas, meta, alvo, tr, nome,
                                params_busca(aj[nome]), cfg)
             print(f"[ranking-execucoes] {rot}: selecionado = {nome}")
+        return _fechar(out, info, t0)
+    if apenas == "painel":
+        info["apenas"] = "painel"
+        from .config import PAINEL_N_MIN
+        previsto = {}
+        for tr, (alvo, rot) in TRILHAS.items():
+            res, aj, _ = competir(pop, ms_A, alvo, tr, idx_tr, idx_te, cfg)
+            sel = selecionar_modelo_final(pop, ms_A, alvo, tr, idx_tr, aj, res, cfg)
+            nome = sel["selecionado"]
+            cv = cv_repetida(pop, ms_A, alvo, tr, nome, params_busca(aj[nome]), cfg)
+            previsto[tr] = pd.Series(cv["pred"], index=pop.index)
+            print(f"[painel] {rot}: selecionado = {nome}")
+        for k, t in PN.agregados(pop, previsto, PAINEL_N_MIN).items():
+            out.tabela(t, f"05_painel_{k}")
         return _fechar(out, info, t0)
     if apenas == "figuras-shap":
         info["apenas"] = "figuras-shap"
@@ -331,7 +346,7 @@ def main(argv=None):
     ap.add_argument("--modo", choices=["rapido", "completo"], default=None)
     ap.add_argument("--ate", choices=ETAPAS, default="robustez")
     ap.add_argument("--seed", type=int, default=None)
-    ap.add_argument("--apenas", choices=["descritivas", "pinball", "pesos", "ranking-pesos", "ablacao", "figuras-shap",
+    ap.add_argument("--apenas", choices=["painel", "descritivas", "pinball", "pesos", "ranking-pesos", "ablacao", "figuras-shap",
                                           "ranking-execucoes"],
                     default=None)
     a = ap.parse_args(argv)

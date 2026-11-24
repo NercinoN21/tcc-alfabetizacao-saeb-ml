@@ -114,3 +114,19 @@ def test_unicidade_questionarios_conta_turmas_repetidas():
     u = unicidade_questionarios(prof, dire)
     assert u.loc["professor (por turma)"].tolist() == [3, 2, 1]
     assert u.loc["diretor (por escola)"].tolist() == [1, 1, 0]
+
+
+def test_painel_suprime_celulas_pequenas_e_mantem_rotulo():
+    import numpy as np
+    import pandas as pd
+    from saeb_alfab.painel import agregados
+    n = 12
+    pop = pd.DataFrame({"GEO_ID_UF": [25] * 9 + [11] * 3, "GEO_ID_REGIAO": [2] * 9 + [1] * 3,
+                        "GEO_ID_LOCALIZACAO": [1] * n, "ESC_INSE": [4.0] * n, "N_ALUNOS": [20] * n,
+                        "PESO": [1.0] * n, "Y_PROP_ALFAB": np.linspace(0.2, 0.8, n), "Y_PROF_MEDIA": np.linspace(700, 760, n)})
+    prev = {"prop": pd.Series(0.5, index=pop.index), "prof": pd.Series(730.0, index=pop.index)}
+    a = agregados(pop, prev, n_min=5)
+    uf = a["uf"]
+    assert uf.loc["RO", "suprimido"] and np.isnan(uf.loc["RO", "prop sem peso"]) and uf.loc["RO", "região"] == "Norte"
+    assert not uf.loc["PB", "suprimido"] and uf.loc["PB", "escolas"] == 9
+    assert abs(a["total"]["prop resíduo médio"].iloc[0] - (pop.Y_PROP_ALFAB.mean() - 0.5)) < 1e-12

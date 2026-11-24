@@ -25,6 +25,7 @@ UF = {"11": "RO", "12": "AC", "13": "AM", "14": "RR", "15": "PA", "16": "AP", "1
       "33": "RJ", "35": "SP", "41": "PR", "42": "SC", "43": "RS", "50": "MS", "51": "MT", "52": "GO", "53": "DF"}
 LOCALIZACAO = {"1": "Urbana", "2": "Rural"}
 AREA = {"1": "Capital", "2": "Interior"}
+PAINEL_N_MIN = 5   # escolas mínimas por célula do painel (supressão de células pequenas, LGPD art. 12)
 
 # Colunas que NUNCA podem entrar em X (vazamento de alvo, desenho amostral, identificadores).
 COLUNAS_PROIBIDAS_EM_X = {
