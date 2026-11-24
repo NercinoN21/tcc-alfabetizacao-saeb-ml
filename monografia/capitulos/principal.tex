@@ -1040,7 +1040,7 @@ nível em que a variância explicável de fato reside. Além do argumento
 estatístico, há um argumento de decisão: a escola é a menor unidade sobre a
 qual a gestão educacional efetivamente atua (alocação de professores,
 formação, infraestrutura), de modo que desfechos e explicações no nível da
-escola são diretamente acionáveis pelo usuário final previsto para o
+escola são diretamente acionáveis pelo usuário final do
 dashboard (Seção~\ref{sec:justificativa}).
 
 \subsection{Agregação dos desfechos e dos preditores}
@@ -1056,34 +1056,32 @@ alfabetizados} da escola,
 em que $n_e$ é o número de alunos avaliados da escola $e$. A proficiência
 contínua torna-se, por sua vez, a \textbf{proficiência média} da escola,
 $Y_e^{\text{prof}} = \frac{1}{n_e} \sum_{i \in e}
-\text{PROFICIENCIA\_LP\_SAEB}_i$. O número de alunos avaliados $n_e$ será
-retido como variável auxiliar: escolas com $n_e$ muito pequeno produzem
-proporções instáveis, e um filtro de número mínimo de alunos por escola
-(com corte definido na análise descritiva e reportado na
-Tabela~\ref{tab:cobertura}) será avaliado, com a sensibilidade das
-conclusões a esse corte verificada.
+\text{PROFICIENCIA\_LP\_SAEB}_i$. O número de alunos avaliados $n_e$ é
+retido como variável auxiliar. Escolas com $n_e$ muito pequeno produzem
+proporções instáveis, e por isso a base exige ao menos 10 alunos avaliados
+por escola (Tabela~\ref{tab:cobertura}). A Seção~\ref{sec:robustez} repete
+a análise com o corte de 20 alunos.
 
 \textbf{Preditores.} As variáveis de diretor, de escola e de geografia já
 são de nível escola e não requerem transformação. As variáveis do
-questionário do professor são de nível turma. Quando uma escola possuir
-mais de uma turma de 2º ano avaliada, serão consolidadas por escola:
+questionário do professor são de nível turma. Quando uma escola possui
+mais de uma turma de 2º ano avaliada, elas são consolidadas por escola:
 variáveis numéricas e ordinais pela média, variáveis binárias pela
 proporção de turmas com resposta afirmativa e variáveis nominais pela moda,
 com o número de turmas da escola retido como variável de contexto. Essa
-consolidação não é inócua: na coorte preliminar, cerca de um terço das
-escolas possuía mais de uma turma avaliada, de modo que a agregação por
-escola funde vetores docentes distintos. Por isso, além da retenção do
-número de turmas, a Seção~\ref{sec:robustez} prevê uma execução de
+consolidação não é inócua. Na base final, 41,4\% das escolas têm mais de
+uma turma avaliada, e a agregação por escola funde vetores docentes
+distintos. Por isso, além da retenção do
+número de turmas, a Seção~\ref{sec:robustez} traz uma execução de
 sensibilidade com a \emph{turma} como unidade de agregação, que preserva o
-bloco docente intacto. Os critérios de agregação de cada variável serão
+bloco docente intacto. Os critérios de agregação de cada variável estão
 registrados no mesmo módulo de configuração que documenta sua inclusão
 (Seção~\ref{sec:variaveis}).
 
 \subsection{Implicações da agregação}
 \label{sec:implicacoes-agregacao}
 
-Três implicações devem ser declaradas desde já, porque alteram a leitura de
-todos os resultados previstos.
+Três implicações alteram a leitura de todos os resultados.
 
 \textbf{Queda do tamanho amostral e das métricas.} A base analítica passa
 de dezenas de milhares de linhas-aluno para algumas centenas de
@@ -1092,19 +1090,19 @@ modelagem: com 363 preditoras candidatas para algumas centenas de
 observações, a regularização dos modelos e a verificação explícita do valor
 incremental de cada bloco de variáveis (Seção~\ref{sec:robustez}) tornam-se
 etapas obrigatórias, sob pena de sobreajuste. Além disso,
-é esperado que as métricas de desempenho reportadas sejam
+espera-se que as métricas de desempenho reportadas sejam
 \emph{substancialmente inferiores} às que um protocolo com partição
 aleatória por aluno produziria, e isso não é uma deficiência do desenho,
 mas sua correção: parte relevante do desempenho aparente sob partição por
 aluno decorre de o modelo reencontrar no teste vetores de preditores que já
 viu no treino. As métricas obtidas no nível da escola aproximam a
 capacidade de generalização para outras escolas da mesma população e da
-mesma edição, que é a pergunta relevante para o uso previsto do
+mesma edição, que é a pergunta relevante para o uso do
 instrumento. Elas não garantem desempenho semelhante em edições futuras do
 Saeb.
 
 \textbf{Perda da leitura individual.} Ao agregar, o trabalho abdica de
-qualquer afirmação sobre alunos individuais: não haverá predição de risco
+qualquer afirmação sobre alunos individuais. Não há predição de risco
 individual de não alfabetização, e as associações estimadas valem para
 escolas, não para crianças (falácia ecológica,
 Seção~\ref{sec:nivel-escola-teoria}). O que se ganha em contrapartida é um
@@ -1119,10 +1117,9 @@ a partição treino/teste e a validação cruzada operam diretamente sobre
 escolas, o que elimina por construção o vazamento entre colegas de turma.
 Permanece
 uma dependência residual possível entre escolas de um mesmo município ou
-rede (gestão municipal comum, Seção~\ref{sec:evidencias-brasileiras}), que
-será tratada como checagem: a estabilidade das conclusões será examinada
-sob validação cruzada agrupada por município, reportada como análise de
-sensibilidade.
+rede (gestão municipal comum, Seção~\ref{sec:evidencias-brasileiras}). A
+análise de sensibilidade examina a estabilidade das conclusões sob
+validação cruzada agrupada por município.
 
 \section{Pesos amostrais e alcance das conclusões}
 \label{sec:pesos}
@@ -1145,7 +1142,7 @@ porque o contraste entre elas serve de diagnóstico. O estimando deste
 trabalho pertence ao segundo tipo: os padrões preditivos e a importância das
 variáveis \emph{no conjunto de escolas analisado}. Os modelos não produzem
 estimativas populacionais do 2º ano do Brasil, e nenhuma generalização
-automática para o país será formulada a partir deles.
+automática para o país é formulada a partir deles.
 
 Os pesos variam muito na população principal. O coeficiente de variação é
 de 2,14, e o efeito de desenho decorrente dessa variação,
