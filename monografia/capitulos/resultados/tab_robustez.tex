@@ -1,0 +1,24 @@
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Robustez: ganho sobre o \textit{baseline} e estabilidade da ordem dos temas por execução}
+    \begin{tabular}{L{5.0cm}C{1.4cm}C{1.5cm}C{1.5cm}C{1.5cm}C{1.5cm}}
+        \toprule
+        \textbf{Execução} & \textbf{Unidades} & \textbf{Ganho proporção (\%)} & \textbf{Ganho proficiência (\%)} & \textbf{Spearman proporção} & \textbf{Spearman proficiência} \\
+        \midrule
+        R1: rede pública com INSE (referência) & 604 & 13,4 & 11,4 & 1,00 & 1,00 \\
+        R2: rede pública sem INSE & 604 & 7,5 & 8,2 & 0,86 & 0,97 \\
+        R3: públicas e privadas sem INSE & 887 & 22,5 & 23,8 & 0,71 & 0,74 \\
+        Turma como unidade & 721 & 11,2 & 9,2 & 0,90 & 0,80 \\
+        Escolas com 20 ou mais alunos & 410 & 15,8 & 13,2 & 0,75 & 0,73 \\
+        Junção interna (professor e diretor) & 491 & 10,9 & 9,4 & 0,81 & 0,89 \\
+        Validação cruzada agrupada por município & 604 & 13,5 & 10,5 & --- & --- \\
+        Treino com peso amostral & 604 & $-$2,6 & 2,5 & --- & --- \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor, com base nos microdados do Saeb 2023 (Inep). Modelo linear, validação cruzada 5 $\times$ 5. Spearman: correlação da ordem dos temas no SHAP com a da execução R1, sem o INSE. Na linha da turma, as unidades são turmas. ---: não calculado.}
+    \end{flushleft}
+    \label{tab:robustez}
+\end{table}

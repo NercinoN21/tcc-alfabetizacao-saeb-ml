@@ -1,0 +1,21 @@
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \caption{Diferença de erro entre grupos de escolas (especificação A) e efeito de incluir cor/raça (B)}
+    \begin{tabular}{L{4.4cm}C{1.1cm}C{1.1cm}C{1.8cm}C{1.1cm}C{1.1cm}C{1.8cm}}
+        \toprule
+        & \multicolumn{3}{c}{\textbf{Proporção (p.p.)}} & \multicolumn{3}{c}{\textbf{Proficiência (pontos)}} \\
+        \cmidrule(lr){2-4}\cmidrule(lr){5-7}
+        \textbf{Grupos comparados} & \textbf{Gap A} & \textbf{$\Delta$ gap} & \textbf{IC95\%} & \textbf{Gap A} & \textbf{$\Delta$ gap} & \textbf{IC95\%} \\
+        \midrule
+        INSE: baixo (I--III) $-$ alto (V--VIII) & $+$4,4 & $+$0,02 & [$-$0,20; 0,23] & $+$5,1 & $+$0,09 & [$-$0,11; 0,28] \\
+        Diretor: preto ou pardo $-$ branco & $-$0,9 & $+$0,25 & [0,08; 0,42] & $-$1,2 & $+$0,27 & [0,11; 0,42] \\
+        Professores: maioria $-$ minoria preta ou parda & $+$0,5 & $-$0,08 & [$-$0,28; 0,12] & $-$0,1 & $-$0,05 & [$-$0,24; 0,12] \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor, com base nos microdados do Saeb 2023 (Inep). Gap: MAE do primeiro grupo menos o do segundo, na validação cruzada. $\Delta$ gap: gap da especificação B (com cor/raça) menos o da A. IC95\% por \textit{bootstrap} pareado.}
+    \end{flushleft}
+    \label{tab:equidade}
+\end{table}

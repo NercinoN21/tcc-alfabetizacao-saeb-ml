@@ -178,3 +178,133 @@ não distinguem as escolas em que ela é muito alta. Os quantis previstos
 saem fora de ordem em 7,4\% das escolas de teste na proporção e em 14,0\%
 na proficiência, um limite da estimação separada por quantil
 (Seção~\ref{sec:testes-significancia}).
+
+\section{Explicabilidade do modelo selecionado}
+\label{sec:res-xai}
+
+A Tabela~\ref{tab:temas} ordena os temas pela participação no SHAP do
+modelo linear e mostra a estabilidade dessa ordem em 20 partições. Na
+proporção, o INSE é o primeiro tema em todas as partições, com 13,5\% da
+importância total em média. Os temas seguintes (merenda escolar, ações
+contra repetência e abandono, gestão democrática e infraestrutura da
+Educação Infantil) trocam de posição entre partições. A posição média de
+cada um fica entre 4,35 e 4,95, e cada um aparece entre os três primeiros em
+35\% a 50\% das partições. Pela regra da Seção~\ref{sec:xai}, só a primeira
+posição do INSE é estável o bastante para interpretação na proporção.
+
+\input{capitulos/resultados/tab_temas}
+
+Na proficiência, o primeiro tema é a infraestrutura da Educação Infantil,
+com posição média de 1,15 e presença entre os três primeiros em todas as
+partições. O INSE vem em seguida (75\% das partições no topo) e a merenda
+escolar, em terceiro (55\%). Os dois temas do diretor reúnem itens sobre
+os espaços e equipamentos para crianças pequenas e sobre o regime de
+refeições conforme o tempo de permanência dos alunos na escola. Uma leitura possível, que este
+trabalho não testa, é que ambos indiquem o tipo de escola, como as de
+redes municipais que oferecem pré-escola ou tempo integral. Nesse caso, a
+infraestrutura e a merenda seriam marcadores desse tipo de escola. A Figura~\ref{fig:shap-prof} mostra as
+12 variáveis de maior contribuição na proficiência. Como o modelo é linear,
+a contribuição de cada variável é o coeficiente vezes o desvio do valor da
+escola em relação à média do treino. As variáveis binárias aparecem, por
+isso, como dois grupos de pontos, e o INSE, como uma escada de contribuições
+que crescem com o nível. A figura da proporção segue o mesmo padrão e está
+no Apêndice~\ref{ap:figuras}.
+
+\begin{figure}[H]
+    \centering
+    \caption{Contribuições SHAP das 12 variáveis principais na trilha de proficiência}
+    \includegraphics[width=\textwidth]{figuras/shap_resumo_prof.png}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor, com base nos microdados do
+    Saeb 2023 (Inep). Cada ponto é uma escola do conjunto de teste. [P]:
+    questionário do professor. [D]: questionário do diretor.}
+    \end{flushleft}
+    \label{fig:shap-prof}
+\end{figure}
+
+A Tabela~\ref{tab:lime} compara o LIME e o SHAP nas três escolas
+escolhidas antes da análise: a típica (menor resíduo absoluto) e as que
+ficaram mais acima e mais abaixo do previsto. O LIME é estável entre
+repetições (Jaccard de 0,74 a 0,88) e, nas variáveis que os dois métodos
+destacam em comum, o sinal coincide em todos os casos. As 10 variáveis
+principais dos dois métodos, porém, quase não coincidem (Jaccard de 0,05 a
+0,18), e a correlação de Spearman entre as importâncias fica entre 0,14 e
+0,60. O modelo local do LIME descreve de 45\% a 74\% da variação do modelo
+selecionado em torno de cada escola.
+
+\input{capitulos/resultados/tab_lime}
+
+A divergência decorre da forma do modelo. Num modelo linear, o SHAP de uma
+variável é o coeficiente vezes o desvio do valor da escola em relação à
+média, e por isso muda de escola para escola. O LIME discretiza as
+variáveis contínuas e ajusta o modelo local sobre perturbações sorteadas
+da distribuição do treino, o que aproxima seus pesos dos coeficientes
+globais. Nas seis escolas analisadas de cada trilha, as três variáveis de
+maior peso no LIME são as mesmas. Os dois métodos concordam na direção das
+associações e diferem no que destacam em cada escola. Como o SHAP é exato
+para o modelo linear, ele é a leitura usada para os casos individuais, e o
+LIME serve de checagem do sinal. A Figura~\ref{fig:lime-shap} mostra a
+comparação nas escolas da trilha de proficiência.
+
+\begin{figure}[H]
+    \centering
+    \caption{Participação com sinal das variáveis no SHAP e no LIME nas três escolas da trilha de proficiência}
+    \includegraphics[width=\textwidth]{figuras/lime_shap_prof.png}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor, com base nos microdados do
+    Saeb 2023 (Inep). Participação: contribuição da variável dividida pela
+    soma das contribuições absolutas do método na escola.}
+    \end{flushleft}
+    \label{fig:lime-shap}
+\end{figure}
+
+\section{Robustez e sensibilidades}
+\label{sec:res-robustez}
+
+A Tabela~\ref{tab:robustez} resume as execuções de robustez. Sem o INSE
+(R2), o ganho sobre o \textit{baseline} cai de 13,4\% para 7,5\% na
+proporção e de 11,4\% para 8,2\% na proficiência, o que repete, por outra
+via, o resultado de H3. Com as escolas privadas e as públicas sem INSE
+(R3), o ganho sobe para 22,5\% e 23,8\%, porque a diferença entre redes
+amplia a variação a prever. O MAE do \textit{baseline} da proporção, por
+exemplo, sobe de 19,0 para 21,7 pontos percentuais. Sem o INSE, a ordem dos
+temas fica próxima da referência na rede pública (Spearman de 0,86 e 0,97)
+e se afasta mais no universo (0,71 e 0,74). Em todas as execuções, o
+primeiro tema depois do INSE na proficiência é a infraestrutura da
+Educação Infantil.
+
+\input{capitulos/resultados/tab_robustez}
+
+A validação cruzada agrupada por município praticamente não muda o ganho
+(13,5\% e 10,5\%), e a dependência entre escolas do mesmo município não
+infla o desempenho. A turma como unidade e a junção interna reduzem o
+ganho em cerca de 2 pontos percentuais e mantêm a ordem dos temas
+(Spearman de 0,80 a 0,90). Com o corte de 20 alunos, o ganho sobe para
+15,8\% e 13,2\%, coerente com o ruído amostral das escolas pequenas.
+Reincluir os itens de percepção do desfecho não muda o erro (ganho de
+13,5\% e 11,6\%). Treinar com o peso amostral piora o desempenho, mesmo
+quando a avaliação é ponderada. Com o treino ponderado, o ganho cai de
+15,3\% para 4,6\% na proporção e de 15,4\% para 9,7\% na proficiência, o que
+sustenta a decisão de treinar sem peso (Seção~\ref{sec:pesos}).
+
+\section{Equidade e cor/raça}
+\label{sec:res-equidade}
+
+O modelo erra mais nas escolas de INSE baixo (Tabela~\ref{tab:equidade}).
+O MAE das escolas dos níveis I a III supera o das escolas dos níveis V a
+VIII em 4,4 pontos percentuais na proporção e em 5,1 pontos na
+proficiência. Incluir cor/raça (especificação B) não reduz esse gap. A
+mudança é de 0,02 ponto percentual e de 0,09 ponto, com intervalos que
+incluem zero. No eixo da cor do diretor, a especificação B altera o gap em
+0,25 ponto percentual e em 0,27 ponto, com intervalos que excluem zero, e
+a mudança é pequena perto do gap por INSE.
+
+\input{capitulos/resultados/tab_equidade}
+
+As variáveis do modelo carregam parte da informação de cor/raça. Elas
+preveem se o diretor é preto ou pardo com AUC de 0,72 e a porcentagem de
+turmas com professor preto ou pardo com R² de 0,14. Para o desempenho
+geral, as duas especificações se equivalem: o MAE de validação do modelo
+linear é de 0,1705 na A e de 0,1703 na B na proporção, e de 17,86 e 17,89
+pontos na proficiência. O Apêndice~\ref{ap:cor-raca} traz as duas
+especificações lado a lado.

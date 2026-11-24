@@ -1,0 +1,24 @@
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \caption{Temas de maior participação no SHAP e estabilidade da ordem em 20 partições}
+    \begin{tabular}{C{0.4cm}L{3.9cm}C{1.0cm}C{1.0cm}L{3.9cm}C{1.0cm}C{1.0cm}}
+        \toprule
+        & \multicolumn{3}{c}{\textbf{Proporção de alfabetizados}} & \multicolumn{3}{c}{\textbf{Proficiência média}} \\
+        \cmidrule(lr){2-4}\cmidrule(lr){5-7}
+        & \textbf{Tema} & \textbf{Posição média} & \textbf{Top-3 (\%)} & \textbf{Tema} & \textbf{Posição média} & \textbf{Top-3 (\%)} \\
+        \midrule
+        1 & Nível socioeconômico (INSE) & 1,00 & 100 & Infraestrutura da Educação Infantil & 1,15 & 100 \\
+        2 & Merenda escolar & 4,35 & 50 & Nível socioeconômico (INSE) & 2,85 & 75 \\
+        3 & Ações contra repetência e abandono & 4,50 & 40 & Merenda escolar & 3,40 & 55 \\
+        4 & Gestão democrática e colegiados & 4,55 & 35 & Ações contra repetência e abandono & 5,30 & 25 \\
+        5 & Infraestrutura da Educação Infantil & 4,95 & 45 & Formação continuada percebida (equipe) & 5,50 & 25 \\
+        6 & Formação continuada percebida (equipe) & 5,45 & 15 & Recursos financeiros e de pessoal & 7,45 & 0 \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor, com base nos microdados do Saeb 2023 (Inep). Modelo linear selecionado, reajustado em 20 partições treino/teste. Top-3: porcentagem das partições em que o tema está entre os três primeiros.}
+    \end{flushleft}
+    \label{tab:temas}
+\end{table}
