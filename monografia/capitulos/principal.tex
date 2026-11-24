@@ -1424,8 +1424,8 @@ ligação logística \cite{papke1996fractional}:
     \label{eq:fraclogit}
 \end{equation}
 
-em que $X_e$ é o vetor de preditores da escola $e$. Essa especificação
-garante, por construção, predições no intervalo unitário e acomoda sem
+em que $X_e$ é o vetor de preditores da escola $e$. A
+Equação~\ref{eq:fraclogit} garante, por construção, predições no intervalo unitário e acomoda sem
 transformação ad hoc as escolas com proporções exatamente iguais a 0 ou 1
 (presentes na base), situação em que a alternativa paramétrica da
 regressão beta \cite{ferrari2004beta} tem verossimilhança indefinida, razão
@@ -1559,7 +1559,8 @@ treino:
 \end{equation}
 em que $J$ é o número de dobras avaliadas e $s^2_d$ a variância amostral das
 diferenças. O \textit{ensemble} é selecionado somente se (i) o limite
-inferior do intervalo for positivo e (ii) o ganho relativo médio,
+inferior do intervalo, calculado com a variância da
+Equação~\ref{eq:nadeau-bengio}, for positivo e (ii) o ganho relativo médio,
 $\bar{d}/\overline{\text{MAE}}_{\text{linear}}$, for de pelo menos 2\%,
 margem que representa a menor melhoria considerada relevante na prática.
 Caso contrário, seleciona-se o modelo linear, mais simples e
@@ -1594,7 +1595,8 @@ conjunto de teste a perda média de quantil (\textit{mean pinball loss})
     \label{eq:pinball}
 \end{equation}
 em que $\hat{q}_{\tau,e}$ é o quantil previsto para a escola $e$ e
-$\mathrm{I}(\cdot)$ é a função indicadora. A função $\rho_\tau$ pesa por
+$\mathrm{I}(\cdot)$ é a função indicadora. A função $\rho_\tau$ da
+Equação~\ref{eq:pinball} pesa por
 $\tau$ os erros acima do quantil e por $1-\tau$ os erros abaixo dele, e é a
 mesma que a regressão quantílica minimiza \cite{koenker2005quantile}.
 Concorrem, em cada $\tau$, a regressão quantílica linear com penalidade L1 e
@@ -1632,7 +1634,7 @@ atribuíveis a cada variável,
 
 em que $\phi_0$ é o valor esperado da predição sobre o conjunto de treino e
 $\phi_{e,j}$ é o valor de SHAP da $j$-ésima variável para a escola $e$.
-Os valores são calculados sobre as \textbf{escolas do conjunto de
+Os valores da Equação~\ref{eq:shap} são calculados sobre as \textbf{escolas do conjunto de
 teste}, de modo que as explicações se refiram ao comportamento do modelo em
 dados que não participaram de sua estimação. O explicador
 \texttt{TreeExplainer} é utilizado quando o modelo selecionado for um
