@@ -109,6 +109,7 @@ def executar(cfg: Config, ate: str = "robustez", apenas: str | None = None) -> P
     base_interna = base_interna[(base_interna.PUBLICA == 1) & base_interna.TEM_INSE]
     alunos_interna = alunos_interna[alunos_interna.ID_ESCOLA.isin(base_interna.index)]
     out.tabela(B.funil(aluno, escola, prof, dire, pop, alunos_interna, cfg.n_min_alunos), "01_funil")
+    out.tabela(B.unicidade_questionarios(prof, dire), "01_unicidade_questionarios")
     pub = base_todas[(base_todas.PUBLICA == 1) & (base_todas.N_ALUNOS >= cfg.n_min_alunos)]
     cobertura = pd.DataFrame({
         "escolas públicas (n ≥ mínimo)": [len(pub)], "com INSE": [int(pub.TEM_INSE.sum())],

@@ -37,6 +37,17 @@ def filtrar_questionarios(prof: pd.DataFrame, dire: pd.DataFrame):
     return p, d
 
 
+def unicidade_questionarios(prof: pd.DataFrame, dire: pd.DataFrame) -> pd.DataFrame:
+    """Depois dos filtros, cada turma tem no máximo um questionário de professor e cada escola um de diretor
+    (Seção 3.1). Reporta registros, chaves distintas e chaves repetidas."""
+    p, d = filtrar_questionarios(prof, dire)
+    linhas = {}
+    for nome, df, chave in (("professor (por turma)", p, "ID_TURMA"), ("diretor (por escola)", d, "ID_ESCOLA")):
+        c = df.groupby(chave).size()
+        linhas[nome] = {"registros": len(df), "chaves distintas": int(c.size), "chaves com mais de um registro": int((c > 1).sum())}
+    return pd.DataFrame(linhas).T
+
+
 def aluno_valido(aluno: pd.DataFrame) -> pd.DataFrame:
     """Coorte válida (Seção 3.1.3). `IN_ALFABETIZADO` vale 0 também para quem não tem proficiência,
     por isso o filtro de proficiência calculável é obrigatório."""

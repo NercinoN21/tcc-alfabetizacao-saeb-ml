@@ -104,3 +104,13 @@ def test_smd_valores_conhecidos():
     assert smd([1, 2, 3], [1, 2, 3]) == pytest.approx(0.0)
     assert smd([2, 4], [0, 2]) == pytest.approx(2 / np.sqrt(2))       # médias 3 e 1, variâncias 2 e 2
     assert smd([1, 1], [1, 1]) == 0.0                                   # sem variância: 0 por definição
+
+def test_unicidade_questionarios_conta_turmas_repetidas():
+    import pandas as pd
+    from saeb_alfab.base import unicidade_questionarios
+    prof = pd.DataFrame({"ID_TURMA": [1, 1, 2, 3], "ID_SERIE": 2, "SQ_QUESTIONARIO": [5, 5, 5, 3],
+                         "IN_PREENCHIMENTO_QUESTIONARIO": 1})
+    dire = pd.DataFrame({"ID_ESCOLA": [10, 11], "ID_SERIE": 2, "IN_PREENCHIMENTO_QUESTIONARIO": [1, 0]})
+    u = unicidade_questionarios(prof, dire)
+    assert u.loc["professor (por turma)"].tolist() == [3, 2, 1]
+    assert u.loc["diretor (por escola)"].tolist() == [1, 1, 0]
