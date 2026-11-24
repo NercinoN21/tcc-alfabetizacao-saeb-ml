@@ -251,6 +251,10 @@ def _descritivas(out: Saida, pop, base_todas, alunos_validos, alunos_interna, de
     bruta, estrato = DS.associacao_cor(pop)
     out.tabela(bruta, "01_cor_associacao_bruta")
     out.tabela(estrato, "01_cor_por_faixa_de_inse")
+    import matplotlib.pyplot as plt
+    for nome, fig in DS.figuras(pop).items():
+        out.figura(fig, nome)
+        plt.close(fig)
 
 
 def _pesos(out: Saida, pop, aluno) -> None:

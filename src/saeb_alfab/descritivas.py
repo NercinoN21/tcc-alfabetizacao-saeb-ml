@@ -191,3 +191,98 @@ def associacao_cor(pop: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     d = c[c.professores != "sem questionário"]
     estrato = d.pivot_table(index="faixa de INSE", columns="professores", values="Y_PROP_ALFAB", aggfunc=["mean", "size"])
     return bruta, estrato
+
+
+# ------------------------------------------------------------------ figuras (impressão: legíveis em preto e branco)
+# Cores da paleta de referência validada (azul e laranja); cada série tem também marcador e traço próprios.
+COR_SEM, COR_COM, TINTA, TINTA2, GRADE = "#2a78d6", "#eb6834", "#0b0b0b", "#52514e", "#d9d8d4"
+FAIXAS_INSE = {1: "I–II", 2: "I–II", 3: "III", 4: "IV", 5: "V", 6: "VI–VII", 7: "VI–VII", 8: "VI–VII"}
+
+
+def _rotulo(rot: str) -> str:
+    return rot[0].upper() + rot[1:]                    # preserva siglas (``capitalize`` rebaixaria LP)
+
+
+def _estilo(ax):
+    from matplotlib.ticker import FuncFormatter
+    virgula = FuncFormatter(lambda v, _: (f"{v:g}").replace(".", ","))
+    ax.xaxis.set_major_formatter(virgula)
+    ax.yaxis.set_major_formatter(virgula)
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.spines[["left", "bottom"]].set_color(TINTA2)
+    ax.tick_params(colors=TINTA2, labelsize=8)
+    ax.yaxis.grid(True, color=GRADE, lw=.6)
+    ax.set_axisbelow(True)
+
+
+def figuras(pop: pd.DataFrame) -> dict:
+    import matplotlib.pyplot as plt
+
+    plt.rcParams.update({"font.size": 9, "axes.titlesize": 9.5, "axes.labelcolor": TINTA, "text.color": TINTA})
+    figs = {}
+
+    # 1. distribuição dos desfechos, com as médias sem e com peso
+    fig, axs = plt.subplots(1, 2, figsize=(9, 3.2))
+    for ax, (y, rot), bins in zip(axs, DESFECHOS.items(), (20, 25)):
+        ax.hist(pop[y], bins=bins, color=COR_SEM, alpha=.85, edgecolor="white", linewidth=1)
+        m0, m1 = pop[y].mean(), _media_pond(pop[y], pop.PESO)
+        ax.axvline(m0, color=TINTA, lw=1.5, ls="-")
+        ax.axvline(m1, color=COR_COM, lw=2, ls="--")
+        fmt = (lambda v: f"{100 * v:.1f}%".replace(".", ",")) if y == "Y_PROP_ALFAB" else (lambda v: f"{v:.1f}".replace(".", ","))
+        ax.set_ylim(0, ax.get_ylim()[1] * 1.3)           # espaço para os rótulos acima das barras
+        topo = ax.get_ylim()[1]
+        ax.text(m0, topo * .97, f" sem peso {fmt(m0)}", color=TINTA, fontsize=7.5, va="top", ha="right" if m1 > m0 else "left")
+        ax.text(m1, topo * .85, f" com peso {fmt(m1)}", color=TINTA2, fontsize=7.5, va="top")
+        if y == "Y_PROF_MEDIA":
+            ax.axvline(743, color=TINTA2, lw=1, ls=":")
+            ax.text(743, topo * .70, " corte 743", color=TINTA2, fontsize=7.5, va="top")
+        ax.set(title=_rotulo(rot) + " por escola", xlabel="proporção" if y == "Y_PROP_ALFAB" else "escala do Saeb",
+               ylabel="escolas")
+        _estilo(ax)
+    fig.tight_layout()
+    figs["01_desfechos_distribuicao"] = fig
+
+    # 2. desfechos por faixa de INSE (níveis extremos agrupados por terem 1 escola), média e IC 95%
+    d = pop.assign(faixa=pop.ESC_INSE.map(FAIXAS_INSE))
+    ordem = ["I–II", "III", "IV", "V", "VI–VII"]
+    fig, axs = plt.subplots(1, 2, figsize=(9, 3.2))
+    for ax, (y, rot) in zip(axs, DESFECHOS.items()):
+        x = np.arange(len(ordem))
+        for desloc, cor, marc, ls, rot_s, pesos in ((-.09, COR_SEM, "o", "-", "sem peso", None),
+                                                     (.09, COR_COM, "s", "--", "com peso", "PESO")):
+            med, ic = [], []
+            for f in ordem:
+                g = d[d.faixa == f]
+                w = np.ones(len(g)) if pesos is None else g[pesos].values
+                m = np.average(g[y], weights=w)
+                n_ef = w.sum() ** 2 / (w ** 2).sum()                 # escolas efetivas (Kish) no grupo
+                sd = np.sqrt(np.average((g[y] - m) ** 2, weights=w))
+                med.append(m); ic.append(1.96 * sd / np.sqrt(n_ef))
+            ax.errorbar(x + desloc, med, yerr=ic, color=cor, marker=marc, ms=6, ls=ls, lw=1.6, capsize=3, label=rot_s)
+        _estilo(ax)
+        ax.set_xticks(x, [f"{f}\n(n = {int((d.faixa == f).sum())})" for f in ordem])
+        ax.set(title=_rotulo(rot) + " por faixa de INSE", xlabel="nível de INSE da escola")
+    axs[0].legend(frameon=False, fontsize=8, loc="upper left")
+    fig.tight_layout()
+    figs["01_desfechos_por_inse"] = fig
+
+    # 3. funil binomial: escolas fora da banda do acaso
+    p0 = float(np.average(pop.Y_PROP_ALFAB, weights=pop.N_ALUNOS))
+    n = np.arange(max(int(pop.N_ALUNOS.min()), 3), int(pop.N_ALUNOS.max()) + 1)
+    banda = 1.96 * np.sqrt(p0 * (1 - p0) / pop.N_ALUNOS)
+    fora = (pop.Y_PROP_ALFAB - p0).abs() > banda
+    fig, ax = plt.subplots(figsize=(6.2, 3.6))
+    ax.scatter(pop.N_ALUNOS[~fora], pop.Y_PROP_ALFAB[~fora], s=14, color="#a9a8a3", marker="o", label="dentro da banda",
+               edgecolor="white", linewidth=.5)
+    ax.scatter(pop.N_ALUNOS[fora], pop.Y_PROP_ALFAB[fora], s=16, color=COR_SEM, marker="^",
+               label=f"fora da banda ({100 * fora.mean():.0f}%)".replace(".", ","), edgecolor="white", linewidth=.5)
+    for sinal in (1, -1):
+        ax.plot(n, p0 + sinal * 1.96 * np.sqrt(p0 * (1 - p0) / n), color=TINTA, lw=1.2, ls="--")
+    ax.axhline(p0, color=TINTA2, lw=.8)
+    ax.set(xlabel="alunos avaliados na escola", ylabel="proporção de alfabetizados",
+           title="Proporção de alfabetizados e banda de 95% do acaso binomial")
+    ax.legend(frameon=False, fontsize=8, loc="lower right")
+    _estilo(ax)
+    fig.tight_layout()
+    figs["01_funil_binomial"] = fig
+    return figs
