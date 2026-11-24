@@ -1393,7 +1393,7 @@ alfabetização, a unidade em que as metas públicas são formuladas. Na trilha
 de proficiência média, é expresso na própria escala do Saeb e é menos
 sensível a observações extremas que o RMSE. As demais métricas são
 reportadas como complementares, para caracterizar o comportamento dos
-modelos, não para arbitrar a comparação. Na trilha de proporção, o MAE será
+modelos, não para arbitrar a comparação. Na trilha de proporção, o MAE é
 reportado em duas versões (não ponderada, cada escola com o mesmo peso,
 coerente com a unidade de decisão, e ponderada pelo número de alunos
 avaliados $n_e$), uma vez que escolas pequenas produzem proporções
@@ -1440,7 +1440,7 @@ $f_m$: amostragem aleatória independente com agregação por média
 (\textit{bagging}) no Random Forest, versus ajuste sequencial que corrige o
 erro residual das árvores anteriores (\textit{boosting}) no XGBoost e no
 LightGBM. Um detalhe de implementação relevante para o alvo fracionário
-será documentado no código: as funções-objetivo empregadas devem aceitar
+está documentado no código: as funções-objetivo empregadas devem aceitar
 rótulos contínuos em $[0,1]$ (\texttt{reg:logistic} no XGBoost e
 \texttt{cross\_entropy} no LightGBM). Os objetivos de classificação
 binária ficam excluídos, porque exigem rótulos em $\{0,1\}$ e falhariam
@@ -1593,7 +1593,7 @@ análise é complementar e não entra na regra de seleção do modelo final.
 
 A explicabilidade concentra-se no \textbf{modelo selecionado de cada
 trilha}, sem interpretar em detalhe todos os modelos estimados.
-A razão é substantiva: importâncias produzidas por modelos que não serão
+A razão é substantiva: importâncias produzidas por modelos que não são
 adotados não informam sobre o fenômeno nem sobre o instrumento final, e
 multiplicar explicações de modelos concorrentes convida à seleção
 \textit{a posteriori} da narrativa mais conveniente.
@@ -1638,7 +1638,7 @@ seu próprio valor de SHAP. Reportar essas colunas isoladamente subestima
 sistematicamente a importância da variável original e a torna incomparável
 com variáveis numéricas, que permanecem em uma única coluna. Por isso, na
 apresentação das importâncias, as colunas geradas por \textit{one-hot} de
-uma mesma variável serão \textbf{reagrupadas}, somando-se as contribuições
+uma mesma variável são \textbf{reagrupadas}, somando-se as contribuições
 absolutas de suas categorias antes de qualquer ordenação ou agregação
 temática.
 
@@ -1650,7 +1650,7 @@ o modelo selecionado é reajustado com os mesmos hiperparâmetros, e o SHAP é
 recalculado no novo conjunto de teste. Reportam-se, para cada tema, a
 posição média, o desvio-padrão da posição e a porcentagem de repetições em
 que ele figura entre os três primeiros. Apenas ordenações estáveis entre
-repetições serão objeto de interpretação substantiva.
+repetições são objeto de interpretação substantiva.
 
 \textbf{LIME como checagem local.} O LIME \cite{ribeiro2016lime} é
 aplicado a seis escolas do conjunto de teste, escolhidas por regra definida
@@ -1713,12 +1713,12 @@ A essas três execuções soma-se uma \textbf{execução de sensibilidade à
 unidade de agregação}, em que as duas trilhas são repetidas com a
 \emph{turma} como unidade, sob o mesmo protocolo (razão na
 Seção~\ref{sec:agregacao}). A convergência das conclusões
-entre as duas unidades indicará que elas não dependem fortemente da escolha
-da unidade de agregação, e uma divergência será reportada e discutida.
+entre as duas unidades indica que elas não dependem fortemente da escolha
+da unidade de agregação, e uma divergência é reportada e discutida.
 
 A leitura conjunta das três execuções principais permite aproximar
 separadamente as diferenças observadas à retirada do INSE
-(1~\textit{vs.}~2) e à mudança de população (2~\textit{vs.}~3). A análise privilegiará a estabilidade do
+(1~\textit{vs.}~2) e à mudança de população (2~\textit{vs.}~3). A análise privilegia a estabilidade do
 \emph{ordenamento} dos grupos temáticos entre execuções, mais informativa
 que a variação do valor absoluto da métrica, que responde também a
 alterações na distribuição do desfecho e no tamanho amostral entre as
