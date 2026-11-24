@@ -1771,3 +1771,40 @@ por vez do conjunto completo (8) e a que retira o INSE (6) aplicam a regra de
 decisão das hipóteses (Seção~\ref{sec:hipoteses}). As demais descrevem o
 ganho acumulado de cada bloco a partir do INSE e da geografia.
 
+\section{Disponibilidade de dados e código}
+\label{sec:disponibilidade}
+
+O código, os resultados citados e o texto desta monografia estão no
+repositório público \url{https://github.com/NercinoN21/tcc-alfabetizacao-saeb-ml},
+com licença MIT para o código e CC BY 4.0 para o texto. Os microdados do
+Saeb 2023 são públicos e distribuídos pelo Inep sob a licença CC BY 4.0. O
+repositório traz uma cópia comprimida dos arquivos usados, com a
+atribuição ao Inep, e as somas SHA-256 que permitem conferi-los contra o
+arquivo original. A Tabela~\ref{tab:reproducao} resume o que é preciso para
+reproduzir os resultados.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Elementos para a reprodução dos resultados}
+    \begin{tabular}{L{4.2cm}L{10.0cm}}
+        \toprule
+        \textbf{Elemento} & \textbf{Valor} \\
+        \midrule
+        Microdados & Saeb 2023 (Inep), \url{https://download.inep.gov.br/microdados/microdados_saeb_2023.zip} \\ \addlinespace
+        Cópia dos dados usados & \texttt{data/snapshot/}, conferida por SHA-256 \\ \addlinespace
+        Versão do código da execução final & \textit{commit} \texttt{4dc8262} \\ \addlinespace
+        Resultados citados no texto & \texttt{reports/final/}, com a versão do código de cada etapa complementar no arquivo \texttt{run\_info.json} da respectiva pasta \\ \addlinespace
+        Ambiente & Python 3.12, com as versões das bibliotecas fixadas em \texttt{uv.lock} \\ \addlinespace
+        Semente aleatória & 2110 \\ \addlinespace
+        Comandos de reprodução & \texttt{uv sync -{}-frozen}, \texttt{make dados-snapshot} e \texttt{make completo} \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.1cm}
+    \begin{flushleft}
+    {\footnotesize Fonte: elaborada pelo autor.}
+    \end{flushleft}
+    \label{tab:reproducao}
+\end{table}
+
+
