@@ -37,9 +37,7 @@ do professor sobre a matéria que ensina e a ausência docente. Isso torna a per
 características da escola acompanham melhores resultados uma pergunta de
 alocação de recursos, não apenas de pesquisa acadêmica.
 
-É nesse cenário de escassez de recursos e de decisões sobre onde investir
-que se insere o sistema educacional brasileiro, cujo funcionamento convém
-situar para um leitor não familiarizado com ele. A Constituição Federal, após a Emenda
+A Constituição Federal, após a Emenda
 Constitucional n\textordmasculine{}~59/2009, torna a educação básica
 obrigatória e gratuita dos 4 aos 17 anos de idade. Ela se organiza em três
 etapas: a \emph{educação infantil} (creche, para crianças de 0 a 3 anos, e
@@ -59,7 +57,7 @@ estratificado por renda), de modo que as crianças chegam ao processo de
 alfabetização com pontos de partida muito distintos
 \cite{ibge2025pnadeducacao}.
 
-É nesse contexto que a alfabetização até o final do 2º ano do Ensino
+A alfabetização até o final do 2º ano do Ensino
 Fundamental, quando a criança tem por volta de 7 a 8 anos, tornou-se uma
 das metas mais consensuais da política educacional brasileira, formalizada
 no Plano Nacional de Educação e reafirmada por programas federais como o
@@ -210,8 +208,8 @@ literatura brasileira (Seção~\ref{sec:evidencias-brasileiras}). A
 importância de cada bloco pelo SHAP (Seção~\ref{sec:xai}) é reportada ao
 lado do teste, como descrição do modelo, fora da regra de decisão.
 
-Uma limitação deve ser declarada já nesta introdução, por qualificar
-diretamente a Hipótese~1: o questionário do professor do 2º ano não
+Uma limitação qualifica diretamente a Hipótese~1. O questionário do
+professor do 2º ano não
 pergunta sobre \emph{método} de alfabetização (fônico, silábico, global),
 apenas sobre práticas pedagógicas genéricas
 (Seção~\ref{sec:alfabetizacao-2ef}). H1 capta, portanto, proxies de
@@ -301,8 +299,7 @@ grupos temáticos de contexto escolar por sua contribuição preditiva à
 alfabetização (e verificar se essa contribuição se sustenta na presença do
 nível socioeconômico) fornece subsídio à \emph{formulação de hipóteses} a
 serem investigadas em estudos futuros com desenho de pesquisa mais robusto.
-Cabe registrar explicitamente o limite desse uso:
-importância preditiva em um modelo não se converte diretamente em
+Esse uso tem um limite. A importância preditiva em um modelo não se converte diretamente em
 recomendação de política pública, uma vez que a ordenação de variáveis
 reflete o poder de previsão sobre os dados observados, não o efeito
 esperado de intervir sobre elas.
@@ -396,8 +393,7 @@ estimação por TRI, as demais colunas derivadas da prova do aluno (erro
 padrão, respostas a itens individuais) não podem ser tratadas como
 preditores independentes, sob pena de vazamento de informação.
 
-Feita essa ressalva metodológica, cabe situar a edição do Saeb em que este
-trabalho se apoia. O 2º ano do Ensino Fundamental integra o Saeb desde a
+O 2º ano do Ensino Fundamental integra o Saeb desde a
 edição de 2019. Em 2023, o Inep definiu o padrão oficial de alfabetização
 como o ponto 743 da escala de proficiência em Língua Portuguesa
 \cite{inep2023alfabetiza}, critério adotado na divulgação dos resultados da
@@ -527,8 +523,8 @@ identificam municípios com efeitos muito acima do esperado. O resultado
 sugere que o contexto geográfico e administrativo pode carregar informação
 própria, não redutível ao nível socioeconômico da escola. É desse achado da literatura
 que deriva diretamente a Hipótese~4 deste trabalho
-(Seção~\ref{sec:hipoteses}). Cabe uma ressalva quanto ao alcance dessa
-transposição: nos microdados do Saeb 2023 utilizados aqui, o identificador
+(Seção~\ref{sec:hipoteses}). O alcance dessa transposição é limitado. Nos
+microdados do Saeb 2023 utilizados aqui, o identificador
 de município é um código anonimizado, sem correspondência divulgada com os
 códigos oficiais do Instituto Brasileiro de Geografia e Estatística (IBGE)
 (Seção~\ref{sec:fonte-dados}), de modo que este
@@ -982,7 +978,7 @@ II.
     \label{tab:fontes-dados}
 \end{table}
 
-Cabe registrar que \texttt{TS\_ALUNO\_2EF} não contribui com covariáveis de
+\texttt{TS\_ALUNO\_2EF} não contribui com covariáveis de
 contexto do aluno: no 2º ano não há questionário
 respondido pelo estudante, de modo que essa base fornece apenas os
 desfechos, os identificadores de vínculo com turma e escola e as variáveis
