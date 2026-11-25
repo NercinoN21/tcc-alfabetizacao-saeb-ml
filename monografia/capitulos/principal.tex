@@ -721,7 +721,8 @@ intervenção.
 
 \textbf{Explicação do modelo} é o que SHAP e LIME fornecem: uma decomposição
 de como um modelo \emph{já estimado} chegou a determinada predição. O objeto
-explicado é o modelo, não o fenômeno educacional. Duas consequências
+explicado é o modelo estimado, e o fenômeno educacional fica fora do
+alcance dessa decomposição. Duas consequências
 decorrem daí: as importâncias de SHAP dependem do modelo escolhido e podem
 variar entre algoritmos igualmente acurados, e uma variável pode receber
 alta importância por atuar como \textit{proxy} de outra, ausente ou mal
@@ -733,8 +734,8 @@ diferenças) que este trabalho não possui, por operar sobre um corte
 transversal observacional de uma única edição do Saeb. Nenhuma afirmação
 causal é, portanto, formulada, e a ordenação de variáveis produzida pela
 análise deve ser lida como insumo para a formulação de hipóteses causais a
-serem testadas em estudos com desenho apropriado, não como estimativa do
-efeito de intervir sobre essas variáveis.
+serem testadas em estudos com desenho apropriado. O efeito de intervir
+sobre essas variáveis fica sem estimativa neste trabalho.
 
 Métodos recentes de aprendizado de máquina para efeitos causais não
 dispensam essa exigência. As florestas causais de
@@ -839,8 +840,8 @@ do Ensino Fundamental no Saeb 2023 não pergunta sobre o método de
 alfabetização adotado em sala de aula, apenas sobre práticas pedagógicas
 de natureza mais genérica. Consequentemente, as variáveis de prática
 docente utilizadas neste trabalho (Seção~\ref{sec:variaveis}) funcionam
-como \textit{proxies} de qualidade pedagógica geral, não como uma medida da
-escolha de método de alfabetização especificamente, o que qualifica de
+como \textit{proxies} de qualidade pedagógica geral, sem medir a escolha
+do método de alfabetização, o que qualifica de
 forma importante a interpretação da Hipótese~1 (Seção~\ref{sec:hipoteses}).
 Some-se a isso a constatação de \citeonline{costa2023reflexoes} de que a
 própria avaliação em larga escala do 2º ano ainda é
@@ -1107,8 +1108,8 @@ incremental de cada bloco de variáveis (Seção~\ref{sec:robustez}) tornam-se
 etapas obrigatórias, sob pena de sobreajuste. Além disso,
 espera-se que as métricas de desempenho reportadas sejam
 \emph{substancialmente inferiores} às que um protocolo com partição
-aleatória por aluno produziria, e isso não é uma deficiência do desenho,
-mas sua correção: parte relevante do desempenho aparente sob partição por
+aleatória por aluno produziria. Essa diferença corrige um viés do
+protocolo por aluno: parte relevante do desempenho aparente sob partição por
 aluno decorre de o modelo reencontrar no teste vetores de preditores que já
 viu no treino. As métricas obtidas no nível da escola aproximam a
 capacidade de generalização para outras escolas da mesma população e da
