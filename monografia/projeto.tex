@@ -50,8 +50,9 @@ questionnaires add, out of sample, to the prediction of school outcomes in
 the 2nd grade of Brazilian public elementary schools beyond the
 socioeconomic index (INSE) and geography. Using the 2023 Saeb microdata,
 the analysis merges the student, school, teacher and principal files into a
-dataset of 604 schools and models two school-level targets, the literacy
-rate and the mean Portuguese proficiency. Regularized linear models and
+dataset of 604 schools and models two school-level targets, the share of
+students meeting the literacy standard (literacy share) and the mean
+Portuguese proficiency. Regularized linear models and
 three tree ensembles (Random Forest, XGBoost and LightGBM) are compared by
 repeated cross-validation, with a selection rule set before estimation, and
 the value of each block of predictors is measured by removing the block
@@ -59,13 +60,13 @@ within the same folds. The linear model is selected for both targets,
 because the ensembles reduce the error by at most 4.5\% with confidence
 intervals that include zero. Together, the two questionnaires reduce the
 proficiency prediction error by 0.76 points, or 4.2\% (95\% CI from 0.02
-to 1.50 points). For the literacy rate, the gain is indistinguishable from
+to 1.50 points). For the literacy share, the gain is indistinguishable from
 zero. Only the INSE hypothesis is confirmed for both targets. The principal
 hypothesis is inconclusive, with an error increase above the 2\% margin and
 a confidence interval that includes zero, and the teacher and
 geography hypotheses are not confirmed. SHAP explanations, whose signs were checked with
 LIME on schools chosen before the analysis, rank INSE first for the
-literacy rate in all 20 partitions and early childhood education
+literacy share in all 20 partitions and early childhood education
 infrastructure first for proficiency. The model errs more in low-INSE
 schools, and adding race does not reduce this gap. The results are
 school-level associations and indicate that INSE and geography already
